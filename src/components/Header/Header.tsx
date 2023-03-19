@@ -11,10 +11,10 @@ import userSvg from '~/icons/user.svg'
 import xSvg from '~/icons/x.svg'
 
 const navigation = [
-  { name: 'About US', href: '/about-us', current: false },
-  { name: 'Monitoring Systems', href: '/monitoring-systems', current: false },
-  { name: 'News', href: '/news', current: false },
+  { name: 'Home', href: '/', current: false },
+  { name: 'About Us', href: '/about-us', current: false },
   { name: 'Contact Us', href: '/contact-us', current: false },
+  { name: 'News', href: '/news', current: false },
 ]
 
 const links = [
@@ -29,22 +29,14 @@ export type HeaderProps = {
 }
 
 export const Header = ({ loggedIn }: HeaderProps) => {
-  const handleRegister = () => {
-    console.log('register')
-  }
-
-  const handleLogin = () => {
-    console.log('login')
-  }
-
   return (
     <Disclosure as="nav">
       {({ open }) => (
         <>
-          <div className="bg-blue">
+          <div className="bg-primary">
             <div className="container">
               {/*<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">*/}
-              <div className="relative flex h-23 items-center justify-between bg-blue">
+              <div className="relative flex h-23 items-center justify-between bg-primary">
                 <div
                   className={`${
                     open ? 'right-0' : 'left-0'
@@ -69,7 +61,7 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                 <div
                   className={`${
                     open ? 'ml-0' : 'ml-16'
-                  } flex flex-1 items-center lg:ml-0 lg:items-stretch justify-start`}
+                  } flex flex-1 items-center justify-start lg:ml-0 lg:items-stretch`}
                 >
                   <div className="flex items-center">
                     <Link
@@ -79,7 +71,7 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                       Logo
                     </Link>
                   </div>
-                  <div className="hidden ml-[120px] lg:flex items-center space-x-20">
+                  <div className="ml-[120px] hidden items-center space-x-20 lg:flex">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -107,7 +99,7 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                         as="div"
                         className="relative"
                       >
-                        <Menu.Button className="flex justify-center items-center bg-white w-[52px] h-[52px] rounded-full focus:outline-none">
+                        <Menu.Button className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white focus:outline-none">
                           <span className="sr-only">Open user menu</span>
                           {/*<img*/}
                           {/*  className="h-8 w-8 rounded-full"*/}
@@ -131,10 +123,10 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-[355px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <div className="p-5">
-                              <div className="flex items-center mb-5">
-                                <div className="bg-gray-light rounded-full w-[80px] h-[80px] mr-5"></div>
+                              <div className="mb-5 flex items-center">
+                                <div className="mr-5 h-[80px] w-[80px] rounded-full bg-gray-light"></div>
                                 <div>
-                                  <p className="text-lg text-black mb-2.5">Samvel Hakobyan</p>
+                                  <p className="mb-2.5 text-lg text-black">Samvel Hakobyan</p>
                                   <p className="text-base text-black-light">example@gmail.com</p>
                                 </div>
                               </div>
@@ -164,22 +156,20 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                       </Menu>
                     ) : (
                       <>
-                        <div className="hidden lg:block ml-[60px]">
-                          <Button
-                            href={'/auth/login'}
-                            onClick={handleLogin}
-                          >
-                            Login
-                          </Button>
+                        <div className="ml-[60px] hidden lg:block">
+                          <Link href={'/auth/login'}>
+                            <Button variant="text">Login</Button>
+                          </Link>
                         </div>
                         <div className="ml-[60px]">
-                          <Button
-                            href={'/auth/register'}
-                            color="secondary"
-                            onClick={handleRegister}
-                          >
-                            Register
-                          </Button>
+                          <Link href={'/auth/register'}>
+                            <Button
+                              color="primary"
+                              variant="outlined"
+                            >
+                              Register
+                            </Button>
+                          </Link>
                         </div>
                       </>
                     )}
@@ -189,13 +179,13 @@ export const Header = ({ loggedIn }: HeaderProps) => {
             </div>
           </div>
 
-          <Disclosure.Panel className="px-5 py-10 lg:hidden h-[calc(100vh-92px)]">
-            <div className="space-y-5 mb-[120px]">
+          <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 lg:hidden">
+            <div className="mb-[120px] space-y-5">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-base font-medium text-black block`}
+                  className={`block text-base font-medium text-black`}
                 >
                   {item.name}
                 </Link>

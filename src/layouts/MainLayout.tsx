@@ -6,7 +6,7 @@ import { Header } from '@/components/Header'
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <Header loggedIn={true} />
+      <Header loggedIn={false} />
       {children}
       <Footer />
     </>

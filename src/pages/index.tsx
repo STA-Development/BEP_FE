@@ -1,15 +1,19 @@
 import { Disclosure } from '@headlessui/react'
-import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Button } from '@/components/Button'
 import { Content } from '@/components/Content'
 
-import { NextPageWithLayout } from './_app'
-
 import aSvg from '~/icons/a.svg'
 import bSvg from '~/icons/b.svg'
-import cSvg from '~/icons/c.svg'
+import chevronSvg from '~/icons/chevron.svg'
+import buildingBankSvg from '~/icons/helps/buildingBank.svg'
+import buildingBankToolboxSvg from '~/icons/helps/buildingBankToolbox.svg'
+import clipboardTaskListSvg from '~/icons/helps/clipboardTaskList.svg'
+import desktopPulseSvg from '~/icons/helps/desktopPulse.svg'
+import peopleCommunitySvg from '~/icons/helps/peopleCommunity.svg'
+import toolboxSvg from '~/icons/helps/toolbox.svg'
 import rightSvg from '~/icons/right.svg'
 
 const data1 = [
@@ -19,127 +23,129 @@ const data1 = [
 ]
 
 const helps = [
-  { id: 1, name: 'Masters' },
-  { id: 2, name: 'Companies' },
-  { id: 3, name: 'Educational Institutes' },
-  { id: 4, name: 'Monitoring Systems' },
-  { id: 5, name: 'Jobs' },
-  { id: 6, name: 'Practice' },
+  { id: 1, name: 'Masters', icon: peopleCommunitySvg },
+  { id: 2, name: 'Companies', icon: buildingBankToolboxSvg },
+  { id: 3, name: 'Educational Institutes', icon: buildingBankSvg },
+  { id: 4, name: 'Monitoring Systems', icon: desktopPulseSvg },
+  { id: 5, name: 'Jobs', icon: toolboxSvg },
+  { id: 6, name: 'Practice', icon: clipboardTaskListSvg },
 ]
 
-const Home: NextPageWithLayout = () => {
+const Home = () => {
   return (
     <>
-      <Head>
-        <title>BEP Armenia</title>
-      </Head>
-      <div>
-        <div className="grid grid-cols-1">
-          <Content img={aSvg}>
-            <h2 className="text-2xl md:mb-5 mb-2.5">
-              Business and Education Partnership Foundation
-            </h2>
-            <p className="text-lg mb-10 text-black-light">
-              Lorem ipsum dolor sit amet consectetur. Massa sed.
-            </p>
-            <Button
-              size="lg"
-              rightIcon={rightSvg}
-            >
-              Start now
-            </Button>
-          </Content>
+      <div className="container">
+        <Content
+          img={aSvg}
+          title="Business and Education Partnership Foundation"
+          desc="Lorem ipsum dolor sit amet consectetur. Massa sed."
+          button={
+            <Link href="/">
+              <Button
+                size="lg"
+                rightIcon={rightSvg}
+              >
+                Start now
+              </Button>
+            </Link>
+          }
+        />
+      </div>
 
-          <div className="md:bg-[#3267891a] bg-white order-last md:order-none">
-            <div className="container mx-auto px-5">
-              <div className="flex justify-between md:grid-cols-3 grid-cols-1 py-10">
-                {data1.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-center md:border-b-0 border-b border-gray last:border-none md:py-0 py-10"
-                  >
-                    <span className="md:text-blue text-black md:text-[64px] text-64 mr-5">
-                      {item.number}
-                    </span>
-                    <span className="md:text-black-light text-black-light md:text-[18px] text-2xl md:max-w-200">
-                      {item.text}
-                    </span>
-                  </div>
-                ))}
+      <div className="mb-0 bg-[#3267891a] xl:mb-25">
+        <div className="container mx-auto px-5">
+          <div className="flex flex-col justify-between xl:flex-row">
+            {data1.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center justify-center py-10"
+              >
+                <span className="mr-5 text-2xl text-primary">{item.number}</span>
+                <span className="text-lg text-black-light xl:max-w-200 xl:text-base">
+                  {item.text}
+                </span>
               </div>
-            </div>
+            ))}
           </div>
-
-          <Content img={bSvg}>
-            <h2 className="text-2xl md:mb-5 mb-2.5">What is BEP?</h2>
-            <p className="text-lg mb-10 text-black-light">
-              “Business and Education Partnership” Foundation has been implementing the activities
-              aimed at supporting the sustainable development and enhancement of the Armenian
-              education system through introduction of innovative education models and mechanisms
-              based on advanced international experience, as well as providing an assistance to the
-              result-oriented process of vocational training.
-            </p>
-            <Button
-              size="lg"
-              href="/fill-the-form"
-              rightIcon={rightSvg}
-            >
-              Fill the form
-            </Button>
-          </Content>
         </div>
+      </div>
 
-        <div className="container">
-          <h2 className="md:text-64 text-[32px] md:mb-5 mb-2.5">How can we help?</h2>
+      <div className="container">
+        <Content
+          img={bSvg}
+          title="What is BEP?"
+          desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
+          at supporting the sustainable development and enhancement of the Armenian education system
+          through introduction of innovative education models and mechanisms based on advanced
+          international experience, as well as providing an assistance to the result-oriented
+          process of vocational training."
+          button={
+            <Link href="/fill-the-form">
+              <Button
+                size="lg"
+                rightIcon={rightSvg}
+              >
+                Fill the form
+              </Button>
+            </Link>
+          }
+        />
 
-          <div>
-            {helps.map((help) => (
-              <Disclosure key={help.id}>
-                {({ open }) => (
-                  <div className=" mb-10">
-                    <Disclosure.Button
-                      className={`md:py-11 py-7 md:px-20 px-6 flex justify-between items-center w-full border border-gray-light rounded-lg ${
-                        open && 'rounded-b-none border-b-0'
-                      }`}
-                    >
-                      <div className="flex items-center">
-                        <Image
-                          src={cSvg}
-                          alt="Picture of the author"
-                          className="mr-5 h-12 w-auto"
-                        />
-                        <span>{help.name}</span>
-                      </div>
-                      <div className="md:h-16 md:w-16 md:p-4 h-9 w-9 p-2 border rounded-full text-blue">
-                        {/*<ChevronUpIcon*/}
-                        {/*  className={`${open ? 'rotate-180 transform' : 'rotate-90 transform'}`}*/}
-                        {/*/>*/}
-                      </div>
-                    </Disclosure.Button>
-                    <Disclosure.Panel className="pb-10 md:px-20 px-6 border border-t-0 border-gray-light rounded-b-lg">
-                      <div className="mb-10">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur. Aenean massa odio in tincidunt. Ac
-                          velit fringilla sed libero sed non turpis arcu. Ornare aliquet ullamcorper
-                          duis et vitae urna. Vel sit duis congue nibh morbi luctus nibh aliquet
-                          egestas. Habitasse nulla ante nunc nulla. Vestibulum condimentum quis
-                          adipiscing varius elit vehicula sem. Habitasse nulla ante nunc nulla.
-                          Vestibulum condimentum quis adipiscing varius elit vehicula sem.
-                        </p>
-                      </div>
+        <h2 className="mt-10 mb-10 text-[32px] font-medium xl:mt-25 xl:text-64">
+          <span className="hidden xl:inline-block">What are you looking for?</span>
+          <span className="xl:hidden">How can we help?</span>
+        </h2>
+
+        <div>
+          {helps.map((help) => (
+            <Disclosure key={help.id}>
+              {({ open }) => (
+                <div className="mb-5 xl:mb-10">
+                  <Disclosure.Button
+                    className={`flex w-full items-center justify-between rounded-lg border border-gray-thin py-7 px-6 xl:py-11 xl:px-20 ${
+                      open && 'rounded-b-none border-b-0'
+                    }`}
+                  >
+                    <div className="flex items-center">
+                      <Image
+                        src={help.icon}
+                        alt="Picture of the author"
+                        className="mr-5 h-12 w-auto"
+                      />
+                      <span>{help.name}</span>
+                    </div>
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full border p-2 text-primary xl:h-16 xl:w-16 xl:p-4">
+                      <Image
+                        src={chevronSvg}
+                        alt="chevron"
+                        className={`transform ${open && 'rotate-90'}`}
+                      />
+                    </div>
+                  </Disclosure.Button>
+                  <Disclosure.Panel className="rounded-b-lg border border-t-0 border-gray-light px-6 pb-10 xl:px-20">
+                    <div className="mb-10">
+                      <p>
+                        Lorem ipsum dolor sit amet consectetur. Aenean massa odio in tincidunt. Ac
+                        velit fringilla sed libero sed non turpis arcu. Ornare aliquet ullamcorper
+                        duis et vitae urna. Vel sit duis congue nibh morbi luctus nibh aliquet
+                        egestas. Habitasse nulla ante nunc nulla. Vestibulum condimentum quis
+                        adipiscing varius elit vehicula sem. Habitasse nulla ante nunc nulla.
+                        Vestibulum condimentum quis adipiscing varius elit vehicula sem.
+                      </p>
+                    </div>
+                    <Link href="/fill-the-form">
                       <Button
                         size="lg"
-                        href="/fill-the-form"
                         rightIcon={rightSvg}
                       >
                         Fill the form
                       </Button>
-                    </Disclosure.Panel>
-                  </div>
-                )}
-              </Disclosure>
-            ))}
-          </div>
+                    </Link>
+                  </Disclosure.Panel>
+                </div>
+              )}
+            </Disclosure>
+          ))}
         </div>
       </div>
     </>

@@ -27,53 +27,54 @@ const socials = [
 export const Footer = () => (
   <div className="bg-blue">
     <div className="container">
-      <div className="py-[40px] grid grid-flow-row lg:grid-flow-col grid-rows-footer-subscribe justify-between text-white">
+      <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white lg:grid-flow-col">
         <div className="row-span-2 mb-10 lg:mb-0">
-          <p className="text-base font-medium mb-5">Contacts</p>
+          <p className="mb-5 text-base font-medium">Contacts</p>
           <ul>
             {contacts.map((contact) => (
               <li
                 key={contact}
-                className="text-sm mb-2.5"
+                className="mb-2.5 text-sm"
               >
                 {contact}
               </li>
             ))}
           </ul>
         </div>
-        <div className="row-span-2 mb-10 lg:0">
-          <p className="text-base font-medium mb-5">Policies and Terms of use</p>
+        <div className="lg:0 row-span-2 mb-10">
+          <p className="mb-5 text-base font-medium">Policies and Terms of use</p>
           <ul className="mb-9">
-            <li className="text-base mb-2.5">
+            <li className="mb-2.5 text-base">
               <Link href="">Privacy Policy</Link>
             </li>
-            <li className="text-base mb-2.5">
+            <li className="mb-2.5 text-base">
               <Link href="">Terms of Use</Link>
             </li>
           </ul>
           <p className="text-base underline">Copyright © 2023 with all rights reserved</p>
         </div>
-        <div className="order-first lg:order-none flex mb-10 lg:mb-7.5">
+        <div className="order-first mb-10 flex lg:order-none lg:mb-7.5">
           <input
             type="text"
             placeholder="Your Email"
-            className="text-black px-5 py-2.5 text-base border-0 rounded-l outline-0 placeholder:text-black-light placeholder:text-base"
+            className="rounded-l border-0 px-5 py-2.5 text-base text-black outline-0 placeholder:text-base placeholder:text-black-light"
           />
           <Button
             variant="outlined"
+            color="secondary"
             radius="r"
           >
             Subscribe
           </Button>
         </div>
         <div>
-          <p className="text-base font-medium mb-5">Get in touch with us:</p>
+          <p className="mb-5 text-base font-medium">Get in touch with us:</p>
           <div className="flex">
             {socials.map((social, index) => (
               <Link
                 key={index}
                 href=""
-                className="flex justify-center items-center mr-5 w-12 h-12 rounded-full bg-white"
+                className="mr-5 flex h-12 w-12 items-center justify-center rounded-full bg-white"
               >
                 <Image
                   src={social.icon}

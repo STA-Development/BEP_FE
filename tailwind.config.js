@@ -6,6 +6,11 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      extend: {
+        screens: {
+          xl: '1240px',
+        },
+      },
       maxWidth: {
         200: '12.5rem',
       },
@@ -14,6 +19,8 @@ module.exports = {
         9.75: '2.438rem',
         15: '3.75rem',
         23: '5.75rem',
+        25: '6.25rem',
+        26: '6.5rem',
         30: '7.5rem',
         73: '18.25rem',
         79: '18.75rem',
@@ -53,7 +60,7 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: '2rem',
+      padding: '1.25rem',
     },
     fontSize: {
       sm: [

@@ -7,21 +7,18 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {},
+  parameters: {
+    backgrounds: { default: 'dark' },
+  },
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Contained: Story = {
+export const Default: Story = {
   args: {
     variant: 'contained',
-    children: 'Button',
-  },
-}
-
-export const Outlined: Story = {
-  args: {
-    variant: 'outlined',
+    color: 'primary',
     children: 'Button',
   },
 }
