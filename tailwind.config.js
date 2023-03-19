@@ -19,6 +19,13 @@ module.exports = {
         79: '18.75rem',
       },
       colors: {
+        primary: {
+          light: '#4996C7',
+          DEFAULT: '#326789',
+        },
+        secondary: {
+          DEFAULT: '#fff',
+        },
         blue: {
           light: '#4996C7',
           DEFAULT: '#326789',
@@ -43,6 +50,10 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-roboto)', ...fontFamily.sans],
       },
+    },
+    container: {
+      center: true,
+      padding: '2rem',
     },
     fontSize: {
       sm: [
