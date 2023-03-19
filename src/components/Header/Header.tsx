@@ -157,12 +157,17 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                     ) : (
                       <>
                         <div className="ml-[60px] hidden lg:block">
-                          <Link href={'/auth/login'}>
-                            <Button variant="text">Login</Button>
+                          <Link href="/login">
+                            <Button
+                              variant="text"
+                              color="secondary"
+                            >
+                              Login
+                            </Button>
                           </Link>
                         </div>
                         <div className="ml-[60px]">
-                          <Link href={'/auth/register'}>
+                          <Link href="/register">
                             <Button
                               color="primary"
                               variant="outlined"
@@ -185,7 +190,7 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`block text-base font-medium text-black`}
+                  className="block text-base font-medium text-black"
                 >
                   {item.name}
                 </Link>
