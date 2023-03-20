@@ -43,13 +43,14 @@ const menu: Menu = {
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
   const pathname = router.pathname.substring(1)
+  const label = menu[pathname].label
 
   return (
     <MainLayout>
       <div className="container">
         <div className="mt-10 mb-[120px] grid grid-cols-5 gap-10 divide-x divide-gray-light">
           <aside>
-            <h1 className="mb-5 text-xl">{menu[pathname].label}</h1>
+            <h1 className="mb-5 text-xl">{label}</h1>
             <ul className="mb-10">
               {Object.values(menu).map((item) => (
                 <li

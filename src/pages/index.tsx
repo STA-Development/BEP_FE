@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Button } from '@/components/Button'
 import { Content } from '@/components/Content'
 
+import { NextPageWithLayout } from '@/pages/_app'
+
 import aSvg from '~/icons/a.svg'
 import bSvg from '~/icons/b.svg'
 import chevronSvg from '~/icons/chevron.svg'
@@ -31,7 +33,7 @@ const helps = [
   { id: 6, name: 'Practice', icon: clipboardTaskListSvg },
 ]
 
-const Home = () => {
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <div className="container">

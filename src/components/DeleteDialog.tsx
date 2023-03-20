@@ -31,7 +31,7 @@ const DeleteDialog = ({
               <p>You will not be able to restore it</p>
             </Dialog.Title>
             <Button
-              variant="transparent-secondary"
+              variant="outlined"
               size="sm"
               onClick={() => setIsOpen(false)}
             >
@@ -44,14 +44,14 @@ const DeleteDialog = ({
 
           <div className="flex gap-10">
             <Button
-              size="w-full"
+              size="fl"
               onClick={() => setIsOpen(false)}
             >
               Delete
             </Button>
             <Button
-              variant="secondary"
-              size="w-full"
+              variant="outlined"
+              size="fl"
               onClick={() => setIsOpen(false)}
             >
               Cancel

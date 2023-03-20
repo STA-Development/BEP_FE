@@ -45,10 +45,20 @@ export const Footer = () => (
           <p className="mb-5 text-base font-medium">Policies and Terms of use</p>
           <ul className="mb-9">
             <li className="mb-2.5 text-base">
-              <Link href="">Privacy Policy</Link>
+              <Link
+                href=""
+                className="hover:underline"
+              >
+                Privacy Policy
+              </Link>
             </li>
             <li className="mb-2.5 text-base">
-              <Link href="">Terms of Use</Link>
+              <Link
+                href=""
+                className="hover:underline"
+              >
+                Terms of Use
+              </Link>
             </li>
           </ul>
           <p className="text-base underline">Copyright © 2023 with all rights reserved</p>

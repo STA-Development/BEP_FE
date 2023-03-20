@@ -30,7 +30,7 @@ const ApplicationDialog = ({
           <div className="mb-5 flex items-center justify-between">
             <Dialog.Title className="text-lg">What are you looking for?</Dialog.Title>
             <Button
-              variant="transparent-secondary"
+              variant="outlined"
               size="sm"
               onClick={() => setIsOpen(false)}
             >
@@ -43,8 +43,8 @@ const ApplicationDialog = ({
 
           <div className="flex gap-10">
             <Button
-              variant="application"
-              size="application"
+              variant="contained"
+              size="app"
               onClick={() => setIsOpen(false)}
             >
               <Image
@@ -55,8 +55,8 @@ const ApplicationDialog = ({
               Job
             </Button>
             <Button
-              variant="application"
-              size="application"
+              variant="contained"
+              size="app"
               onClick={() => setIsOpen(false)}
             >
               <Image
