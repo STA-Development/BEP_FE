@@ -33,7 +33,7 @@ const helps = [
   { id: 6, name: 'Practice', icon: clipboardTaskListSvg },
 ]
 
-const Home: NextPageWithLayout = () => {
+const Home: NextPageWithLayout = ({ asa }) => {
   return (
     <>
       <div className="container">

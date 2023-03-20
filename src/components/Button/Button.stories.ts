@@ -7,9 +7,6 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {},
-  parameters: {
-    backgrounds: { default: 'dark' },
-  },
 }
 
 export default meta

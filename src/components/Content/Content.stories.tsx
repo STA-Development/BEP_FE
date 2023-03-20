@@ -14,6 +14,13 @@ const meta: Meta<typeof Content> = {
   parameters: {
     layout: 'fullscreen',
   },
+  decorators: [
+    (Story) => (
+      <div className="container">
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export default meta
