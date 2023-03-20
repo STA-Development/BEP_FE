@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check-types": "tsc --pretty --noEmit",
-    "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext ts --ext tsx --ext js",
+    "check-format": "prettier -c .",
+    "check-types": "tsc --pretty --noEmit --incremental false",
+    "check-lint": "eslint --max-warnings=0 src",
     "format": "prettier -w .",
     "test-all": "pnpm check-format && pnpm check-lint && pnpm check-types && pnpm build",
     "storybook": "storybook dev -p 6006",
@@ -26,6 +26,8 @@
     "tailwind-merge": "^1.10.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "@storybook/addon-essentials": "7.0.0-rc.4",
     "@storybook/addon-interactions": "7.0.0-rc.4",
     "@storybook/addon-links": "7.0.0-rc.4",
