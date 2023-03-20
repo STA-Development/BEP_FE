@@ -36,7 +36,7 @@ const helps = [
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <div className='container'>
+      <div className="container">
         <Content
           img={aSvg}
           title="Business and Education Partnership Foundation"
