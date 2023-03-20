@@ -7,9 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier -w \"**/*.+(js|ts|jsx|tsx)\"",
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint . --ext ts --ext tsx --ext js",
+    "format": "prettier -w .",
+    "test-all": "pnpm check-format && pnpm check-lint && pnpm check-types && pnpm build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -38,6 +43,7 @@
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.0",
     "postcss": "^8.4.21",
     "postcss-loader": "^7.1.0",
     "prettier": "^2.8.4",

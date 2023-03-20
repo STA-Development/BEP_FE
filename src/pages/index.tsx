@@ -55,7 +55,7 @@ const Home: NextPageWithLayout = () => {
       </div>
 
       <div className="mb-0 bg-[#3267891a] xl:mb-25">
-        <div className="container mx-auto px-5">
+        <div className="container">
           <div className="flex flex-col justify-between xl:flex-row">
             {data1.map((item) => (
               <div

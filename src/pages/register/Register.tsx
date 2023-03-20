@@ -34,7 +34,7 @@ export const Register = () => {
       <div className="mx-auto flex w-[380px] flex-col items-center">
         <h1 className="mb-5 text-xl">Create an account</h1>
         <Button
-          variant="secondary"
+          variant="outlined"
           size="fl"
         >
           Continue with Google

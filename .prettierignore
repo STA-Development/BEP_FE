@@ -3,16 +3,20 @@
 /.pnp
 .pnp.js
 
+pnpm-lock.yaml
+
 # testing
 /coverage
 
 # next.js
 .next
-/.next/
-/out/
+next-env.d.ts
 
 # production
 /build
+
+# dev
+/public
 
 # misc
 .DS_Store

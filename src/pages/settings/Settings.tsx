@@ -49,7 +49,7 @@ export const Settings = () => {
           </p>
           <Button
             size="lg"
-            variant="secondary"
+            variant="outlined"
           >
             <Image
               src={userSvg}
@@ -101,4 +101,4 @@ export const Settings = () => {
 }
 
 export default Settings
-Settings.Layout = 'Profile'
+Settings.Layout = 'Main'

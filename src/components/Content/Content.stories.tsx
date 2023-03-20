@@ -22,19 +22,15 @@ type Story = StoryObj<typeof Content>
 export const Default: Story = {
   args: {
     img: aSvg,
-    children: (
-      <>
-        <h2 className="text-2xl md:mb-5 mb-2.5">Business and Education Partnership Foundation</h2>
-        <p className="text-lg mb-10 text-black-light">
-          Lorem ipsum dolor sit amet consectetur. Massa sed.
-        </p>
-        <Button
-          size="lg"
-          rightIcon={rightSvg}
-        >
-          Start now
-        </Button>
-      </>
+    title: 'Business and Education Partnership Foundation',
+    desc: 'Lorem ipsum dolor sit amet consectetur. Massa sed.',
+    button: (
+      <Button
+        size="lg"
+        rightIcon={rightSvg}
+      >
+        Start now
+      </Button>
     ),
   },
 }

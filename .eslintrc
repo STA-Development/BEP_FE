@@ -19,21 +19,12 @@
     "@typescript-eslint/no-var-requires": 0,
 
     "react/display-name": "off",
-    "react/jsx-curly-brace-presence": [
-      "warn",
-      { "props": "never", "children": "never" }
-    ],
+    "react/jsx-curly-brace-presence": ["warn", { "props": "never", "children": "never" }],
     "react/no-unescaped-entities": "off",
     "react/jsx-first-prop-new-line": [2, "multiline"],
-    "react/jsx-max-props-per-line": [
-      2,
-      { "maximum": 1, "when": "multiline" }
-    ],
+    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],
     "react/jsx-indent-props": [2, 2],
-    "react/jsx-closing-bracket-location": [
-      2,
-      "tag-aligned"
-    ],
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
 
     //*=========== Unused Import ===========
     "@typescript-eslint/no-unused-vars": "off",

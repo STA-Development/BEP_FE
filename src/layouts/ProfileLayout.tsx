@@ -43,7 +43,7 @@ const menu: Menu = {
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
   const pathname = router.pathname.substring(1)
-  const label = menu[pathname].label
+  const label = menu[pathname]?.label
 
   return (
     <MainLayout>

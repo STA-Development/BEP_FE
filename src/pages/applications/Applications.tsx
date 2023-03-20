@@ -126,4 +126,4 @@ export const Applications = () => {
 }
 
 export default Applications
-Applications.Layout = 'Profile'
+Applications.Layout = 'Main'

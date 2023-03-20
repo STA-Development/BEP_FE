@@ -33,7 +33,7 @@ export const Login = () => {
       <div className="mx-auto flex w-[380px] flex-col items-center">
         <h1 className="mb-5 text-xl">Log In</h1>
         <Button
-          variant="secondary"
+          variant="outlined"
           size="fl"
         >
           Continue with Google

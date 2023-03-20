@@ -25,6 +25,7 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const Layout = Layouts[Component.Layout] ?? ((page) => page)
+
   return (
     <>
       <Head>
