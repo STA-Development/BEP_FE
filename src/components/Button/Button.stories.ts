@@ -65,17 +65,3 @@ export const Full: Story = {
     children: 'Button',
   },
 }
-
-// export const Large: Story = {
-//   args: {
-//     size: 'large',
-//     label: 'Button',
-//   },
-// }
-//
-// export const Small: Story = {
-//   args: {
-//     size: 'small',
-//     label: 'Button',
-//   },
-// }
