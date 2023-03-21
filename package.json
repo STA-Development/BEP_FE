@@ -8,10 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier -w .",
-    "check-format": "prettier -c .",
-    "check-lint": "eslint --max-warnings=0 src",
-    "check-types": "tsc --pretty --noEmit --incremental false",
-    "test-all": "pnpm pretty-quick --staged && pnpm check-lint && pnpm check-types && pnpm build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky install"
