@@ -47,7 +47,7 @@ const Home: NextPageWithLayout = () => {
                 size="lg"
                 rightIcon={rightSvg}
               >
-                Start now 1
+                Start now
               </Button>
             </Link>
           }
