@@ -34,12 +34,37 @@ export const Text: Story = {
   },
 }
 
-// export const Secondary: Story = {
-//   args: {
-//     variant: 'secondary',
-//     children: 'Button',
-//   },
-// }
+export const Small: Story = {
+  args: {
+    variant: 'contained',
+    size: 'sm',
+    children: 'Button',
+  },
+}
+
+export const Base: Story = {
+  args: {
+    variant: 'contained',
+    size: 'bs',
+    children: 'Button',
+  },
+}
+
+export const Large: Story = {
+  args: {
+    variant: 'contained',
+    size: 'lg',
+    children: 'Button',
+  },
+}
+
+export const Full: Story = {
+  args: {
+    variant: 'contained',
+    size: 'fl',
+    children: 'Button',
+  },
+}
 
 // export const Large: Story = {
 //   args: {
