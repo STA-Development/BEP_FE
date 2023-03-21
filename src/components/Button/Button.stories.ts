@@ -12,10 +12,17 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Default: Story = {
+export const Contained: Story = {
   args: {
     variant: 'contained',
     color: 'primary',
+    children: 'Button',
+  },
+}
+
+export const Outlined: Story = {
+  args: {
+    variant: 'outlined',
     children: 'Button',
   },
 }
