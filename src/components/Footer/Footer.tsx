@@ -25,7 +25,7 @@ const socials = [
 ]
 
 export const Footer = () => (
-  <div className="bg-blue">
+  <div className="bg-primary">
     <div className="container">
       <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white lg:grid-flow-col">
         <div className="row-span-2 mb-10 lg:mb-0">

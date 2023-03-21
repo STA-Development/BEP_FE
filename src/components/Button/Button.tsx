@@ -149,17 +149,17 @@ export const Button: FC<ButtonProps> = ({
 //         contained: '',
 //         outlined: '',
 //         text: 'text-white hover:underline border-transparent',
-//         // primary: 'bg-blue text-white border-blue hover:bg-blue-light',
-//         // secondary: 'bg-white text-blue border-blue hover:bg-blue-light hover:text-white',
-//         // outline: 'bg-transparent text-white border-white hover:bg-blue-light hover:text-white',
-//         // transparent: 'bg-transparent text-blue border-transparent hover:underline',
+//         // primary: 'bg-primary text-white border-primary hover:bg-primary-light',
+//         // secondary: 'bg-white text-primary border-primary hover:bg-primary-light hover:text-white',
+//         // outline: 'bg-transparent text-white border-white hover:bg-primary-light hover:text-white',
+//         // transparent: 'bg-transparent text-primary border-transparent hover:underline',
 //         // 'transparent-secondary': 'bg-transparent text-white border-transparent hover:underline',
 //         // 'transparent-secondary-outline':
-//         //   'bg-transparent text-blue border-gray-light hover:outline outline-2 outline-blue -outline-offset-2',
+//         //   'bg-transparent text-primary border-gray-light hover:outline outline-2 outline-primary -outline-offset-2',
 //         // 'list-item':
-//         //   'bg-blue text-white border-black-light hover:bg-white hover:text-blue hover:border-blue hover:underline',
+//         //   'bg-primary text-white border-black-light hover:bg-white hover:text-primary hover:border-primary hover:underline',
 //         // application:
-//         //   'flex-col bg-gray-thin text-blue border-2 border-gray-thin hover:bg-white hover:border-blue font-normal',
+//         //   'flex-col bg-gray-thin text-primary border-2 border-gray-thin hover:bg-white hover:border-primary font-normal',
 //       },
 //       color: {
 //         primary: '',

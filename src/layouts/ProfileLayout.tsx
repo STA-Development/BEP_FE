@@ -55,7 +55,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
               {Object.values(menu).map((item) => (
                 <li
                   key={item.label}
-                  className="mb-5 text-base font-medium text-blue"
+                  className="mb-5 text-base font-medium text-primary"
                 >
                   <Link
                     href={item.href}

@@ -5,9 +5,9 @@
 - [x] Prettier
 - [x] Git
 - [x] Eslint
-- [ ] Tailwind
-- [ ] CommitLint
-- [ ] LintStaged
+- [x] CommitLint
+- [x] LintStaged
+- [x] Tailwind
 
 ### Storybook
 

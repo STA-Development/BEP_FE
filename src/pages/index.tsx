@@ -93,7 +93,7 @@ const Home: NextPageWithLayout = () => {
           }
         />
 
-        <h2 className="mt-10 mb-10 text-[32px] font-medium xl:mt-25 xl:text-64">
+        <h2 className="mt-10 mb-10 text-[32px] font-medium xl:mt-25 xl:text-2xl">
           <span className="hidden xl:inline-block">What are you looking for?</span>
           <span className="xl:hidden">How can we help?</span>
         </h2>

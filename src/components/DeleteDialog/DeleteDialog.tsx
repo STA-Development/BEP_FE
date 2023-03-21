@@ -6,7 +6,7 @@ import { Button } from '@/components/Button'
 
 import xBlackSvg from '~/icons/xBlack.svg'
 
-const DeleteDialog = ({
+export const DeleteDialog = ({
   isOpen,
   setIsOpen,
 }: {
@@ -62,5 +62,3 @@ const DeleteDialog = ({
     </Dialog>
   )
 }
-
-export default DeleteDialog

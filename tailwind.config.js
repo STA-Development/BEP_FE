@@ -33,10 +33,6 @@ module.exports = {
         secondary: {
           DEFAULT: '#fff',
         },
-        blue: {
-          light: '#4996C7',
-          DEFAULT: '#326789',
-        },
         gray: {
           thin: '#EAF0F3',
           light: '#D9D9D9',
@@ -102,9 +98,6 @@ module.exports = {
           fontWeight: '500',
         },
       ],
-
-      64: ['4rem', '130%'],
-      32: ['2rem', '150%'],
     },
   },
   plugins: [],

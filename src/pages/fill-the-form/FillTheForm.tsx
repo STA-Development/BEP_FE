@@ -60,7 +60,7 @@ const FillTheForm = () => {
             <Tab.Panel>
               <div className="mb-5 flex justify-between text-xl">
                 <p>Where do you study/studied?</p>
-                <p className="text-blue">1/3</p>
+                <p className="text-primary">1/3</p>
               </div>
 
               <div className="mb-5 w-full">
@@ -92,7 +92,7 @@ const FillTheForm = () => {
             <Tab.Panel>
               <div className="mb-5 flex justify-between text-xl">
                 <p>Fill your address details</p>
-                <p className="text-blue">2/3</p>
+                <p className="text-primary">2/3</p>
               </div>
 
               <div className="mb-5 w-full">

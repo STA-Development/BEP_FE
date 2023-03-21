@@ -34,7 +34,9 @@ const MonitoringSystems = () => {
               {({ selected }) => (
                 <>
                   <div className="p-2.5 pb-1.5">{tab.label}</div>
-                  <div className={`h-1 w-full rounded ${selected ? 'bg-blue' : 'bg-white'}`}></div>
+                  <div
+                    className={`h-1 w-full rounded ${selected ? 'bg-primary' : 'bg-white'}`}
+                  ></div>
                 </>
               )}
             </Tab>

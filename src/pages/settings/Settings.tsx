@@ -76,14 +76,14 @@ export const Settings = () => {
                     {item.label}:
                   </label>
                 </td>
-                <td className="py-10">
+                <td className="py-10 pr-10">
                   <input
                     id={item.id}
                     type={item.type}
                     className="w-full rounded border border-gray-light px-5 py-2.5 text-base text-black outline-0"
                   />
                 </td>
-                <td className="w-1 w-48 py-10 pl-10">
+                <td className="w-1 w-48 py-10">
                   <Button
                     variant="outlined"
                     size="fl"
@@ -101,4 +101,4 @@ export const Settings = () => {
 }
 
 export default Settings
-Settings.Layout = 'Main'
+Settings.Layout = 'Profile'

@@ -8,7 +8,7 @@ import jobSvg from '~/icons/job.svg'
 import practiceSvg from '~/icons/practice.svg'
 import xBlackSvg from '~/icons/xBlack.svg'
 
-const ApplicationDialog = ({
+export const ApplicationDialog = ({
   isOpen,
   setIsOpen,
 }: {
@@ -72,5 +72,3 @@ const ApplicationDialog = ({
     </Dialog>
   )
 }
-
-export default ApplicationDialog

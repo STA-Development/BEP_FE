@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-import ApplicationDialog from '@/components/ApplicationDialog'
+import { ApplicationDialog } from '@/components/ApplicationDialog'
 import { Button } from '@/components/Button'
-import DeleteDialog from '@/components/DeleteDialog'
+import { DeleteDialog } from '@/components/DeleteDialog'
 
 import addSvg from '~/icons/add.svg'
 import deleteSvg from '~/icons/delete.svg'
@@ -65,7 +65,8 @@ export const Applications = () => {
                 key={status.label}
                 className="mr-10 text-base text-black-light"
               >
-                {status.label}:<span className="ml-5 font-medium text-blue">{status.status}</span>
+                {status.label}:
+                <span className="ml-5 font-medium text-primary">{status.status}</span>
               </p>
             ))}
           </div>
@@ -126,4 +127,4 @@ export const Applications = () => {
 }
 
 export default Applications
-Applications.Layout = 'Main'
+Applications.Layout = 'Profile'
