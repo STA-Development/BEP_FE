@@ -1,0 +1,190 @@
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { Button } from '@/components/Button'
+
+import barsSvg from '~/icons/bars.svg'
+import logOutSvg from '~/icons/log-out.svg'
+import userSvg from '~/icons/user.svg'
+import xSvg from '~/icons/x.svg'
+
+const navigation = [
+  { name: 'Home', href: '/', current: false },
+  { name: 'About Us', href: '/about-us', current: false },
+  { name: 'Contact Us', href: '/contact-us', current: false },
+  { name: 'News', href: '/news', current: false },
+]
+
+const links = [
+  { href: '/settings', label: 'Change Email' },
+  { href: '/settings', label: 'Apply' },
+  { href: '/settings', label: 'Edit Profile' },
+  { href: '/settings', label: 'Log Out' },
+]
+
+export type HeaderProps = {
+  loggedIn: boolean
+}
+
+export const Header = ({ loggedIn }: HeaderProps) => {
+  return (
+    <Disclosure as="nav">
+      {({ open }) => (
+        <>
+          <div className="bg-primary">
+            <div className="container">
+              <div className="relative flex h-23 items-center justify-between bg-primary">
+                <div
+                  className={`${
+                    open ? 'right-0' : 'left-0'
+                  } absolute inset-y-0 flex items-center lg:hidden`}
+                >
+                  {/* Mobile menu button*/}
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-gray-400 lg:hidden">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <Image
+                        src={xSvg}
+                        alt="close"
+                      />
+                    ) : (
+                      <Image
+                        src={barsSvg}
+                        alt="bars"
+                      />
+                    )}
+                  </Disclosure.Button>
+                </div>
+                <div
+                  className={`${
+                    open ? 'ml-0' : 'ml-16'
+                  } flex flex-1 items-center justify-start lg:ml-0 lg:items-stretch`}
+                >
+                  <div className="flex items-center">
+                    <Link
+                      href="/"
+                      className="text-lg text-white"
+                    >
+                      Logo
+                    </Link>
+                  </div>
+                  <div className="ml-[120px] hidden items-center space-x-20 lg:flex">
+                    {navigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="text-base text-white hover:underline"
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                {open ? null : (
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    {loggedIn ? (
+                      <Menu
+                        as="div"
+                        className="relative"
+                      >
+                        <Menu.Button className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white focus:outline-none">
+                          <span className="sr-only">Open user menu</span>
+
+                          <Image
+                            src={userSvg}
+                            alt="User"
+                          />
+                        </Menu.Button>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-[355px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="p-5">
+                              <div className="mb-5 flex items-center">
+                                <div className="mr-5 h-[80px] w-[80px] rounded-full bg-gray-light"></div>
+                                <div>
+                                  <p className="mb-2.5 text-lg text-black">Samvel Hakobyan</p>
+                                  <p className="text-base text-black-light">example@gmail.com</p>
+                                </div>
+                              </div>
+                              <ul>
+                                {links.map((link) => (
+                                  <Menu.Item
+                                    key={link.href}
+                                    as={Fragment}
+                                  >
+                                    <li className="mb-2.5">
+                                      <Link href={link.href}>
+                                        <Button variant="outlined">{link.label}</Button>
+                                      </Link>
+                                    </li>
+                                  </Menu.Item>
+                                ))}
+                              </ul>
+                            </div>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    ) : (
+                      <>
+                        <div className="ml-[60px] hidden lg:block">
+                          <Link href="/login">
+                            <Button
+                              variant="text"
+                              color="secondary"
+                            >
+                              Login
+                            </Button>
+                          </Link>
+                        </div>
+                        <div className="ml-[60px]">
+                          <Link href="/register">
+                            <Button
+                              color="primary"
+                              variant="outlined"
+                            >
+                              Register
+                            </Button>
+                          </Link>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 lg:hidden">
+            <div className="mb-[120px] space-y-5">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block text-base font-medium text-black"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+            <Button
+              size="lg"
+              leftIcon={logOutSvg}
+            >
+              Log Out
+            </Button>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  )
+}
