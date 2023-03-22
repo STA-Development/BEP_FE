@@ -34,8 +34,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# md
-TODO.md
-
 # intellij
 .idea
+
+# md
+TODO.md
