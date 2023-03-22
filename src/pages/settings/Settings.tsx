@@ -1,9 +1,5 @@
-import Image from 'next/image'
-
 import { Button } from '@/components/Button'
-
-import locationSvg from '~/icons/location.svg'
-import userSvg from '~/icons/user.svg'
+import { LocationIcon, UserIcon } from '@/components/Icons'
 
 const form = [
   {
@@ -40,22 +36,14 @@ export const Settings = () => {
         <div className="pl-10">
           <h2 className="mb-2.5 text-lg">Name and Surname</h2>
           <p className="mb-10 flex">
-            <Image
-              src={locationSvg}
-              alt="location"
-              className="mr-2.5"
-            />
+            <LocationIcon className="mr-2.5" />
             Yerevan, Armenia
           </p>
           <Button
             size="lg"
             variant="outlined"
+            leftIcon={<UserIcon />}
           >
-            <Image
-              src={userSvg}
-              alt="Picture of the author"
-              className="mr-2.5"
-            />
             Upload Avatar
           </Button>
         </div>

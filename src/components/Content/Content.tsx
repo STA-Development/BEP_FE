@@ -1,8 +1,7 @@
 import { ReactNode } from 'react'
-import Image from 'next/image'
 
 export type ContentProps = {
-  img: string
+  img: ReactNode
   title: string
   desc: string
   button?: ReactNode
@@ -16,13 +15,7 @@ export const Content = ({ img, title, desc, button }: ContentProps) => {
         <p className="mb-10 text-base text-black-light xl:text-lg">{desc}</p>
         {button}
       </div>
-      <div className="order-first mb-10 flex justify-center xl:order-last">
-        <Image
-          src={img}
-          alt="Image"
-          className="w-auto"
-        />
-      </div>
+      <div className="order-first mb-10 flex justify-center xl:order-last">{img}</div>
     </div>
   )
 }

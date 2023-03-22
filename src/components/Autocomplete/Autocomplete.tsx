@@ -1,8 +1,7 @@
 import { Fragment, useMemo, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
-import Image from 'next/image'
 
-import chevronDownSvg from '~/icons/chevronDown.svg'
+import { ChevronIcon } from '@/components/Icons'
 
 interface Item {
   id: number
@@ -48,10 +47,7 @@ export const Autocomplete = ({ items, placeholder }: AutocompleteProps) => {
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-5">
-              <Image
-                src={chevronDownSvg}
-                alt="down"
-              />
+              <ChevronIcon className="rotate-90 transform" />
             </Combobox.Button>
           </div>
           <Transition

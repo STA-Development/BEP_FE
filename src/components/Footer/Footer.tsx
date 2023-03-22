@@ -1,13 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
-
-import fbSvg from '~/icons/socials/fb.svg'
-import ggSvg from '~/icons/socials/gg.svg'
-import lnSvg from '~/icons/socials/ln.svg'
-import twSvg from '~/icons/socials/tw.svg'
-import ytSvg from '~/icons/socials/yt.svg'
+import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@/components/Icons'
 
 const contacts = [
   'E-mail: info@bep.am',
@@ -17,11 +11,11 @@ const contacts = [
 ]
 
 const socials = [
-  { icon: fbSvg },
-  { icon: twSvg },
-  { icon: lnSvg },
-  { icon: ytSvg },
-  { icon: ggSvg },
+  { icon: <FBIcon /> },
+  { icon: <TWIcon /> },
+  { icon: <LNIcon /> },
+  { icon: <YTIcon /> },
+  { icon: <GGIcon /> },
 ]
 
 export const Footer = () => (
@@ -86,10 +80,7 @@ export const Footer = () => (
                 href=""
                 className="mr-5 flex h-12 w-12 items-center justify-center rounded-full bg-white"
               >
-                <Image
-                  src={social.icon}
-                  alt="icon"
-                ></Image>
+                {social.icon}
               </Link>
             ))}
           </div>

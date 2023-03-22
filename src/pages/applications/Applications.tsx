@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import Image from 'next/image'
 
 import { ApplicationDialog } from '@/components/ApplicationDialog'
 import { Button } from '@/components/Button'
 import { DeleteDialog } from '@/components/DeleteDialog'
-
-import addSvg from '~/icons/add.svg'
-import deleteSvg from '~/icons/delete.svg'
+import { AddIcon, DeleteIcon } from '@/components/Icons'
 
 const applications = [
   {
@@ -85,13 +82,9 @@ export const Applications = () => {
             </div>
             <Button
               variant="text"
+              leftIcon={<DeleteIcon />}
               onClick={() => setIsOpenDeleteDialog(true)}
             >
-              <Image
-                src={deleteSvg}
-                alt="delete"
-                className="mr-2.5"
-              />
               Delete Application
             </Button>
           </div>
@@ -101,13 +94,9 @@ export const Applications = () => {
         variant="contained"
         color="gray"
         size="hg"
+        leftIcon={<AddIcon />}
         onClick={() => setIsOpenApplicationDialog(true)}
       >
-        <Image
-          src={addSvg}
-          alt="delete"
-          className="mr-2.5"
-        />
         Add Application
       </Button>
 
