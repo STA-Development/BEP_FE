@@ -1,5 +1,4 @@
-import { ComponentPropsWithoutRef, FC } from 'react'
-import Image from 'next/image'
+import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
 
 import clsxMerge from '@/lib/clsxm'
 
@@ -14,8 +13,8 @@ export type ButtonProps = {
   color?: (typeof ButtonColor)[number]
   size?: (typeof ButtonSize)[number]
   radius?: (typeof ButtonRadius)[number]
-  leftIcon?: string
-  rightIcon?: string
+  leftIcon?: ReactNode
+  rightIcon?: ReactNode
 } & ComponentPropsWithoutRef<'button'>
 
 export const Button: FC<ButtonProps> = ({
@@ -87,21 +86,9 @@ export const Button: FC<ButtonProps> = ({
       className={style}
       {...rest}
     >
-      {leftIcon ? (
-        <Image
-          src={leftIcon}
-          alt="icon"
-          className="mr-5"
-        />
-      ) : null}
+      {leftIcon ? <div className="mr-2.5">{leftIcon}</div> : null}
       {children}
-      {rightIcon ? (
-        <Image
-          src={rightIcon}
-          alt="icon"
-          className="ml-5"
-        />
-      ) : null}
+      {rightIcon ? <div className="ml-2.5">{rightIcon}</div> : null}
     </button>
   )
 }

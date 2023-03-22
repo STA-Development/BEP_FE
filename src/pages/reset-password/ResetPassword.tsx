@@ -1,9 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
-
-import leftSvg from '~/icons/left.svg'
+import { LeftIcon } from '@/components/Icons'
 
 export const ResetPassword = () => {
   const error = false
@@ -12,12 +10,10 @@ export const ResetPassword = () => {
     <div className="container pt-10">
       <div className="mb-10 flex justify-between">
         <Link href="/">
-          <Button variant="text">
-            <Image
-              src={leftSvg}
-              alt="Picture of the author"
-              className="mr-5"
-            />
+          <Button
+            variant="text"
+            leftIcon={<LeftIcon />}
+          >
             Go back
           </Button>
         </Link>

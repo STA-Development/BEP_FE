@@ -1,21 +1,22 @@
-import { PropsWithChildren } from 'react'
-import Image from 'next/image'
+import { PropsWithChildren, ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import MainLayout from '@/layouts/MainLayout'
 import { Button } from '@/components/Button'
-
-import applicationsSvg from '~/icons/applications.svg'
-import logOutSvg from '~/icons/log-out.svg'
-import monitoringSystemsSvg from '~/icons/monitoring-systems.svg'
-import settingsSvg from '~/icons/settings.svg'
+import {
+  ApplicationsIcon,
+  LogOutIcon,
+  MonitoringSystemsIcon,
+  SettingsIcon,
+} from '@/components/Icons'
 
 interface MenuItem {
   label: string
   href: string
-  icon: string
+  icon: ReactNode
 }
+
 interface Menu {
   [key: string]: MenuItem
 }
@@ -24,17 +25,17 @@ const menu: Menu = {
   settings: {
     label: 'Settings',
     href: '/settings',
-    icon: settingsSvg,
+    icon: <SettingsIcon />,
   },
   applications: {
     label: 'Applications',
     href: '/applications',
-    icon: applicationsSvg,
+    icon: <ApplicationsIcon />,
   },
   'monitoring-systems': {
     label: 'Monitoring Systems',
     href: '/monitoring-systems',
-    icon: monitoringSystemsSvg,
+    icon: <MonitoringSystemsIcon />,
   },
 }
 
@@ -59,22 +60,16 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
                     href={item.href}
                     className="flex items-center"
                   >
-                    <Image
-                      src={item.icon}
-                      alt={item.label}
-                      className="mr-2.5"
-                    />
+                    <span className="mr-2.5">{item.icon}</span>
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Button size="bs">
-              <Image
-                src={logOutSvg}
-                alt="log out"
-                className="mr-2.5"
-              />
+            <Button
+              size="bs"
+              leftIcon={<LogOutIcon />}
+            >
               Log Out
             </Button>
           </aside>

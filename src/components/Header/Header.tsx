@@ -1,14 +1,9 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
-
-import barsSvg from '~/icons/bars.svg'
-import logOutSvg from '~/icons/log-out.svg'
-import userSvg from '~/icons/user.svg'
-import xSvg from '~/icons/x.svg'
+import { BarsIcon, CloseIcon, LogOutIcon, UserIcon } from '@/components/Icons'
 
 const navigation = [
   { name: 'Home', href: '/', current: false },
@@ -36,32 +31,14 @@ export const Header = ({ loggedIn }: HeaderProps) => {
           <div className="bg-primary">
             <div className="container">
               <div className="relative flex h-23 items-center justify-between bg-primary">
-                <div
-                  className={`${
-                    open ? 'right-0' : 'left-0'
-                  } absolute inset-y-0 flex items-center lg:hidden`}
-                >
+                <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
                   {/* Mobile menu button*/}
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-gray-400 lg:hidden">
                     <span className="sr-only">Open main menu</span>
-                    {open ? (
-                      <Image
-                        src={xSvg}
-                        alt="close"
-                      />
-                    ) : (
-                      <Image
-                        src={barsSvg}
-                        alt="bars"
-                      />
-                    )}
+                    {open ? <CloseIcon /> : <BarsIcon />}
                   </Disclosure.Button>
                 </div>
-                <div
-                  className={`${
-                    open ? 'ml-0' : 'ml-16'
-                  } flex flex-1 items-center justify-start lg:ml-0 lg:items-stretch`}
-                >
+                <div className="flex flex-1 items-center justify-start lg:ml-0 lg:items-stretch">
                   <div className="flex items-center">
                     <Link
                       href="/"
@@ -83,83 +60,78 @@ export const Header = ({ loggedIn }: HeaderProps) => {
                     ))}
                   </div>
                 </div>
-                {open ? null : (
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    {loggedIn ? (
-                      <Menu
-                        as="div"
-                        className="relative"
-                      >
-                        <Menu.Button className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white focus:outline-none">
-                          <span className="sr-only">Open user menu</span>
+                <div className="absolute inset-y-0 right-0 hidden items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 lg:flex">
+                  {loggedIn ? (
+                    <Menu
+                      as="div"
+                      className="relative"
+                    >
+                      <Menu.Button className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white focus:outline-none">
+                        <span className="sr-only">Open user menu</span>
 
-                          <Image
-                            src={userSvg}
-                            alt="User"
-                          />
-                        </Menu.Button>
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-[355px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="p-5">
-                              <div className="mb-5 flex items-center">
-                                <div className="mr-5 h-[80px] w-[80px] rounded-full bg-gray-light"></div>
-                                <div>
-                                  <p className="mb-2.5 text-lg text-black">Samvel Hakobyan</p>
-                                  <p className="text-base text-black-light">example@gmail.com</p>
-                                </div>
+                        <UserIcon />
+                      </Menu.Button>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-[355px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <div className="p-5">
+                            <div className="mb-5 flex items-center">
+                              <div className="mr-5 h-[80px] w-[80px] rounded-full bg-gray-light"></div>
+                              <div>
+                                <p className="mb-2.5 text-lg text-black">Samvel Hakobyan</p>
+                                <p className="text-base text-black-light">example@gmail.com</p>
                               </div>
-                              <ul>
-                                {links.map((link) => (
-                                  <Menu.Item
-                                    key={link.href}
-                                    as={Fragment}
-                                  >
-                                    <li className="mb-2.5">
-                                      <Link href={link.href}>
-                                        <Button variant="outlined">{link.label}</Button>
-                                      </Link>
-                                    </li>
-                                  </Menu.Item>
-                                ))}
-                              </ul>
                             </div>
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
-                    ) : (
-                      <>
-                        <div className="ml-[60px] hidden lg:block">
-                          <Link href="/login">
-                            <Button
-                              variant="text"
-                              color="secondary"
-                            >
-                              Login
-                            </Button>
-                          </Link>
-                        </div>
-                        <div className="ml-[60px]">
-                          <Link href="/register">
-                            <Button
-                              color="primary"
-                              variant="outlined"
-                            >
-                              Register
-                            </Button>
-                          </Link>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
+                            <ul>
+                              {links.map((link) => (
+                                <Menu.Item
+                                  key={link.href}
+                                  as={Fragment}
+                                >
+                                  <li className="mb-2.5">
+                                    <Link href={link.href}>
+                                      <Button variant="outlined">{link.label}</Button>
+                                    </Link>
+                                  </li>
+                                </Menu.Item>
+                              ))}
+                            </ul>
+                          </div>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  ) : (
+                    <>
+                      <div className="ml-[60px]">
+                        <Link href="/login">
+                          <Button
+                            variant="text"
+                            color="secondary"
+                          >
+                            Login
+                          </Button>
+                        </Link>
+                      </div>
+                      <div className="ml-[60px]">
+                        <Link href="/register">
+                          <Button
+                            color="primary"
+                            variant="outlined"
+                          >
+                            Register
+                          </Button>
+                        </Link>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -178,7 +150,7 @@ export const Header = ({ loggedIn }: HeaderProps) => {
             </div>
             <Button
               size="lg"
-              leftIcon={logOutSvg}
+              leftIcon={<LogOutIcon />}
             >
               Log Out
             </Button>
