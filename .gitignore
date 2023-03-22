@@ -39,3 +39,6 @@ next-env.d.ts
 
 # md
 TODO.md
+
+# intellij
+.idea
