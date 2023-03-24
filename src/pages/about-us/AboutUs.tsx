@@ -1,18 +1,15 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
 import { Content } from '@/components/Content'
-
-import dSvg from '~/icons/d.svg'
-import rightSvg from '~/icons/right.svg'
+import { RightIcon, TeamIcon } from '@/components/Icons'
 
 const AboutUs = () => {
   return (
     <>
       <div className="container">
         <Content
-          img={dSvg}
+          img={<TeamIcon />}
           title="What is BEP?"
           desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
           at supporting the sustainable development and enhancement of the Armenian education system
@@ -21,13 +18,11 @@ const AboutUs = () => {
           process of vocational training."
           button={
             <Link href="/fill-the-form">
-              <Button size="lg">
+              <Button
+                size="lg"
+                rightIcon={<RightIcon />}
+              >
                 Fill the form
-                <Image
-                  src={rightSvg}
-                  alt="Picture of the author"
-                  className="ml-5"
-                />
               </Button>
             </Link>
           }

@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
-import { OrDivider } from '@/components/OrDivider/OrDivider'
-
-import eyeSvg from '~/icons/eye.svg'
-import leftSvg from '~/icons/left.svg'
+import { EyeIcon, LeftIcon } from '@/components/Icons'
+import { OrDivider } from '@/components/OrDivider'
 
 export const Register = () => {
   const [show, setShow] = useState(false)
@@ -16,12 +13,10 @@ export const Register = () => {
     <div className="container pt-10">
       <div className="mb-10 flex justify-between">
         <Link href="/">
-          <Button variant="text">
-            <Image
-              src={leftSvg}
-              alt="Picture of the author"
-              className="mr-5"
-            />
+          <Button
+            variant="text"
+            leftIcon={<LeftIcon />}
+          >
             Go back
           </Button>
         </Link>
@@ -69,10 +64,7 @@ export const Register = () => {
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button onClick={() => setShow((prev) => !prev)}>
-                <Image
-                  src={eyeSvg}
-                  alt="eye"
-                />
+                <EyeIcon />
               </button>
             </div>
           </div>
@@ -92,10 +84,7 @@ export const Register = () => {
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button onClick={() => setShow((prev) => !prev)}>
-                <Image
-                  src={eyeSvg}
-                  alt="eye"
-                />
+                <EyeIcon />
               </button>
             </div>
           </div>

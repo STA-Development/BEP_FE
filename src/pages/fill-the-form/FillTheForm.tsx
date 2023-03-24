@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { Tab } from '@headlessui/react'
-import Image from 'next/image'
 
 import { Autocomplete } from '@/components/Autocomplete'
 import { Button } from '@/components/Button'
-
-import leftSvg from '~/icons/left.svg'
+import { LeftIcon } from '@/components/Icons/LeftIcon'
 
 interface Person {
   id: number
@@ -34,15 +32,11 @@ const FillTheForm = () => {
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
+          leftIcon={<LeftIcon />}
           onClick={() => {
             setSelectedIndex((prev) => prev - 1)
           }}
         >
-          <Image
-            src={leftSvg}
-            alt="Picture of the author"
-            className="mr-5"
-          />
           Go back
         </Button>
       </div>

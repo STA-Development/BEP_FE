@@ -1,22 +1,21 @@
 import { Disclosure } from '@headlessui/react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/Button'
 import { Content } from '@/components/Content'
+import {
+  AgreementIcon,
+  BuildingBankIcon,
+  BuildingBankToolboxIcon,
+  ChevronIcon,
+  ClipboardTaskListIcon,
+  DesktopPulseIcon,
+  PeopleCommunityIcon,
+  RightIcon,
+  ToolboxIcon,
+} from '@/components/Icons'
 
 import { NextPageWithLayout } from '@/pages/_app'
-
-import aSvg from '~/icons/a.svg'
-import bSvg from '~/icons/b.svg'
-import chevronSvg from '~/icons/chevron.svg'
-import buildingBankSvg from '~/icons/helps/buildingBank.svg'
-import buildingBankToolboxSvg from '~/icons/helps/buildingBankToolbox.svg'
-import clipboardTaskListSvg from '~/icons/helps/clipboardTaskList.svg'
-import desktopPulseSvg from '~/icons/helps/desktopPulse.svg'
-import peopleCommunitySvg from '~/icons/helps/peopleCommunity.svg'
-import toolboxSvg from '~/icons/helps/toolbox.svg'
-import rightSvg from '~/icons/right.svg'
 
 const data1 = [
   { id: 1, number: '43', text: 'Lorem ipsum dolor sit amet consectetur' },
@@ -25,12 +24,12 @@ const data1 = [
 ]
 
 const helps = [
-  { id: 1, name: 'Masters', icon: peopleCommunitySvg },
-  { id: 2, name: 'Companies', icon: buildingBankToolboxSvg },
-  { id: 3, name: 'Educational Institutes', icon: buildingBankSvg },
-  { id: 4, name: 'Monitoring Systems', icon: desktopPulseSvg },
-  { id: 5, name: 'Jobs', icon: toolboxSvg },
-  { id: 6, name: 'Practice', icon: clipboardTaskListSvg },
+  { id: 1, name: 'Masters', icon: <PeopleCommunityIcon /> },
+  { id: 2, name: 'Companies', icon: <BuildingBankToolboxIcon /> },
+  { id: 3, name: 'Educational Institutes', icon: <BuildingBankIcon /> },
+  { id: 4, name: 'Monitoring Systems', icon: <DesktopPulseIcon /> },
+  { id: 5, name: 'Jobs', icon: <ToolboxIcon /> },
+  { id: 6, name: 'Practice', icon: <ClipboardTaskListIcon /> },
 ]
 
 const Home: NextPageWithLayout = () => {
@@ -38,14 +37,14 @@ const Home: NextPageWithLayout = () => {
     <>
       <div className="container">
         <Content
-          img={aSvg}
+          img={<AgreementIcon />}
           title="Business and Education Partnership Foundation"
           desc="Lorem ipsum dolor sit amet consectetur. Massa sed."
           button={
             <Link href="/">
               <Button
                 size="lg"
-                rightIcon={rightSvg}
+                rightIcon={<RightIcon />}
               >
                 Start now
               </Button>
@@ -74,7 +73,7 @@ const Home: NextPageWithLayout = () => {
 
       <div className="container">
         <Content
-          img={bSvg}
+          img={<AgreementIcon />}
           title="What is BEP?"
           desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
           at supporting the sustainable development and enhancement of the Armenian education system
@@ -85,7 +84,7 @@ const Home: NextPageWithLayout = () => {
             <Link href="/fill-the-form">
               <Button
                 size="lg"
-                rightIcon={rightSvg}
+                rightIcon={<RightIcon />}
               >
                 Fill the form
               </Button>
@@ -109,19 +108,11 @@ const Home: NextPageWithLayout = () => {
                     }`}
                   >
                     <div className="flex items-center">
-                      <Image
-                        src={help.icon}
-                        alt="Picture of the author"
-                        className="mr-5 h-12 w-auto"
-                      />
+                      <span className="mr-5 h-12 w-auto">{help.icon}</span>
                       <span>{help.name}</span>
                     </div>
                     <div className="flex h-9 w-9 items-center justify-center rounded-full border p-2 text-primary xl:h-16 xl:w-16 xl:p-4">
-                      <Image
-                        src={chevronSvg}
-                        alt="chevron"
-                        className={`transform ${open && 'rotate-90'}`}
-                      />
+                      <ChevronIcon className={`transform ${open && 'rotate-90'}`} />
                     </div>
                   </Disclosure.Button>
                   <Disclosure.Panel className="rounded-b-lg border border-t-0 border-gray-light px-6 pb-10 xl:px-20">
@@ -138,7 +129,7 @@ const Home: NextPageWithLayout = () => {
                     <Link href="/fill-the-form">
                       <Button
                         size="lg"
-                        rightIcon={rightSvg}
+                        rightIcon={<RightIcon />}
                       >
                         Fill the form
                       </Button>
