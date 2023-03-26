@@ -1,7 +1,7 @@
+import React from 'react'
+import { Button } from '@components/Button'
+import { LeftIcon } from '@components/Icons'
 import Link from 'next/link'
-
-import { Button } from '@/components/Button'
-import { LeftIcon } from '@/components/Icons'
 
 export const ResetPassword = () => {
   const error = false
@@ -45,4 +45,3 @@ export const ResetPassword = () => {
 }
 
 export default ResetPassword
-ResetPassword.Layout = 'Auth'

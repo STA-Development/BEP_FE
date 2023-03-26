@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const AgreementIcon: FC<SVGIcon> = ({ fill = 'fill-primary', className, ...rest }) => {
+// TODO: fix this eslint error
+// eslint-disable-next-line max-lines-per-function
+export const AgreementIcon: FC<IconProps> = ({ fill = 'fill-primary', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (

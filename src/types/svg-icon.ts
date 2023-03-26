@@ -1,9 +1,9 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-type SVGIcon = ComponentPropsWithoutRef<'svg'> & {
+type IconProps = ComponentPropsWithoutRef<'svg'> & {
   width?: number
   height?: number
   fill?: string
 }
 
-export default SVGIcon
+export default IconProps

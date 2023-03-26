@@ -1,10 +1,8 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const MonitoringSystemsIcon: FC<SVGIcon> = ({
+export const MonitoringSystemsIcon: FC<IconProps> = ({
   fill = 'fill-primary',
   className,
   ...rest

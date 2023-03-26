@@ -1,10 +1,8 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const YTIcon: FC<SVGIcon> = ({ fill = 'fill-[#FF0000]', className, ...rest }) => {
+export const YTIcon: FC<IconProps> = ({ fill = 'fill-[#FF0000]', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (

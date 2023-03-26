@@ -1,11 +1,18 @@
-import AuthLayout from './AuthLayout'
-import MainLayout from './MainLayout'
-import ProfileLayout from './ProfileLayout'
+import React, { PropsWithChildren } from 'react'
+import MainLayout from '@layouts/MainLayout'
 
-export const Layouts = {
-  Auth: AuthLayout,
-  Main: MainLayout,
-  Profile: ProfileLayout,
+import AuthLayout from './AuthLayout'
+
+const LayoutContent = ({ children }: PropsWithChildren) => {
+  const auth = true
+
+  if (auth) {
+    return <MainLayout>{children}</MainLayout>
+  }
+
+  return <AuthLayout>{children}</AuthLayout>
 }
 
-export type LayoutKeys = keyof typeof Layouts
+const Layout = ({ children }: PropsWithChildren) => <LayoutContent>{children}</LayoutContent>
+
+export default Layout

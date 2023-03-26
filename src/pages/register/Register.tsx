@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { Button } from '@components/Button'
+import { EyeIcon, LeftIcon } from '@components/Icons'
+import { OrDivider } from '@components/OrDivider'
 import Link from 'next/link'
-
-import { Button } from '@/components/Button'
-import { EyeIcon, LeftIcon } from '@/components/Icons'
-import { OrDivider } from '@/components/OrDivider'
 
 export const Register = () => {
   const [show, setShow] = useState(false)
@@ -63,7 +62,10 @@ export const Register = () => {
               } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
-              <button onClick={() => setShow((prev) => !prev)}>
+              <button
+                type="button"
+                onClick={() => setShow((prev) => !prev)}
+              >
                 <EyeIcon />
               </button>
             </div>
@@ -83,7 +85,10 @@ export const Register = () => {
               } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
-              <button onClick={() => setShow((prev) => !prev)}>
+              <button
+                type="button"
+                onClick={() => setShow((prev) => !prev)}
+              >
                 <EyeIcon />
               </button>
             </div>
@@ -110,4 +115,3 @@ export const Register = () => {
 }
 
 export default Register
-Register.Layout = 'Auth'

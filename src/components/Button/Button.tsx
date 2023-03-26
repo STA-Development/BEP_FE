@@ -1,6 +1,5 @@
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
-
-import clsxMerge from '@/lib/clsxm'
+import React, { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'text'] as const
 const ButtonColor = ['primary', 'secondary', 'gray'] as const
@@ -30,7 +29,7 @@ export const Button: FC<ButtonProps> = ({
   rightIcon,
   ...rest
 }) => {
-  const disabled = isLoading || buttonDisabled
+  const disabled = isLoading ?? buttonDisabled
 
   const style = clsxMerge(
     'flex',
@@ -84,6 +83,7 @@ export const Button: FC<ButtonProps> = ({
     <button
       disabled={disabled}
       className={style}
+      type="button"
       {...rest}
     >
       {leftIcon ? <div className="mr-2.5">{leftIcon}</div> : null}

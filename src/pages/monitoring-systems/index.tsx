@@ -1,1 +1,1 @@
-export { default } from './MonitoringSystems'
+export { default as MonitoringSystems } from './MonitoringSystems'

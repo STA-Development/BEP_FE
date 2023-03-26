@@ -24,6 +24,9 @@ export const LoggedIn: Story = {
     const loginButton = await canvas.getByRole('button', {
       name: /Log in/i,
     })
+
+    // TODO fix lint error
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     await userEvent.click(loginButton)
   },
 }

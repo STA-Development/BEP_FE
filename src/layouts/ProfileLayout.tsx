@@ -1,15 +1,14 @@
-import { PropsWithChildren, ReactNode } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-
-import MainLayout from '@/layouts/MainLayout'
-import { Button } from '@/components/Button'
+import React, { PropsWithChildren, ReactNode } from 'react'
+import { Button } from '@components/Button'
 import {
   ApplicationsIcon,
   LogOutIcon,
   MonitoringSystemsIcon,
   SettingsIcon,
-} from '@/components/Icons'
+} from '@components/Icons'
+import MainLayout from '@layouts/MainLayout'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 interface MenuItem {
   label: string
