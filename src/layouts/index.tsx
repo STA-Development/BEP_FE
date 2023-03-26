@@ -1,7 +1,14 @@
 import React, { PropsWithChildren } from 'react'
 import MainLayout from '@layouts/MainLayout'
+import ProfileLayout from '@layouts/ProfileLayout'
 
 import AuthLayout from './AuthLayout'
+
+export const Layouts = {
+  Auth: AuthLayout,
+  Main: MainLayout,
+  Profile: ProfileLayout,
+}
 
 const LayoutContent = ({ children }: PropsWithChildren) => {
   const auth = true

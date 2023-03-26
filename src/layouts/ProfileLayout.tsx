@@ -23,12 +23,12 @@ interface Menu {
 const menu: Menu = {
   settings: {
     label: 'Settings',
-    href: '/settings',
+    href: '/profile/settings',
     icon: <SettingsIcon />,
   },
   applications: {
     label: 'Applications',
-    href: '/applications',
+    href: '/profile/applications',
     icon: <ApplicationsIcon />,
   },
   'monitoring-systems': {
@@ -40,8 +40,9 @@ const menu: Menu = {
 
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
-  const pathname = router.pathname.substring(1)
-  const label = menu[pathname]?.label
+  const { pathname } = router
+  const menuItem = Object.keys(menu).find((item) => menu[item].href === pathname)
+  const label = menuItem ? menu?.[menuItem]?.label : ''
 
   return (
     <MainLayout>
