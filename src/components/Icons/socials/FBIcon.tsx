@@ -1,10 +1,8 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const FBIcon: FC<SVGIcon> = ({ fill = 'fill-[#1877F2]', className, ...rest }) => {
+export const FBIcon: FC<IconProps> = ({ fill = 'fill-[#1877F2]', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (

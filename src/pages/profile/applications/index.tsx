@@ -1,9 +1,8 @@
-import { useState } from 'react'
-
-import { ApplicationDialog } from '@/components/ApplicationDialog'
-import { Button } from '@/components/Button'
-import { DeleteDialog } from '@/components/DeleteDialog'
-import { AddIcon, DeleteIcon } from '@/components/Icons'
+import React, { useState } from 'react'
+import { ApplicationDialog } from '@components/ApplicationDialog'
+import { Button } from '@components/Button'
+import { DeleteDialog } from '@components/DeleteDialog'
+import { AddIcon, DeleteIcon } from '@components/Icons'
 
 const applications = [
   {
@@ -48,11 +47,8 @@ export const Applications = () => {
 
   return (
     <>
-      {applications.map((item, index) => (
-        <div
-          key={index}
-          className="mb-10 rounded border border-gray-light p-10"
-        >
+      {applications.map((item) => (
+        <div className="mb-10 rounded border border-gray-light p-10">
           <h2 className="mb-5 text-lg">{item.label}:</h2>
           <div className="mb-10 flex">
             {item.statuses.map((status) => (

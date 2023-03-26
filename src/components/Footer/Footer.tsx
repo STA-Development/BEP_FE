@@ -1,7 +1,7 @@
+import React from 'react'
+import { Button } from '@components/Button'
+import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
 import Link from 'next/link'
-
-import { Button } from '@/components/Button'
-import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@/components/Icons'
 
 const contacts = [
   'E-mail: info@bep.am',
@@ -18,6 +18,7 @@ const socials = [
   { icon: <GGIcon /> },
 ]
 
+// TODO Update links
 export const Footer = () => (
   <div className="bg-primary">
     <div className="container">
@@ -40,7 +41,7 @@ export const Footer = () => (
           <ul className="mb-9">
             <li className="mb-2.5 text-base">
               <Link
-                href=""
+                href="youtube.com"
                 className="hover:underline"
               >
                 Privacy Policy
@@ -48,7 +49,7 @@ export const Footer = () => (
             </li>
             <li className="mb-2.5 text-base">
               <Link
-                href=""
+                href="youtube.com"
                 className="hover:underline"
               >
                 Terms of Use
@@ -74,10 +75,9 @@ export const Footer = () => (
         <div>
           <p className="mb-5 text-base font-medium">Get in touch with us:</p>
           <div className="flex">
-            {socials.map((social, index) => (
+            {socials.map((social) => (
               <Link
-                key={index}
-                href=""
+                href="youtube.com"
                 className="mr-5 flex h-12 w-12 items-center justify-center rounded-full bg-white"
               >
                 {social.icon}

@@ -36,6 +36,7 @@ export const Button = ({
   ...props
 }: ButtonProps) => {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary'
+
   return (
     <button
       type="button"
@@ -43,7 +44,7 @@ export const Button = ({
       {...props}
     >
       {label}
-      <style jsx>{`
+      <style>{`
         button {
           background-color: ${backgroundColor};
         }

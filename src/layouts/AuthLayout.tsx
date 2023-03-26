@@ -1,7 +1,5 @@
-import { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react'
 
-const AuthLayout = ({ children }: PropsWithChildren) => {
-  return <>{children}</>
-}
+const AuthLayout = ({ children }: PropsWithChildren) => <div>{children}</div>
 
 export default AuthLayout

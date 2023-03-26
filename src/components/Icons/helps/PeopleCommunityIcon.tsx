@@ -1,10 +1,12 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const PeopleCommunityIcon: FC<SVGIcon> = ({ fill = 'fill-primary', className, ...rest }) => {
+export const PeopleCommunityIcon: FC<IconProps> = ({
+  fill = 'fill-primary',
+  className,
+  ...rest
+}) => {
   const style = clsxMerge(fill, className)
 
   return (

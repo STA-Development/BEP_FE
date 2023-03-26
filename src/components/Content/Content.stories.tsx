@@ -1,7 +1,7 @@
+import React from 'react'
+import { Button } from '@components/Button'
+import { AgreementIcon, RightIcon } from '@components/Icons'
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { Button } from '@/components/Button'
-import { AgreementIcon, RightIcon } from '@/components/Icons'
 
 import { Content } from './Content'
 

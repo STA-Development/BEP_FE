@@ -1,11 +1,10 @@
-import { NextComponentType, NextPage, NextPageContext } from 'next'
-import type { AppProps } from 'next/app'
+import React from 'react'
+import Layout, { Layouts } from '@layouts/index'
+import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
 
-import { LayoutKeys, Layouts } from '@/layouts'
-
-import '@/styles/globals.css'
+import '@styles/globals.css'
 
 const roboto = Roboto({
   weight: ['400', '500'],
@@ -13,18 +12,15 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
-export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
-  Layout?: LayoutKeys
-}
-
-type AppPropsWithLayout = AppProps & {
+interface IAppProps {
   Component: NextComponentType<NextPageContext, never> & {
-    Layout: LayoutKeys
+    Layout: keyof typeof Layouts
   }
+  pageProps: JSX.IntrinsicAttributes
 }
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const Layout = Layouts[Component.Layout] ?? ((page) => page)
+const App = ({ Component, pageProps }: IAppProps) => {
+  const ChildLayout = Layouts[Component.Layout]
 
   return (
     <>
@@ -44,10 +40,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       <main className={`${roboto.variable} font-sans`}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {ChildLayout ? (
+          <ChildLayout>
+            <Component {...pageProps} />
+          </ChildLayout>
+        ) : (
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        )}
       </main>
     </>
   )
 }
+
+export default App

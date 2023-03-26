@@ -1,10 +1,8 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
+import clsxMerge from '@lib/clsxm'
 
-import clsxMerge from '@/lib/clsxm'
-
-import SVGIcon from '@/types/svg-icon.type'
-
-export const LocationIcon: FC<SVGIcon> = ({ fill = 'fill-black-light', className, ...rest }) => {
+export const LocationIcon: FC<IconProps> = ({ fill = 'fill-black-light', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (
