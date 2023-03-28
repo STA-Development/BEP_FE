@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { ApplicationDialog } from '@components/ApplicationDialog'
+import React from 'react'
+import { ModalName } from '@allTypes/modals'
 import { Button } from '@components/Button'
-import { DeleteDialog } from '@components/DeleteDialog'
 import { AddIcon, DeleteIcon } from '@components/Icons'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 
 const applications = [
   {
@@ -41,73 +42,71 @@ const applications = [
   },
 ]
 
-export const Applications = () => {
-  const [isOpenApplicationDialog, setIsOpenApplicationDialog] = useState(false)
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false)
-
-  return (
-    <>
-      {applications.map((item) => (
-        <div className="mb-10 rounded border border-gray-light p-10">
-          <h2 className="mb-5 text-lg">{item.label}:</h2>
-          <div className="mb-10 flex">
-            {item.statuses.map((status) => (
-              <p
-                key={status.label}
-                className="mr-10 text-base text-black-light"
-              >
-                {status.label}:
-                <span className="ml-5 font-medium text-primary">{status.status}</span>
-              </p>
-            ))}
-          </div>
-          <div className="flex justify-between">
-            <div className="flex gap-10">
-              <Button
-                size="bs"
-                variant="outlined"
-              >
-                Deactivate Application
-              </Button>
-              <Button
-                size="bs"
-                variant="contained"
-              >
-                Edit Form
-              </Button>
-            </div>
-            <Button
-              variant="text"
-              leftIcon={<DeleteIcon />}
-              onClick={() => setIsOpenDeleteDialog(true)}
+export const Applications = () => (
+  <>
+    {applications.map((item) => (
+      <div className="mb-10 rounded border border-gray-light p-10">
+        <h2 className="mb-5 text-lg">{item.label}:</h2>
+        <div className="mb-10 flex">
+          {item.statuses.map((status) => (
+            <p
+              key={status.label}
+              className="mr-10 text-base text-black-light"
             >
-              Delete Application
+              {status.label}:<span className="ml-5 font-medium text-primary">{status.status}</span>
+            </p>
+          ))}
+        </div>
+        <div className="flex justify-between">
+          <div className="flex gap-10">
+            <Button
+              size="bs"
+              variant="outlined"
+            >
+              Deactivate Application
+            </Button>
+            <Button
+              size="bs"
+              variant="contained"
+            >
+              Edit Form
             </Button>
           </div>
+          <Button
+            variant="text"
+            leftIcon={<DeleteIcon />}
+            onClick={() =>
+              dispatch(
+                viewsMiddleware.openModal({
+                  name: ModalName.DeleteApplicationModal,
+                  props: {},
+                })
+              )
+            }
+          >
+            Delete Application
+          </Button>
         </div>
-      ))}
-      <Button
-        variant="contained"
-        color="gray"
-        size="hg"
-        leftIcon={<AddIcon />}
-        onClick={() => setIsOpenApplicationDialog(true)}
-      >
-        Add Application
-      </Button>
-
-      <ApplicationDialog
-        isOpen={isOpenApplicationDialog}
-        setIsOpen={setIsOpenApplicationDialog}
-      />
-
-      <DeleteDialog
-        isOpen={isOpenDeleteDialog}
-        setIsOpen={setIsOpenDeleteDialog}
-      />
-    </>
-  )
-}
+      </div>
+    ))}
+    <Button
+      variant="contained"
+      color="gray"
+      size="hg"
+      leftIcon={<AddIcon />}
+      onClick={() =>
+        dispatch(
+          viewsMiddleware.openModal({
+            name: ModalName.AddApplicationModal,
+            props: {},
+          })
+        )
+      }
+    >
+      Add Application
+    </Button>
+  </>
+)
 
 export default Applications
 Applications.Layout = 'Profile'
