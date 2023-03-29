@@ -1,21 +1,21 @@
-import { PropsWithChildren } from 'react'
-import Image from 'next/image'
+import React, { PropsWithChildren, ReactNode } from 'react'
+import { Button } from '@components/Button'
+import {
+  ApplicationsIcon,
+  LogOutIcon,
+  MonitoringSystemsIcon,
+  SettingsIcon,
+} from '@components/Icons'
+import MainLayout from '@layouts/MainLayout'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import MainLayout from '@/layouts/MainLayout'
-import { Button } from '@/components/Button'
-
-import applicationsSvg from '~/icons/applications.svg'
-import logOutSvg from '~/icons/log-out.svg'
-import monitoringSystemsSvg from '~/icons/monitoring-systems.svg'
-import settingsSvg from '~/icons/settings.svg'
 
 interface MenuItem {
   label: string
   href: string
-  icon: string
+  icon: ReactNode
 }
+
 interface Menu {
   [key: string]: MenuItem
 }
@@ -23,25 +23,26 @@ interface Menu {
 const menu: Menu = {
   settings: {
     label: 'Settings',
-    href: '/settings',
-    icon: settingsSvg,
+    href: '/profile/settings',
+    icon: <SettingsIcon />,
   },
   applications: {
     label: 'Applications',
-    href: '/applications',
-    icon: applicationsSvg,
+    href: '/profile/applications',
+    icon: <ApplicationsIcon />,
   },
   'monitoring-systems': {
     label: 'Monitoring Systems',
     href: '/monitoring-systems',
-    icon: monitoringSystemsSvg,
+    icon: <MonitoringSystemsIcon />,
   },
 }
 
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
-  const pathname = router.pathname.substring(1)
-  const label = menu[pathname]?.label
+  const { pathname } = router
+  const menuItem = Object.keys(menu).find((item) => menu[item].href === pathname)
+  const label = menuItem ? menu?.[menuItem]?.label : ''
 
   return (
     <MainLayout>
@@ -59,22 +60,16 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
                     href={item.href}
                     className="flex items-center"
                   >
-                    <Image
-                      src={item.icon}
-                      alt={item.label}
-                      className="mr-2.5"
-                    />
+                    <span className="mr-2.5">{item.icon}</span>
                     {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Button size="bs">
-              <Image
-                src={logOutSvg}
-                alt="log out"
-                className="mr-2.5"
-              />
+            <Button
+              size="bs"
+              leftIcon={<LogOutIcon />}
+            >
               Log Out
             </Button>
           </aside>

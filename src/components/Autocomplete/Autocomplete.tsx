@@ -1,28 +1,26 @@
-import { Fragment, useMemo, useState } from 'react'
+import React, { Fragment, useMemo, useState } from 'react'
+import { ChevronIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
-import Image from 'next/image'
-
-import chevronDownSvg from '~/icons/chevronDown.svg'
 
 interface Item {
-  id: number
+  id: string
   name: string
 }
 
-export type AutocompleteProps = {
-  items: Item[]
+interface AutocompleteProps<T> {
+  items: T[]
   placeholder: string
 }
 
-export const Autocomplete = ({ items, placeholder }: AutocompleteProps) => {
-  const [selected, setSelected] = useState({})
+export const Autocomplete = <T extends Item>({ items, placeholder }: AutocompleteProps<T>) => {
+  const [selected, setSelected] = useState()
   const [query, setQuery] = useState('')
 
   const filteredItems = useMemo(
     () =>
       query === ''
         ? items
-        : items.filter((item: Item) =>
+        : items.filter((item: T) =>
             item.name
               .toLowerCase()
               .replace(/\s+/g, '')
@@ -48,10 +46,7 @@ export const Autocomplete = ({ items, placeholder }: AutocompleteProps) => {
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-5">
-              <Image
-                src={chevronDownSvg}
-                alt="down"
-              />
+              <ChevronIcon className="rotate-90 transform" />
             </Combobox.Button>
           </div>
           <Transition
@@ -67,7 +62,7 @@ export const Autocomplete = ({ items, placeholder }: AutocompleteProps) => {
                   Nothing found.
                 </div>
               ) : (
-                filteredItems.map((item: Item) => (
+                filteredItems.map((item) => (
                   <Combobox.Option
                     key={item.id}
                     className="relative cursor-pointer select-none border-b border-gray-thin py-2.5 px-5 text-base"

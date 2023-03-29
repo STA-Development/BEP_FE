@@ -1,15 +1,12 @@
 import React from 'react'
+import { IUser } from '@allTypes/user'
 
 import { Button } from './Button'
 
 import './header.css'
 
-type User = {
-  name: string
-}
-
 interface HeaderProps {
-  user?: User
+  user: IUser | null
   onLogin: () => void
   onLogout: () => void
   onCreateAccount: () => void
