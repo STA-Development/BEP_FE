@@ -56,7 +56,7 @@ module.exports = {
     },
     container: {
       center: true,
-      padding: '3.75rem',
+      padding: '1.25rem',
     },
     fontSize: {
       sm: [

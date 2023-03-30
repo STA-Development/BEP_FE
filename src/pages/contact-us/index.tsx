@@ -5,10 +5,7 @@ import { PageHeader } from '@components/PageHeader'
 const ContactUs = () => (
   <div className="container">
     <div className="grid grid-cols-1 divide-y">
-      <PageHeader
-        title="Contact Us"
-        paths={[]}
-      />
+      <PageHeader title="Contact Us" />
       <div className="grid grid-cols-2 divide-x py-10">
         <div className="pr-20">
           <form action="">

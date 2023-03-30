@@ -8,12 +8,14 @@ const SingleNews = ({
   imageUrl,
   index,
   key,
+  date,
 }: {
   title: string
   key: string
   description: string
   imageUrl: string
   index: number
+  date: string
 }) => {
   const isIndexOdd: boolean = index % 2 === 1
 
@@ -30,9 +32,9 @@ const SingleNews = ({
           className="border-transparent bg-transparent pl-0 pt-0 pb-4 text-cyan-800 hover:border-transparent hover:bg-transparent"
         >
           Read More
-          <RightIcon color="fill-cyan-800 ml-4" />
+          <RightIcon fill="fill-cyan-800 ml-4" />
         </Button>
-        <p className="text-gray-500">22.01.2022</p>
+        <p className="text-gray-500">{date}</p>
       </div>
       <div className={`${isIndexOdd ? 'order-first' : ''} md:shrink-0`}>
         <img
