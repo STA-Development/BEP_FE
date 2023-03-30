@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container } from '@components/Container'
 import { PageHeader } from '@components/PageHeader'
 import { Tab } from '@headlessui/react'
 
@@ -18,7 +19,7 @@ const tabs = [
 ]
 
 const MonitoringSystems = () => (
-  <div className="container">
+  <Container>
     <PageHeader
       title="Monitoring Systems"
       breadcrumbs
@@ -50,7 +51,7 @@ const MonitoringSystems = () => (
         ))}
       </Tab.Panels>
     </Tab.Group>
-  </div>
+  </Container>
 )
 
 export default MonitoringSystems

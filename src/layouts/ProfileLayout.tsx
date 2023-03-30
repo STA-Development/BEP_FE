@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import {
   ApplicationsIcon,
   LogOutIcon,
@@ -46,7 +47,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <MainLayout>
-      <div className="container">
+      <Container>
         <div className="mt-10 mb-[120px] grid grid-cols-5 gap-10 divide-x divide-gray-light">
           <aside>
             <h1 className="mb-5 text-xl">{label}</h1>
@@ -75,7 +76,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
           </aside>
           <main className="col-span-4 pl-10">{children}</main>
         </div>
-      </div>
+      </Container>
     </MainLayout>
   )
 }

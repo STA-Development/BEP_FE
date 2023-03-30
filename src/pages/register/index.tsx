@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import Link from 'next/link'
@@ -9,7 +10,7 @@ export const Register = () => {
   const error = false
 
   return (
-    <div className="container pt-10">
+    <Container className="pt-10">
       <div className="mb-10 flex justify-between">
         <Link href="/">
           <Button
@@ -110,7 +111,7 @@ export const Register = () => {
         </div>
         <Button size="fl">Next</Button>
       </div>
-    </div>
+    </Container>
   )
 }
 

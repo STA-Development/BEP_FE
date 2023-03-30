@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { BarsIcon, CloseIcon, LogOutIcon, UserIcon } from '@components/Icons'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import Link from 'next/link'
@@ -27,7 +28,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
     {({ open }) => (
       <>
         <div className="bg-primary">
-          <div className="container">
+          <Container>
             <div className="relative flex h-23 items-center justify-between bg-primary">
               <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
                 {/* Mobile menu button */}
@@ -128,7 +129,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
                 )}
               </div>
             </div>
-          </div>
+          </Container>
         </div>
 
         <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 lg:hidden">
