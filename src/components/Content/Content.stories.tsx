@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { AgreementIcon, RightIcon } from '@components/Icons'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -14,9 +15,9 @@ const meta: Meta<typeof Content> = {
   },
   decorators: [
     (Story) => (
-      <div className="container">
+      <Container>
         <Story />
-      </div>
+      </Container>
     ),
   ],
 }

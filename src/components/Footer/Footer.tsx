@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
 import Link from 'next/link'
 
@@ -21,7 +22,7 @@ const socials = [
 // TODO Update links
 export const Footer = () => (
   <div className="bg-primary">
-    <div className="container">
+    <Container>
       <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white lg:grid-flow-col">
         <div className="row-span-2 mb-10 lg:mb-0">
           <p className="mb-5 text-base font-medium">Contacts</p>
@@ -86,6 +87,6 @@ export const Footer = () => (
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   </div>
 )

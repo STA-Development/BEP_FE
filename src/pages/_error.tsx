@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container } from '@components/Container'
 import { NextPage } from 'next'
 
 interface Props {
@@ -6,11 +7,11 @@ interface Props {
 }
 
 const Error: NextPage<Props> = ({ statusCode }: Props) => (
-  <div className="container">
+  <Container>
     <p>
       {statusCode ? `An error ${statusCode} occurred on server` : 'An error occurred on client'}
     </p>
-  </div>
+  </Container>
 )
 
 Error.getInitialProps = ({ res, err }) => {
