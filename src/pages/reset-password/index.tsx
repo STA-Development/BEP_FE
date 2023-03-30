@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
 import Link from 'next/link'
 
@@ -7,7 +8,7 @@ export const ResetPassword = () => {
   const error = false
 
   return (
-    <div className="container pt-10">
+    <Container className="pt-10">
       <div className="mb-10 flex justify-between">
         <Link href="/">
           <Button
@@ -40,7 +41,7 @@ export const ResetPassword = () => {
         </div>
         <Button size="fl">Next</Button>
       </div>
-    </div>
+    </Container>
   )
 }
 

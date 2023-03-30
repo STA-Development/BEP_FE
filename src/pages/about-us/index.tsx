@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { Content } from '@components/Content'
 import { RightIcon, TeamIcon } from '@components/Icons'
 import Link from 'next/link'
 
 const AboutUs = () => (
   <>
-    <div className="container">
+    <Container>
       <Content
         img={<TeamIcon />}
         title="What is BEP?"
@@ -26,7 +27,7 @@ const AboutUs = () => (
           </Link>
         }
       />
-    </div>
+    </Container>
 
     <div className="bg-gray-thin py-10 px-5 text-center text-white">
       <div className="mx-auto max-w-screen-md">

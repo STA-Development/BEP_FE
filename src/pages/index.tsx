@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { Content } from '@components/Content'
 import {
   AgreementIcon,
@@ -32,7 +33,7 @@ const helps = [
 
 const Home = () => (
   <>
-    <div className="container">
+    <Container>
       <Content
         img={<AgreementIcon />}
         title="Business and Education Partnership Foundation"
@@ -48,10 +49,10 @@ const Home = () => (
           </Link>
         }
       />
-    </div>
+    </Container>
 
     <div className="mb-0 bg-[#3267891a] xl:mb-25">
-      <div className="container">
+      <Container>
         <div className="flex flex-col justify-between xl:flex-row">
           {data1.map((item) => (
             <div
@@ -65,10 +66,10 @@ const Home = () => (
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </div>
 
-    <div className="container">
+    <Container>
       <Content
         img={<AgreementIcon />}
         title="What is BEP?"
@@ -137,7 +138,7 @@ const Home = () => (
           </Disclosure>
         ))}
       </div>
-    </div>
+    </Container>
   </>
 )
 

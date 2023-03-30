@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Autocomplete } from '@components/Autocomplete'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { Tab } from '@headlessui/react'
 
@@ -25,7 +26,7 @@ const FillTheForm = () => {
   }
 
   return (
-    <div className="container mt-15 mb-30">
+    <Container className="mt-15 mb-30">
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
@@ -130,7 +131,7 @@ const FillTheForm = () => {
           Next
         </Button>
       </div>
-    </div>
+    </Container>
   )
 }
 

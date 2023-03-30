@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button } from '@components/Button'
+import { Container } from '@components/Container'
 import { PageHeader } from '@components/PageHeader'
 
 const ContactUs = () => (
-  <div className="container">
+  <Container>
     <div className="grid grid-cols-1 divide-y">
       <PageHeader title="Contact Us" />
       <div className="grid grid-cols-2 divide-x py-10">
@@ -69,7 +70,7 @@ const ContactUs = () => (
         <div className="pl-20" />
       </div>
     </div>
-  </div>
+  </Container>
 )
 
 export default ContactUs

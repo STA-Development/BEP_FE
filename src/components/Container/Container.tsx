@@ -1,5 +1,10 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
-export const Container = ({ children }: { children: ReactNode }) => (
-  <div className="container px-30"> {children} </div>
+export interface IContainerProps {
+  className?: string
+  children: React.ReactNode | string
+}
+
+export const Container = ({ className, children }: IContainerProps) => (
+  <div className={`container ${className}`}>{children}</div>
 )
