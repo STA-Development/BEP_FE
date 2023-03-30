@@ -13,6 +13,7 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
+// TODO: Create a global component for modals
 export const AddApplicationModal = () => {
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.AddApplicationModal))

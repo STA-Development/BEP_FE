@@ -23,7 +23,7 @@ interface IAppProps {
 }
 
 const App = ({ Component, pageProps }: IAppProps) => {
-  const ChildLayout = Layouts[Component.Layout]
+  const HierarchicalLayout = Layouts[Component.Layout]
 
   return (
     <>
@@ -44,10 +44,10 @@ const App = ({ Component, pageProps }: IAppProps) => {
       </Head>
       <main className={`${roboto.variable} font-sans`}>
         <Provider store={store}>
-          {ChildLayout ? (
-            <ChildLayout>
+          {HierarchicalLayout ? (
+            <HierarchicalLayout>
               <Component {...pageProps} />
-            </ChildLayout>
+            </HierarchicalLayout>
           ) : (
             <Layout>
               <Component {...pageProps} />
