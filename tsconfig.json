@@ -20,6 +20,9 @@
       "@styles/*": ["./src/styles/*"],
       "@lib/*": ["./src/lib/*"],
       "@allTypes/*": ["./src/types/*"],
+      "@axios/*": ["./src/manager/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@constants/*": ["./src/constants/*"],
       "~/*": ["./public/*"]
     },
     "resolveJsonModule": true /* Enable importing .json files */ /* Emit */,
