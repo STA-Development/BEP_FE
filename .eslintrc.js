@@ -11,9 +11,9 @@ module.exports = {
   },
   plugins: [
     'react',
-    '@emotion',
     '@typescript-eslint',
     'simple-import-sort',
+    'unused-imports',
     '@next/eslint-plugin-next',
   ],
   extends: [
@@ -53,7 +53,6 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'max-lines-per-function': ['error', 150],
-    '@emotion/jsx-import': 'error',
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
     'no-underscore-dangle': 'off',
@@ -70,19 +69,34 @@ module.exports = {
         ],
       },
     ],
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'warn',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [
       'error',
       {
         groups: [
-          // Side effect imports.
-          ['^\\u0000'],
+          // Packages `react` related packages come first.
+          ['^react', '^@?\\w'],
+          // ext library & side effect imports
+          ['^@?\\w', '^\\u0000'],
           // Packages. `react` related packages come first.
           ['^react', '^@?\\w'],
           // Internal packages.
           ['^(|@assets|@ui-component|@config|@context|@hooks|@types|@utils)(/.*|$)'],
           // Parent imports. Put `..` last.
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          // Type imports
+          ['^@/types'],
           // Other relative imports. Put same-folder imports and `.` last.
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
           // Style imports.

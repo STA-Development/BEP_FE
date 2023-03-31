@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@components/Button'
-import { Container } from '@components/Container'
 import { AgreementIcon, RightIcon } from '@components/Icons'
+import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Content } from './Content'
@@ -10,24 +10,15 @@ const meta: Meta<typeof Content> = {
   title: 'Components/Content',
   component: Content,
   tags: ['autodocs'],
-  parameters: {
-    layout: 'fullscreen',
-  },
-  decorators: [
-    (Story) => (
-      <Container>
-        <Story />
-      </Container>
-    ),
-  ],
+  argTypes: {},
 }
 
 export default meta
 type Story = StoryObj<typeof Content>
 
-export const Default: Story = {
+export const First: Story = {
   args: {
-    img: <AgreementIcon />,
+    img: <BusinessDealIcon />,
     title: 'Business and Education Partnership Foundation',
     desc: 'Lorem ipsum dolor sit amet consectetur. Massa sed.',
     button: (
@@ -36,6 +27,26 @@ export const Default: Story = {
         rightIcon={<RightIcon />}
       >
         Start now
+      </Button>
+    ),
+  },
+}
+export const Second: Story = {
+  args: {
+    img: <AgreementIcon />,
+    title: 'What is BEP?',
+    desc:
+      '“Business and Education Partnership” Foundation has been implementing the activities aimed\n' +
+      '          at supporting the sustainable development and enhancement of the Armenian education system\n' +
+      '          through introduction of innovative education models and mechanisms based on advanced\n' +
+      '          international experience, as well as providing an assistance to the result-oriented\n' +
+      '          process of vocational training.',
+    button: (
+      <Button
+        size="lg"
+        rightIcon={<RightIcon />}
+      >
+        Fill the form
       </Button>
     ),
   },
