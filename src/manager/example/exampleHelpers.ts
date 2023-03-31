@@ -4,7 +4,7 @@ interface ExampleListParams {
   value: string
 }
 
-const exampleFunction = async (params: ExampleListParams) => {
+const exampleFunction = (params: ExampleListParams) => {
   const { page, value } = params
 
   return value[page]
