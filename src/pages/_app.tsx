@@ -44,15 +44,15 @@ const App = ({ Component, pageProps }: IAppProps) => {
       </Head>
       <main className={`${roboto.variable} font-sans`}>
         <Provider store={store}>
-          {HierarchicalLayout ? (
-            <HierarchicalLayout>
+          <Layout>
+            {HierarchicalLayout ? (
+              <HierarchicalLayout>
+                <Component {...pageProps} />
+              </HierarchicalLayout>
+            ) : (
               <Component {...pageProps} />
-            </HierarchicalLayout>
-          ) : (
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          )}
+            )}
+          </Layout>
           <ModalsController />
         </Provider>
       </main>
