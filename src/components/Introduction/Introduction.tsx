@@ -3,7 +3,7 @@ import { Container } from '@components/Container'
 
 const ContentColor = ['primary', 'secondary'] as const
 
-export interface IContentProps extends ComponentPropsWithoutRef<'div'> {
+export interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
   img: ReactNode
   title: string
   desc: string
@@ -11,7 +11,14 @@ export interface IContentProps extends ComponentPropsWithoutRef<'div'> {
   color?: (typeof ContentColor)[number]
 }
 
-export const Content = ({ color, className, img, title, desc, button }: IContentProps) => (
+export const Introduction = ({
+  color,
+  className,
+  img,
+  title,
+  desc,
+  button,
+}: IIntroductionProps) => (
   <Container
     color={color}
     className={className}

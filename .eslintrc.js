@@ -95,8 +95,6 @@ module.exports = {
           ['^(|@assets|@ui-component|@config|@context|@hooks|@types|@utils)(/.*|$)'],
           // Parent imports. Put `..` last.
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-          // Type imports
-          ['^@/types'],
           // Other relative imports. Put same-folder imports and `.` last.
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
           // Style imports.

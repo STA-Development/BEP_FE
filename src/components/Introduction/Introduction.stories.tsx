@@ -4,17 +4,17 @@ import { AgreementIcon, RightIcon } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Content } from './Content'
+import { Introduction } from './Introduction'
 
-const meta: Meta<typeof Content> = {
-  title: 'Components/Content',
-  component: Content,
+const meta: Meta<typeof Introduction> = {
+  title: 'Components/Introduction',
+  component: Introduction,
   tags: ['autodocs'],
   argTypes: {},
 }
 
 export default meta
-type Story = StoryObj<typeof Content>
+type Story = StoryObj<typeof Introduction>
 
 export const First: Story = {
   args: {

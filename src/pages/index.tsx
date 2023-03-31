@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
-import { Content } from '@components/Content'
 import {
   AgreementIcon,
   BuildingBankIcon,
@@ -14,6 +13,7 @@ import {
   ToolboxIcon,
 } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
+import { Introduction } from '@components/Introduction'
 import { Disclosure } from '@headlessui/react'
 import Link from 'next/link'
 
@@ -34,7 +34,7 @@ const helps = [
 
 const Home = () => (
   <>
-    <Content
+    <Introduction
       img={<BusinessDealIcon />}
       title="Business and Education Partnership Foundation"
       desc="Lorem ipsum dolor sit amet consectetur. Massa sed."
@@ -49,7 +49,7 @@ const Home = () => (
         </Link>
       }
     />
-    <Content
+    <Introduction
       className="mb-px"
       color="secondary"
       img={<AgreementIcon />}
