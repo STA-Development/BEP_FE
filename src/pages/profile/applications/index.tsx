@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { ApplicationDialog } from '@components/ApplicationDialog'
+import React, { useCallback } from 'react'
+import { ModalName } from '@allTypes/modals'
 import { Button } from '@components/Button'
-import { DeleteDialog } from '@components/DeleteDialog'
 import { AddIcon, DeleteIcon } from '@components/Icons'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 
 const applications = [
   {
@@ -42,8 +43,23 @@ const applications = [
 ]
 
 export const Applications = () => {
-  const [isOpenApplicationDialog, setIsOpenApplicationDialog] = useState(false)
-  const [isOpenDeleteDialog, setIsOpenDeleteDialog] = useState(false)
+  const onOpenAddApplicationModal = useCallback(() => {
+    dispatch(
+      viewsMiddleware.openModal({
+        name: ModalName.AddApplicationModal,
+        props: {},
+      })
+    )
+  }, [])
+
+  const onDeleteAddApplicationModal = useCallback(() => {
+    dispatch(
+      viewsMiddleware.openModal({
+        name: ModalName.DeleteApplicationModal,
+        props: {},
+      })
+    )
+  }, [])
 
   return (
     <>
@@ -79,7 +95,7 @@ export const Applications = () => {
             <Button
               variant="text"
               leftIcon={<DeleteIcon />}
-              onClick={() => setIsOpenDeleteDialog(true)}
+              onClick={onDeleteAddApplicationModal}
             >
               Delete Application
             </Button>
@@ -91,20 +107,10 @@ export const Applications = () => {
         color="gray"
         size="hg"
         leftIcon={<AddIcon />}
-        onClick={() => setIsOpenApplicationDialog(true)}
+        onClick={onOpenAddApplicationModal}
       >
         Add Application
       </Button>
-
-      <ApplicationDialog
-        isOpen={isOpenApplicationDialog}
-        setIsOpen={setIsOpenApplicationDialog}
-      />
-
-      <DeleteDialog
-        isOpen={isOpenDeleteDialog}
-        setIsOpen={setIsOpenDeleteDialog}
-      />
     </>
   )
 }

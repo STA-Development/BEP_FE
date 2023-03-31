@@ -6,11 +6,6 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      extend: {
-        screens: {
-          xl: '1240px',
-        },
-      },
       maxWidth: {
         200: '12.5rem',
       },
@@ -54,9 +49,15 @@ module.exports = {
         sans: ['var(--font-roboto)', ...fontFamily.sans],
       },
     },
+    screens: {
+      xl: '1280px',
+    },
     container: {
       center: true,
-      padding: '1.25rem',
+      padding: {
+        DEFAULT: '1.25rem',
+        xl: '2.5rem',
+      },
     },
     fontSize: {
       sm: [

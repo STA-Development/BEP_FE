@@ -9,13 +9,7 @@ module.exports = {
   globals: {
     RequestInit: 'readonly',
   },
-  plugins: [
-    'react',
-    '@emotion',
-    '@typescript-eslint',
-    'simple-import-sort',
-    '@next/eslint-plugin-next',
-  ],
+  plugins: ['react', '@typescript-eslint', 'simple-import-sort', '@next/eslint-plugin-next'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -53,7 +47,6 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     'max-lines-per-function': ['error', 150],
-    '@emotion/jsx-import': 'error',
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
     'no-underscore-dangle': 'off',
@@ -75,8 +68,10 @@ module.exports = {
       'error',
       {
         groups: [
-          // Side effect imports.
-          ['^\\u0000'],
+          // Packages `react` related packages come first.
+          ['^react', '^@?\\w'],
+          // ext library & side effect imports
+          ['^@?\\w', '^\\u0000'],
           // Packages. `react` related packages come first.
           ['^react', '^@?\\w'],
           // Internal packages.
