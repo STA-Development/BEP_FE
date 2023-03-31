@@ -7,7 +7,6 @@ import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
 
-// TODO: Create a global component for modals
 export const AddApplicationModal = () => {
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.AddApplicationModal))
