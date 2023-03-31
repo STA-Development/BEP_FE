@@ -28,16 +28,16 @@ export const Header = ({ loggedIn }: HeaderProps) => (
     {({ open }) => (
       <>
         <div className="bg-primary">
-          <Container>
-            <div className="relative flex h-23 items-center justify-between bg-primary">
-              <div className="absolute inset-y-0 right-0 flex items-center lg:hidden">
+          <Container className="px-[20px]">
+            <div className="relative flex h-23 w-full items-center justify-between bg-primary">
+              <div className="lg:hidden absolute inset-y-0 right-0 flex items-center">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-gray-400 lg:hidden">
+                <Disclosure.Button className="lg:hidden inline-flex items-center justify-center rounded-md text-gray-400">
                   <span className="sr-only">Open main menu</span>
                   {open ? <CloseIcon /> : <BarsIcon />}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-start lg:ml-0 lg:items-stretch">
+              <div className="lg:ml-0 lg:items-stretch flex flex-1 items-center justify-start">
                 <div className="flex items-center">
                   <Link
                     href="/"
@@ -46,7 +46,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
                     Logo
                   </Link>
                 </div>
-                <div className="ml-[120px] hidden items-center space-x-20 lg:flex">
+                <div className="lg:flex ml-[120px] hidden items-center space-x-20">
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
@@ -59,7 +59,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
                   ))}
                 </div>
               </div>
-              <div className="absolute inset-y-0 right-0 hidden items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 lg:flex">
+              <div className="static absolute inset-auto inset-y-0 right-0 ml-6 hidden items-center pr-0 xl:flex">
                 {loggedIn ? (
                   <Menu
                     as="div"
@@ -131,8 +131,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
             </div>
           </Container>
         </div>
-
-        <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 lg:hidden">
+        <Disclosure.Panel className="lg:hidden h-[calc(100vh-92px)] px-5 py-10">
           <div className="mb-[120px] space-y-5">
             {navigation.map((item) => (
               <Link

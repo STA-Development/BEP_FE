@@ -23,8 +23,8 @@ const socials = [
 export const Footer = () => (
   <div className="bg-primary">
     <Container>
-      <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white lg:grid-flow-col">
-        <div className="row-span-2 mb-10 lg:mb-0">
+      <div className="lg:grid-flow-col grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white">
+        <div className="lg:mb-0 row-span-2 mb-10">
           <p className="mb-5 text-base font-medium">Contacts</p>
           <ul>
             {contacts.map((contact) => (
@@ -59,7 +59,7 @@ export const Footer = () => (
           </ul>
           <p className="text-base underline">Copyright © 2023 with all rights reserved</p>
         </div>
-        <div className="order-first mb-10 flex lg:order-none lg:mb-7.5">
+        <div className="lg:order-none lg:mb-7.5 order-first mb-10 flex">
           <input
             type="text"
             placeholder="Your Email"
@@ -69,6 +69,7 @@ export const Footer = () => (
             variant="outlined"
             color="secondary"
             radius="r"
+            className="w-[122px]"
           >
             Subscribe
           </Button>
