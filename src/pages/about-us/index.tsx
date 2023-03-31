@@ -4,6 +4,7 @@ import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
 import Image from 'next/image'
 
+// TODO remove after API integration
 const team = [{ id: Math.random() }, { id: Math.random() }]
 
 const AboutUs = () => (
