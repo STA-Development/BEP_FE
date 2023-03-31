@@ -1,14 +1,14 @@
 import React from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
-import { Content } from '@components/Content'
 import { RightIcon, TeamIcon } from '@components/Icons'
+import { Introduction } from '@components/Introduction'
 import Link from 'next/link'
 
 const AboutUs = () => (
   <>
     <Container>
-      <Content
+      <Introduction
         img={<TeamIcon />}
         title="What is BEP?"
         desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
@@ -30,7 +30,7 @@ const AboutUs = () => (
     </Container>
 
     <div className="bg-gray-thin py-10 px-5 text-center text-white">
-      <div className="mx-auto max-w-screen-md">
+      <div className="max-w-screen-md mx-auto">
         <h2 className="mb-5 text-xl text-primary">Lorem ipsum dolor sit amet consectetur.</h2>
         <p className="text-base text-black-light">
           Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus
