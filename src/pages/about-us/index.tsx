@@ -1,14 +1,14 @@
 import React from 'react'
 import { Container } from '@components/Container'
-import { Content } from '@components/Content'
 import { TeamIcon } from '@components/Icons'
+import { Introduction } from '@components/Introduction'
 import Image from 'next/image'
 
 const team = [{ id: Math.random() }, { id: Math.random() }]
 
 const AboutUs = () => (
   <>
-    <Content
+    <Introduction
       img={<TeamIcon />}
       title="Who are we?"
       desc="Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus

@@ -9,13 +9,7 @@ module.exports = {
   globals: {
     RequestInit: 'readonly',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'simple-import-sort',
-    'unused-imports',
-    '@next/eslint-plugin-next',
-  ],
+  plugins: ['react', '@typescript-eslint', 'simple-import-sort', '@next/eslint-plugin-next'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -69,17 +63,6 @@ module.exports = {
         ],
       },
     ],
-    '@typescript-eslint/no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'warn',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        varsIgnorePattern: '^_',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [
       'error',
@@ -95,8 +78,6 @@ module.exports = {
           ['^(|@assets|@ui-component|@config|@context|@hooks|@types|@utils)(/.*|$)'],
           // Parent imports. Put `..` last.
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-          // Type imports
-          ['^@/types'],
           // Other relative imports. Put same-folder imports and `.` last.
           ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
           // Style imports.
