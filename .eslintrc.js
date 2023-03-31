@@ -9,13 +9,7 @@ module.exports = {
   globals: {
     RequestInit: 'readonly',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'simple-import-sort',
-    'unused-imports',
-    '@next/eslint-plugin-next',
-  ],
+  plugins: ['react', '@typescript-eslint', 'simple-import-sort', '@next/eslint-plugin-next'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -67,17 +61,6 @@ module.exports = {
           'scripts/**/*',
           'dangerfile.ts',
         ],
-      },
-    ],
-    '@typescript-eslint/no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'warn',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        varsIgnorePattern: '^_',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
       },
     ],
     'simple-import-sort/exports': 'error',
