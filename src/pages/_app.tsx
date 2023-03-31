@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
