@@ -5,13 +5,6 @@ import { CloseIcon, JobIcon } from '@components/Icons'
 import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
-import { Roboto } from 'next/font/google'
-
-const roboto = Roboto({
-  weight: ['400', '500'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-})
 
 // TODO: Create a global component for modals
 export const AddApplicationModal = () => {
@@ -23,7 +16,7 @@ export const AddApplicationModal = () => {
     <Dialog
       open
       onClose={onClose}
-      className={`${roboto.variable} relative z-50 font-sans`}
+      className="relative z-50 font-sans"
     >
       <div
         className="fixed inset-0 bg-black/20"
