@@ -1,5 +1,7 @@
 import { ModalName } from '@allTypes/modals'
 import { IOpenedAlert, IOpenedModal, RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
+import API from '@axios/API'
+import { IExampleListParams } from '@axios/example/managerExampleTypes'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -46,9 +48,30 @@ const setToastNotificationPopUpState =
     dispatch(updateToastNotificationState(value))
   }
 
+//  TODO: remove this after first API implementation
+const getExampleValue = (params: IExampleListParams) => async (dispatch: AppDispatch) => {
+  console.log(params)
+
+  try {
+    // Set loading state to true
+
+    const response = await API.example.getExampleValue(params)
+
+    dispatch(setRedirectionState({ path: '/example', params: '', apply: true }))
+
+    console.log(response)
+    //   Do Something with received data
+  } catch (error) {
+    // DO something in error case
+  } finally {
+    //  Set loading state to false
+  }
+}
+
 export default {
   setRedirectionState,
   activateMenuItem,
+  getExampleValue,
   openMenuDrawer,
   openModal,
   closeModal,
