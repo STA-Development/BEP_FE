@@ -1,5 +1,8 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { ModalsController } from '@components/ModalsController/ModalsController'
 import Layout, { Layouts } from '@layouts/index'
+import store from '@redux/store'
 import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
@@ -20,7 +23,7 @@ interface IAppProps {
 }
 
 const App = ({ Component, pageProps }: IAppProps) => {
-  const ChildLayout = Layouts[Component.Layout]
+  const HierarchicalLayout = Layouts[Component.Layout]
 
   return (
     <>
@@ -40,15 +43,18 @@ const App = ({ Component, pageProps }: IAppProps) => {
         />
       </Head>
       <main className={`${roboto.variable} font-sans`}>
-        {ChildLayout ? (
-          <ChildLayout>
-            <Component {...pageProps} />
-          </ChildLayout>
-        ) : (
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        )}
+        <Provider store={store}>
+          {HierarchicalLayout ? (
+            <HierarchicalLayout>
+              <Component {...pageProps} />
+            </HierarchicalLayout>
+          ) : (
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          )}
+          <ModalsController />
+        </Provider>
       </main>
     </>
   )
