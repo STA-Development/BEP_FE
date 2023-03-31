@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Container } from '@components/Container'
+import { Dialog } from '@headlessui/react'
 
 const ContentColor = ['primary', 'secondary'] as const
 
