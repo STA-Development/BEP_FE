@@ -33,7 +33,7 @@ const menu: Menu = {
   },
   'monitoring-systems': {
     label: 'Monitoring Systems',
-    href: '/monitoring-systems',
+    href: '/profile/monitoring-systems',
     icon: <MonitoringSystemsIcon />,
   },
 }

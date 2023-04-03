@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
+import { Divider } from '@components/Divider'
 import { EyeIcon, LeftIcon } from '@components/Icons'
-import { OrDivider } from '@components/OrDivider'
 import Link from 'next/link'
 
 export const Login = () => {
@@ -32,7 +32,7 @@ export const Login = () => {
         >
           Continue with Google
         </Button>
-        <OrDivider />
+        <Divider content />
         <div className="mb-5 w-full">
           <input
             type="email"

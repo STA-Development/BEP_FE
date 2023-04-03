@@ -2,7 +2,7 @@ import React from 'react'
 import { Autocomplete } from '@components/Autocomplete'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
-import { Divider } from '@components/OrDivider/Divider'
+import { Divider } from '@components/Divider/Divider'
 import { PageHeader } from '@components/PageHeader'
 import { Tab } from '@headlessui/react'
 
@@ -55,24 +55,29 @@ const MonitoringSystems = () => (
         ))}
       </Tab.List>
       <Tab.Panels>
-        <div className="mt-10  flex w-full flex-row">
-          <div className="mb-5 mr-5 w-[124px]">
-            <Autocomplete
-              items={years}
-              placeholder="Years"
-            />
+        <div className="md:inline-block mt-10 xl:flex xl:w-full xl:flex-row">
+          <div className="flex  flex-row">
+            <div className="mb-5 mr-5 w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Years"
+              />
+            </div>
+            <div className="mb-5 mr-5 w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Region"
+              />
+            </div>
+            <div className=" mr-5 w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Region"
+              />
+            </div>
           </div>
-          <div className="mb-5 mr-5 w-[124px]">
-            <Autocomplete
-              items={years}
-              placeholder="Region"
-            />
-          </div>
-          <div className="mb-5 w-[124px]">
-            <Autocomplete
-              items={years}
-              placeholder="Region"
-            />
+          <div className="mb-5 xl:w-[124px]">
+            <Button size="fl">Apply filters</Button>
           </div>
         </div>
         <Divider />
@@ -84,16 +89,10 @@ const MonitoringSystems = () => (
             {tab.content}
           </Tab.Panel>
         ))}
-        <Button
-          variant="outlined"
-          size="sm"
-          className="mb-20"
-        >
-          Download Graph and Data
-        </Button>
       </Tab.Panels>
     </Tab.Group>
   </Container>
 )
 
 export default MonitoringSystems
+MonitoringSystems.Layout = 'Profile'
