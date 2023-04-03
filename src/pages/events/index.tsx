@@ -16,7 +16,7 @@ const data = [
   {
     id: 2,
     title: 'Visit Of The Training Center Of The Chamber',
-    info: 'Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.',
+    info: 'Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Montes sit mattis urna faucibus habitasse.',
     secondInfo:
       'Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna.  turpis tempus eu. Montes sit mattis urna. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu.',
     time: '31.01.2022',
@@ -37,9 +37,21 @@ const News = () => {
   const [showMore, setShowMore] = useState<boolean>(false)
   const [showModeId, setShowModeId] = useState<number>()
 
-  const hendelShowMore = (id: number) => {
-    setShowModeId(id)
-    setShowMore(true)
+  const handleShowMore = (id: number, variant?: string) => {
+    if (variant === 'Open') {
+      setShowModeId(id)
+      setShowMore(true)
+    } else if (variant === 'Close') {
+      setShowMore(false)
+    }
+  }
+
+  const showMoreInfo = (id: number) => {
+    if (showMore && id === showModeId) {
+      return true
+    }
+
+    return false
   }
 
   return (
@@ -59,11 +71,7 @@ const News = () => {
         {data.map((item) => (
           <div
             key={item.id}
-            className={`mt-5 flex flex-col border p-5 xl:mt-[60px] xl:flex-row xl:items-start xl:justify-between ${
-              showMore && item.secondInfo && showModeId === item.id
-                ? 'rounded-2.5 border-primary'
-                : 'rounded border-gray-thin'
-            }`}
+            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-5 hover:border-primary xl:mt-[60px] xl:flex-row xl:items-start xl:justify-between"
           >
             <div className="xl:w-[35%]">
               <Image
@@ -86,47 +94,32 @@ const News = () => {
               <p className="mt-2.5 text-lg text-black">{item.title}</p>
 
               <p className="mt-2.5 text-base text-black-light">
-                {showMore && item.id === showModeId ? item.info : `${item.info.substring(0, 130)}`}
+                {showMoreInfo(item.id) ? item.info : `${item.info.substring(0, 130)}`}
               </p>
               <p className="mt-5 text-sm text-black-light xl:hidden">{item.time}</p>
               <div className="mb-5 mt-5 xl:hidden">
-                {showMore && item.id === showModeId ? (
-                  <Button
-                    onClick={() => setShowMore(false)}
-                    variant="outlined"
-                    className="w-full xl:hidden xl:pl-0"
-                  >
-                    Close
-                  </Button>
-                ) : (
-                  <Button
-                    className="w-full xl:hidden xl:pl-0"
-                    onClick={() => hendelShowMore(item.id)}
-                  >
-                    Read All
-                  </Button>
-                )}
+                <Button
+                  className="w-full xl:hidden xl:pl-0"
+                  onClick={() => handleShowMore(item.id, showMoreInfo(item.id) ? 'Close' : 'Open')}
+                  variant={showMoreInfo(item.id) ? 'outlined' : 'contained'}
+                >
+                  {showMoreInfo(item.id) ? 'Close' : 'Read All'}
+                </Button>
               </div>
               {!item.isButtonVisuable ? (
                 <div>
-                  {showMore && item.id === showModeId ? (
-                    <Button
-                      onClick={() => setShowMore(false)}
-                      variant="outlined"
-                      className="hidden w-full pl-0  xl:mt-[30px] xl:flex "
-                    >
-                      Close
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={() => hendelShowMore(item.id)}
-                      variant="text"
-                      rightIcon={<RightIcon fill="fill-primary" />}
-                      className=" hidden pl-0 xl:mt-[30px]  xl:flex"
-                    >
-                      Read more
-                    </Button>
-                  )}
+                  <Button
+                    onClick={() =>
+                      handleShowMore(item.id, showMoreInfo(item.id) ? 'Close' : 'Open')
+                    }
+                    variant={showMoreInfo(item.id) ? 'outlined' : 'text'}
+                    rightIcon={showMoreInfo(item.id) ? null : <RightIcon fill="fill-primary" />}
+                    className={`hidden pl-0  xl:mt-[30px] xl:flex ${
+                      showMoreInfo(item.id) ? 'w-full' : ' '
+                    }`}
+                  >
+                    {showMoreInfo(item.id) ? 'Close' : 'Read more'}
+                  </Button>
                 </div>
               ) : null}
             </div>
