@@ -1,5 +1,8 @@
 import React from 'react'
+import { Autocomplete } from '@components/Autocomplete'
+import { Button } from '@components/Button'
 import { Container } from '@components/Container'
+import { Divider } from '@components/OrDivider/Divider'
 import { PageHeader } from '@components/PageHeader'
 import { Tab } from '@headlessui/react'
 
@@ -16,6 +19,17 @@ const tabs = [
     label: 'Tab 3',
     content: 'Content 3',
   },
+]
+
+interface Years {
+  id: string
+  name: string
+}
+
+const years: Years[] = [
+  { id: '1', name: '2019' },
+  { id: '2', name: '2020' },
+  { id: '3', name: '2021' },
 ]
 
 const MonitoringSystems = () => (
@@ -41,14 +55,42 @@ const MonitoringSystems = () => (
         ))}
       </Tab.List>
       <Tab.Panels>
+        <div className="mt-10  flex w-full flex-row">
+          <div className="mb-5 mr-5 w-[124px]">
+            <Autocomplete
+              items={years}
+              placeholder="Years"
+            />
+          </div>
+          <div className="mb-5 mr-5 w-[124px]">
+            <Autocomplete
+              items={years}
+              placeholder="Region"
+            />
+          </div>
+          <div className="mb-5 w-[124px]">
+            <Autocomplete
+              items={years}
+              placeholder="Region"
+            />
+          </div>
+        </div>
+        <Divider />
         {tabs.map((tab) => (
           <Tab.Panel
             key={tab.label}
-            className="pt-10 pb-28"
+            className="pt-10 pb-20"
           >
             {tab.content}
           </Tab.Panel>
         ))}
+        <Button
+          variant="outlined"
+          size="sm"
+          className="mb-20"
+        >
+          Download Graph and Data
+        </Button>
       </Tab.Panels>
     </Tab.Group>
   </Container>
