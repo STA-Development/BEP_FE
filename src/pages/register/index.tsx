@@ -3,11 +3,25 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 import Link from 'next/link'
 
 export const Register = () => {
   const [show, setShow] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [fullName, setFullName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
+
   const error = false
+
+  const handleRegisterFunc = () => {
+    setIsLoading(true)
+    dispatch(viewsMiddleware.register({ email, role: 'JobSeeker', password }))
+    setIsLoading(false)
+  }
 
   return (
     <Container className="pt-10">
@@ -34,6 +48,8 @@ export const Register = () => {
         </Button>
         <OrDivider />
         <input
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           type="text"
           id="name"
           placeholder="Full Name"
@@ -41,6 +57,8 @@ export const Register = () => {
         />
         <div className="mb-5 w-full">
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
             placeholder="Email"
@@ -53,6 +71,8 @@ export const Register = () => {
         <div className="mb-5 w-full">
           <div className="relative">
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={show ? 'text' : 'password'}
               id="password"
               placeholder="Password"
@@ -78,6 +98,8 @@ export const Register = () => {
             <input
               type={show ? 'text' : 'password'}
               id="confirm-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
               className={`${
                 error
@@ -109,7 +131,13 @@ export const Register = () => {
             Remember me
           </label>
         </div>
-        <Button size="fl">Next</Button>
+        <Button
+          disabled={isLoading}
+          size="fl"
+          onClick={() => handleRegisterFunc()}
+        >
+          Next
+        </Button>
       </div>
     </Container>
   )

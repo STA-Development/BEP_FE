@@ -3,11 +3,22 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 import Link from 'next/link'
 
 export const Login = () => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
   const error = false
+
+  const handleLoginFunc = () => {
+    setIsLoading(true)
+    dispatch(viewsMiddleware.login({ email, password }))
+    setIsLoading(false)
+  }
 
   return (
     <Container className="pt-10">
@@ -35,6 +46,8 @@ export const Login = () => {
         <OrDivider />
         <div className="mb-5 w-full">
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
             placeholder="example@email.com"
@@ -47,6 +60,8 @@ export const Login = () => {
         <div className="mb-5 w-full">
           <div className="relative">
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={show ? 'text' : 'password'}
               id="password"
               placeholder="Password"
@@ -80,7 +95,13 @@ export const Login = () => {
             Remember me
           </label>
         </div>
-        <Button size="fl">Next</Button>
+        <Button
+          size="fl"
+          disabled={isLoading}
+          onClick={() => handleLoginFunc()}
+        >
+          Next
+        </Button>
       </div>
     </Container>
   )

@@ -18,12 +18,12 @@ class RequestManager {
       const requestConfig = config
 
       // TODO: update this after login endpoint integration
-      const idToken = 'TOKENHERE'
+      // const idToken = 'TOKENHERE'
 
       // Put all headers here
-      requestConfig.headers.set({
-        Authorization: idToken,
-      })
+      // requestConfig.headers.set({
+      //   Authorization: idToken,
+      // })
 
       return requestConfig
     })
