@@ -107,7 +107,7 @@ const MonitoringSystems = () => (
           >
             <div className="mb-5	text-lg font-medium">{tab.title}</div>
             <div className="mb-5	font-normal">{tab.content}</div>
-            <div className="mb-5 font-normal text-gray-500">{tab.content2}</div>
+            <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
             <div>{tab.content3}</div>
           </Tab.Panel>
         ))}
