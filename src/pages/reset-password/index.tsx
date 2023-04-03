@@ -22,7 +22,7 @@ export const ResetPassword = () => {
           <Button variant="outlined">Log In</Button>
         </Link>
       </div>
-      <div className="mx-auto w-[380px] lg:w-[480px]">
+      <div className="mx-auto w-[380px] xl:w-[480px]">
         <h1 className="mb-5 text-xl">Forgot your password</h1>
         <p className="mb-5 text-base text-black-light">
           Enter the email that you’ve registered with in the field below. You will receive a link
