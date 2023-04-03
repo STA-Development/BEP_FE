@@ -40,21 +40,19 @@ const Events = () => {
   }
 
   return (
-    <Container className="xl:pb=10 pb-10">
+    <Container className="pb-30">
       <div className="border-b border-gray-thin">
-        <div className="mt-5 flex w-full justify-between border-b border-gray-thin pb-5 xl:pb-10">
+        <div className="mt-5 w-full border-b border-gray-thin">
           <PageHeader
             title="Events"
             description="Keep up with the following events"
+            breadcrumbs
           />
-          <div className="hidden xl:flex">
-            <p className="text-base text-black-light">Home / Events</p>
-          </div>
         </div>
         {data.map((item) => (
           <div
             key={item.id}
-            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-10 hover:border-primary xl:mt-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-10 hover:border-primary hover:outline-2 xl:mt-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
           >
             <div className="xl:flex-none">
               <Image
@@ -64,9 +62,9 @@ const Events = () => {
                 alt="picture"
                 className="h-full w-full"
               />
-              <div className="hidden xl:flex">
+              <div className="hidden xl:flex xl:w-full xl:max-w-[500px]">
                 {item.secondInfo && item.id === showModeId ? (
-                  <p className="mt-5 text-base text-black-light">{item.secondInfo}</p>
+                  <p className="mt-5 text-base text-black-light xl:mt-15">{item.secondInfo}</p>
                 ) : null}
               </div>
             </div>
@@ -104,7 +102,7 @@ const Events = () => {
                     <Button
                       onClick={() => setShowModeId(null)}
                       variant="outlined"
-                      className="hidden w-full pl-0 xl:mt-[30px] xl:flex"
+                      className="hidden w-full pl-0 xl:mt-7.5 xl:flex"
                     >
                       Close
                     </Button>
@@ -113,7 +111,7 @@ const Events = () => {
                       onClick={() => handleShowMore(item.id)}
                       variant="text"
                       rightIcon={<RightIcon fill="fill-primary" />}
-                      className="hidden pl-0 xl:mt-[30px] xl:flex"
+                      className="hidden pl-0 xl:mt-7.5 xl:flex"
                     >
                       Read more
                     </Button>

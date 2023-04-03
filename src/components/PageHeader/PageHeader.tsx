@@ -10,9 +10,11 @@ export const PageHeader = ({
   description?: string
   breadcrumbs?: boolean
 }) => (
-  <div className="mb-7.5 mt-10 flex flex-col items-start justify-between">
-    <h1 className="text-xl">{title}</h1>
-    <p className="mt-2.5 text-base text-black-light xl:mt-5 xl:text-lg">{description}</p>
+  <div className="mb-7.5 mt-10 flex w-full items-start justify-between">
+    <div>
+      <h1 className="text-xl">{title}</h1>
+      <p className="mt-2.5 text-base text-black-light xl:mt-5 xl:text-lg">{description}</p>
+    </div>
     {breadcrumbs ? <Breadcrumbs /> : null}
   </div>
 )
