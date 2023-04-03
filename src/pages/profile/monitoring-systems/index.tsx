@@ -2,7 +2,6 @@ import React from 'react'
 import { Autocomplete } from '@components/Autocomplete'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
-import { Divider } from '@components/Divider/Divider'
 import { Tab } from '@headlessui/react'
 
 const tabs = [
@@ -74,43 +73,44 @@ const MonitoringSystems = () => (
         ))}
       </Tab.List>
       <Tab.Panels>
-        <div className="md:inline-block mt-10 xl:flex xl:w-full xl:flex-row">
-          <div className="flex  flex-row">
-            <div className="mb-5 mr-5 w-[124px]">
-              <Autocomplete
-                items={years}
-                placeholder="Years"
-              />
+        <div className="grid grid-cols-1 divide-y">
+          <div className="md:inline-block mb-5 mt-10 xl:flex xl:w-full xl:flex-row">
+            <div className="flex  flex-row">
+              <div className="mb-5 mr-5 w-[124px]">
+                <Autocomplete
+                  items={years}
+                  placeholder="Years"
+                />
+              </div>
+              <div className="mb-5 mr-5 w-[124px]">
+                <Autocomplete
+                  items={years}
+                  placeholder="Region"
+                />
+              </div>
+              <div className=" mr-5">
+                <Autocomplete
+                  items={years}
+                  placeholder="Region"
+                />
+              </div>
             </div>
-            <div className="mb-5 mr-5 w-[124px]">
-              <Autocomplete
-                items={years}
-                placeholder="Region"
-              />
-            </div>
-            <div className=" mr-5 w-[124px]">
-              <Autocomplete
-                items={years}
-                placeholder="Region"
-              />
+            <div className="mb-5 xl:w-[124px]">
+              <Button size="fl">Apply filters</Button>
             </div>
           </div>
-          <div className="mb-5 xl:w-[124px]">
-            <Button size="fl">Apply filters</Button>
-          </div>
+          {tabs.map((tab) => (
+            <Tab.Panel
+              key={tab.label}
+              className="pt-10 pb-20"
+            >
+              <div className="mb-5	text-lg font-medium">{tab.title}</div>
+              <div className="mb-5	font-normal">{tab.content}</div>
+              <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
+              <div>{tab.content3}</div>
+            </Tab.Panel>
+          ))}
         </div>
-        <Divider />
-        {tabs.map((tab) => (
-          <Tab.Panel
-            key={tab.label}
-            className="pt-10 pb-20"
-          >
-            <div className="mb-5	text-lg font-medium">{tab.title}</div>
-            <div className="mb-5	font-normal">{tab.content}</div>
-            <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
-            <div>{tab.content3}</div>
-          </Tab.Panel>
-        ))}
       </Tab.Panels>
     </Tab.Group>
   </Container>
