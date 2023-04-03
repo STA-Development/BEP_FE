@@ -3,13 +3,16 @@ import { Breadcrumbs } from '@components/Breadcrumbs'
 
 export const PageHeader = ({
   title,
+  description,
   breadcrumbs = false,
 }: {
   title: string
+  description?: string
   breadcrumbs?: boolean
 }) => (
-  <div className="mt-10 mb-7.5 flex items-center justify-between">
+  <div className="mb-7.5 mt-10 flex flex-col items-start justify-between">
     <h1 className="text-xl">{title}</h1>
+    <p className="mt-2.5 text-base text-black-light xl:mt-5 xl:text-lg">{description}</p>
     {breadcrumbs ? <Breadcrumbs /> : null}
   </div>
 )

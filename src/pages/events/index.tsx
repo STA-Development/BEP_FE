@@ -32,8 +32,8 @@ const data = [
   },
 ]
 
-const News = () => {
-  const [showModeId, setShowModeId] = useState<number>()
+const Events = () => {
+  const [showModeId, setShowModeId] = useState<number | null>()
 
   const handleShowMore = (id: number) => {
     setShowModeId(id)
@@ -43,12 +43,10 @@ const News = () => {
     <Container className="xl:pb=10 pb-10">
       <div className="border-b border-gray-thin">
         <div className="mt-5 flex w-full justify-between border-b border-gray-thin pb-5 xl:pb-10">
-          <div>
-            <PageHeader title="Events" />
-            <p className="mt-2.5 text-base text-black-light xl:mt-5 xl:text-lg">
-              Keep up with the following events
-            </p>
-          </div>
+          <PageHeader
+            title="Events"
+            description="Keep up with the following events"
+          />
           <div className="hidden xl:flex">
             <p className="text-base text-black-light">Home / Events</p>
           </div>
@@ -56,9 +54,9 @@ const News = () => {
         {data.map((item) => (
           <div
             key={item.id}
-            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-10 hover:border-primary xl:mt-10 xl:flex-row xl:items-start xl:justify-between"
+            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-10 hover:border-primary xl:mt-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
           >
-            <div className="xl:w-[500px]">
+            <div className="xl:flex-none">
               <Image
                 src={item.image}
                 width={500}
@@ -72,7 +70,7 @@ const News = () => {
                 ) : null}
               </div>
             </div>
-            <div className="xl:w-[60%]">
+            <div className="xl:flex-1">
               <h2 className="mt-5 text-xl text-black xl:mt-0 xl:text-2xl">{item.time}</h2>
               <p className="mt-2.5 text-lg text-black">{item.title}</p>
               {item.secondInfo && item.id === showModeId ? (
@@ -85,7 +83,7 @@ const News = () => {
               <div className="mb-5 mt-5 xl:hidden">
                 {item.id === showModeId ? (
                   <Button
-                    onClick={() => setShowModeId(0)}
+                    onClick={() => setShowModeId(null)}
                     variant="outlined"
                     className="w-full xl:hidden xl:pl-0"
                   >
@@ -104,7 +102,7 @@ const News = () => {
                 <div>
                   {item.id === showModeId ? (
                     <Button
-                      onClick={() => setShowModeId(0)}
+                      onClick={() => setShowModeId(null)}
                       variant="outlined"
                       className="hidden w-full pl-0 xl:mt-[30px] xl:flex"
                     >
@@ -130,4 +128,4 @@ const News = () => {
   )
 }
 
-export default News
+export default Events
