@@ -1,12 +1,5 @@
 import React, { PropsWithChildren } from 'react'
 import { Dialog } from '@headlessui/react'
-import { Roboto } from 'next/font/google'
-
-const roboto = Roboto({
-  weight: ['400', '500'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-})
 
 interface IDialogProps extends PropsWithChildren {
   onClose: () => void
@@ -16,7 +9,7 @@ export const Modal = ({ children, onClose }: IDialogProps) => (
   <Dialog
     open
     onClose={onClose}
-    className={`${roboto.variable} relative z-50 font-sans`}
+    className="relative z-50"
   >
     <div
       className="fixed inset-0 bg-black/20"
