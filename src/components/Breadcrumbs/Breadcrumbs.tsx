@@ -7,7 +7,7 @@ export const Breadcrumbs = () => {
   const pageTitle = location.asPath.charAt(1).toUpperCase() + location.asPath.slice(2)
 
   return (
-    <ul className="flex text-base text-black-light ">
+    <ul className="hidden text-base text-black-light xl:flex">
       <li className="after:mx-2.5 after:content-['\/']">Home</li>
       <li>{pageTitle}</li>
     </ul>
