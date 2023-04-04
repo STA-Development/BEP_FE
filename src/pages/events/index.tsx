@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
@@ -40,18 +40,6 @@ const Events = () => {
   const handleShowMore = (id: number) => {
     setShowModeId(id)
   }
-
-  const [isDesktop, setIsDesktop] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 960px)')
-    const listener = () => setIsDesktop(media.matches)
-
-    listener()
-    window.addEventListener('resize', listener)
-
-    return () => window.removeEventListener('resize', listener)
-  }, [isDesktop])
 
   return (
     <Container className="pb-30">
