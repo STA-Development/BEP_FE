@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
@@ -22,6 +22,7 @@ const data = [
       'Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna.  turpis tempus eu. Montes sit mattis urna. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu.',
     time: '31.01.2022',
     image: '/image1.jpg',
+    isButtonVisible: false,
   },
   {
     id: 3,
@@ -29,6 +30,7 @@ const data = [
     info: 'Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.',
     time: '31.01.2022',
     image: '/image1.jpg',
+    isButtonVisible: false,
   },
 ]
 
@@ -38,6 +40,18 @@ const Events = () => {
   const handleShowMore = (id: number) => {
     setShowModeId(id)
   }
+
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 960px)')
+    const listener = () => setIsDesktop(media.matches)
+
+    listener()
+    window.addEventListener('resize', listener)
+
+    return () => window.removeEventListener('resize', listener)
+  }, [isDesktop])
 
   return (
     <Container className="pb-30">
@@ -78,43 +92,33 @@ const Events = () => {
                 {item.id === showModeId ? item.info : `${item.info.substring(0, 130)}`}
               </p>
               <p className="mt-5 text-sm text-black-light xl:hidden">{item.time}</p>
-              <div className="mb-5 mt-5 xl:hidden">
-                {item.id === showModeId ? (
-                  <Button
-                    onClick={() => setShowModeId(null)}
-                    variant="outlined"
-                    className="w-full xl:hidden xl:pl-0"
-                  >
-                    Close
-                  </Button>
-                ) : (
-                  <Button
-                    className="w-full xl:hidden xl:pl-0"
-                    onClick={() => handleShowMore(item.id)}
-                  >
-                    Read All
-                  </Button>
-                )}
-              </div>
               {!item.isButtonVisible ? (
-                <div>
+                <div className="md:w-full mb-5 mt-5">
                   {item.id === showModeId ? (
                     <Button
                       onClick={() => setShowModeId(null)}
                       variant="outlined"
-                      className="hidden w-full pl-0 xl:mt-7.5 xl:flex"
+                      className="w-full pl-0 xl:mt-7.5 "
                     >
                       Close
                     </Button>
                   ) : (
-                    <Button
-                      onClick={() => handleShowMore(item.id)}
-                      variant="text"
-                      rightIcon={<RightIcon fill="fill-primary" />}
-                      className="hidden pl-0 xl:mt-7.5 xl:flex"
-                    >
-                      Read more
-                    </Button>
+                    <div>
+                      <Button
+                        onClick={() => handleShowMore(item.id)}
+                        variant="text"
+                        rightIcon={<RightIcon fill="fill-primary" />}
+                        className="hidden w-full xl:mt-7.5 xl:flex xl:w-auto xl:pl-0"
+                      >
+                        Read more
+                      </Button>
+                      <Button
+                        className="w-full xl:hidden xl:pl-0"
+                        onClick={() => handleShowMore(item.id)}
+                      >
+                        Read more
+                      </Button>
+                    </div>
                   )}
                 </div>
               ) : null}
