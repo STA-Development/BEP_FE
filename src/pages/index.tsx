@@ -50,7 +50,7 @@ const Home = () => {
           <Link href="/">
             <Button
               size="lg"
-              rightIcon={<RightIcon />}
+              RightIcon={RightIcon}
               onClick={clickFunc}
             >
               Start now
@@ -72,7 +72,7 @@ const Home = () => {
           <Link href="/fill-the-form">
             <Button
               size="lg"
-              rightIcon={<RightIcon />}
+              RightIcon={RightIcon}
             >
               Fill the form
             </Button>
@@ -136,7 +136,7 @@ const Home = () => {
                   <Link href="/fill-the-form">
                     <Button
                       size="lg"
-                      rightIcon={<RightIcon />}
+                      RightIcon={RightIcon}
                     >
                       Fill the form
                     </Button>

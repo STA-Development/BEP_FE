@@ -30,7 +30,7 @@ const FillTheForm = () => {
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
-          leftIcon={<LeftIcon />}
+          LeftIcon={LeftIcon}
           onClick={() => {
             setSelectedIndex((prev) => prev - 1)
           }}

@@ -15,7 +15,7 @@ export const Login = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>

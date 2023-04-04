@@ -95,7 +95,7 @@ const Events = () => {
                         <Button
                           onClick={() => handleShowMore(item.id)}
                           variant="text"
-                          rightIcon={<RightIcon fill="fill-primary" />}
+                          RightIcon={RightIcon}
                           className="hidden w-full xl:mt-7.5 xl:flex xl:w-auto xl:pl-0"
                         >
                           Read more

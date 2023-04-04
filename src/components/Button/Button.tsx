@@ -1,4 +1,5 @@
-import React, { ComponentPropsWithoutRef, FC, ReactNode } from 'react'
+import React, { ComponentPropsWithoutRef, ComponentType, FC } from 'react'
+import IconProps from '@allTypes/svg-icon'
 import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'text'] as const
@@ -12,8 +13,8 @@ export type ButtonProps = {
   color?: (typeof ButtonColor)[number]
   size?: (typeof ButtonSize)[number]
   radius?: (typeof ButtonRadius)[number]
-  leftIcon?: ReactNode
-  rightIcon?: ReactNode
+  LeftIcon?: ComponentType<IconProps>
+  RightIcon?: ComponentType<IconProps>
 } & ComponentPropsWithoutRef<'button'>
 
 export const Button: FC<ButtonProps> = ({
@@ -25,13 +26,13 @@ export const Button: FC<ButtonProps> = ({
   color = 'primary',
   size = 'sm',
   radius = 'all',
-  leftIcon,
-  rightIcon,
+  LeftIcon,
+  RightIcon,
   ...rest
 }) => {
   const disabled = isLoading ?? buttonDisabled
 
-  const style = clsxMerge(
+  const buttonStyle = clsxMerge(
     'flex',
     'items-center',
     'align-middle',
@@ -43,11 +44,12 @@ export const Button: FC<ButtonProps> = ({
     'overflow-clip',
     'font-medium',
     'text-base',
-    'transition-colors',
+    'transition-none',
     'ease-in-out',
     'duration-200',
     'focus:outline-none',
     'disabled:cursor-not-allowed',
+    'group',
     [
       variant === 'contained' && [
         'hover:border-primary-light hover:bg-primary-light',
@@ -79,16 +81,30 @@ export const Button: FC<ButtonProps> = ({
     className
   )
 
+  const iconStyle = clsxMerge([
+    variant === 'contained' && 'fill-secondary',
+    variant === 'outlined' && 'fill-primary group-hover:fill-secondary',
+    variant === 'text' && 'fill-primary',
+  ])
+
   return (
     <button
       disabled={disabled}
-      className={style}
+      className={buttonStyle}
       type="button"
       {...rest}
     >
-      {leftIcon ? <div className="mr-2.5">{leftIcon}</div> : null}
+      {LeftIcon ? (
+        <div className="mr-2.5">
+          <LeftIcon fill={iconStyle} />
+        </div>
+      ) : null}
       {children}
-      {rightIcon ? <div className="ml-2.5">{rightIcon}</div> : null}
+      {RightIcon ? (
+        <div className="ml-2.5">
+          <RightIcon fill={iconStyle} />
+        </div>
+      ) : null}
     </button>
   )
 }

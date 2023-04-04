@@ -144,7 +144,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
           </div>
           <Button
             size="lg"
-            leftIcon={<LogOutIcon />}
+            LeftIcon={LogOutIcon}
           >
             Log Out
           </Button>
