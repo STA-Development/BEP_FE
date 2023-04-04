@@ -54,7 +54,7 @@ const Events = () => {
         {data.map((item) => (
           <div
             key={item.id}
-            className="hover:rounded-2.5 mt-5 flex flex-col rounded border border-gray-thin p-10 hover:border-primary hover:outline-2 xl:mt-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+            className="hover:rounded-2.5 mt-5 flex flex-col rounded p-10 outline-2 outline-gray-thin hover:outline-2 hover:outline-primary xl:mt-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
           >
             <div className="xl:flex-none">
               <Image
