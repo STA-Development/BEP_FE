@@ -1,14 +1,15 @@
 import React from 'react'
-import { INews } from '@allTypes/news'
+import { INewsProps } from '@allTypes/news'
 import { Container } from '@components/Container/Container'
 import { PageHeader } from '@components/PageHeader'
-import SingleNews from '@components/SingleNews/SingleNews'
+import SingleNews from '@pages/news/SingleNews'
 import { uuid } from 'uuidv4'
 
 const NewsList = () => {
   const newsList = [
     // TODO: Consider refactoring hardcoded data
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description:
         'Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ' +
@@ -18,6 +19,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -26,6 +28,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -34,6 +37,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description: 'Lorem ipsum dolor sit ame',
       imageURL:
@@ -41,6 +45,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -49,6 +54,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -57,6 +63,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
+      id: uuid(),
       title: 'Visit Of The Training Center',
       description: 'Lorem ipsum dolor sit ame',
       imageURL:
@@ -72,15 +79,8 @@ const NewsList = () => {
         paths={['Home', 'News']}
       />
       <p className="text-base text-gray-500">The Latest News From our Foundation</p>
-      {newsList.map((news: INews, index: number) => (
-        <SingleNews
-          key={uuid()}
-          title={news.title}
-          description={news.description}
-          imageUrl={news.imageURL}
-          index={index}
-          date={news.date}
-        />
+      {newsList.map((news: INewsProps) => (
+        <SingleNews news={news} />
       ))}
     </Container>
   )
