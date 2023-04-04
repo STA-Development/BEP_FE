@@ -10,9 +10,16 @@ interface Item {
 interface AutocompleteProps<T> {
   items: T[]
   placeholder: string
+  classes?: string
+  inputClasses?: string
 }
 
-export const Autocomplete = <T extends Item>({ items, placeholder }: AutocompleteProps<T>) => {
+export const Autocomplete = <T extends Item>({
+  items,
+  placeholder,
+  classes,
+  inputClasses,
+}: AutocompleteProps<T>) => {
   const [selected, setSelected] = useState()
   const [query, setQuery] = useState('')
 
@@ -35,12 +42,12 @@ export const Autocomplete = <T extends Item>({ items, placeholder }: Autocomplet
       onChange={setSelected}
     >
       {({ open }) => (
-        <div className="relative">
+        <div className={`relative ${classes}`}>
           <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'
-              } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black`}
+              } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${inputClasses}`}
               displayValue={(item: Item) => item.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
