@@ -13,7 +13,7 @@ const registerManager = {
   register(params: IRegisterListParams) {
     return axiosInstance.post<IRegisterResponse, IAxiosResponse<IRegisterResponse>>(
       `${baseURL}/v1/auth/register`,
-      { params }
+      params
     )
   },
 }

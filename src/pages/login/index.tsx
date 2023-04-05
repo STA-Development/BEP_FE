@@ -3,21 +3,19 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
-import { dispatch } from '@redux/hooks'
-import { viewsMiddleware } from '@redux/slices/views'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/users'
 import Link from 'next/link'
 
 export const Login = () => {
+  const { isLoading, error } = useAppSelector(usersSelector.user)
+
   const [show, setShow] = useState<boolean>(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const error = false
 
   const handleLoginFunc = () => {
-    setIsLoading(true)
-    dispatch(viewsMiddleware.login({ email, password }))
-    setIsLoading(false)
+    dispatch(usersMiddleware.login({ email, password }))
   }
 
   return (
@@ -52,10 +50,12 @@ export const Login = () => {
             id="email"
             placeholder="example@email.com"
             className={`${
-              error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'
+              error && !email
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
             } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
           />
-          {error ? <p className="mt-2.5 text-red">Email not valid</p> : null}
+          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
@@ -66,7 +66,7 @@ export const Login = () => {
               id="password"
               placeholder="Password"
               className={`${
-                error
+                error && !password
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
               } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
@@ -80,7 +80,7 @@ export const Login = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Password not valid</p> : null}
+          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
         </div>
         <div className="mb-5 flex w-full items-center">
           <input
@@ -96,12 +96,19 @@ export const Login = () => {
           </label>
         </div>
         <Button
+          className="mb-7"
           size="fl"
           disabled={isLoading}
           onClick={() => handleLoginFunc()}
         >
-          Next
+          Log In
         </Button>
+        <div className="w-full">
+          {error ? <p className="mt-2.5 text-red">Something went wrong</p> : null}
+        </div>
+        <div className="mb-44 w-full">
+          <Button variant="text">Forgot Password?</Button>
+        </div>
       </div>
     </Container>
   )

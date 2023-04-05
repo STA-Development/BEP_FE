@@ -3,24 +3,21 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
-import { dispatch } from '@redux/hooks'
-import { viewsMiddleware } from '@redux/slices/views'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/users'
 import Link from 'next/link'
 
 export const Register = () => {
+  const { isLoading, error, successfully } = useAppSelector(usersSelector.user)
+
   const [show, setShow] = useState(false)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [fullName, setFullName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-  const error = false
-
   const handleRegisterFunc = () => {
-    setIsLoading(true)
-    dispatch(viewsMiddleware.register({ email, role: 'JobSeeker', password }))
-    setIsLoading(false)
+    dispatch(usersMiddleware.register({ email, role: 'JobSeeker', password }))
   }
 
   return (
@@ -38,7 +35,7 @@ export const Register = () => {
           <Button variant="outlined">Log In</Button>
         </Link>
       </div>
-      <div className="mx-auto flex w-[380px] flex-col items-center">
+      <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
         <h1 className="mb-5 text-xl">Create an account</h1>
         <Button
           variant="outlined"
@@ -47,14 +44,21 @@ export const Register = () => {
           Continue with Google
         </Button>
         <OrDivider />
-        <input
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          type="text"
-          id="name"
-          placeholder="Full Name"
-          className="mb-5 w-full rounded border border-gray-light py-2.5 px-5 outline-0 placeholder:text-base placeholder:text-black"
-        />
+        <div className="mb-5 w-full">
+          <input
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            className={`${
+              error && !fullName
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
+            } w-full rounded border border-gray-light py-2.5 px-5 outline-0 placeholder:text-base placeholder:text-black`}
+          />
+          {error && !fullName ? <p className="mt-2.5 text-red">Full Name not valid</p> : null}
+        </div>
         <div className="mb-5 w-full">
           <input
             value={email}
@@ -63,10 +67,12 @@ export const Register = () => {
             id="email"
             placeholder="Email"
             className={`${
-              error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'
+              error && !email
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
             } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
           />
-          {error ? <p className="mt-2.5 text-red">Email not valid</p> : null}
+          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
@@ -77,7 +83,7 @@ export const Register = () => {
               id="password"
               placeholder="Password"
               className={`${
-                error
+                error && !password
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
               } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
@@ -91,7 +97,7 @@ export const Register = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Password not valid</p> : null}
+          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
@@ -102,7 +108,7 @@ export const Register = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
               className={`${
-                error
+                error && (!confirmPassword || confirmPassword !== password)
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
               } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
@@ -116,7 +122,9 @@ export const Register = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Passwords do not match</p> : null}
+          {error && (!confirmPassword || confirmPassword !== password) ? (
+            <p className="mt-2.5 text-red">Passwords do not match</p>
+          ) : null}
         </div>
         <div className="mb-5 flex w-full items-center">
           <input
@@ -136,8 +144,16 @@ export const Register = () => {
           size="fl"
           onClick={() => handleRegisterFunc()}
         >
-          Next
+          Create Account
         </Button>
+        <div className="w-full">
+          {error ? <p className="mt-2.5 text-red">Something went wrong</p> : null}
+        </div>
+        <div className="w-full">
+          {successfully ? (
+            <p className="mt-2.5 text-green-500	">Your account has been created</p>
+          ) : null}
+        </div>
       </div>
     </Container>
   )

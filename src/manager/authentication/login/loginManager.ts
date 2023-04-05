@@ -10,7 +10,7 @@ const loginManager = {
   login(params: ILoginListParams) {
     return axiosInstance.post<ILoginResponse, IAxiosResponse<ILoginResponse>>(
       `${baseURL}/v1/auth/login`,
-      { params }
+      params
     )
   },
 }

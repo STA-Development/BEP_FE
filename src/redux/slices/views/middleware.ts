@@ -1,8 +1,6 @@
 import { ModalName } from '@allTypes/modals'
 import { IOpenedAlert, IOpenedModal, RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
-import { ILoginListParams } from '@axios/authentication/login/managerLoginTypes'
-import { IRegisterListParams } from '@axios/authentication/register/registerLoginTypes'
 import { IExampleListParams } from '@axios/example/managerExampleTypes'
 import { AppDispatch } from '@redux/store'
 
@@ -50,32 +48,6 @@ const setToastNotificationPopUpState =
     dispatch(updateToastNotificationState(value))
   }
 
-const login = (params: ILoginListParams) => async (dispatch: AppDispatch) => {
-  try {
-    const response = await API.authLogin.login(params)
-
-    dispatch(setRedirectionState({ path: '/profile', params: '', apply: true }))
-
-    console.log(response)
-  } catch (error) {
-    // DO something in error case
-  }
-}
-
-const register = (params: IRegisterListParams) => async (dispatch: AppDispatch) => {
-  console.log(params, 'register')
-
-  try {
-    const response = await API.authRegister.register(params)
-
-    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
-
-    console.log(response)
-  } catch (error) {
-    // DO something in error case
-  }
-}
-
 //  TODO: remove this after first API implementation
 const getExampleValue = (params: IExampleListParams) => async (dispatch: AppDispatch) => {
   console.log(params)
@@ -99,8 +71,6 @@ const getExampleValue = (params: IExampleListParams) => async (dispatch: AppDisp
 export default {
   setRedirectionState,
   activateMenuItem,
-  login,
-  register,
   getExampleValue,
   openMenuDrawer,
   openModal,

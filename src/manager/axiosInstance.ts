@@ -21,9 +21,11 @@ class RequestManager {
       // const idToken = 'TOKENHERE'
 
       // Put all headers here
-      // requestConfig.headers.set({
-      //   Authorization: idToken,
-      // })
+      requestConfig.headers.set({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        // Authorization: idToken,
+      })
 
       return requestConfig
     })
