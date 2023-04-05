@@ -47,7 +47,7 @@ const Events = () => {
         <PageHeader
           title="Events"
           description="Keep up with the following events"
-          breadcrumbs
+          paths={['Home', 'Events']}
         />
         <div className="pt-5 xl:pt-10">
           {data.map((item) => (
