@@ -50,12 +50,7 @@ module.exports = {
       },
     },
     screens: {
-      xxl: '1536px',
       xl: '1440px',
-      l: '1024px',
-      md: '800px',
-      s: '600px',
-      xs: '414px',
     },
     container: {
       center: true,
