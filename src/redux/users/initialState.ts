@@ -7,7 +7,5 @@ export const getInitialState = (): UsersProps => ({
     successfully: false,
     fullName: '',
     email: '',
-    password: '',
-    confirmPassword: '',
   },
 })

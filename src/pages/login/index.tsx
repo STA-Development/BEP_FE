@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
@@ -6,9 +6,11 @@ import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/users'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const Login = () => {
-  const { isLoading, error } = useAppSelector(usersSelector.user)
+  const { push } = useRouter()
+  const { isLoading, error, successfully } = useAppSelector(usersSelector.user)
 
   const [show, setShow] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
@@ -17,6 +19,12 @@ export const Login = () => {
   const handleLoginFunc = () => {
     dispatch(usersMiddleware.login({ email, password }))
   }
+
+  useEffect(() => {
+    if (successfully) {
+      push('/profile')
+    }
+  }, [push, successfully])
 
   return (
     <Container className="pt-10">

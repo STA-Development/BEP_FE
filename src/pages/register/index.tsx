@@ -9,7 +9,6 @@ import Link from 'next/link'
 
 export const Register = () => {
   const { isLoading, error, successfully } = useAppSelector(usersSelector.user)
-
   const [show, setShow] = useState(false)
   const [fullName, setFullName] = useState<string>('')
   const [email, setEmail] = useState<string>('')

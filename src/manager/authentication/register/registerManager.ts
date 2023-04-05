@@ -11,7 +11,7 @@ const axiosInstance = Axios()
 const registerManager = {
   axiosInstance,
   register(params: IRegisterListParams) {
-    return axiosInstance.post<IRegisterResponse, IAxiosResponse<IRegisterResponse>>(
+    return axiosInstance.post<IRegisterResponse, IAxiosResponse>(
       `${baseURL}/v1/auth/register`,
       params
     )

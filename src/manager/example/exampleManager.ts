@@ -8,10 +8,7 @@ const axiosInstance = Axios()
 const exampleManager = {
   axiosInstance,
   getExampleValue(params: IExampleListParams) {
-    return axiosInstance.get<IExampleResponse, IAxiosResponse<IExampleResponse>>(
-      `${baseURL}/v1/example`,
-      { params }
-    )
+    return axiosInstance.get<IExampleResponse, IAxiosResponse>(`${baseURL}/v1/example`, { params })
   },
 }
 

@@ -22,10 +22,12 @@ const login = (params: ILoginListParams) => async (dispatch: AppDispatch) => {
 
     const response = await API.authLogin.login(params)
 
-    dispatch(setRedirectionState({ path: '/profile', params: '', apply: true }))
-    console.log(response)
+    localStorage.setItem('accessToken', response.data.data.accessToken)
     dispatch(setError(false))
-    dispatch(setSuccessfully(true))
+
+    if (response.status === 200) {
+      dispatch(setSuccessfully(true))
+    }
   } catch (error) {
     dispatch(setError(true))
     dispatch(setSuccessfully(false))
@@ -41,9 +43,12 @@ const register = (params: IRegisterListParams) => async (dispatch: AppDispatch) 
     const response = await API.authRegister.register(params)
 
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
-    console.log(response)
+
     dispatch(setError(false))
-    dispatch(setSuccessfully(true))
+
+    if (response.status === 204) {
+      dispatch(setSuccessfully(true))
+    }
   } catch (error) {
     dispatch(setError(true))
     dispatch(setSuccessfully(false))
