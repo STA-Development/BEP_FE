@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Login = () => {
@@ -24,7 +24,7 @@ export const Login = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>

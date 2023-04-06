@@ -22,7 +22,7 @@ const MonitoringSystems = () => (
   <Container>
     <PageHeader
       title="Monitoring Systems"
-      breadcrumbs
+      paths={['Home, Masters']}
     />
     <Tab.Group>
       <Tab.List>

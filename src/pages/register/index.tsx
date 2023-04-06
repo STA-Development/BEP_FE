@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { UserTypes } from '@allTypes/user'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Register = () => {
@@ -26,7 +26,7 @@ export const Register = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>

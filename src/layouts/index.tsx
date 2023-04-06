@@ -21,9 +21,12 @@ const LayoutContent = ({ children }: PropsWithChildren) => {
     }
   }, [])
 
-  if (isSignedIn) {
-    return <MainLayout>{children}</MainLayout>
-  }
+  // TODO: FIX FOR REDIRECT
+  // if (isSignedIn) {
+  console.log(isSignedIn)
+
+  return <MainLayout>{children}</MainLayout>
+  // }
 
   return <AuthLayout>{children}</AuthLayout>
 }

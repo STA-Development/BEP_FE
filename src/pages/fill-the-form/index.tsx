@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Autocomplete } from '@components/Autocomplete'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { Tab } from '@headlessui/react'
+import { Autocomplete } from '@uiComponents/Autocomplete'
+import { Button } from '@uiComponents/Button'
 
 interface Person {
   id: string
@@ -30,7 +30,7 @@ const FillTheForm = () => {
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
-          leftIcon={<LeftIcon />}
+          LeftIcon={LeftIcon}
           onClick={() => {
             setSelectedIndex((prev) => prev - 1)
           }}

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { Button } from '@components/Button'
 import { UserIcon } from '@components/Icons'
 import { Menu, Transition } from '@headlessui/react'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const links = [

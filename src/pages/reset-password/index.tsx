@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const ResetPassword = () => {
@@ -13,7 +13,7 @@ export const ResetPassword = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>

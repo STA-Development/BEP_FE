@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
@@ -27,6 +28,16 @@ const App = ({ Component, pageProps }: IAppProps) => {
 
   return (
     <>
+      <style
+        jsx
+        global
+      >
+        {`
+          html {
+            font-family: ${roboto.style.fontFamily};
+          }
+        `}
+      </style>
       <Head>
         <title>BEP Armenia</title>
         <meta
@@ -42,7 +53,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
           href="/favicon.ico"
         />
       </Head>
-      <main className={`${roboto.variable} font-sans`}>
+      <main>
         <Provider store={store}>
           <Layout>
             {HierarchicalLayout ? (

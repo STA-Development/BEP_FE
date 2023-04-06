@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import HeaderUser from '@components/Header/HeaderUser'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const navigation = [
@@ -106,7 +106,7 @@ export const Header = () => {
               size="lg"
               disabled={isLogOutLoading}
               onClick={handleLogOut}
-              leftIcon={<LogOutIcon />}
+              LeftIcon={LogOutIcon}
             >
               Log Out
             </Button>
