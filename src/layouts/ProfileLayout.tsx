@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import {
   ApplicationsIcon,
@@ -7,6 +6,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
+import { Button } from '@components/UI/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

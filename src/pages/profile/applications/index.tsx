@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { ModalName } from '@allTypes/modals'
-import { Button } from '@components/Button'
 import { AddIcon, DeleteIcon } from '@components/Icons'
+import { Button } from '@components/UI/Button'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
 

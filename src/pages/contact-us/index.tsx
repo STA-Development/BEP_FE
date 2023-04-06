@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { PageHeader } from '@components/PageHeader'
+import { Button } from '@components/UI/Button'
 
 const ContactUs = () => (
   <Container>

@@ -1,15 +1,23 @@
 import React from 'react'
-import { INewsProps } from '@allTypes/news'
 import { Container } from '@components/Container/Container'
+import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
-import SingleNews from '@pages/news/SingleNews'
-import { uuid } from 'uuidv4'
+import { Button } from '@components/UI/Button'
+import Image from 'next/image'
+
+export interface INewsProps {
+  id: number
+  title: string
+  description: string
+  imageURL: string
+  date: string
+}
 
 const NewsList = () => {
-  const newsList = [
+  const newsList: INewsProps[] = [
     // TODO: Consider refactoring hardcoded data
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description:
         'Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ' +
@@ -19,7 +27,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -28,7 +36,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -37,7 +45,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description: 'Lorem ipsum dolor sit ame',
       imageURL:
@@ -45,7 +53,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -54,7 +62,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description:
         "Lorem ipsum dolor sit ame ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame'",
@@ -63,7 +71,7 @@ const NewsList = () => {
       date: '22.01.2022',
     },
     {
-      id: uuid(),
+      id: Math.random(),
       title: 'Visit Of The Training Center',
       description: 'Lorem ipsum dolor sit ame',
       imageURL:
@@ -77,10 +85,36 @@ const NewsList = () => {
       <PageHeader
         title="News"
         paths={['Home', 'News']}
+        description="The Latest News From our Foundation"
       />
-      <p className="text-base text-gray-500">The Latest News From our Foundation</p>
       {newsList.map((news: INewsProps) => (
-        <SingleNews news={news} />
+        <div
+          key={news.id}
+          className="border-outline my-10 mx-auto grid grid-cols-1 items-center justify-between rounded p-8 xl:grid-cols-2"
+        >
+          <div className="order-last ml-4 mb-4 space-y-4 xl:order-first">
+            <h2 className="text-lg font-medium">{news.title}</h2>
+            <p className="text-black-light">{news.description}</p>
+            <Button
+              variant="text"
+              size="xs"
+              RightIcon={RightIcon}
+            >
+              Read More
+            </Button>
+            <p className="mt-4 text-black-light">{news.date}</p>
+          </div>
+          <div className="pb-5 xl:shrink-0">
+            <Image
+              src={news.imageURL}
+              alt="img"
+              loader={() => news.imageURL}
+              height={320}
+              width={320}
+              className="ml-auto w-full max-w-md rounded object-cover max-xl:mx-auto"
+            />
+          </div>
+        </div>
       ))}
     </Container>
   )

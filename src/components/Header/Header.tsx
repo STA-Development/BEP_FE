@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { BarsIcon, CloseIcon, LogOutIcon, UserIcon } from '@components/Icons'
+import { Button } from '@components/UI/Button'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import Link from 'next/link'
 

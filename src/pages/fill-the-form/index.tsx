@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Autocomplete } from '@components/Autocomplete'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
+import { Autocomplete } from '@components/UI/Autocomplete'
+import { Button } from '@components/UI/Button'
 import { Tab } from '@headlessui/react'
 
 interface Person {
