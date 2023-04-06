@@ -1,11 +1,9 @@
-import loginManager from '@axios/authentication/login/loginManager'
-import registerManager from '@axios/authentication/register/registerManager'
+import authManager from '@axios/authentication/authManager'
 import exampleManager from '@axios/example/exampleManager'
 
 const API = {
   example: exampleManager,
-  authLogin: loginManager,
-  authRegister: registerManager,
+  auth: authManager,
 }
 
 export default API

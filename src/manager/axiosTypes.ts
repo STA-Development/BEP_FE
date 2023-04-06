@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios'
 
-export interface IAxiosResponse extends AxiosResponse {
-  data: AxiosResponse
+export interface IAxiosResponse<T> extends AxiosResponse {
+  data: IData<T>
 }
-export interface IAxiosResponsePaginated extends AxiosResponse {
-  data: IPaginatedData
+export interface IAxiosResponsePaginated<T> extends AxiosResponse {
+  data: IPaginatedData<T>
 }
 
 interface IResponseStatus {
@@ -13,8 +13,8 @@ interface IResponseStatus {
   title?: string
 }
 
-interface IData extends IResponseStatus {
-  data: AxiosResponse
+interface IData<T> extends IResponseStatus {
+  data: T
   status: IResponseStatus
 }
 
@@ -24,4 +24,4 @@ export interface IPagination {
   totalItems: number
 }
 
-interface IPaginatedData extends IData, IPagination {}
+interface IPaginatedData<T> extends IData<T>, IPagination {}

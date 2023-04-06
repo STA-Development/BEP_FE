@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+import { UserTypes } from '@allTypes/user'
 import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { usersMiddleware, usersSelector } from '@redux/users'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import Link from 'next/link'
 
 export const Register = () => {
-  const { isLoading, error, successfully } = useAppSelector(usersSelector.user)
+  const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
   const [show, setShow] = useState(false)
   const [fullName, setFullName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
@@ -16,7 +17,7 @@ export const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('')
 
   const handleRegisterFunc = () => {
-    dispatch(usersMiddleware.register({ email, role: 'JobSeeker', password }))
+    dispatch(usersMiddleware.register({ email, role: UserTypes.JOBSEEKER, password }))
   }
 
   return (
@@ -139,7 +140,7 @@ export const Register = () => {
           </label>
         </div>
         <Button
-          disabled={isLoading}
+          disabled={isSignUpLoading}
           size="fl"
           onClick={() => handleRegisterFunc()}
         >
@@ -147,11 +148,6 @@ export const Register = () => {
         </Button>
         <div className="w-full">
           {error ? <p className="mt-2.5 text-red">Something went wrong</p> : null}
-        </div>
-        <div className="w-full">
-          {successfully ? (
-            <p className="mt-2.5 text-green-500	">Your account has been created</p>
-          ) : null}
         </div>
       </div>
     </Container>

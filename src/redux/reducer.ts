@@ -1,4 +1,4 @@
-import { users } from '@redux/users'
+import { users } from '@redux/slices/users'
 import { combineReducers } from 'redux'
 
 import { viewsSlice } from './slices/views'

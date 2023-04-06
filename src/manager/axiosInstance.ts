@@ -17,7 +17,6 @@ class RequestManager {
     axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
       const requestConfig = config
 
-      // TODO: update this after login endpoint integration
       const idToken = localStorage.getItem('accessToken')
 
       // Put all headers here

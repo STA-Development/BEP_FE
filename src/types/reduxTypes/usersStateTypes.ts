@@ -1,11 +1,11 @@
-export interface UsersProps {
-  user: UserProps
+export interface IUserProps {
+  user: IUser
 }
 
-export interface UserProps {
+export interface IUser {
   fullName: string
   email: string
-  isLoading: boolean
-  successfully: boolean
-  error: boolean
+  isSignInLoading: boolean
+  isSignUpLoading: boolean
+  error: Error | null
 }
