@@ -3,7 +3,7 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
-import { Input } from '@components/Input'
+import { Input } from '@components/UI-Components/Input'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -26,16 +26,20 @@ export const ResetPassword = () => {
       return
     }
 
-    router.query.tab = 'verify-otp'
+    router.query.tab = RouterQueryTypes.verifyOtp
     router.push(router)
     setEmailVerificationError('')
   }
 
-  const handleEnterCode = (value: string) => {
+  const onEnterCode = (value: string) => {
     if (value.length === 6) {
-      router.query.tab = 'confirm-password'
+      router.query.tab = RouterQueryTypes.confirmPassword
       router.push(router)
     }
+  }
+
+  const onSetEmail = (value: string) => {
+    setEmailValue(value)
   }
 
   return (
@@ -66,12 +70,12 @@ export const ResetPassword = () => {
                 type="email"
                 error={emailVerificationError}
                 placeholder="Email"
-                onChange={(e) => setEmailValue(e.target.value)}
+                onChange={(e) => onSetEmail(e.target.value)}
               />
             </div>
             <Button
               size="fl"
-              onClick={() => handleEmailSend()}
+              onClick={handleEmailSend}
             >
               Next
             </Button>
@@ -95,7 +99,7 @@ export const ResetPassword = () => {
               <Input
                 type="email"
                 placeholder="Enter Code"
-                onChange={(e) => handleEnterCode(e.target.value)}
+                onChange={(e) => onEnterCode(e.target.value)}
               />
             </div>
             <Button size="fl">Resend Email</Button>
