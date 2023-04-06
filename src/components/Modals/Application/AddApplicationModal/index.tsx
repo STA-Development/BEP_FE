@@ -5,7 +5,7 @@ import { Modal } from '@components/Modals'
 import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 
 export const AddApplicationModal = () => {
   const onClose = useCallback(() => {

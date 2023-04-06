@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const ResetPassword = () => {

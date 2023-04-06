@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Login = () => {

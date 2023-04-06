@@ -15,8 +15,7 @@
     "paths": {
       /* Specify a set of entries that re-map imports to additional lookup locations. */
       "@components/*": ["./src/components/*"],
-      "@UIComponents/*": ["./src/ui-components/*"],
-      "@UI/*": ["./src/UI/*"],
+      "@uiComponents/*": ["./src/ui-components/*"],
       "@redux/*": ["./src/redux/*"],
       "@pages/*": ["./src/pages/*"],
       "@layouts/*": ["./src/layouts/*"],

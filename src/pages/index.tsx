@@ -17,7 +17,7 @@ import { NewsCarousel } from '@components/NewsCarousel'
 import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const data1 = [

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Container } from '@components/Container'
 import { BarsIcon, CloseIcon, LogOutIcon, UserIcon } from '@components/Icons'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const navigation = [

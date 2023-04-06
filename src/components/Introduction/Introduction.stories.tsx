@@ -2,7 +2,7 @@ import React from 'react'
 import { AgreementIcon, RightIcon } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 
 import { Introduction } from './Introduction'
 

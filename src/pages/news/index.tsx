@@ -2,7 +2,7 @@ import React from 'react'
 import { Container } from '@components/Container/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
-import { Button } from '@UIComponents/Button'
+import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
 export interface INewsProps {
