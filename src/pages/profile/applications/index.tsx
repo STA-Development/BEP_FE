@@ -94,7 +94,7 @@ export const Applications = () => {
             </div>
             <Button
               variant="text"
-              leftIcon={<DeleteIcon />}
+              LeftIcon={DeleteIcon}
               onClick={onDeleteAddApplicationModal}
             >
               Delete Application
@@ -106,7 +106,7 @@ export const Applications = () => {
         variant="contained"
         color="gray"
         size="hg"
-        leftIcon={<AddIcon />}
+        LeftIcon={AddIcon}
         onClick={onOpenAddApplicationModal}
       >
         Add Application
