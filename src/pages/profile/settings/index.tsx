@@ -31,18 +31,18 @@ const form = [
 
 export const Settings = () => (
   <div className="grid divide-y divide-gray-light">
-    <div className="flex pb-10">
+    <div className="flex flex-col items-center pb-5 xl:flex-row xl:items-start xl:pb-10">
       <div className="h-[227px] w-[227px] rounded bg-gray-thin" />
-      <div className="pl-10">
-        <h2 className="mb-2.5 text-lg">Name and Surname</h2>
-        <p className="mb-10 flex">
+      <div className="text-center xl:pl-10 xl:text-left">
+        <h2 className="mb-2.5 mt-5 text-lg xl:mt-0">Name and Surname</h2>
+        <p className="mb-5 flex justify-center text-base text-black-light xl:mb-10 xl:justify-start">
           <LocationIcon className="mr-2.5" />
           Yerevan, Armenia
         </p>
         <Button
           size="lg"
           variant="outlined"
-          leftIcon={<UserIcon />}
+          LeftIcon={UserIcon}
         >
           Upload Avatar
         </Button>
@@ -56,7 +56,7 @@ export const Settings = () => (
         <tbody className="divide-y divide-gray-light">
           {form.map((item) => (
             <tr key={item.id}>
-              <td className="py-10 align-top">
+              <td className="block px-0 pt-5 pb-2.5 align-top xl:table-cell xl:py-10">
                 <label
                   htmlFor=""
                   className="text-sm text-black-light"
@@ -64,14 +64,14 @@ export const Settings = () => (
                   {item.label}:
                 </label>
               </td>
-              <td className="py-10 pr-10">
+              <td className="block p-0 xl:table-cell xl:py-10 xl:pr-10">
                 <input
                   id={item.id}
                   type={item.type}
                   className="w-full rounded border border-gray-light px-5 py-2.5 text-base text-black outline-0"
                 />
               </td>
-              <td className="w-1 w-48 py-10">
+              <td className="block w-1 w-full p-0 py-5 xl:table-cell xl:w-48 xl:py-10">
                 <Button
                   variant="outlined"
                   size="fl"

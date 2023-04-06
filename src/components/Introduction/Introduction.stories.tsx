@@ -24,7 +24,7 @@ export const First: Story = {
     button: (
       <Button
         size="lg"
-        rightIcon={<RightIcon />}
+        LeftIcon={RightIcon}
       >
         Start now
       </Button>
@@ -44,7 +44,7 @@ export const Second: Story = {
     button: (
       <Button
         size="lg"
-        rightIcon={<RightIcon />}
+        LeftIcon={RightIcon}
       >
         Fill the form
       </Button>
