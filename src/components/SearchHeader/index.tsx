@@ -60,7 +60,7 @@ export const SearchHeader = () => {
           </div>
 
           <div
-            className="l:w-1/5 flex w-full flex-row border-[.5px]
+            className="flex w-full flex-row border-[.5px]
                 border-gray-700"
           >
             <Autocomplete
@@ -72,7 +72,7 @@ export const SearchHeader = () => {
           </div>
 
           <div
-            className="l:w-1/5 flex w-full flex-row border-[.5px]
+            className="flex w-full flex-row border-[.5px]
                 border-gray-700"
           >
             <Autocomplete
@@ -83,7 +83,7 @@ export const SearchHeader = () => {
             />
           </div>
           <div
-            className="l:w-1/5 flex w-full flex-row border-[.5px]
+            className="flex w-full flex-row border-[.5px]
                 border-gray-700"
           >
             <Autocomplete
@@ -95,7 +95,7 @@ export const SearchHeader = () => {
           </div>
           <button
             type="button"
-            className="l:rounded-r-lg l:py-0 flex items-center justify-start rounded-none bg-[#326789]
+            className="flex items-center justify-start rounded-none bg-[#326789]
                  py-4 text-sm font-normal
                  text-white xl:w-32"
           >
