@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import { ModalName } from '@allTypes/modals'
 import { AddIcon, DeleteIcon } from '@components/Icons'
-import { Button } from '@components/UI/Button'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@UIComponents/Button'
 
 const applications = [
   {

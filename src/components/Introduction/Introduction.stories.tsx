@@ -1,8 +1,8 @@
 import React from 'react'
 import { AgreementIcon, RightIcon } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
-import { Button } from '@components/UI/Button'
 import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@UIComponents/Button'
 
 import { Introduction } from './Introduction'
 

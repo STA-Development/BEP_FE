@@ -14,10 +14,10 @@ import {
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
-import { Button } from '@components/UI/Button'
 import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@UIComponents/Button'
 import Link from 'next/link'
 
 const data1 = [

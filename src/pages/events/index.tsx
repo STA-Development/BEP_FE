@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
-import { Button } from '@components/UI/Button'
+import { Button } from '@UIComponents/Button'
 import Image from 'next/image'
 
 const data = [

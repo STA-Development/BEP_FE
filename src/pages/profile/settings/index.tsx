@@ -1,6 +1,6 @@
 import React from 'react'
 import { LocationIcon, UserIcon } from '@components/Icons'
-import { Button } from '@components/UI/Button'
+import { Button } from '@UIComponents/Button'
 
 const form = [
   {

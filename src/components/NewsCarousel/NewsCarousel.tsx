@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Container } from '@components/Container'
 import { ChevronIcon } from '@components/Icons'
-import { Button } from '@components/UI/Button'
+import { Button } from '@UIComponents/Button'
 import Image from 'next/image'
 
 export const NewsCarousel = () => {

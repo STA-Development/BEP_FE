@@ -2,10 +2,10 @@ import React, { useCallback } from 'react'
 import { ModalName } from '@allTypes/modals'
 import { CloseIcon, JobIcon } from '@components/Icons'
 import { Modal } from '@components/Modals'
-import { Button } from '@components/UI/Button'
 import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@UIComponents/Button'
 
 export const AddApplicationModal = () => {
   const onClose = useCallback(() => {

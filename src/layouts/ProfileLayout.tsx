@@ -6,7 +6,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
-import { Button } from '@components/UI/Button'
+import { Button } from '@UIComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
