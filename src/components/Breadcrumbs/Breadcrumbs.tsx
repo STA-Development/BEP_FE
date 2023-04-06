@@ -1,5 +1,8 @@
 import React from 'react'
-import { IBreadCrumbsProps } from '@allTypes/breadCrumbs'
+
+export interface IBreadCrumbsProps {
+  paths?: string[]
+}
 
 export const Breadcrumbs = ({ paths }: IBreadCrumbsProps) => (
   <ul className="flex text-sm text-black-light">

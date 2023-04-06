@@ -1,9 +1,14 @@
 import React from 'react'
-import { IPageHeaderProps } from '@allTypes/pageHeader'
 import { Breadcrumbs } from '@components/Breadcrumbs'
 
+export interface IPageHeaderProps {
+  paths?: string[]
+  title: string
+  description?: string
+}
+
 export const PageHeader = ({ title, description, paths = [] }: IPageHeaderProps) => (
-  <div className="my-5 flex w-full items-start justify-between xl:my-10">
+  <div className="flex w-full items-start justify-between border-b border-gray-thin py-5 xl:py-10">
     <div>
       <h1 className="text-xl font-medium xl:font-normal">{title}</h1>
       {description ? (

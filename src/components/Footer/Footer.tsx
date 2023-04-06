@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const contacts = [

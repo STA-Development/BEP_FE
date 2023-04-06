@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { EyeIcon, LeftIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Register = () => {
