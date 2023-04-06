@@ -13,6 +13,8 @@ const NewsList = () => {
       title: 'Visit Of The Training Center',
       description:
         'Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ' +
+        'ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame' +
+        'ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame' +
         'ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame Lorem ipsum dolor sit ame',
       imageURL:
         'https://www.wallpapers13.com/wp-content/uploads/2022/12/Snowy-christmas-840x525.jpg',
