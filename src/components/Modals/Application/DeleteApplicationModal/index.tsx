@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
 import { ModalName } from '@allTypes/modals'
-import { Button } from '@components/Button'
 import { CloseIcon } from '@components/Icons'
 import { Modal } from '@components/Modals'
 import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@uiComponents/Button'
 
 export const DeleteApplicationModal = () => {
   const onClose = useCallback(() => {

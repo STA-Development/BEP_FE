@@ -1,8 +1,8 @@
 import React from 'react'
-import { Autocomplete } from '@components/Autocomplete'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { Tab } from '@headlessui/react'
+import { Autocomplete } from '@uiComponents/Autocomplete'
+import { Button } from '@uiComponents/Button'
 
 const tabs = [
   {
@@ -75,7 +75,7 @@ const MonitoringSystems = () => (
       <Tab.Panels>
         <div className="grid grid-cols-1 divide-y">
           <div className="md:inline-block mb-5 mt-10 xl:flex xl:w-full xl:flex-row">
-            <div className="flex  flex-row">
+            <div className="flex flex-row">
               <div className="mb-5 mr-5 w-[124px]">
                 <Autocomplete
                   items={years}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
 import { EyeIcon, LeftIcon } from '@components/Icons'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Register = () => {
@@ -15,7 +15,7 @@ export const Register = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>
