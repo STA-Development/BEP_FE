@@ -1,6 +1,8 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import MainLayout from '@layouts/MainLayout'
 import ProfileLayout from '@layouts/ProfileLayout'
+
+import { isAuthenticated } from '@utils/authUtils'
 
 import AuthLayout from './AuthLayout'
 
@@ -11,9 +13,15 @@ export const Layouts = {
 }
 
 const LayoutContent = ({ children }: PropsWithChildren) => {
-  const auth = true
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false)
 
-  if (auth) {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsSignedIn(isAuthenticated())
+    }
+  }, [])
+
+  if (isSignedIn) {
     return <MainLayout>{children}</MainLayout>
   }
 

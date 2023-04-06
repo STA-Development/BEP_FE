@@ -7,5 +7,7 @@ export interface IUser {
   email: string
   isSignInLoading: boolean
   isSignUpLoading: boolean
+  isLogOutLoading: boolean
+  isAuthenticated: boolean
   error: Error | null
 }

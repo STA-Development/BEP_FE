@@ -13,7 +13,7 @@ const axiosInstance = Axios()
 const authManager = {
   axiosInstance,
   signIn(params: ISignInParams) {
-    return axiosInstance.post<ISignInResponse, IAxiosResponse<ISignUpResponse>>(
+    return axiosInstance.post<ISignInResponse, IAxiosResponse<ISignInResponse>>(
       `${baseURL}/v1/auth/login`,
       params
     )

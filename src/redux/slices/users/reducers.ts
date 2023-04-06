@@ -11,6 +11,12 @@ const reducers = createReducer({
   setSignUpLoading(state, action: IAction<boolean>) {
     state.user.isSignUpLoading = action.payload
   },
+  setLogoutLoading(state, action: IAction<boolean>) {
+    state.user.isLogOutLoading = action.payload
+  },
+  setIsAuthenticated(state, action: IAction<boolean>) {
+    state.user.isAuthenticated = action.payload
+  },
   setSignInLoading(state, action: IAction<boolean>) {
     state.user.isSignInLoading = action.payload
   },
