@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useState } from 'react'
-import { Button } from '@components/Button'
 import { EyeIcon } from '@components/Icons'
 import clsxMerge from '@lib/clsxm'
+import { Button } from '@uiComponents/Button'
 
 export interface InputType {
   error?: string
@@ -22,11 +22,8 @@ export const Input: FC<InputType> = ({ error, placeholder, type = 'text', id, on
     'border-gray-light',
     'placeholder:text-black',
     'w-full',
-    [
-      error
-        ? 'border-2 border-red placeholder:text-red'
-        : 'border-gray-light placeholder:text-black',
-    ]
+    'border-2',
+    [error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black']
   )
 
   const [inputType, setInputType] = useState<boolean>(false)
@@ -42,7 +39,7 @@ export const Input: FC<InputType> = ({ error, placeholder, type = 'text', id, on
           onChange={onChange}
         />
         {type === 'password' ? (
-          <div className="absolute inset-y-0 right-4 flex items-center">
+          <div className="absolute inset-y-0 right-0 flex items-center">
             <Button
               variant="text"
               onClick={() => setInputType(!inputType)}

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Autocomplete } from '@components/Autocomplete'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { Tab } from '@headlessui/react'
+import { Autocomplete } from '@uiComponents/Autocomplete'
+import { Button } from '@uiComponents/Button'
 
 interface Person {
   id: string
@@ -26,11 +26,11 @@ const FillTheForm = () => {
   }
 
   return (
-    <Container className="mt-15 mb-30">
+    <Container className="mb-30 mt-15">
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
-          leftIcon={<LeftIcon />}
+          LeftIcon={LeftIcon}
           onClick={() => {
             setSelectedIndex((prev) => prev - 1)
           }}
@@ -77,7 +77,7 @@ const FillTheForm = () => {
                 <input
                   type="text"
                   placeholder="Student Code *"
-                  className="w-full rounded border border-gray-thin py-2.5 px-5 outline-0 placeholder:text-base placeholder:text-black"
+                  className="w-full rounded border border-gray-thin px-5 py-2.5 outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
             </Tab.Panel>
@@ -97,26 +97,26 @@ const FillTheForm = () => {
                 <input
                   type="text"
                   placeholder="Province"
-                  className="w-full rounded border border-gray-thin py-2.5 px-5 text-base outline-0 placeholder:text-base placeholder:text-black"
+                  className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
               <div className="mb-5 flex w-full justify-between gap-5">
                 <input
                   type="text"
                   placeholder="City"
-                  className="w-full rounded border border-gray-thin py-2.5 px-5 text-base outline-0 placeholder:text-base placeholder:text-black"
+                  className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
                 <input
                   type="text"
                   placeholder="ZIP Code"
-                  className="w-full rounded border border-gray-thin py-2.5 px-5 text-base outline-0 placeholder:text-base placeholder:text-black"
+                  className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
               <div className="mb-5 w-full">
                 <input
                   type="text"
                   placeholder="Street, apt./building number *"
-                  className="w-full rounded border border-gray-thin py-2.5 px-5 text-base outline-0 placeholder:text-base placeholder:text-black"
+                  className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
             </Tab.Panel>

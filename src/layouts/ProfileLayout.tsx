@@ -1,5 +1,4 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import {
   ApplicationsIcon,
@@ -7,6 +6,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -46,33 +46,35 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Container>
-      <div className="mt-10 mb-[120px] grid grid-cols-5 gap-10 divide-x divide-gray-light">
+      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-light xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
         <aside>
-          <h1 className="mb-5 text-xl">{label}</h1>
-          <ul className="mb-10">
-            {Object.values(menu).map((item) => (
-              <li
-                key={item.label}
-                className="mb-5 text-base font-medium text-primary"
-              >
-                <Link
-                  href={item.href}
-                  className="flex items-center"
+          <h1 className="mb-5 text-xl font-medium xl:font-normal">{label}</h1>
+          <div className="hidden xl:block">
+            <ul className="mb-10">
+              {Object.values(menu).map((item) => (
+                <li
+                  key={item.label}
+                  className="mb-5 text-base font-medium text-primary"
                 >
-                  <span className="mr-2.5">{item.icon}</span>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Button
-            size="bs"
-            leftIcon={<LogOutIcon />}
-          >
-            Log Out
-          </Button>
+                  <Link
+                    href={item.href}
+                    className="flex items-center"
+                  >
+                    <span className="mr-2.5">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Button
+              size="bs"
+              LeftIcon={LogOutIcon}
+            >
+              Log Out
+            </Button>
+          </div>
         </aside>
-        <main className="col-span-4 pl-10">{children}</main>
+        <main className="col-span-4 xl:pl-10">{children}</main>
       </div>
     </Container>
   )

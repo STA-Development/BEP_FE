@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
+import { Button } from '@uiComponents/Button'
+import { Input } from '@uiComponents/Input'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import { Input } from '../../ui-components/Input'
 
 export enum RouterQueryTypes {
   verifyOtp = 'verify-otp',
@@ -49,12 +48,12 @@ export const ResetPassword = () => {
         <Link href="/">
           <Button
             variant="text"
-            leftIcon={<LeftIcon />}
+            LeftIcon={LeftIcon}
           >
             Go back
           </Button>
         </Link>
-        <Link href="/login">
+        <Link href="/register">
           <Button variant="outlined">Register</Button>
         </Link>
       </div>

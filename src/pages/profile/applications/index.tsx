@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import { ModalName } from '@allTypes/modals'
-import { Button } from '@components/Button'
 import { AddIcon, DeleteIcon } from '@components/Icons'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@uiComponents/Button'
 
 const applications = [
   {
@@ -94,7 +94,7 @@ export const Applications = () => {
             </div>
             <Button
               variant="text"
-              leftIcon={<DeleteIcon />}
+              LeftIcon={DeleteIcon}
               onClick={onDeleteAddApplicationModal}
             >
               Delete Application
@@ -106,7 +106,7 @@ export const Applications = () => {
         variant="contained"
         color="gray"
         size="hg"
-        leftIcon={<AddIcon />}
+        LeftIcon={AddIcon}
         onClick={onOpenAddApplicationModal}
       >
         Add Application
