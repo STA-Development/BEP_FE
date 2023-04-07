@@ -3,9 +3,10 @@ import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
-import { Input } from '@components/UI-Components/Input'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import { Input } from '../../ui-components/Input'
 
 export enum RouterQueryTypes {
   verifyOtp = 'verify-otp',
@@ -21,7 +22,7 @@ export const ResetPassword = () => {
     const emailVerification: boolean = /\S+@\S+\.\S+/.test(emailValue)
 
     if (!emailVerification || !emailValue.length) {
-      setEmailVerificationError('Email not valid')
+      setEmailVerificationError('Email not recognized')
 
       return
     }
@@ -54,7 +55,7 @@ export const ResetPassword = () => {
           </Button>
         </Link>
         <Link href="/login">
-          <Button variant="outlined">Log In</Button>
+          <Button variant="outlined">Register</Button>
         </Link>
       </div>
       <div className="flex w-full justify-center">
@@ -77,7 +78,7 @@ export const ResetPassword = () => {
               size="fl"
               onClick={handleEmailSend}
             >
-              Next
+              Request password reset
             </Button>
           </div>
         )}
@@ -87,7 +88,7 @@ export const ResetPassword = () => {
               The link was sent to your email
             </h1>
             <div className="mt-5 flex border-b border-gray-thin pb-5">
-              <ChekInIcon />
+              <ChekInIcon className="mr-5" />
               <p className="text-base text-black-light">
                 Check your inbox and click on the link for password recovery
               </p>

@@ -60,6 +60,14 @@ module.exports = {
       },
     },
     fontSize: {
+      xs: [
+        '12px',
+        {
+          lineHeight: '150%',
+          letterSpacing: '0.01em',
+          fontWeight: '400',
+        },
+      ],
       sm: [
         '16px',
         {
