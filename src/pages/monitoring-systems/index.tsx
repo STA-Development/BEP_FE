@@ -44,7 +44,7 @@ const MonitoringSystems = () => (
         {tabs.map((tab) => (
           <Tab.Panel
             key={tab.label}
-            className="pt-10 pb-28"
+            className="pb-28 pt-10"
           >
             {tab.content}
           </Tab.Panel>

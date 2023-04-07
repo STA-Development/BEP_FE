@@ -54,7 +54,7 @@ export const SearchHeader = () => {
         >
           <div
             className="flex w-full flex-row border-[.5px]
-                border-gray-700 py-4 px-1"
+                border-gray-700 px-1 py-4"
           >
             <p className="flex items-center justify-center pl-4">Specialization</p>
           </div>
