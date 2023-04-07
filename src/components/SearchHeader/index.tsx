@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Autocomplete } from '@components/Autocomplete'
 import { FilterIcon } from '@components/Icons/FilterIcon'
 import { SearchIcon } from '@components/Icons/SearchIcon'
+import { Autocomplete } from '@uiComponents/Autocomplete'
 
 interface Person {
   id: string
