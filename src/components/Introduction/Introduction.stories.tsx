@@ -1,8 +1,8 @@
 import React from 'react'
-import { Button } from '@components/Button'
 import { AgreementIcon, RightIcon } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from '@uiComponents/Button'
 
 import { Introduction } from './Introduction'
 
@@ -24,7 +24,7 @@ export const First: Story = {
     button: (
       <Button
         size="lg"
-        rightIcon={<RightIcon />}
+        LeftIcon={RightIcon}
       >
         Start now
       </Button>
@@ -44,7 +44,7 @@ export const Second: Story = {
     button: (
       <Button
         size="lg"
-        rightIcon={<RightIcon />}
+        LeftIcon={RightIcon}
       >
         Fill the form
       </Button>

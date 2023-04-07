@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import { BarsIcon, CloseIcon, LogOutIcon, UserIcon } from '@components/Icons'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const navigation = [
@@ -144,7 +144,7 @@ export const Header = ({ loggedIn }: HeaderProps) => (
           </div>
           <Button
             size="lg"
-            leftIcon={<LogOutIcon />}
+            LeftIcon={LogOutIcon}
           >
             Log Out
           </Button>

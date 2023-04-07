@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@components/Button'
 import { Container } from '@components/Container'
 import {
   AgreementIcon,
@@ -14,9 +13,11 @@ import {
 } from '@components/Icons'
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import { Introduction } from '@components/Introduction'
+import { NewsCarousel } from '@components/NewsCarousel'
 import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
+import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const data1 = [
@@ -50,7 +51,7 @@ const Home = () => {
           <Link href="/">
             <Button
               size="lg"
-              rightIcon={<RightIcon />}
+              RightIcon={RightIcon}
               onClick={clickFunc}
             >
               Start now
@@ -72,7 +73,7 @@ const Home = () => {
           <Link href="/fill-the-form">
             <Button
               size="lg"
-              rightIcon={<RightIcon />}
+              RightIcon={RightIcon}
             >
               Fill the form
             </Button>
@@ -106,9 +107,8 @@ const Home = () => {
             {({ open }) => (
               <div className="mb-5 last:mb-0 xl:mb-10">
                 <Disclosure.Button
-                  className={`flex w-full items-center justify-between rounded-lg p-5 outline outline-1 outline-gray-thin
-                  hover:outline-2 hover:outline-primary
-                  xl:py-10 xl:px-20 ${open && 'rounded-b-none outline-2 outline-primary'}`}
+                  className={`border-outline flex w-full items-center justify-between rounded-lg p-5
+                    xl:py-10 xl:px-20 ${open && 'rounded-b-none outline-2 outline-primary'}`}
                 >
                   <div className="flex items-center">
                     <span className="mr-5 w-auto">{help.icon}</span>
@@ -120,8 +120,7 @@ const Home = () => {
                 </Disclosure.Button>
                 <Disclosure.Panel
                   className="relative -m-0.5 rounded-b-lg border border-2 border-t-0 border-primary bg-white
-                  px-6
-                  pb-10 outline-gray-thin xl:px-20"
+                    px-6 pb-10 outline-gray-thin xl:px-20"
                 >
                   <div className="mb-10">
                     <p>
@@ -136,7 +135,7 @@ const Home = () => {
                   <Link href="/fill-the-form">
                     <Button
                       size="lg"
-                      rightIcon={<RightIcon />}
+                      RightIcon={RightIcon}
                     >
                       Fill the form
                     </Button>
@@ -147,6 +146,8 @@ const Home = () => {
           </Disclosure>
         ))}
       </Container>
+
+      <NewsCarousel />
     </>
   )
 }

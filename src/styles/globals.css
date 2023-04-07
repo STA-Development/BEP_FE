@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .border-outline {
+    @apply outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
+  }
+}
