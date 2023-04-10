@@ -11,7 +11,7 @@ const ContactUs = () => (
       title="Contact Us"
       paths={['Home', 'Contact Us']}
     />
-    <div className="mb-10 grid grid-cols-1 gap-10 pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
+    <div className="mb-10 grid grid-cols-1 gap-10 divide-gray-thin pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
       <div className="xl:pr-20">
         <form action="">
           <div className="mb-5 flex flex-col">

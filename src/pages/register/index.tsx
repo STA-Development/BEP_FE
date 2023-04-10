@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
+import { OnDivider } from '@components/Divider'
 import { EyeIcon, LeftIcon } from '@components/Icons'
-import { OrDivider } from '@components/OrDivider'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
@@ -32,7 +32,7 @@ export const Register = () => {
         >
           Continue with Google
         </Button>
-        <OrDivider />
+        <OnDivider />
         <input
           type="text"
           id="name"
