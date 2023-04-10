@@ -6,6 +6,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
+import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -35,6 +36,11 @@ const menu: Menu = {
     label: 'Monitoring Systems',
     href: '/profile/monitoring-systems',
     icon: <MonitoringSystemsIcon />,
+  },
+  help: {
+    label: 'Help',
+    href: '/profile/help',
+    icon: <HelpIcon />,
   },
 }
 
