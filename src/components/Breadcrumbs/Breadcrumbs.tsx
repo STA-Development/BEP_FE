@@ -5,9 +5,12 @@ export interface IBreadCrumbsProps {
 }
 
 export const Breadcrumbs = ({ paths }: IBreadCrumbsProps) => (
-  <ul className="flex text-sm text-black-light">
+  <ul className="hidden text-base text-black-light xl:flex">
     {paths?.map((path: string, index: number) => (
-      <li className={index !== paths.length - 1 ? "after:mx-2.5 after:content-['/']" : ''}>
+      <li
+        key={path}
+        className={index !== paths.length - 1 ? "after:mx-2.5 after:content-['/']" : ''}
+      >
         {path}
       </li>
     ))}
