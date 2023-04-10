@@ -5,13 +5,23 @@ import { Button } from '@uiComponents/Button'
 
 export interface InputType {
   error?: string
-  placeholder: string
+  placeholder?: string
   type: string
   id?: string
+  htmlFor?: string
+  label?: string
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: FC<InputType> = ({ error, placeholder, type = 'text', id, onChange }) => {
+export const Input: FC<InputType> = ({
+  error,
+  placeholder,
+  type = 'text',
+  id,
+  onChange,
+  htmlFor,
+  label,
+}) => {
   const style = clsxMerge(
     'border',
     'rounded',
@@ -23,7 +33,8 @@ export const Input: FC<InputType> = ({ error, placeholder, type = 'text', id, on
     'placeholder:text-black',
     'w-full',
     'border-2',
-    [error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black']
+    [error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'],
+    [label && 'mt-2.5']
   )
 
   const [inputType, setInputType] = useState<boolean>(false)
@@ -31,6 +42,14 @@ export const Input: FC<InputType> = ({ error, placeholder, type = 'text', id, on
   return (
     <>
       <div className="relative">
+        {label ? (
+          <label
+            htmlFor={htmlFor}
+            className="text-sm text-black-light"
+          >
+            {label}
+          </label>
+        ) : null}
         <input
           type={inputType ? 'text' : type}
           placeholder={placeholder}
