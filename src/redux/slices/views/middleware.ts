@@ -1,6 +1,5 @@
 import { ModalName } from '@allTypes/modals'
 import { IOpenedAlert, IOpenedModal, RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
-import API from '@axios/API'
 import { IExampleListParams } from '@axios/example/managerExampleTypes'
 import { AppDispatch } from '@redux/store'
 
@@ -55,11 +54,11 @@ const getExampleValue = (params: IExampleListParams) => async (dispatch: AppDisp
   try {
     // Set loading state to true
 
-    const response = await API.example.getExampleValue(params)
+    // const response = await API.example.getExampleValue(params)
 
-    dispatch(setRedirectionState({ path: '/example', params: '', apply: true }))
+    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
 
-    console.log(response)
+    // console.log(response)
     //   Do Something with received data
   } catch (error) {
     // DO something in error case
