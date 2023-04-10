@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { UserTypes } from '@allTypes/user'
 import { Container } from '@components/Container'
-import { EyeIcon, LeftIcon } from '@components/Icons'
+import { EyeIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import Link from 'next/link'
 
 export const Register = () => {
   const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
@@ -22,19 +21,6 @@ export const Register = () => {
 
   return (
     <Container className="pt-10">
-      <div className="mb-10 flex justify-between">
-        <Link href="/">
-          <Button
-            variant="text"
-            LeftIcon={LeftIcon}
-          >
-            Go back
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button variant="outlined">Log In</Button>
-        </Link>
-      </div>
       <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
         <h1 className="mb-5 text-xl">Create an account</h1>
         <Button

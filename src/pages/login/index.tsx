@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
-import { EyeIcon, LeftIcon } from '@components/Icons'
+import { EyeIcon } from '@components/Icons'
 import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import Link from 'next/link'
 
 export const Login = () => {
   const { isSignInLoading, error } = useAppSelector(usersSelector.user)
@@ -21,19 +20,6 @@ export const Login = () => {
 
   return (
     <Container className="pt-10">
-      <div className="mb-10 flex justify-between">
-        <Link href="/">
-          <Button
-            variant="text"
-            LeftIcon={LeftIcon}
-          >
-            Go back
-          </Button>
-        </Link>
-        <Link href="/register">
-          <Button variant="outlined">Register</Button>
-        </Link>
-      </div>
       <div className="mx-auto flex w-[380px] flex-col items-center">
         <h1 className="mb-5 text-xl">Log In</h1>
         <Button
