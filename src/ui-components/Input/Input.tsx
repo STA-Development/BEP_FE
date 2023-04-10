@@ -21,7 +21,7 @@ export const Input: FC<InputType> = ({
   error,
   placeholder,
   label,
-  color = 'secondary',
+  color = 'primary',
   type = 'text',
   id,
   rows,
@@ -66,6 +66,7 @@ export const Input: FC<InputType> = ({
         {rows ? (
           <textarea
             id="message"
+            placeholder={placeholder}
             className={style}
             rows={rows}
           />
