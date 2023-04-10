@@ -13,9 +13,10 @@ export const Login = () => {
   const [show, setShow] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [remember, setRemember] = useState<boolean>(false)
 
   const handleLoginFunc = () => {
-    dispatch(usersMiddleware.login({ email, password }))
+    dispatch(usersMiddleware.login({ email, password, remember }))
   }
 
   return (
@@ -86,6 +87,7 @@ export const Login = () => {
           <input
             id="remember-me"
             type="checkbox"
+            onClick={() => setRemember(!remember)}
             className="ml-1 h-5 w-5 rounded-sm border-black"
           />
           <label

@@ -7,6 +7,7 @@ export interface ISignInResponse {
 export interface ISignInParams {
   email: string
   password: string
+  remember: boolean
 }
 
 // TODO: change response interface to match your backend

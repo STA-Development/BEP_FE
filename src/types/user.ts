@@ -3,5 +3,5 @@ export interface IUser {
 }
 
 export enum UserTypes {
-  JOBSEEKER = 'jobseeker',
+  JOBSEEKER = 'JobSeeker',
 }
