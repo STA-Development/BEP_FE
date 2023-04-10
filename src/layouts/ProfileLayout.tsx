@@ -46,7 +46,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Container>
-      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-light xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
+      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
         <aside>
           <h1 className="mb-5 text-xl font-medium xl:font-normal">{label}</h1>
           <div className="hidden xl:block">

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container } from '@components/Container'
 import { Tab } from '@headlessui/react'
 import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
@@ -55,65 +54,61 @@ const years: Years[] = [
 ]
 
 const MonitoringSystems = () => (
-  <Container>
-    <Tab.Group>
-      <Tab.List>
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.label}
-            className="mr-10 text-base text-black focus:outline-none"
-          >
-            {({ selected }) => (
-              <>
-                <div className="p-2.5 pb-1.5">{tab.label}</div>
-                <div className={`h-1 w-full rounded ${selected ? 'bg-primary' : 'bg-white'}`} />
-              </>
-            )}
-          </Tab>
-        ))}
-      </Tab.List>
-      <Tab.Panels>
-        <div className="grid grid-cols-1 divide-y">
-          <div className="md:inline-block mb-5 mt-10 xl:flex xl:w-full xl:flex-row">
-            <div className="flex flex-row">
-              <div className="mb-5 mr-5 w-[124px]">
-                <Autocomplete
-                  items={years}
-                  placeholder="Years"
-                />
-              </div>
-              <div className="mb-5 mr-5 w-[124px]">
-                <Autocomplete
-                  items={years}
-                  placeholder="Region"
-                />
-              </div>
-              <div className=" mr-5">
-                <Autocomplete
-                  items={years}
-                  placeholder="Region"
-                />
-              </div>
+  <Tab.Group>
+    <Tab.List>
+      {tabs.map((tab) => (
+        <Tab
+          key={tab.label}
+          className="mr-10 text-base text-black focus:outline-none"
+        >
+          {({ selected }) => (
+            <>
+              <div className="p-2.5 pb-1.5">{tab.label}</div>
+              <div className={`h-1 w-full rounded ${selected ? 'bg-primary' : 'bg-transparent'}`} />
+            </>
+          )}
+        </Tab>
+      ))}
+    </Tab.List>
+    <Tab.Panels>
+      <div className="grid grid-cols-1 divide-y divide-gray-thin">
+        <div className="my-10 inline-block xl:flex xl:w-full xl:flex-row">
+          <div className="flex flex-row gap-5">
+            <div className="w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Years"
+              />
             </div>
-            <div className="mb-5 xl:w-[124px]">
-              <Button size="fl">Apply filters</Button>
+            <div className="w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Region"
+              />
             </div>
+            <div className="w-[124px]">
+              <Autocomplete
+                items={years}
+                placeholder="Region"
+              />
+            </div>
+            <Button size="sm">Apply filters</Button>
           </div>
-          {tabs.map((tab) => (
-            <Tab.Panel
-              key={tab.label}
-              className="pt-10 pb-20"
-            >
-              <div className="mb-5	text-lg font-medium">{tab.title}</div>
-              <div className="mb-5	font-normal">{tab.content}</div>
-              <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
-              <div>{tab.content3}</div>
-            </Tab.Panel>
-          ))}
         </div>
-      </Tab.Panels>
-    </Tab.Group>
-  </Container>
+        {tabs.map((tab) => (
+          <Tab.Panel
+            key={tab.label}
+            className="pt-10"
+          >
+            <div className="mb-5 text-lg font-medium">{tab.title}</div>
+            <div className="mb-5 font-normal">{tab.content}</div>
+            <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
+            <div>{tab.content3}</div>
+          </Tab.Panel>
+        ))}
+      </div>
+    </Tab.Panels>
+  </Tab.Group>
 )
 
 export default MonitoringSystems

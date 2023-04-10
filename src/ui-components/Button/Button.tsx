@@ -71,7 +71,7 @@ export const Button: FC<ButtonProps> = ({
     [radius === 'all' && 'rounded', radius === 'r' && 'rounded-r', radius === 'l' && 'rounded-l'],
     [
       size === 'xs' && 'p-0',
-      size === 'sm' && 'px-5 py-2.5',
+      size === 'sm' && 'px-5 py-2.5 text-sm font-normal',
       size === 'bs' && 'px-10 py-2.5',
       size === 'lg' && 'w-full px-20 py-2.5 xl:w-auto',
       size === 'fl' && 'w-full py-2.5',
