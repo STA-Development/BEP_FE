@@ -30,7 +30,7 @@ const form = [
 ]
 
 export const Settings = () => (
-  <div className="grid divide-y divide-gray-light">
+  <div className="grid divide-y divide-gray-thin">
     <div className="flex flex-col items-center pb-5 xl:flex-row xl:items-start xl:pb-10">
       <div className="h-[227px] w-[227px] rounded bg-gray-thin" />
       <div className="text-center xl:pl-10 xl:text-left">
@@ -50,10 +50,10 @@ export const Settings = () => (
     </div>
     <form
       action="src/app/(profile)/user"
-      className="divide-y divide-gray-light"
+      className="divide-y divide-gray-thin"
     >
       <table className="w-full table-auto">
-        <tbody className="divide-y divide-gray-light">
+        <tbody className="divide-y divide-gray-thin">
           {form.map((item) => (
             <tr key={item.id}>
               <td className="block px-0 pb-2.5 pt-5 align-top xl:table-cell xl:py-10">

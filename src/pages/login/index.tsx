@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
+import { OnDivider } from '@components/Divider'
 import { EyeIcon } from '@components/Icons'
-import { OrDivider } from '@components/OrDivider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
@@ -27,7 +27,7 @@ export const Login = () => {
         >
           Continue with Google
         </Button>
-        <OrDivider />
+        <OnDivider />
         <div className="mb-5 w-full">
           <input
             value={email}
