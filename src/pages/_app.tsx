@@ -2,6 +2,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
+import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
 import store from '@redux/store'
 import { NextComponentType, NextPageContext } from 'next'
@@ -55,6 +56,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
       </Head>
       <main>
         <Provider store={store}>
+          <RedirectionHandler />
           <Layout>
             {HierarchicalLayout ? (
               <HierarchicalLayout>
