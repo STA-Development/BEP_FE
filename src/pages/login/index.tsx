@@ -40,7 +40,7 @@ export const Login = () => {
             placeholder="example@email.com"
             className={`${
               error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'
-            } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+            } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
           />
           {error ? <p className="mt-2.5 text-red">Email not valid</p> : null}
         </div>
@@ -54,7 +54,7 @@ export const Login = () => {
                 error
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
-              } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button

@@ -108,7 +108,7 @@ const Home = () => {
               <div className="mb-5 last:mb-0 xl:mb-10">
                 <Disclosure.Button
                   className={`border-outline flex w-full items-center justify-between rounded-lg p-5
-                    xl:py-10 xl:px-20 ${open && 'rounded-b-none outline-2 outline-primary'}`}
+                    xl:px-20 xl:py-10 ${open && 'rounded-b-none outline-2 outline-primary'}`}
                 >
                   <div className="flex items-center">
                     <span className="mr-5 w-auto">{help.icon}</span>
