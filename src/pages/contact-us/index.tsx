@@ -11,7 +11,7 @@ const ContactUs = () => (
       title="Contact Us"
       paths={['Home', 'Contact Us']}
     />
-    <div className="grid grid-cols-1 gap-10 pt-10 xl:grid-cols-2 xl:gap-0 xl:divide-x">
+    <div className="mb-10 grid grid-cols-1 gap-10 pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
       <div className="xl:pr-20">
         <form action="">
           <div className="mb-5 flex flex-col">
@@ -22,7 +22,7 @@ const ContactUs = () => (
               required
             />
           </div>
-          <div className="columns-2 gap-5">
+          <div className="columns-1 gap-5 xl:columns-2">
             <div className="mb-5 flex flex-col">
               <Input
                 type="email"
@@ -51,7 +51,7 @@ const ContactUs = () => (
           <Button size="fl">Submit</Button>
         </form>
       </div>
-      <div className="mb-10 flex flex-col xl:mb-0 xl:pl-20">
+      <div className="flex flex-col xl:mb-0 xl:pl-20">
         <h3 className="mb-2.5 text-lg font-medium xl:hidden">Where to find us:</h3>
         <div className="mb-5 flex items-center">
           <LocationIcon />

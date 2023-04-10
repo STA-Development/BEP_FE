@@ -29,7 +29,6 @@ export const Input: FC<InputType> = ({
   onChange,
 }) => {
   const style = clsxMerge(
-    'border',
     'rounded',
     'px-5',
     'py-2.5',
@@ -43,11 +42,11 @@ export const Input: FC<InputType> = ({
         ? 'border-red placeholder:text-red'
         : [
             color === 'primary' && 'border-primary placeholder:text-black',
-            color === 'secondary' && 'border-gray-light placeholder:text-black',
+            color === 'secondary' && 'border-gray-thin placeholder:text-black',
           ],
     ],
     [label && 'mt-2.5'],
-    [rows && 'resize-none border-gray-light px-5 py-2.5 outline-0']
+    [rows && 'resize-none']
   )
 
   const [inputType, setInputType] = useState<boolean>(false)
