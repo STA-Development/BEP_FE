@@ -2,7 +2,6 @@ import {
   ISignInParams,
   ISignInResponse,
   ISignUpParams,
-  ISignUpResponse,
 } from '@axios/authentication/authManagerTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
@@ -19,10 +18,7 @@ const authManager = {
     )
   },
   signUp(params: ISignUpParams) {
-    return axiosInstance.post<ISignUpResponse, IAxiosResponse<ISignUpResponse>>(
-      `${baseURL}/v1/auth/register`,
-      params
-    )
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/register`, params)
   },
 }
 

@@ -13,7 +13,7 @@ export const Login = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const handleLoginFunc = () => {
+  const handleLogin = () => {
     dispatch(usersMiddleware.login({ email, password }))
   }
 
@@ -85,7 +85,7 @@ export const Login = () => {
           className="mb-7"
           size="fl"
           disabled={isSignInLoading}
-          onClick={() => handleLoginFunc()}
+          onClick={handleLogin}
         >
           Log In
         </Button>

@@ -1,18 +1,12 @@
-// TODO: change response interface to match your backend
 export interface ISignInResponse {
   accessToken: string
-  fullName: string
+  refreshToken: string
+  remember: boolean
 }
 
 export interface ISignInParams {
   email: string
   password: string
-}
-
-// TODO: change response interface to match your backend
-export interface ISignUpResponse {
-  accessToken: string
-  fullName: string
 }
 
 export interface IError {
