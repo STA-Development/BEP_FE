@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
-import { LeftIcon } from '@components/Icons'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
 import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 export enum RouterQueryTypes {
@@ -44,19 +42,6 @@ export const ResetPassword = () => {
 
   return (
     <Container className="pb-40 pt-10">
-      <div className="mb-10 flex justify-between">
-        <Link href="/">
-          <Button
-            variant="text"
-            LeftIcon={LeftIcon}
-          >
-            Go back
-          </Button>
-        </Link>
-        <Link href="/register">
-          <Button variant="outlined">Register</Button>
-        </Link>
-      </div>
       <div className="flex w-full justify-center">
         {!router.query.tab && (
           <div className="w-full max-w-[480px]">

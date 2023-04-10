@@ -10,15 +10,10 @@ export const Layouts = {
   Profile: ProfileLayout,
 }
 
-const LayoutContent = ({ children }: PropsWithChildren) => {
-  const auth = true
-
-  if (auth) {
-    return <MainLayout>{children}</MainLayout>
-  }
-
-  return <AuthLayout>{children}</AuthLayout>
-}
+const LayoutContent = ({ children }: PropsWithChildren) => (
+  // TODO: FIX FOR REDIRECT
+  <MainLayout>{children}</MainLayout>
+)
 
 const Layout = ({ children }: PropsWithChildren) => <LayoutContent>{children}</LayoutContent>
 
