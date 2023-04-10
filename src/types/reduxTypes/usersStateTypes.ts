@@ -9,5 +9,5 @@ export interface IUser {
   isSignUpLoading: boolean
   isLogOutLoading: boolean
   isAuthenticated: boolean
-  error: Error | null
+  error: string | null
 }

@@ -12,10 +12,9 @@ export const Login = () => {
   const [show, setShow] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [remember, setRemember] = useState<boolean>(false)
 
   const handleLoginFunc = () => {
-    dispatch(usersMiddleware.login({ email, password, remember }))
+    dispatch(usersMiddleware.login({ email, password }))
   }
 
   return (
@@ -73,7 +72,6 @@ export const Login = () => {
           <input
             id="remember-me"
             type="checkbox"
-            onClick={() => setRemember(!remember)}
             className="ml-1 h-5 w-5 rounded-sm border-black"
           />
           <label
@@ -91,9 +89,7 @@ export const Login = () => {
         >
           Log In
         </Button>
-        <div className="w-full">
-          {error ? <p className="mt-2.5 text-red">Something went wrong</p> : null}
-        </div>
+        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
         <div className="mb-44 w-full">
           <Button variant="text">Forgot Password?</Button>
         </div>

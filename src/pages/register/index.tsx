@@ -15,8 +15,12 @@ export const Register = () => {
   const [password, setPassword] = useState<string>('')
   const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-  const handleRegisterFunc = () => {
+  const handleRegister = () => {
     dispatch(usersMiddleware.register({ email, role: UserTypes.JOBSEEKER, password }))
+  }
+
+  const handleChangeFullName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFullName(e.target.value)
   }
 
   return (
@@ -33,7 +37,7 @@ export const Register = () => {
         <div className="mb-5 w-full">
           <input
             value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={handleChangeFullName}
             type="text"
             id="name"
             placeholder="Full Name"
@@ -128,13 +132,11 @@ export const Register = () => {
         <Button
           disabled={isSignUpLoading}
           size="fl"
-          onClick={() => handleRegisterFunc()}
+          onClick={handleRegister}
         >
           Create Account
         </Button>
-        <div className="w-full">
-          {error ? <p className="mt-2.5 text-red">Something went wrong</p> : null}
-        </div>
+        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
       </div>
     </Container>
   )

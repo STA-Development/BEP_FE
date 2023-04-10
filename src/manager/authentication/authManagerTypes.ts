@@ -7,13 +7,22 @@ export interface ISignInResponse {
 export interface ISignInParams {
   email: string
   password: string
-  remember: boolean
 }
 
 // TODO: change response interface to match your backend
 export interface ISignUpResponse {
   accessToken: string
   fullName: string
+}
+
+export interface IError {
+  response: {
+    data: {
+      status: {
+        message: string
+      }
+    }
+  }
 }
 
 export interface ISignUpParams {

@@ -1,6 +1,6 @@
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
-import { ISignInParams, ISignUpParams } from '@axios/authentication/authManagerTypes'
+import { IError, ISignInParams, ISignUpParams } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
 
 import ViewSlice from '../views/slice'
@@ -27,19 +27,19 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     dispatch(setIsAuthenticated(true))
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError(error as Error))
+    dispatch(setError((error as IError).response.data.status.message))
   } finally {
     dispatch(setSignInLoading(false))
   }
 }
 
-const IsAuthenticated = () => async (dispatch: AppDispatch) => {
+const isAuthenticated = () => async (dispatch: AppDispatch) => {
   try {
     if (localStorage.getItem('accessToken')) {
       dispatch(setIsAuthenticated(true))
     }
   } catch (error) {
-    dispatch(setError(error as Error))
+    dispatch(setError((error as IError).response.data.status.message))
   }
 }
 
@@ -51,7 +51,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
     dispatch(setIsAuthenticated(false))
     dispatch(dispatch(setError(null)))
   } catch (error) {
-    dispatch(setError(error as Error))
+    dispatch(setError((error as IError).response.data.status.message))
   } finally {
     dispatch(setLogoutLoading(false))
   }
@@ -66,7 +66,7 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError(error as Error))
+    dispatch(setError((error as IError).response.data.status.message))
   } finally {
     dispatch(setSignUpLoading(false))
   }
@@ -76,6 +76,6 @@ export default {
   setRedirectionState,
   login,
   logOut,
-  IsAuthenticated,
+  isAuthenticated,
   register,
 }

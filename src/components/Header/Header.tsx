@@ -19,7 +19,7 @@ export const Header = () => {
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 
   useEffect(() => {
-    dispatch(usersMiddleware.IsAuthenticated())
+    dispatch(usersMiddleware.isAuthenticated())
   }, [])
 
   const handleLogOut = () => {
