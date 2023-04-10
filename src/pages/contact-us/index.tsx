@@ -20,7 +20,7 @@ const ContactUs = () => (
               <input
                 type="text"
                 id="name"
-                className="rounded border border-gray-light py-2.5 px-5 outline-0"
+                className="rounded border border-gray-light px-5 py-2.5 outline-0"
               />
             </div>
             <div className="grid grid-cols-2 gap-5">
@@ -34,7 +34,7 @@ const ContactUs = () => (
                 <input
                   type="text"
                   id="email"
-                  className="rounded border border-gray-light py-2.5 px-5 outline-0"
+                  className="rounded border border-gray-light px-5 py-2.5 outline-0"
                 />
               </div>
               <div className="mb-5 flex flex-col">
@@ -47,7 +47,7 @@ const ContactUs = () => (
                 <input
                   type="text"
                   id="telephone"
-                  className="rounded border border-gray-light py-2.5 px-5 outline-0"
+                  className="rounded border border-gray-light px-5 py-2.5 outline-0"
                 />
               </div>
             </div>
@@ -60,7 +60,7 @@ const ContactUs = () => (
               </label>
               <textarea
                 id="message"
-                className="resize-none rounded border border-gray-light py-2.5 px-5 outline-0"
+                className="resize-none rounded border border-gray-light px-5 py-2.5 outline-0"
                 rows={10}
               />
             </div>

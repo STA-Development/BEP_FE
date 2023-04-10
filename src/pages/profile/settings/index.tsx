@@ -56,7 +56,7 @@ export const Settings = () => (
         <tbody className="divide-y divide-gray-light">
           {form.map((item) => (
             <tr key={item.id}>
-              <td className="block px-0 pt-5 pb-2.5 align-top xl:table-cell xl:py-10">
+              <td className="block px-0 pb-2.5 pt-5 align-top xl:table-cell xl:py-10">
                 <label
                   htmlFor=""
                   className="text-sm text-black-light"
