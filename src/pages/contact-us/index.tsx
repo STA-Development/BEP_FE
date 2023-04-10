@@ -11,15 +11,15 @@ const ContactUs = () => (
       title="Contact Us"
       paths={['Home', 'Contact Us']}
     />
-    <div className="mb-10 mb-10 grid grid-cols-1 gap-10 py-10 xl:mb-0 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
-      <div className="xl:pr-20 ">
+    <div className="grid grid-cols-1 gap-10 pt-10 xl:grid-cols-2 xl:gap-0 xl:divide-x">
+      <div className="xl:pr-20">
         <form action="">
           <div className="mb-5 flex flex-col">
             <Input
               type="text"
               id="name"
-              htmlFor="name"
-              label="Full Name:"
+              label="Full Name"
+              required
             />
           </div>
           <div className="columns-2 gap-5">
@@ -27,49 +27,43 @@ const ContactUs = () => (
               <Input
                 type="email"
                 id="email"
-                htmlFor="email"
-                label="E-mail:"
+                label="E-mail"
+                required
               />
             </div>
             <div className="mb-5 flex flex-col">
               <Input
                 type="text"
                 id="telephone"
-                htmlFor="telephone"
-                label="Telephone:"
+                label="Telephone"
+                required
               />
             </div>
           </div>
           <div className="mb-10 flex flex-col">
-            <label
-              htmlFor="message"
-              className="pb-2.5 text-sm text-black-light"
-            >
-              Message*
-            </label>
-            <textarea
+            <Input
+              label="Message"
               id="message"
-              className="resize-none rounded border border-gray-light px-5 py-2.5 outline-0"
               rows={5}
+              required
             />
           </div>
           <Button size="fl">Submit</Button>
         </form>
       </div>
-      <div className="mb-30 flex flex-col xl:mb-0 xl:pl-20">
+      <div className="mb-10 flex flex-col xl:mb-0 xl:pl-20">
         <h3 className="mb-2.5 text-lg font-medium xl:hidden">Where to find us:</h3>
         <div className="mb-5 flex items-center">
           <LocationIcon />
           <p className="ml-2.5 text-sm text-black-light xl:ml-4">Abovyan st. 29, Yerevan</p>
         </div>
-        <div className="mb-5 h-full max-h-[400px] xl:mb-10 xl:max-h-[332px]">
+        <div className="mb-5 h-full xl:mb-12">
           <iframe
             title="Google Map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25500.34655662076!2d44.55500355758102!3d40.173801582606615!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406aa2dab8fc8b5b%3A0x3d1479ae87da526a!2z0JXRgNC10LLQsNC9!5e0!3m2!1sru!2sam!4v1681134335648!5m2!1sru!2sam"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.966540054967!2d44.520139515845585!3d40.18755807939243!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681140090545!5m2!1sru!2sam"
             style={{
-              borderRadius: '10px',
               width: '100%',
-              height: '100%',
+              height: '332px',
             }}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
