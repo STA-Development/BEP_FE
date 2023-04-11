@@ -1,4 +1,4 @@
-name: Audit CI
+name: Build
 run-name: ${{ github.workflow }}-${{ github.actor }}-${{ github.event.head_commit.message}}
 on:
   push:
@@ -14,6 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - uses: pnpm/action-setup@v2
+          with:
+            version: 6.0.2
         with:
           node-version: "16"
       - name: Install Dependencies
