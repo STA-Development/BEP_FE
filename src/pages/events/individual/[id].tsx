@@ -26,8 +26,6 @@ const IndividualEventPage = () => {
           key={item.id}
           className="mb-5rounded p-10 xl:mb-10 "
         >
-          <h2 className="text-xl text-black xl:mt-0 xl:text-2xl">{item.time}</h2>
-          <p className="mt-5 text-lg text-black">{item.title}</p>
           <div>
             <Image
               className="xl:float-right xl:ml-30 xl:mb-20"
@@ -36,6 +34,8 @@ const IndividualEventPage = () => {
               height={680}
               alt="picture"
             />
+            <h2 className="text-xl text-black xl:mt-0 xl:text-2xl">{item.time}</h2>
+            <p className="mt-5 text-lg text-black">{item.title}</p>
             <p className="mt-5 text-base text-black-light xl:mt-15">{item.info}</p>
           </div>
           <p className="mt-11 text-black-light">{item.date}</p>
