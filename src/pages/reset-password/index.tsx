@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
+import { dispatch } from '@redux/hooks'
+import { usersMiddleware } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
 import { useRouter } from 'next/router'
@@ -24,8 +26,9 @@ export const ResetPassword = () => {
       return
     }
 
-    router.query.tab = RouterQueryTypes.verifyOtp
-    router.push(router)
+    dispatch(usersMiddleware.resetPassword(emailValue))
+    // router.query.tab = RouterQueryTypes.verifyOtp
+    // router.push(router)
     setEmailVerificationError('')
   }
 

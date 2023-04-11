@@ -72,10 +72,27 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
   }
 }
 
+const resetPassword = (params: string) => async (dispatch: AppDispatch) => {
+  try {
+    // dispatch(setSignUpLoading(true))
+
+    console.log(params, 'params')
+    await API.auth.forgotPassword(params)
+
+    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response.data.status.message))
+  } finally {
+    dispatch(setSignUpLoading(false))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
   logOut,
   isAuthenticated,
   register,
+  resetPassword,
 }
