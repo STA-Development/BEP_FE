@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
+import { UserTypes } from '@allTypes/user'
 import { Container } from '@components/Container'
-import { EyeIcon, LeftIcon } from '@components/Icons'
-import { OrDivider } from '@components/OrDivider'
+import { OnDivider } from '@components/Divider'
+import { EyeIcon } from '@components/Icons'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import Link from 'next/link'
 
 export const Register = () => {
+  const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
   const [show, setShow] = useState(false)
-  const error = false
+  const [fullName, setFullName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
+
+  const handleRegister = () => {
+    dispatch(usersMiddleware.register({ email, role: UserTypes.JOBSEEKER, password }))
+  }
+
+  const handleChangeFullName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFullName(e.target.value)
+  }
 
   return (
     <Container className="pt-10">
-      <div className="mb-10 flex justify-between">
-        <Link href="/">
-          <Button
-            variant="text"
-            LeftIcon={LeftIcon}
-          >
-            Go back
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button variant="outlined">Log In</Button>
-        </Link>
-      </div>
-      <div className="mx-auto flex w-[380px] flex-col items-center">
+      <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
         <h1 className="mb-5 text-xl">Create an account</h1>
         <Button
           variant="outlined"
@@ -32,35 +33,50 @@ export const Register = () => {
         >
           Continue with Google
         </Button>
-        <OrDivider />
-        <input
-          type="text"
-          id="name"
-          placeholder="Full Name"
-          className="mb-5 w-full rounded border border-gray-light py-2.5 px-5 outline-0 placeholder:text-base placeholder:text-black"
-        />
+        <OnDivider />
         <div className="mb-5 w-full">
           <input
+            value={fullName}
+            onChange={handleChangeFullName}
+            type="text"
+            id="name"
+            placeholder="Full Name"
+            className={`${
+              error && !fullName
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
+            } w-full rounded border border-gray-light px-5 py-2.5 outline-0 placeholder:text-base placeholder:text-black`}
+          />
+          {error && !fullName ? <p className="mt-2.5 text-red">Full Name not valid</p> : null}
+        </div>
+        <div className="mb-5 w-full">
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
             placeholder="Email"
             className={`${
-              error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'
-            } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              error && !email
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
+            } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
           />
-          {error ? <p className="mt-2.5 text-red">Email not valid</p> : null}
+          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={show ? 'text' : 'password'}
               id="password"
               placeholder="Password"
               className={`${
-                error
+                error && !password
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
-              } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button
@@ -71,19 +87,21 @@ export const Register = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Password not valid</p> : null}
+          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
             <input
               type={show ? 'text' : 'password'}
               id="confirm-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
               className={`${
-                error
+                error && (!confirmPassword || confirmPassword !== password)
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
-              } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button
@@ -94,7 +112,9 @@ export const Register = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Passwords do not match</p> : null}
+          {error && (!confirmPassword || confirmPassword !== password) ? (
+            <p className="mt-2.5 text-red">Passwords do not match</p>
+          ) : null}
         </div>
         <div className="mb-5 flex w-full items-center">
           <input
@@ -109,7 +129,14 @@ export const Register = () => {
             Remember me
           </label>
         </div>
-        <Button size="fl">Next</Button>
+        <Button
+          disabled={isSignUpLoading}
+          size="fl"
+          onClick={handleRegister}
+        >
+          Create Account
+        </Button>
+        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
       </div>
     </Container>
   )

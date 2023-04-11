@@ -90,9 +90,9 @@ const NewsList = () => {
       {newsList.map((news: INewsProps) => (
         <div
           key={news.id}
-          className="border-outline my-10 mx-auto grid grid-cols-1 items-center justify-between rounded p-8 xl:grid-cols-2"
+          className="border-outline mx-auto my-10 grid grid-cols-1 items-center justify-between rounded p-8 xl:grid-cols-2"
         >
-          <div className="order-last ml-4 mb-4 space-y-4 xl:order-first">
+          <div className="order-last mb-4 ml-4 space-y-4 xl:order-first">
             <h2 className="text-lg font-medium">{news.title}</h2>
             <p className="text-black-light">{news.description}</p>
             <Button

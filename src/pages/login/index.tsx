@@ -1,29 +1,24 @@
 import React, { useState } from 'react'
 import { Container } from '@components/Container'
-import { EyeIcon, LeftIcon } from '@components/Icons'
-import { OrDivider } from '@components/OrDivider'
+import { OnDivider } from '@components/Divider'
+import { EyeIcon } from '@components/Icons'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import Link from 'next/link'
 
 export const Login = () => {
-  const [show, setShow] = useState(false)
-  const error = false
+  const { isSignInLoading, error } = useAppSelector(usersSelector.user)
+
+  const [show, setShow] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const handleLogin = () => {
+    dispatch(usersMiddleware.login({ email, password }))
+  }
 
   return (
     <Container className="pt-10">
-      <div className="mb-10 flex justify-between">
-        <Link href="/">
-          <Button
-            variant="text"
-            LeftIcon={LeftIcon}
-          >
-            Go back
-          </Button>
-        </Link>
-        <Link href="/register">
-          <Button variant="outlined">Register</Button>
-        </Link>
-      </div>
       <div className="mx-auto flex w-[380px] flex-col items-center">
         <h1 className="mb-5 text-xl">Log In</h1>
         <Button
@@ -32,29 +27,35 @@ export const Login = () => {
         >
           Continue with Google
         </Button>
-        <OrDivider />
+        <OnDivider />
         <div className="mb-5 w-full">
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="email"
             placeholder="example@email.com"
             className={`${
-              error ? 'border-red placeholder:text-red' : 'border-gray-light placeholder:text-black'
-            } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              error && !email
+                ? 'border-red placeholder:text-red'
+                : 'border-gray-light placeholder:text-black'
+            } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
           />
-          {error ? <p className="mt-2.5 text-red">Email not valid</p> : null}
+          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
         </div>
         <div className="mb-5 w-full">
           <div className="relative">
             <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               type={show ? 'text' : 'password'}
               id="password"
               placeholder="Password"
               className={`${
-                error
+                error && !password
                   ? 'border-red placeholder:text-red'
                   : 'border-gray-light placeholder:text-black'
-              } w-full rounded border py-2.5 px-5 outline-0 placeholder:text-base`}
+              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
             />
             <div className="absolute inset-y-0 right-4 flex items-center">
               <button
@@ -65,7 +66,7 @@ export const Login = () => {
               </button>
             </div>
           </div>
-          {error ? <p className="mt-2.5 text-red">Password not valid</p> : null}
+          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
         </div>
         <div className="mb-5 flex w-full items-center">
           <input
@@ -80,7 +81,18 @@ export const Login = () => {
             Remember me
           </label>
         </div>
-        <Button size="fl">Next</Button>
+        <Button
+          className="mb-7"
+          size="fl"
+          disabled={isSignInLoading}
+          onClick={handleLogin}
+        >
+          Log In
+        </Button>
+        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
+        <div className="mb-44 w-full">
+          <Button variant="text">Forgot Password?</Button>
+        </div>
       </div>
     </Container>
   )

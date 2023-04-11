@@ -6,6 +6,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
+import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -33,8 +34,13 @@ const menu: Menu = {
   },
   'monitoring-systems': {
     label: 'Monitoring Systems',
-    href: '/monitoring-systems',
+    href: '/profile/monitoring-systems',
     icon: <MonitoringSystemsIcon />,
+  },
+  help: {
+    label: 'Help',
+    href: '/profile/help',
+    icon: <HelpIcon />,
   },
 }
 
@@ -46,7 +52,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Container>
-      <div className="mt-5 mb-30 grid grid-cols-1 divide-gray-light xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
+      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
         <aside>
           <h1 className="mb-5 text-xl font-medium xl:font-normal">{label}</h1>
           <div className="hidden xl:block">
