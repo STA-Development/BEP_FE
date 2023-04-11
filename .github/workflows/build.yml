@@ -1,4 +1,4 @@
-name: Audit CI
+name: Build
 run-name: ${{ github.workflow }}-${{ github.actor }}-${{ github.event.head_commit.message}}
 on:
   push:
