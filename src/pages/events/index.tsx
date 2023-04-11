@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
@@ -38,7 +40,13 @@ const Events = () => {
   const [showModeId, setShowModeId] = useState<number | null>()
 
   const handleShowMore = (id: number) => {
-    setShowModeId(id)
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/events/individual/${id}`,
+        params: '',
+        apply: true,
+      })
+    )
   }
 
   return (
