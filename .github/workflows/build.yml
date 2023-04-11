@@ -1,6 +1,5 @@
 name: Build
-run-name: ${{ github.workflow }}-${{ github.actor }}-${{ github.event.head_commit.message}}
-on:
+run-name: ${{ github.workflow }}-${{ github.actor }}
   push:
     branches:
       - ci_cd
@@ -9,7 +8,7 @@ on:
       - master
 
 jobs:
-  run-audit-ci:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,5 +21,5 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Run Audit CI
+      - name: Build
         run: pnpm build
