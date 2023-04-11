@@ -1,4 +1,4 @@
-name: Build
+name: Audit CI
 run-name: ${{ github.workflow }}-${{ github.actor }}-${{ github.event.head_commit.message}}
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
         with:
           version: 6.0.2
       - name: Install Dependencies
-        run: pnpm build
+        run: pnpm install
 
       - name: Run Audit CI
-        run: yarn audit
+        run: pnpm build
