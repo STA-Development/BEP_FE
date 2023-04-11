@@ -17,6 +17,12 @@ export interface InputType {
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
+export interface InputTypeCheckbox {
+  id?: string
+  label?: string
+  onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+}
+
 export const Input: FC<InputType> = ({
   error,
   placeholder,
@@ -96,3 +102,20 @@ export const Input: FC<InputType> = ({
     </>
   )
 }
+
+export const InputCheckbox: FC<InputTypeCheckbox> = ({ label, id, onChange }) => (
+  <>
+    <input
+      id={id}
+      type="checkbox"
+      onChange={onChange}
+      className="ml-1 h-5 w-5 rounded-sm border-black"
+    />
+    <label
+      htmlFor={id}
+      className="ml-3 text-sm"
+    >
+      {label}
+    </label>
+  </>
+)

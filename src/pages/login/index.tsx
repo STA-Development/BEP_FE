@@ -4,8 +4,7 @@ import { OnDivider } from '@components/Divider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import { Input } from '@uiComponents/Input'
-import InputCheckbox from '@uiComponents/Input/inputCheckbox'
+import { Input, InputCheckbox } from '@uiComponents/Input'
 
 export const Login = () => {
   const { isSignInLoading, error } = useAppSelector(usersSelector.user)
@@ -53,7 +52,6 @@ export const Login = () => {
           />
         </div>
         <Button
-          className="mb-7"
           size="fl"
           disabled={isSignInLoading}
           onClick={handleLogin}
@@ -61,11 +59,11 @@ export const Login = () => {
           Log In
         </Button>
         {error ? (
-          <div className="mb-7 w-full">
-            <p className="mt-2.5 text-red">{error}</p>
+          <div className="mt-2.5 w-full">
+            <p className="text-red">{error}</p>
           </div>
         ) : null}
-        <div className="mb-44 w-full">
+        <div className="mb-44 mt-7 w-full">
           <Button
             className="ml-2	font-normal	"
             size="xs"

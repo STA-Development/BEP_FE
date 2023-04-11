@@ -5,8 +5,7 @@ import { OnDivider } from '@components/Divider'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import { Input } from '@uiComponents/Input'
-import InputCheckbox from '@uiComponents/Input/inputCheckbox'
+import { Input, InputCheckbox } from '@uiComponents/Input'
 
 export const Register = () => {
   const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
