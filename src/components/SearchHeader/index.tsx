@@ -49,19 +49,19 @@ export const SearchHeader = () => {
         </div>
 
         <div
-          className={`w-full flex-col py-4 xl:hidden ${active ? `flex` : `hidden`}
+          className={`w-full flex-col py-4 xl:flex xl:flex-row ${active ? `flex` : `hidden`}
            `}
         >
           <div
-            className="flex w-full flex-row border-[.5px]
-                border-gray-700 py-4 px-1"
+            className="flex w-full flex-row border-[.5px] border-gray-700
+                py-4 px-1 xl:w-1/5"
           >
             <p className="flex items-center justify-center pl-4">Specialization</p>
           </div>
 
           <div
             className="flex w-full flex-row border-[.5px]
-                border-gray-700"
+                border-gray-700 xl:w-1/5 xl:items-center xl:justify-center"
           >
             <Autocomplete
               inputClasses="border-none"
@@ -73,7 +73,7 @@ export const SearchHeader = () => {
 
           <div
             className="flex w-full flex-row border-[.5px]
-                border-gray-700"
+                border-gray-700 xl:w-1/5 xl:items-center xl:justify-center"
           >
             <Autocomplete
               inputClasses="border-none"
@@ -84,7 +84,7 @@ export const SearchHeader = () => {
           </div>
           <div
             className="flex w-full flex-row border-[.5px]
-                border-gray-700"
+                border-gray-700 xl:w-1/5 xl:items-center xl:justify-center"
           >
             <Autocomplete
               inputClasses="border-none"
