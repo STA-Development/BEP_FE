@@ -27,7 +27,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     dispatch(setIsAuthenticated(true))
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data.status.message))
   } finally {
     dispatch(setSignInLoading(false))
   }
@@ -39,7 +39,7 @@ const isAuthenticated = () => async (dispatch: AppDispatch) => {
       dispatch(setIsAuthenticated(true))
     }
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data.status.message))
   }
 }
 
@@ -51,7 +51,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
     dispatch(setIsAuthenticated(false))
     dispatch(dispatch(setError(null)))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data.status.message))
   } finally {
     dispatch(setLogoutLoading(false))
   }
@@ -66,10 +66,14 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data.status.message))
   } finally {
     dispatch(setSignUpLoading(false))
   }
+}
+
+const clearError = () => async (dispatch: AppDispatch) => {
+  dispatch(setError(null))
 }
 
 export default {
@@ -78,4 +82,5 @@ export default {
   logOut,
   isAuthenticated,
   register,
+  clearError,
 }

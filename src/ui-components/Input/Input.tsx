@@ -12,7 +12,7 @@ export interface InputType {
   label?: string
   color?: (typeof InputColor)[number]
   rows?: number
-  error?: string
+  error?: string | null
   required?: boolean
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }

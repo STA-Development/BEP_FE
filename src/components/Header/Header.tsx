@@ -26,6 +26,10 @@ export const Header = () => {
     dispatch(usersMiddleware.logOut())
   }
 
+  const handleClearError = () => {
+    dispatch(usersMiddleware.clearError())
+  }
+
   return (
     <Disclosure as="nav">
       {({ open }) => (
@@ -68,6 +72,7 @@ export const Header = () => {
                     <div className="ml-[60px]">
                       <Link href="/login">
                         <Button
+                          onClick={handleClearError}
                           variant="text"
                           color="secondary"
                         >
@@ -78,6 +83,7 @@ export const Header = () => {
                     <div className="ml-[60px]">
                       <Link href="/register">
                         <Button
+                          onClick={handleClearError}
                           color="primary"
                           variant="outlined"
                         >
