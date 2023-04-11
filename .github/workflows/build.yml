@@ -1,5 +1,6 @@
 name: Build
 run-name: ${{ github.workflow }}-${{ github.actor }}
+on:
   push:
     branches:
       - ci_cd
