@@ -1,0 +1,35 @@
+name: Continuous Deployment
+run-name: ${{ github.workflow }}-${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - ci_cd
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run:  pnpm install
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }} >> .env
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Restart server application
+        run: pm2 restart all
