@@ -5,15 +5,22 @@ import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import { Input, InputCheckbox } from '@uiComponents/Input'
+import Link from 'next/link'
+
+import { testEmail } from '@utils/testEmail'
 
 export const Login = () => {
-  const { isSignInLoading, error } = useAppSelector(usersSelector.user)
+  const { isSignInLoading, error, errorContinueWithGoogle } = useAppSelector(usersSelector.user)
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const handleLogin = () => {
     dispatch(usersMiddleware.login({ email, password }))
+  }
+
+  const handleContinueWithGoogle = () => {
+    dispatch(usersMiddleware.continueWithGoogle())
   }
 
   return (
@@ -23,6 +30,7 @@ export const Login = () => {
         <Button
           variant="outlined"
           size="fl"
+          onClick={handleContinueWithGoogle}
         >
           Continue with Google
         </Button>
@@ -32,7 +40,7 @@ export const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="example@email.com"
             type="email"
-            error={error && !email ? 'Email not valid' : null}
+            error={error && (!email || !testEmail(email)) ? 'Email not valid' : null}
           />
         </div>
         <div className="mb-5 w-full">
@@ -58,19 +66,21 @@ export const Login = () => {
         >
           Log In
         </Button>
-        {error ? (
+        {error || errorContinueWithGoogle ? (
           <div className="mt-2.5 w-full">
-            <p className="text-red">{error}</p>
+            <p className="text-red">{error ?? errorContinueWithGoogle}</p>
           </div>
         ) : null}
         <div className="mb-44 mt-7 w-full">
-          <Button
-            className="ml-2	font-normal	"
-            size="xs"
-            variant="text"
-          >
-            Forgot Password?
-          </Button>
+          <Link href="/reset-password">
+            <Button
+              className="ml-2	font-normal	"
+              size="xs"
+              variant="text"
+            >
+              Forgot Password?
+            </Button>
+          </Link>
         </div>
       </div>
     </Container>

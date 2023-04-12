@@ -7,8 +7,10 @@ import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import { Input, InputCheckbox } from '@uiComponents/Input'
 
+import { testEmail } from '@utils/testEmail'
+
 export const Register = () => {
-  const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
+  const { isSignUpLoading, error, errorContinueWithGoogle } = useAppSelector(usersSelector.user)
   const [fullName, setFullName] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -34,6 +36,10 @@ export const Register = () => {
     setConfirmPassword(e.target.value)
   }
 
+  const handleContinueWithGoogle = () => {
+    dispatch(usersMiddleware.continueWithGoogle())
+  }
+
   return (
     <Container className="pt-10">
       <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
@@ -41,6 +47,7 @@ export const Register = () => {
         <Button
           variant="outlined"
           size="fl"
+          onClick={handleContinueWithGoogle}
         >
           Continue with Google
         </Button>
@@ -57,7 +64,7 @@ export const Register = () => {
             onChange={handleChangeEmail}
             placeholder="Email"
             type="email"
-            error={error && !email ? 'Email not valid' : null}
+            error={error && (!email || !testEmail(email)) ? 'Email not valid' : null}
           />
         </div>
         <div className="mb-5 w-full">
@@ -93,7 +100,11 @@ export const Register = () => {
         >
           Create Account
         </Button>
-        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
+        <div className="w-full">
+          {error || errorContinueWithGoogle ? (
+            <p className="mt-2.5 text-red">{error ?? errorContinueWithGoogle}</p>
+          ) : null}
+        </div>
       </div>
     </Container>
   )

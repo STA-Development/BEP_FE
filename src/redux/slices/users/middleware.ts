@@ -7,8 +7,14 @@ import ViewSlice from '../views/slice'
 
 import slice from './slice'
 
-const { setSignInLoading, setIsAuthenticated, setLogoutLoading, setSignUpLoading, setError } =
-  slice.actions
+const {
+  setSignInLoading,
+  setIsAuthenticated,
+  setLogoutLoading,
+  setSignUpLoading,
+  setError,
+  setErrorContinueWithGoogle,
+} = slice.actions
 
 const { setRedirection } = ViewSlice.actions
 
@@ -49,11 +55,22 @@ const logOut = () => async (dispatch: AppDispatch) => {
     localStorage.removeItem('accessToken')
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setIsAuthenticated(false))
-    dispatch(dispatch(setError(null)))
+    dispatch(setError(null))
   } catch (error) {
     dispatch(setError((error as IError).response?.data.status.message))
   } finally {
     dispatch(setLogoutLoading(false))
+  }
+}
+
+const continueWithGoogle = () => async (dispatch: AppDispatch) => {
+  try {
+    await API.auth.continueWithGoogle()
+    dispatch(setErrorContinueWithGoogle(null))
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setErrorContinueWithGoogle((error as IError).response?.data.status.message))
+    dispatch(setError(null))
   }
 }
 
@@ -74,12 +91,14 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
 
 const clearError = () => async (dispatch: AppDispatch) => {
   dispatch(setError(null))
+  dispatch(setErrorContinueWithGoogle(null))
 }
 
 export default {
   setRedirectionState,
   login,
   logOut,
+  continueWithGoogle,
   isAuthenticated,
   register,
   clearError,
