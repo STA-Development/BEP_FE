@@ -104,7 +104,7 @@ export const Input: FC<InputType> = ({
 }
 
 export const InputCheckbox: FC<InputTypeCheckbox> = ({ label, id, onChange }) => (
-  <>
+  <div className="flex items-center">
     <input
       id={id}
       type="checkbox"
@@ -117,5 +117,5 @@ export const InputCheckbox: FC<InputTypeCheckbox> = ({ label, id, onChange }) =>
     >
       {label}
     </label>
-  </>
+  </div>
 )

@@ -87,7 +87,7 @@ export const Register = () => {
             }
           />
         </div>
-        <div className="mb-5 flex w-full items-center">
+        <div className="mb-5 w-full">
           <InputCheckbox
             label="Remember me"
             id="remember-me"
