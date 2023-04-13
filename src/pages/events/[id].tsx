@@ -22,24 +22,19 @@ const IndividualEventPage = () => {
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">
-        <div
-          key={item.id}
-          className="mb-5rounded p-10 xl:mb-10 "
-        >
-          <div>
-            <Image
-              className="xl:float-right xl:ml-30 xl:mb-20"
-              src={item.image}
-              width={500}
-              height={680}
-              alt="picture"
-            />
-            <h2 className="text-xl text-black xl:mt-0 xl:text-2xl">{item.time}</h2>
-            <p className="mt-5 text-lg text-black">{item.title}</p>
-            <p className="mt-5 text-base text-black-light xl:mt-15">{item.info}</p>
-          </div>
-          <p className="mt-11 text-black-light">{item.date}</p>
+        <div>
+          <Image
+            className="mb-5 xl:float-right xl:ml-30"
+            src={item.image}
+            width={500}
+            height={680}
+            alt="picture"
+          />
+          <h2 className="text-xl text-black xl:text-2xl">{item.time}</h2>
+          <p className="mt-5 text-lg text-black">{item.title}</p>
+          <p className="mt-5 text-base text-black-light">{item.info}</p>
         </div>
+        <p className="mt-10 text-black-light xl:mt-20">{item.date}</p>
       </div>
     </Container>
   )
