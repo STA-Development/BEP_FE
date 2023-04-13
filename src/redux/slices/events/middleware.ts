@@ -4,7 +4,7 @@ import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setEventsLoading, setError, setEventsData, setPageSize } = slice.actions
+const { setEventsLoading, setError, setEventsData, setPageSize, setTotalItems } = slice.actions
 
 const events = (currentPage: number) => async (dispatch: AppDispatch) => {
   try {
@@ -16,6 +16,7 @@ const events = (currentPage: number) => async (dispatch: AppDispatch) => {
     dispatch(setEventsData(response.data.data))
     dispatch(setPageSize(response.data.pageSize))
     dispatch(setEventsLoading(false))
+    dispatch(setTotalItems(response.data.totalItems))
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {

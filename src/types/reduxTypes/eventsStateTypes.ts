@@ -7,13 +7,14 @@ export interface IEvents {
   error: string
   eventsData: IEventsDataType[]
   pageSize: number
+  totalItems: number
 }
 
 export interface IEventsDataType {
+  id: string
   hasLongParagraph: boolean
   header: string
   paragraph: string
   imageURL: string
   postedAt: string
-  id?: string
 }

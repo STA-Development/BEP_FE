@@ -20,6 +20,10 @@ const reducers = createReducer({
   setPageSize(state, action: IAction<number>) {
     state.events.pageSize = action.payload
   },
+
+  setTotalItems(state, action: IAction<number>) {
+    state.events.totalItems = action.payload
+  },
 })
 
 export default reducers

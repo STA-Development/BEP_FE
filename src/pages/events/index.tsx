@@ -5,36 +5,51 @@ import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { eventsMiddleware, eventsSelector } from '@redux/slices/events'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
-import Loading from '@uiComponents/Loading'
+import { Loading } from '@uiComponents/Loading'
 import Image from 'next/image'
+
+const PAGE_BOTTOM = 600
 
 const Events = () => {
   const [page, setPage] = useState<number>(1)
-  const { eventsData, pageSize, isEventsLoading } = useAppSelector(eventsSelector.events)
+  const { eventsData, pageSize, isEventsLoading, totalItems } = useAppSelector(
+    eventsSelector.events
+  )
+  const pageCout = totalItems / pageSize
+
+  const handleShowMore = (id: string) => {
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/events/${id}`,
+        params: '',
+        apply: true,
+      })
+    )
+  }
 
   useEffect(() => {
     dispatch(eventsMiddleware.events(page))
   }, [page])
 
-  const onScroll = () => {
-    if (page < pageSize) {
-      const { scrollTop } = document.documentElement
-      const { scrollHeight } = document.documentElement
-      const { clientHeight } = document.documentElement
+  useEffect(() => {
+    const onScroll = () => {
+      if (page < Math.floor(pageCout)) {
+        const { scrollTop } = document.documentElement
+        const { scrollHeight } = document.documentElement
+        const { clientHeight } = document.documentElement
 
-      if (scrollTop + clientHeight + 600 >= scrollHeight) {
-        setPage(page + 1)
+        if (scrollTop + clientHeight + PAGE_BOTTOM >= scrollHeight) {
+          setPage(page + 1)
+        }
       }
     }
-  }
 
-  useEffect(() => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [eventsData])
+  }, [eventsData, page, pageCout])
 
   return (
     <Container className="pb-30">
@@ -52,7 +67,7 @@ const Events = () => {
               <div
                 key={Math.random()}
                 className="border-outline mb-5 flex flex-col rounded p-10
-                xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+                  xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
               >
                 <div className="xl:flex-initial">
                   <Image
@@ -74,12 +89,14 @@ const Events = () => {
                         size="xs"
                         RightIcon={RightIcon}
                         className="hidden xl:flex"
+                        onClick={() => handleShowMore(item.id)}
                       >
                         Read more
                       </Button>
                       <Button
                         size="fl"
                         className="xl:hidden"
+                        onClick={() => handleShowMore(item.id)}
                       >
                         Read more
                       </Button>
