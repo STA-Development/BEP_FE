@@ -85,7 +85,7 @@ const NewsList = () => {
   const redirectToIndividualNews = (id: number) => {
     dispatch(
       viewsMiddleware.setRedirectionState({
-        path: `/news/individual/${id}`,
+        path: `/news/${id}`,
         params: '',
         apply: true,
       })
