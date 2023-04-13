@@ -42,7 +42,7 @@ const Events = () => {
   const handleShowMore = (id: number) => {
     dispatch(
       viewsMiddleware.setRedirectionState({
-        path: `/events/individual/${id}`,
+        path: `/events/${id}`,
         params: '',
         apply: true,
       })
@@ -61,7 +61,7 @@ const Events = () => {
           <div
             key={item.id}
             className="border-outline mb-5 flex flex-col rounded p-10
-                xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+              xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
           >
             <div className="xl:flex-initial">
               <Image
