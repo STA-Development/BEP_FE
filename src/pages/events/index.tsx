@@ -17,7 +17,6 @@ const Events = () => {
   const { eventsData, pageSize, isEventsLoading, totalItems } = useAppSelector(
     eventsSelector.events
   )
-  const pageCout = totalItems / pageSize
 
   const handleShowMore = (id: string) => {
     dispatch(
@@ -35,13 +34,15 @@ const Events = () => {
 
   useEffect(() => {
     const onScroll = () => {
-      if (page < Math.floor(pageCout)) {
+      const pageCount = totalItems / pageSize
+
+      if (page < Math.round(pageCount) && eventsData.length === page * pageSize) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
 
         if (scrollTop + clientHeight + PAGE_BOTTOM >= scrollHeight) {
-          setPage(page + 1)
+          setPage((prev) => prev + 1)
         }
       }
     }
@@ -49,7 +50,7 @@ const Events = () => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [eventsData, page, pageCout])
+  }, [eventsData, page, pageSize, totalItems])
 
   return (
     <Container className="pb-30">

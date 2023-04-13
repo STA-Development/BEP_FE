@@ -12,7 +12,6 @@ const events = (currentPage: number) => async (dispatch: AppDispatch) => {
 
     const response = await API.events.getEvents(currentPage)
 
-    console.log(response, 'response')
     dispatch(setEventsData(response.data.data))
     dispatch(setPageSize(response.data.pageSize))
     dispatch(setEventsLoading(false))
