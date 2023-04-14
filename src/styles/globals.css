@@ -6,4 +6,7 @@
   .border-outline {
     @apply outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
   }
+  .border-outline-active {
+    @apply outline outline-2 outline-primary;
+  }
 }

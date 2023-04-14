@@ -108,7 +108,7 @@ const Home = () => {
               <div className="mb-5 last:mb-0 xl:mb-10">
                 <Disclosure.Button
                   className={`border-outline flex w-full items-center justify-between rounded-lg p-5
-                    xl:px-20 xl:py-10 ${open && 'rounded-b-none outline-2 outline-primary'}`}
+                    xl:px-20 xl:py-10 ${open && 'border-outline-active rounded-b-none'}`}
                 >
                   <div className="flex items-center">
                     <span className="mr-5 w-auto">{help.icon}</span>
@@ -119,7 +119,7 @@ const Home = () => {
                   </div>
                 </Disclosure.Button>
                 <Disclosure.Panel
-                  className="relative -m-0.5 rounded-b-lg border border-2 border-t-0 border-primary bg-white
+                  className="relative -m-0.5 rounded-b-lg border-2 border-t-0 border-primary bg-white
                     px-6 pb-10 outline-gray-thin xl:px-20"
                 >
                   <div className="mb-10">
