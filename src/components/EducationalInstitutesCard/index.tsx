@@ -5,7 +5,7 @@ import { PhoneIcon } from '@components/Icons/PhoneIcon'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
-export const IndividualPage = () => (
+export const EducationalInstitutesCard = () => (
   <div
     className="my-8 flex w-3/4 flex-col flex-wrap items-center justify-center
        overflow-hidden border-2 border-[#EAF0F3] hover:border-[#326789] xl:flex-row"
@@ -41,7 +41,7 @@ export const IndividualPage = () => (
         +374 94 574 984
       </div>
       <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">
-        <MailIcon />
+        <MailIcon className="mt-2" />
         <p>metal.factory@gmail.com</p>
       </div>
       <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">

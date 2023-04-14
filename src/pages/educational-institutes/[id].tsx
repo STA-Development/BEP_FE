@@ -1,24 +1,20 @@
 import React from 'react'
-import IndividualPage1 from '@components/IndividualPage1'
+import { EducationalInstitutesSingle } from '@components/EducationalInstitutesSingle'
 import { useRouter } from 'next/router'
 
 const EducationalInstitutePage = () => {
   const router = useRouter()
   const { id } = router.query
 
-  if (typeof id === 'undefined') {
-    // Handle the case where the id is undefined
-    return <div>Id is undefined</div>
-  }
+  const idString = Array.isArray(id) ? id[0].toString() : id?.toString()
 
-  const idString = Array.isArray(id) ? id[0] : id // Convert id to a string
-
-  return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <div className="mt-4 flex w-3/4 flex-col items-center justify-center">
-        <IndividualPage1
-          id={idString}
-          description="Lorem ipsum dolor sit amet consectetur. Placerat etiam aliquam aliquam non elit tempor
+  if (idString) {
+    return (
+      <div className="flex w-full flex-col items-center justify-center">
+        <div className="mt-4 flex w-3/4 flex-col items-center justify-center">
+          <EducationalInstitutesSingle
+            id={idString}
+            description="Lorem ipsum dolor sit amet consectetur. Placerat etiam aliquam aliquam non elit tempor
         facilisis id. Id nam mauris amet volutpat. Mauris faucibus morbi dignissim elit. Purus
         pharetra accumsan suspendisse pellentesque fringilla euismod ut. Blandit lorem vitae urna
         quis tincidunt aenean ornare magna vulputate. Risus justo consectetur sem cursus dolor urna
@@ -44,10 +40,13 @@ const EducationalInstitutePage = () => {
         Vulputate dignissim nisi nisi nunc vitae. Non pretium nec orci imperdiet et ultrices a
         volutpat. Lacus tristique donec sem eget ullamcorper sed. Ullamcorper ultricies semper
         vestibulum nibh est et. Enim ligula ipsum amet."
-        />
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+
+  return <div>Id is undefined</div>
 }
 
 export default EducationalInstitutePage

@@ -10,11 +10,11 @@ import { IndividualCarousel } from '@components/IndividualCarousel'
 import { PageHeader } from '@components/PageHeader'
 import { Button } from '@uiComponents/Button'
 
-interface IndividualPageProps {
+interface IIndividualPageProps {
   id: string
   description: string
 }
-export const IndividualPage1 = ({ id, description }: IndividualPageProps) => (
+export const EducationalInstitutesSingle = ({ id, description }: IIndividualPageProps) => (
   <div className="flex w-full flex-col items-center justify-center">
     <div className="mb-8 flex w-full flex-row">
       <PageHeader
@@ -109,4 +109,4 @@ export const IndividualPage1 = ({ id, description }: IndividualPageProps) => (
   </div>
 )
 
-export default IndividualPage1
+export default EducationalInstitutesSingle
