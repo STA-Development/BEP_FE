@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Container } from '@components/Container'
-import HeaderUser from '@components/Header/HeaderUser'
+import { User } from '@components/Header/User'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -12,7 +12,7 @@ const navigation = [
   { name: 'Home', href: '/', current: false },
   { name: 'About Us', href: '/about-us', current: false },
   { name: 'Contact Us', href: '/contact-us', current: false },
-  { name: 'News', href: '/news', current: false },
+  { name: 'Educational Institutes', href: '/educational-institutes', current: false },
 ]
 
 export const Header = () => {
@@ -62,7 +62,7 @@ export const Header = () => {
               </div>
               <div className="sm:static sm:inset-auto sm:ml-6 sm:pr-0 absolute inset-y-0 right-0 hidden items-center xl:flex">
                 {isAuthenticated ? (
-                  <HeaderUser handleLogOut={handleLogOut} />
+                  <User handleLogOut={handleLogOut} />
                 ) : (
                   <>
                     <div className="ml-[60px]">
