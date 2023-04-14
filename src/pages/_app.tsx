@@ -9,6 +9,8 @@ import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
 
+import '@utils/i18n'
+
 import '@styles/globals.css'
 
 const roboto = Roboto({
