@@ -8,8 +8,8 @@ const reducers = createReducer({
   setError(state, action: IAction<string | null>) {
     state.user.error = action.payload
   },
-  setErrorContinueWithGoogle(state, action: IAction<string | null>) {
-    state.user.errorContinueWithGoogle = action.payload
+  setErrorGoogleSignIn(state, action: IAction<string | null>) {
+    state.user.errorGoogleSignIn = action.payload
   },
   setSignUpLoading(state, action: IAction<boolean>) {
     state.user.isSignUpLoading = action.payload

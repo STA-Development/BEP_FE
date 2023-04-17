@@ -10,5 +10,5 @@ export interface IUser {
   isLogOutLoading: boolean
   isAuthenticated: boolean
   error: string | null
-  errorContinueWithGoogle: string | null
+  errorGoogleSignIn: string | null
 }

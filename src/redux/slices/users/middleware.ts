@@ -13,7 +13,7 @@ const {
   setLogoutLoading,
   setSignUpLoading,
   setError,
-  setErrorContinueWithGoogle,
+  setErrorGoogleSignIn,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -63,13 +63,13 @@ const logOut = () => async (dispatch: AppDispatch) => {
   }
 }
 
-const continueWithGoogle = () => async (dispatch: AppDispatch) => {
+const googleSignIn = () => async (dispatch: AppDispatch) => {
   try {
-    await API.auth.continueWithGoogle()
-    dispatch(setErrorContinueWithGoogle(null))
+    await API.auth.googleSignIn()
+    dispatch(setErrorGoogleSignIn(null))
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setErrorContinueWithGoogle((error as IError).response?.data.status.message))
+    dispatch(setErrorGoogleSignIn((error as IError).response?.data.status.message))
     dispatch(setError(null))
   }
 }
@@ -91,14 +91,14 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
 
 const clearError = () => async (dispatch: AppDispatch) => {
   dispatch(setError(null))
-  dispatch(setErrorContinueWithGoogle(null))
+  dispatch(setErrorGoogleSignIn(null))
 }
 
 export default {
   setRedirectionState,
   login,
   logOut,
-  continueWithGoogle,
+  googleSignIn,
   isAuthenticated,
   register,
   clearError,

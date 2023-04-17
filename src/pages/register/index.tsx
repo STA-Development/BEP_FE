@@ -1,110 +1,140 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import { UserTypes } from '@allTypes/user'
+import { IRegisterData } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import { Input, InputCheckbox } from '@uiComponents/Input'
 
-import { testEmail } from '@utils/testEmail'
+import { registerValidationSchema } from '../../validation/auth/register'
 
 export const Register = () => {
-  const { isSignUpLoading, error, errorContinueWithGoogle } = useAppSelector(usersSelector.user)
-  const [fullName, setFullName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const { isSignUpLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
-  const handleRegister = () => {
-    dispatch(usersMiddleware.register({ email, role: UserTypes.JOBSEEKER, password }))
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      remember: false,
+    },
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(registerValidationSchema),
+  })
+
+  const onSubmit = (data: IRegisterData) => {
+    dispatch(
+      usersMiddleware.register({
+        email: data.email,
+        role: UserTypes.JOBSEEKER,
+        password: data.password,
+      })
+    )
   }
 
-  const handleChangeFullName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value)
-  }
-
-  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
-
-  const handleChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value)
-  }
-
-  const handleContinueWithGoogle = () => {
-    dispatch(usersMiddleware.continueWithGoogle())
+  const handleGoogleSignIn = () => {
+    dispatch(usersMiddleware.googleSignIn())
   }
 
   return (
     <Container className="pt-10">
       <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
-        <h1 className="mb-5 text-xl">Create an account</h1>
-        <Button
-          variant="outlined"
-          size="fl"
-          onClick={handleContinueWithGoogle}
-        >
-          Continue with Google
-        </Button>
-        <OnDivider />
-        <div className="mb-5 w-full">
-          <Input
-            onChange={handleChangeFullName}
-            placeholder="Full Name"
-            error={error && !fullName ? 'Full Name not valid' : null}
-          />
-        </div>
-        <div className="mb-5 w-full">
-          <Input
-            onChange={handleChangeEmail}
-            placeholder="Email"
-            type="email"
-            error={error && (!email || !testEmail(email)) ? 'Email not valid' : null}
-          />
-        </div>
-        <div className="mb-5 w-full">
-          <Input
-            onChange={handleChangePassword}
-            placeholder="Password"
-            type="password"
-            error={error && !password ? 'Password not valid' : null}
-          />
-        </div>
-        <div className="mb-5 w-full">
-          <Input
-            onChange={handleChangeConfirmPassword}
-            placeholder="Confirm Password"
-            type="password"
-            error={
-              error && (!confirmPassword || confirmPassword !== password)
-                ? 'Passwords do not match'
-                : null
-            }
-          />
-        </div>
-        <div className="mb-5 w-full">
-          <InputCheckbox
-            label="Remember me"
-            id="remember-me"
-          />
-        </div>
-        <Button
-          disabled={isSignUpLoading}
-          size="fl"
-          onClick={handleRegister}
-        >
-          Create Account
-        </Button>
-        <div className="w-full">
-          {error || errorContinueWithGoogle ? (
-            <p className="mt-2.5 text-red">{error ?? errorContinueWithGoogle}</p>
-          ) : null}
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="mb-5 text-xl">Create an account</h1>
+          <Button
+            variant="outlined"
+            size="fl"
+            onClick={handleGoogleSignIn}
+          >
+            Continue with Google
+          </Button>
+          <OnDivider />
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              name="name"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Full Name"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              name="email"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="example@email.com"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              name="password"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Password"
+                  type="password"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              name="passwordConfirmation"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Password"
+                  type="password"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <InputCheckbox
+                  {...field}
+                  label="Remember me"
+                  id="remember-me"
+                />
+              )}
+              name="remember"
+            />
+          </div>
+          <Button
+            disabled={isSignUpLoading}
+            size="fl"
+            type="submit"
+          >
+            Create Account
+          </Button>
+          <div className="w-full">
+            {error || errorGoogleSignIn ? (
+              <p className="mt-2.5 text-red">{error ?? errorGoogleSignIn}</p>
+            ) : null}
+          </div>
+        </form>
       </div>
     </Container>
   )

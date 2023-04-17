@@ -1,10 +1,8 @@
 import React from 'react'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Controller, useForm } from 'react-hook-form'
 import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -15,14 +13,14 @@ import Link from 'next/link'
 import { loginValidationSchema } from '../../validation/auth/login'
 
 export const Login = () => {
-  const { isSignInLoading, error, errorContinueWithGoogle } = useAppSelector(usersSelector.user)
+  const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
   const onSubmit = (data: ISignInParams) => {
     dispatch(usersMiddleware.login(data))
   }
 
   const onGoogleAuth = () => {
-    dispatch(usersMiddleware.continueWithGoogle())
+    dispatch(usersMiddleware.googleSignIn())
   }
 
   const { handleSubmit, control } = useForm({
@@ -98,9 +96,9 @@ export const Login = () => {
           >
             Log In
           </Button>
-          {error || errorContinueWithGoogle ? (
+          {error || errorGoogleSignIn ? (
             <div className="mt-2.5 w-full">
-              <p className="text-red">{error ?? errorContinueWithGoogle}</p>
+              <p className="text-red">{error ?? errorGoogleSignIn}</p>
             </div>
           ) : null}
           <div className="mb-44 mt-7 w-full">
