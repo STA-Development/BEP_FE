@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import HeaderUser from '@components/Header/HeaderUser'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
+import LanguageSelector from '@components/LanguageSelector'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -65,7 +66,7 @@ export const Header = () => {
                       {item.name}
                     </Link>
                   ))}
-                  {/* <LanguageSelector /> */}
+                  <LanguageSelector />
                 </div>
               </div>
               <div className="sm:static sm:inset-auto sm:ml-6 sm:pr-0 absolute inset-y-0 right-0 hidden items-center xl:flex">
