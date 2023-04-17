@@ -65,6 +65,7 @@ export const Header = () => {
                       {item.name}
                     </Link>
                   ))}
+                  {/* <LanguageSelector /> */}
                 </div>
               </div>
               <div className="sm:static sm:inset-auto sm:ml-6 sm:pr-0 absolute inset-y-0 right-0 hidden items-center xl:flex">

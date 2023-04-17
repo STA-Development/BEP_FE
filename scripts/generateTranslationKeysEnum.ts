@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-ignore - this is a script, not a module
 // @ts-nocheck
+import store from '@redux/store'
+
 const shell = require('shelljs')
 const fs = require('fs')
 
-const jsonPath = './src/assets/localization/ru.json'
+const selectedLanguage = store.getState().users.user.language
+const jsonPath = `./src/assets/localization/${selectedLanguage}.json`
 const translationsFile = fs.readFileSync(jsonPath)
 const translations = JSON.parse(translationsFile)
 

@@ -7,8 +7,15 @@ import ViewSlice from '../views/slice'
 
 import slice from './slice'
 
-const { setSignInLoading, setIsAuthenticated, setLogoutLoading, setSignUpLoading, setError } =
-  slice.actions
+const {
+  setSignInLoading,
+  setIsAuthenticated,
+  setLogoutLoading,
+  setSignUpLoading,
+  setError,
+  setLanguage,
+  setLanguageChangeLoading,
+} = slice.actions
 
 const { setRedirection } = ViewSlice.actions
 
@@ -72,10 +79,24 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
   }
 }
 
+const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setLanguageChangeLoading(true))
+    dispatch(setLanguage(lng))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response.data.status.message))
+  } finally {
+    dispatch(setLanguageChangeLoading(false))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
   logOut,
   isAuthenticated,
   register,
+  changeLanguage,
 }

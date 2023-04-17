@@ -9,5 +9,7 @@ export const getInitialState = (): IUserProps => ({
     fullName: '',
     isAuthenticated: false,
     email: '',
+    language: 'hy',
+    isLanguageChangeLoading: false,
   },
 })
