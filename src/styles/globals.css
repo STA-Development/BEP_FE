@@ -4,9 +4,20 @@
 
 @layer utilities {
   .border-outline {
-    @apply outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
+    @apply m-px outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
   }
   .border-outline-active {
     @apply outline outline-2 outline-primary;
   }
+}
+
+.wave {
+  background-size: 50% 100%;
+  bottom: -5%;
+  height: calc(12 * 1vh);
+  left: 0;
+  opacity: 1;
+  position: absolute;
+  right: 0;
+  width: 100vw;
 }

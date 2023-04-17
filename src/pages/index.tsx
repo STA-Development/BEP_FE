@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container } from '@components/Container'
 import {
-  AgreementIcon,
   BuildingBankIcon,
   BuildingBankToolboxIcon,
   ChevronIcon,
@@ -61,8 +60,8 @@ const Home = () => {
       />
       <Introduction
         className="mb-px"
-        color="secondary"
-        img={<AgreementIcon />}
+        color="wave"
+        wave
         title="What is BEP?"
         desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
           at supporting the sustainable development and enhancement of the Armenian education system

@@ -1,10 +1,12 @@
 import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Container } from '@components/Container'
+import { Wave } from '@components/Icons/Wave'
 
-const ContentColor = ['primary', 'secondary'] as const
+const ContentColor = ['primary', 'secondary', 'wave'] as const
 
 export interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
-  img: ReactNode
+  wave?: boolean
+  img?: ReactNode
   title: string
   desc: string
   button?: ReactNode
@@ -12,6 +14,7 @@ export interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 export const Introduction = ({
+  wave = false,
   color,
   className,
   img,
@@ -19,19 +22,30 @@ export const Introduction = ({
   desc,
   button,
 }: IIntroductionProps) => (
-  <Container
-    color={color}
-    className={className}
-  >
-    <div className="flex flex-col gap-0 py-20 xl:flex-row xl:gap-20 xl:pt-25">
-      <div className="col-span-2">
-        <h2 className="mb-2.5 text-xl font-medium xl:mb-5 xl:text-2xl">{title}</h2>
-        <p className="mb-10 text-base text-black-light">{desc}</p>
-        {button}
+  <>
+    {wave ? (
+      <div className="max-h-[213px] overflow-hidden bg-gray-wave">
+        <Container>
+          <div className="bg-white">
+            <Wave className="w-full" />
+          </div>
+        </Container>
       </div>
-      <div className="order-first mb-10 flex justify-center xl:order-last xl:mb-0 xl:justify-end">
-        {img}
+    ) : null}
+    <Container
+      color={color}
+      className={className}
+    >
+      <div className={`flex flex-col gap-0 py-20 xl:flex-row xl:gap-20 ${wave && 'xl:pt-0'}`}>
+        <div className="col-span-2">
+          <h2 className="mb-2.5 text-xl font-medium xl:mb-5 xl:text-2xl">{title}</h2>
+          <p className="mb-10 text-base text-black-light">{desc}</p>
+          {button}
+        </div>
+        <div className="order-first mb-10 flex justify-center xl:order-last xl:mb-0 xl:justify-end">
+          {img}
+        </div>
       </div>
-    </div>
-  </Container>
+    </Container>
+  </>
 )
