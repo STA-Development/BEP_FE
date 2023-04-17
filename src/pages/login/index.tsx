@@ -91,7 +91,6 @@ export const Login = () => {
           <Button
             size="fl"
             disabled={isSignInLoading}
-            // onClick={handleLogin}
             type="submit"
           >
             Log In
