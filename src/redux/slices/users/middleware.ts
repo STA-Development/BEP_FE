@@ -2,6 +2,7 @@ import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
 import { IError, ISignInParams, ISignUpParams } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
+import i18n from 'i18next'
 
 import ViewSlice from '../views/slice'
 
@@ -30,6 +31,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     const response = await API.auth.signIn(params)
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
+
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
     dispatch(setError(null))
@@ -83,6 +85,9 @@ const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setLanguageChangeLoading(true))
     dispatch(setLanguage(lng))
+
+    i18n.changeLanguage(lng)
+    localStorage.setItem('language', lng)
 
     dispatch(setError(null))
   } catch (error) {

@@ -1,9 +1,11 @@
 /* eslint-disable react/no-unknown-property */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
+import { dispatch } from '@redux/hooks'
+import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
 import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
@@ -28,6 +30,14 @@ interface IAppProps {
 
 const App = ({ Component, pageProps }: IAppProps) => {
   const HierarchicalLayout = Layouts[Component.Layout]
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('language')
+
+    if (data !== null) {
+      dispatch(usersMiddleware.changeLanguage(data))
+    }
+  }, [])
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import IconProps from '@allTypes/svg-icon'
+import { DownIcon } from '@components/Icons/DownIcon'
 import { ArmIcon } from '@components/Icons/lang/ArmIcon'
 import { EnIcon } from '@components/Icons/lang/EnIcon'
 import { RuIcon } from '@components/Icons/lang/RuIcon'
@@ -8,7 +9,7 @@ import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
-interface ISelectedLanguageType {
+interface ISelectedLanguageProps {
   id: number
   language: string
   value: string
@@ -31,14 +32,15 @@ const languageList = [
   {
     id: 3,
     icon: ArmIcon,
-
     language: 'Armenian',
     value: 'arm',
   },
 ]
 
 export const LanguageSelector = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<ISelectedLanguageType>()
+  const [selectedLanguage, setSelectedLanguage] = useState<ISelectedLanguageProps>()
+  const [open, setOpen] = useState<boolean>(false)
+  const localLang = typeof window !== 'undefined' ? window.localStorage.getItem('language') : 'en'
   const { language } = useAppSelector(usersSelector.user)
 
   const onSetLanguage = (value: string) => {
@@ -47,13 +49,13 @@ export const LanguageSelector = () => {
 
   useEffect(() => {
     if (language) {
-      const setLanguage: ISelectedLanguageType[] = languageList.filter(
-        (item) => language === item.value
+      const setLanguage: ISelectedLanguageProps[] = languageList.filter(
+        (item) => localLang === item.value
       )
 
       setSelectedLanguage(setLanguage[0])
     }
-  }, [language])
+  }, [language, localLang])
 
   return (
     <Menu
@@ -61,22 +63,26 @@ export const LanguageSelector = () => {
       className="relative"
     >
       <div>
-        <Menu.Button className="inline-flex w-full items-center px-4 py-2 text-base font-medium text-white">
+        <Menu.Button
+          className="inline-flex w-full items-center px-4 py-2 text-base text-white"
+          onClick={() => setOpen(!open)}
+        >
           Language:
           <span className="ml-5"> {selectedLanguage && <selectedLanguage.icon />}</span>
+          <div className="ml-3">{open ? <DownIcon className="rotate-180" /> : <DownIcon />}</div>
         </Menu.Button>
       </div>
-      <Menu.Items className="right-1xss absolute left-1 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <Menu.Items className="absolute left-1 right-1 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-b-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="space-y-1 px-1 py-1">
           {languageList.map((item) => (
-            <Menu.Item>
+            <Menu.Item key={item.id}>
               <Button
                 variant="flat"
                 size="fl"
                 LeftIcon={item.icon}
                 onClick={() => onSetLanguage(item.value)}
               >
-                <p>{item.language}</p>
+                <p className="text-base">{item.language}</p>
               </Button>
             </Menu.Item>
           ))}
