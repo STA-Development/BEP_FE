@@ -26,20 +26,19 @@ const languageList = [
   {
     id: 2,
     icon: RuIcon,
-    language: 'Русский',
+    language: 'Russian',
     value: 'ru',
   },
   {
     id: 3,
     icon: ArmIcon,
-    language: 'Հայերեն',
+    language: 'Armenian',
     value: 'arm',
   },
 ]
 
 export const LanguageSelector = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<ISelectedLanguageProps>()
-  const [open, setOpen] = useState<boolean>(false)
   const localLang = typeof window !== 'undefined' ? window.localStorage.getItem('language') : 'en'
   const { language } = useAppSelector(usersSelector.user)
 
@@ -62,32 +61,31 @@ export const LanguageSelector = () => {
       as="div"
       className="relative"
     >
-      <div>
-        <Menu.Button
-          className="inline-flex w-full items-center px-4 py-2 text-base text-white"
-          onClick={() => setOpen(!open)}
-        >
-          Language:
-          <span className="ml-5"> {selectedLanguage && <selectedLanguage.icon />}</span>
-          <div className="ml-3">{open ? <DownIcon className="rotate-180" /> : <DownIcon />}</div>
-        </Menu.Button>
-      </div>
-      <Menu.Items className="absolute left-1 right-1 mt-2 origin-top-right divide-y divide-gray-100 rounded-b-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-        <div className="space-y-1 px-1 py-1">
-          {languageList.map((item) => (
-            <Menu.Item key={item.id}>
-              <Button
-                variant="flat"
-                size="fl"
-                LeftIcon={item.icon}
-                onClick={() => onSetLanguage(item.value)}
-              >
-                <p className="text-base">{item.language}</p>
-              </Button>
-            </Menu.Item>
-          ))}
-        </div>
-      </Menu.Items>
+      {({ open }) => (
+        <>
+          <Menu.Button className="inline-flex w-full items-center px-4 py-2 text-base text-white">
+            Language:
+            <span className="ml-5"> {selectedLanguage && <selectedLanguage.icon />}</span>
+            <div className="ml-3">{open ? <DownIcon className="rotate-180" /> : <DownIcon />}</div>
+          </Menu.Button>
+          <Menu.Items className="absolute left-1 right-1 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-b-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="space-y-1 px-1 py-1">
+              {languageList.map((item) => (
+                <Menu.Item key={item.id}>
+                  <Button
+                    variant="flat"
+                    size="fl"
+                    LeftIcon={item.icon}
+                    onClick={() => onSetLanguage(item.value)}
+                  >
+                    <p className="text-base">{item.language}</p>
+                  </Button>
+                </Menu.Item>
+              ))}
+            </div>
+          </Menu.Items>
+        </>
+      )}
     </Menu>
   )
 }
