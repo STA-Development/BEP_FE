@@ -29,7 +29,7 @@ const Events = () => {
   }
 
   useEffect(() => {
-    dispatch(eventsMiddleware.events(page))
+    dispatch(eventsMiddleware.fetchEventsList(page))
   }, [page])
 
   useEffect(() => {

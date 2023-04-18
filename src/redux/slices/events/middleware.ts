@@ -6,7 +6,7 @@ import slice from './slice'
 
 const { setEventsLoading, setError, setEventsList, setPageSize, setTotalItems } = slice.actions
 
-const events = (page: number) => async (dispatch: AppDispatch) => {
+const fetchEventsList = (page: number) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setEventsLoading(true))
 
@@ -32,5 +32,5 @@ const events = (page: number) => async (dispatch: AppDispatch) => {
 }
 
 export default {
-  events,
+  fetchEventsList,
 }
