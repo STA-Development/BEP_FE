@@ -75,6 +75,7 @@ const Events = () => {
                     src={item.imageURL}
                     width={500}
                     height={320}
+                    loader={() => item?.imageURL ?? ''}
                     alt="picture"
                     className="h-[320px] w-[500px] object-cover"
                   />

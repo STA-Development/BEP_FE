@@ -1,6 +1,10 @@
-import { IEventsListProps, IEventsParams } from '@allTypes/reduxTypes/eventsStateTypes'
+import {
+  IEventsListProps,
+  IEventsParams,
+  IIndividualEventsProps,
+} from '@allTypes/reduxTypes/eventsStateTypes'
 import { Axios } from '@axios/axiosInstance'
-import { IAxiosResponsePaginated } from '@axios/axiosTypes'
+import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 
 const baseURL = 'event'
 
@@ -13,6 +17,12 @@ const eventsManager = {
       {
         params,
       }
+    )
+  },
+
+  getIndividualEvents(id: string) {
+    return axiosInstance.get<IIndividualEventsProps, IAxiosResponse<IIndividualEventsProps>>(
+      `${baseURL}/${id}`
     )
   },
 }

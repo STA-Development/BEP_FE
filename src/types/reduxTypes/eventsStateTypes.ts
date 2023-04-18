@@ -4,8 +4,10 @@ export interface IEventsProps {
 
 export interface IEventsList {
   isEventsLoading: boolean
-  error: string | null
+  isIndividualEventsLoading: boolean
+  error: null | string
   eventsList: IEventsListProps[]
+  individualEvents: IIndividualEventsProps | null
   pageSize: number
   totalItems: number
 }
@@ -21,4 +23,12 @@ export interface IEventsListProps {
 
 export interface IEventsParams {
   page: number
+}
+
+export interface IIndividualEventsProps {
+  uuid: string
+  header: string
+  paragraph: string
+  imageURL: string
+  postedAt: string
 }

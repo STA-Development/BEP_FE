@@ -1,11 +1,15 @@
-import { IEventsListProps, IEventsProps } from '@allTypes/reduxTypes/eventsStateTypes'
+import {
+  IEventsListProps,
+  IEventsProps,
+  IIndividualEventsProps,
+} from '@allTypes/reduxTypes/eventsStateTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
 const createReducer = <T extends SliceCaseReducers<IEventsProps>>(reducer: T) => ({ ...reducer })
 
 const reducers = createReducer({
-  setError(state, action: IAction<string>) {
+  setError(state, action: IAction<null | string>) {
     state.events.error = action.payload
   },
 
@@ -23,6 +27,12 @@ const reducers = createReducer({
 
   setTotalItems(state, action: IAction<number>) {
     state.events.totalItems = action.payload
+  },
+  setIndividualEvents(state, action: IAction<IIndividualEventsProps>) {
+    state.events.individualEvents = action.payload
+  },
+  setIndividualEventsLoading(state, action: IAction<boolean>) {
+    state.events.isIndividualEventsLoading = action.payload
   },
 })
 
