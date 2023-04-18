@@ -27,17 +27,19 @@ const IndividualNewsPage = () => {
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">
-        <div>
+        <div className="justify-between xl:flex">
           <Image
-            className="xl:float-right xl:ml-30 xl:mb-20"
+            className="order-last xl:mb-20 xl:ml-30"
             src={individualNews?.imageURL as string}
             loader={() => individualNews?.imageURL ?? ''}
             width={500}
             height={680}
             alt="picture"
           />
-          <p className="mt-5 text-lg text-black">{individualNews?.header}</p>
-          <p className="mt-5 text-base text-black-light xl:mt-15">{individualNews?.paragraph}</p>
+          <div>
+            <p className="mt-5 text-lg text-black">{individualNews?.header}</p>
+            <p className="mt-5 text-base text-black-light xl:mt-15">{individualNews?.paragraph}</p>
+          </div>
         </div>
         <p className="mt-10 text-black-light xl:mt-20">{individualNews?.postedAt}</p>
       </div>
