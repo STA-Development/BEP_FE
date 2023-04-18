@@ -26,13 +26,13 @@ const languageList = [
   {
     id: 2,
     icon: RuIcon,
-    language: 'Russian',
+    language: 'Русский',
     value: 'ru',
   },
   {
     id: 3,
     icon: ArmIcon,
-    language: 'Armenian',
+    language: 'Հայերեն',
     value: 'arm',
   },
 ]
