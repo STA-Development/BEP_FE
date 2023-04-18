@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IEventsDataProps } from '@allTypes/reduxTypes/eventsStateTypes'
+import { IEventsListProps } from '@allTypes/reduxTypes/eventsStateTypes'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
@@ -14,7 +14,7 @@ const PAGE_BOTTOM = 600
 
 const Events = () => {
   const [page, setPage] = useState<number>(1)
-  const { eventsData, pageSize, isEventsLoading, totalItems } = useAppSelector(
+  const { eventsList, pageSize, isEventsLoading, totalItems } = useAppSelector(
     eventsSelector.events
   )
 
@@ -36,7 +36,7 @@ const Events = () => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 
-      if (page < Math.round(pageCount) && eventsData.length === page * pageSize) {
+      if (page < Math.round(pageCount) && eventsList.length === page * pageSize) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
@@ -50,7 +50,7 @@ const Events = () => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [eventsData, page, pageSize, totalItems])
+  }, [eventsList, page, pageSize, totalItems])
 
   return (
     <Container className="pb-30">
@@ -60,11 +60,11 @@ const Events = () => {
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">
-        {isEventsLoading && !eventsData.length ? (
+        {isEventsLoading && !eventsList.length ? (
           <Loading />
         ) : (
           <div>
-            {eventsData?.map((item: IEventsDataProps) => (
+            {eventsList?.map((item: IEventsListProps) => (
               <div
                 key={item.uuid}
                 className="border-outline mb-5 flex flex-col rounded p-10

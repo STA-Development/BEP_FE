@@ -1,4 +1,4 @@
-import { IEventsDataProps, IEventsProps } from '@allTypes/reduxTypes/eventsStateTypes'
+import { IEventsListProps, IEventsProps } from '@allTypes/reduxTypes/eventsStateTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -13,8 +13,8 @@ const reducers = createReducer({
     state.events.isEventsLoading = action.payload
   },
 
-  setEventsData(state, action: IAction<IEventsDataProps[]>) {
-    state.events.eventsData = action.payload
+  setEventsList(state, action: IAction<IEventsListProps[]>) {
+    state.events.eventsList = action.payload
   },
 
   setPageSize(state, action: IAction<number>) {

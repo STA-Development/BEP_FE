@@ -1,16 +1,16 @@
 export interface IEventsProps {
-  events: IEvents
+  events: IEventsList
 }
 
-export interface IEvents {
+export interface IEventsList {
   isEventsLoading: boolean
   error: string | null
-  eventsData: IEventsDataProps[]
+  eventsList: IEventsListProps[]
   pageSize: number
   totalItems: number
 }
 
-export interface IEventsDataProps {
+export interface IEventsListProps {
   uuid: string
   hasLongParagraph: boolean
   header: string
