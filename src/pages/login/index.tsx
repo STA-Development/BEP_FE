@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
+import { GoogleIcon } from '@components/Icons/GoogleIcon'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -36,14 +37,18 @@ export const Login = () => {
   return (
     <Container className="pt-10">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mx-auto flex w-[350px] flex-col items-center xl:w-[380px]">
+        <div className="mx-auto flex w-[380px] flex-col items-center">
           <h1 className="mb-5 text-xl">Log In</h1>
           <Button
             variant="outlined"
             size="fl"
+            className="border-light-blue text-black"
             onClick={onGoogleAuth}
           >
-            Continue with Google
+            <div className="mr-5">
+              <GoogleIcon className="group-hover:fill-white" />
+            </div>
+            <div>Sign in with Google</div>
           </Button>
           <OnDivider />
           <div className="mb-5 w-full">
@@ -103,7 +108,7 @@ export const Login = () => {
           <div className="mb-44 mt-7 w-full">
             <Link href="/reset-password">
               <Button
-                className="ml-2	font-normal	"
+                className="ml-2	font-normal"
                 size="xs"
                 variant="text"
               >

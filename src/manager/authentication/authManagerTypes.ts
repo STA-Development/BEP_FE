@@ -20,7 +20,6 @@ export interface IError {
 }
 
 export interface ISignUpParams {
-  role: string
   password: string
   email: string
 }
