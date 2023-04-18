@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
@@ -38,7 +40,13 @@ const Events = () => {
   const [showModeId, setShowModeId] = useState<number | null>()
 
   const handleShowMore = (id: number) => {
-    setShowModeId(id)
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/events/${id}`,
+        params: '',
+        apply: true,
+      })
+    )
   }
 
   return (
@@ -53,7 +61,7 @@ const Events = () => {
           <div
             key={item.id}
             className="border-outline mb-5 flex flex-col rounded p-10
-                xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+              xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
           >
             <div className="xl:flex-initial">
               <Image
