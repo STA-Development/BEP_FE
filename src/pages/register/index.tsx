@@ -44,8 +44,11 @@ export const Register = () => {
 
   return (
     <Container className="pt-10">
-      <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mx-auto flex w-[350px] flex-col items-center pb-28 xl:w-[380px]">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full text-center"
+        >
           <h1 className="mb-5 text-xl">Create an account</h1>
           <Button
             variant="outlined"
@@ -102,7 +105,7 @@ export const Register = () => {
               render={({ field, fieldState }) => (
                 <Input
                   {...field}
-                  placeholder="Password"
+                  placeholder="Confirm Password"
                   type="password"
                   error={fieldState.error ? fieldState.error.message : null}
                 />

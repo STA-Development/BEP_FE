@@ -36,7 +36,7 @@ export const Login = () => {
   return (
     <Container className="pt-10">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mx-auto flex w-[380px] flex-col items-center">
+        <div className="mx-auto flex w-[350px] flex-col items-center xl:w-[380px]">
           <h1 className="mb-5 text-xl">Log In</h1>
           <Button
             variant="outlined"
