@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from '@components/Container'
 import { PageHeader } from '@components/PageHeader'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { eventsMiddleware, eventsSelector } from '@redux/slices/events'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const IndividualEventPage = () => {
-  const item = {
-    id: 2,
-    title: 'Visit Of The Training Center Of The Chamber',
-    info: 'Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse.Lorem ipsum dolor sit amet consectetur. Tincidunt nisi pretium congue tristique egestas tincidunt. Morbi lobortis purus risus turpis tempus eu. Montes sit mattis urna faucibus habitasse. Morbi lobortis purus risus turpis.',
-    time: '31.01.2022',
-    image: '/image1.jpg',
-    isButtonVisible: false,
-    date: '22.01.2022',
-  }
+  const router = useRouter()
+  const eventsId = router.query.id
+
+  const singleEvent = useAppSelector(eventsSelector.singleEvent)
+
+  useEffect(() => {
+    if (eventsId) {
+      dispatch(eventsMiddleware.fetchSingleEvent(eventsId as string))
+    }
+  }, [eventsId])
 
   return (
     <Container className="pb-30">
@@ -22,19 +26,22 @@ const IndividualEventPage = () => {
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">
-        <div>
+        <div className="justify-between xl:flex">
           <Image
-            className="mb-5 xl:float-right xl:ml-30"
-            src={item.image}
+            className="order-last xl:mb-20 xl:ml-30"
+            src={singleEvent?.imageURL as string}
+            loader={() => singleEvent?.imageURL ?? ''}
             width={500}
             height={680}
             alt="picture"
           />
-          <h2 className="text-xl text-black xl:text-2xl">{item.time}</h2>
-          <p className="mt-5 text-lg text-black">{item.title}</p>
-          <p className="mt-5 text-base text-black-light">{item.info}</p>
+          <div>
+            <h2 className="text-xl text-black xl:text-2xl">{singleEvent?.header}</h2>
+            <p className="mt-5 text-lg text-black">{singleEvent?.postedAt}</p>
+            <p className="mt-5 text-base text-black-light">{singleEvent?.paragraph}</p>
+          </div>
         </div>
-        <p className="mt-10 text-black-light xl:mt-20">{item.date}</p>
+        <p className="mt-10 text-black-light xl:mt-20">22.01.2022</p>
       </div>
     </Container>
   )

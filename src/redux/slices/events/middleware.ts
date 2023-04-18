@@ -4,7 +4,15 @@ import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setEventsLoading, setError, setEventsList, setPageSize, setTotalItems } = slice.actions
+const {
+  setEventsLoading,
+  setError,
+  setEventsList,
+  setPageSize,
+  setTotalItems,
+  setSingleEventLoading,
+  setSingleEventData,
+} = slice.actions
 
 const fetchEventsList = (page: number) => async (dispatch: AppDispatch) => {
   try {
@@ -31,6 +39,22 @@ const fetchEventsList = (page: number) => async (dispatch: AppDispatch) => {
   }
 }
 
+const fetchSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setSingleEventLoading(true))
+
+    const response = await API.events.getIndividualEvent(id)
+
+    dispatch(setSingleEventData(response.data.data))
+    dispatch(setSingleEventLoading(false))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setSingleEventLoading(false))
+  }
+}
+
 export default {
   fetchEventsList,
+  fetchSingleEvent,
 }

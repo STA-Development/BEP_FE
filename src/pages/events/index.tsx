@@ -15,7 +15,7 @@ const PAGE_BOTTOM = 600
 const Events = () => {
   const [page, setPage] = useState<number>(1)
   const { eventsList, pageSize, isEventsLoading, totalItems } = useAppSelector(
-    eventsSelector.events
+    eventsSelector.eventsData
   )
 
   const handleShowMore = (id: string) => {

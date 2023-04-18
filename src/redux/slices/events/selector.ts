@@ -3,8 +3,10 @@ import { createSelector } from '@reduxjs/toolkit'
 
 const selector = (state: RootState) => state.events
 
-export const events = createSelector([selector], (state) => state.events)
+export const eventsData = createSelector([selector], (state) => state.events)
+export const singleEvent = createSelector([selector], (state) => state.singleEventData)
 
 export default {
-  events,
+  eventsData,
+  singleEvent,
 }
