@@ -1,21 +1,29 @@
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
-import { AppDispatch } from '@redux/store'
+import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
 const { setEventsLoading, setError, setEventsData, setPageSize, setTotalItems } = slice.actions
 
-const events = (currentPage: number) => async (dispatch: AppDispatch) => {
+const events = (page: number) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setEventsLoading(true))
 
-    const response = await API.events.getEvents(currentPage)
+    const reqBody = {
+      page,
+    }
 
-    dispatch(setEventsData(response.data.data))
-    dispatch(setPageSize(response.data.pageSize))
+    const response = await API.events.getEvents(reqBody)
+
+    const responseData = response.data
+
+    const { eventsData } = store.getState().events.events
+
+    dispatch(setEventsData([...eventsData, ...responseData.data]))
+    dispatch(setPageSize(responseData.pageSize))
     dispatch(setEventsLoading(false))
-    dispatch(setTotalItems(response.data.totalItems))
+    dispatch(setTotalItems(responseData.totalItems))
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {

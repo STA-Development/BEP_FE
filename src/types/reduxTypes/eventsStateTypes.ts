@@ -4,17 +4,21 @@ export interface IEventsProps {
 
 export interface IEvents {
   isEventsLoading: boolean
-  error: string
-  eventsData: IEventsDataType[]
+  error: string | null
+  eventsData: IEventsDataProps[]
   pageSize: number
   totalItems: number
 }
 
-export interface IEventsDataType {
-  id: string
+export interface IEventsDataProps {
+  uuid: string
   hasLongParagraph: boolean
   header: string
   paragraph: string
   imageURL: string
   postedAt: string
+}
+
+export interface IEventsParams {
+  page: number
 }

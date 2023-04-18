@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IEventsDataType } from '@allTypes/reduxTypes/eventsStateTypes'
+import { IEventsDataProps } from '@allTypes/reduxTypes/eventsStateTypes'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
@@ -41,7 +41,7 @@ const Events = () => {
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
 
-        if (scrollTop + clientHeight + PAGE_BOTTOM >= scrollHeight) {
+        if (scrollTop + clientHeight + PAGE_BOTTOM > scrollHeight) {
           setPage((prev) => prev + 1)
         }
       }
@@ -64,9 +64,9 @@ const Events = () => {
           <Loading />
         ) : (
           <div>
-            {eventsData?.map((item: IEventsDataType) => (
+            {eventsData?.map((item: IEventsDataProps) => (
               <div
-                key={Math.random()}
+                key={item.uuid}
                 className="border-outline mb-5 flex flex-col rounded p-10
                   xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
               >
@@ -90,14 +90,14 @@ const Events = () => {
                         size="xs"
                         RightIcon={RightIcon}
                         className="hidden xl:flex"
-                        onClick={() => handleShowMore(item.id)}
+                        onClick={() => handleShowMore(item.uuid)}
                       >
                         Read more
                       </Button>
                       <Button
                         size="fl"
                         className="xl:hidden"
-                        onClick={() => handleShowMore(item.id)}
+                        onClick={() => handleShowMore(item.uuid)}
                       >
                         Read more
                       </Button>
