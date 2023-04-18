@@ -18,8 +18,6 @@ const navigation = [
 export const Header = () => {
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 
-  console.log('test')
-
   useEffect(() => {
     dispatch(usersMiddleware.isAuthenticated())
   }, [])
