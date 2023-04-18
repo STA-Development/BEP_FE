@@ -72,7 +72,7 @@ export const LanguageSelector = () => {
           <div className="ml-3">{open ? <DownIcon className="rotate-180" /> : <DownIcon />}</div>
         </Menu.Button>
       </div>
-      <Menu.Items className="absolute left-1 right-1 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-b-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+      <Menu.Items className="absolute left-1 right-1 mt-2 origin-top-right divide-y divide-gray-100 rounded-b-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
         <div className="space-y-1 px-1 py-1">
           {languageList.map((item) => (
             <Menu.Item key={item.id}>
