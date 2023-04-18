@@ -5,7 +5,7 @@ import translationArm from '@assets/localization/arm.json'
 import translation from '@assets/localization/en.json'
 import translationRu from '@assets/localization/ru.json'
 
-const selectedLanguage = Promise.resolve().then(() => localStorage.getItem('language'))
+const selectedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : 'en'
 
 const localizationResources = {
   en: {
