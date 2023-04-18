@@ -1,12 +1,12 @@
 import { initReactI18next } from 'react-i18next'
+import store from '@redux/store'
 import i18n from 'i18next'
 
 import translationArm from '@assets/localization/arm.json'
 import translation from '@assets/localization/en.json'
 import translationRu from '@assets/localization/ru.json'
 
-const selectedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : 'en'
-
+const selectedLanguage = store.getState().users.user.language
 const localizationResources = {
   en: {
     translation,

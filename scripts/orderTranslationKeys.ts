@@ -2,10 +2,12 @@
 // @ts-ignore - this is a script, not a module
 // @ts-nocheck
 
+import store from '@redux/store'
+
 const shell = require('shelljs')
 const fs = require('fs')
 
-const selectedLanguage = typeof window !== 'undefined' ? localStorage.getItem('language') : 'en'
+const selectedLanguage = store.getState().users.user.language
 
 const jsonPath = `./src/assets/localization/${selectedLanguage}.json`
 const translationsFile = fs.readFileSync(jsonPath)
