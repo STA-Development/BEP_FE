@@ -23,7 +23,7 @@ const IndividualNewsPage = () => {
       <div className="pt-5 xl:pt-10">
         <div>
           <Image
-            className="xl:float-right xl:ml-30 xl:mb-20"
+            className="xl:float-right xl:mb-20 xl:ml-30"
             src={item.image}
             width={500}
             height={680}
