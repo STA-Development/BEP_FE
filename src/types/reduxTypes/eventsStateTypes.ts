@@ -1,5 +1,7 @@
 export interface IEventsProps {
   events: IEventsList
+  singleEventData: IEventsListProps | null
+  isSingleEventLoading: boolean
 }
 
 export interface IEventsList {
@@ -19,6 +21,6 @@ export interface IEventsListProps {
   postedAt: string
 }
 
-export interface IEventsParams {
+export interface IEventsListParams {
   page: number
 }

@@ -13,6 +13,10 @@ const reducers = createReducer({
     state.events.isEventsLoading = action.payload
   },
 
+  setSingleEventLoading(state, action: IAction<boolean>) {
+    state.isSingleEventLoading = action.payload
+  },
+
   setEventsList(state, action: IAction<IEventsListProps[]>) {
     state.events.eventsList = action.payload
   },
@@ -23,6 +27,10 @@ const reducers = createReducer({
 
   setTotalItems(state, action: IAction<number>) {
     state.events.totalItems = action.payload
+  },
+
+  setSingleEventData(state, action: IAction<IEventsListProps>) {
+    state.singleEventData = action.payload
   },
 })
 
