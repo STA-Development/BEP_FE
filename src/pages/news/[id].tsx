@@ -18,7 +18,6 @@ const IndividualNewsPage = () => {
     }
   }, [newsId])
 
-  // TODO: Add loader to image after events page is done
   return (
     <Container className="pb-30">
       <PageHeader
