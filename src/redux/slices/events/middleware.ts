@@ -46,7 +46,6 @@ const fetchSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
     const response = await API.events.getIndividualEvent(id)
 
     dispatch(setSingleEventData(response.data.data))
-    dispatch(setSingleEventLoading(false))
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
