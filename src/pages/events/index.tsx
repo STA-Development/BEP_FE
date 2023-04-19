@@ -73,6 +73,7 @@ const Events = () => {
                 <div className="xl:flex-initial">
                   <Image
                     src={item.imageURL}
+                    loader={() => item?.imageURL ?? ''}
                     width={500}
                     height={320}
                     alt="picture"
