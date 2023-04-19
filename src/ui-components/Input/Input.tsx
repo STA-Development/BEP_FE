@@ -14,7 +14,7 @@ export interface InputType {
   rows?: number
   error?: string | null
   required?: boolean
-  onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+  onChange?: (value: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export interface InputTypeCheckbox {
@@ -71,12 +71,16 @@ export const Input = React.forwardRef((props: InputType, ref: LegacyRef<HTMLInpu
           </label>
         ) : null}
         {rows ? (
-          <textarea
-            id="message"
-            placeholder={placeholder}
-            className={style}
-            rows={rows}
-          />
+          <div>
+            <textarea
+              id={id}
+              placeholder={placeholder}
+              className={style}
+              rows={rows}
+              onChange={onChange}
+              ref={ref as LegacyRef<HTMLTextAreaElement>}
+            />
+          </div>
         ) : (
           <>
             <input
