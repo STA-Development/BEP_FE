@@ -67,18 +67,24 @@ const Events = () => {
             {eventsList?.map((item: IEventsListProps) => (
               <div
                 key={item.uuid}
-                className="border-outline mb-5 flex flex-col rounded p-10
-                  xl:mb-10 xl:flex-row xl:items-start xl:justify-between xl:gap-10"
+                className="border-outline xl:center mb-5 flex flex-col
+                  rounded p-10 xl:mb-10 xl:flex-row xl:justify-between xl:gap-10"
               >
                 <div className="xl:flex-initial">
-                  <Image
-                    src={item.imageURL}
-                    loader={() => item?.imageURL ?? ''}
-                    width={500}
-                    height={320}
-                    alt="picture"
-                    className="h-[320px] w-[500px] object-cover"
-                  />
+                  {item.imageURL ? (
+                    <Image
+                      src={item.imageURL}
+                      loader={() => item.imageURL ?? ''}
+                      width={500}
+                      height={320}
+                      alt="picture"
+                      className="h-[320px] w-[500px] object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center">
+                      <Loading />
+                    </div>
+                  )}
                 </div>
                 <div className="xl:flex-1">
                   <h2 className="mt-5 text-xl text-black xl:mt-0 xl:text-2xl">{item.postedAt}</h2>
