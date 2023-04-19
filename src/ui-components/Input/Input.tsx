@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from 'react'
+import React, { ChangeEvent, LegacyRef, useState } from 'react'
 import { EyeIcon } from '@components/Icons'
 import clsxMerge from '@lib/clsxm'
 import { Button } from '@uiComponents/Button'
@@ -12,22 +12,29 @@ export interface InputType {
   label?: string
   color?: (typeof InputColor)[number]
   rows?: number
-  error?: string
+  error?: string | null
   required?: boolean
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: FC<InputType> = ({
-  error,
-  placeholder,
-  label,
-  color = 'primary',
-  type = 'text',
-  id,
-  rows,
-  required = false,
-  onChange,
-}) => {
+export interface InputTypeCheckbox {
+  id?: string
+  label?: string
+  onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+}
+
+export const Input = React.forwardRef((props: InputType, ref: LegacyRef<HTMLInputElement>) => {
+  const {
+    error,
+    placeholder,
+    label,
+    color = 'primary',
+    type = 'text',
+    id,
+    rows,
+    required = false,
+    onChange,
+  } = props
   const style = clsxMerge(
     'rounded',
     'px-5',
@@ -78,6 +85,7 @@ export const Input: FC<InputType> = ({
               id={id}
               className={style}
               onChange={onChange}
+              ref={ref}
             />
             {type === 'password' ? (
               <div className="absolute inset-y-0 right-0 flex items-center">
@@ -95,4 +103,28 @@ export const Input: FC<InputType> = ({
       {error ? <p className="mt-2.5 text-xs text-red">{error}</p> : null}
     </>
   )
-}
+})
+
+export const InputCheckbox = React.forwardRef(
+  (props: InputTypeCheckbox, ref: LegacyRef<HTMLInputElement>) => {
+    const { label, id, onChange } = props
+
+    return (
+      <div className="flex items-center">
+        <input
+          id={id}
+          type="checkbox"
+          onChange={onChange}
+          ref={ref}
+          className="ml-1 h-5 w-5 rounded-sm border-black"
+        />
+        <label
+          htmlFor={id}
+          className="ml-3 text-sm"
+        >
+          {label}
+        </label>
+      </div>
+    )
+  }
+)

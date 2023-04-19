@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import IconProps from '@allTypes/svg-icon'
 import clsxMerge from '@lib/clsxm'
 
-export const ArmIcon: FC<IconProps> = ({ fill = 'fill-[#212121]', className, ...rest }) => {
+export const ArmIcon: FC<IconProps> = ({ fill = 'fill-black', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (

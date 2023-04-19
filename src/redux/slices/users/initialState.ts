@@ -11,5 +11,6 @@ export const getInitialState = (): IUserProps => ({
     email: '',
     language: 'en',
     isLanguageChangeLoading: false,
+    errorGoogleSignIn: '',
   },
 })

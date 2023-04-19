@@ -10,6 +10,7 @@ export interface IUser {
   isLogOutLoading: boolean
   isAuthenticated: boolean
   error: string | null
+  errorGoogleSignIn: string | null
   language: string
   isLanguageChangeLoading: boolean
 }
