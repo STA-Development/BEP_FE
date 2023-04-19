@@ -14,7 +14,7 @@ const reducers = createReducer({
   },
 
   setSingleEventLoading(state, action: IAction<boolean>) {
-    state.events.isSingleEventLoading = action.payload
+    state.isSingleEventLoading = action.payload
   },
 
   setEventsList(state, action: IAction<IEventsListProps[]>) {
