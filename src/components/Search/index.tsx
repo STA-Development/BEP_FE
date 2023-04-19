@@ -20,11 +20,6 @@ const SearchResult = () => (
   <div className="inline-grid w-full grid-cols-1  xl:grid-cols-5">
     <div className="rounded-l-[10px] py-2.5 text-start text-base xl:border">
       <p className="flex justify-start xl:px-5">Specialization</p>
-      {/* <Autocomplete */}
-      {/*   items={people} */}
-      {/*   placeholder="Specialization" */}
-      {/*   inputClasses="border-none" */}
-      {/* /> */}
     </div>
     <div className="xl:border">
       <Autocomplete
