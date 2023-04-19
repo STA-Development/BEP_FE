@@ -1,9 +1,9 @@
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { UserTypes } from '@allTypes/user'
 import { IRegisterData } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
+import { GoogleIcon } from '@components/Icons/GoogleIcon'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -32,7 +32,6 @@ export const Register = () => {
     dispatch(
       usersMiddleware.register({
         email: data.email,
-        role: UserTypes.JOBSEEKER,
         password: data.password,
       })
     )
@@ -44,7 +43,7 @@ export const Register = () => {
 
   return (
     <Container className="pt-10">
-      <div className="mx-auto flex w-[350px] flex-col items-center pb-28 xl:w-[380px]">
+      <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full text-center"
@@ -53,12 +52,16 @@ export const Register = () => {
           <Button
             variant="outlined"
             size="fl"
+            className="border-light-blue group text-black"
             onClick={handleGoogleSignIn}
           >
-            Continue with Google
+            <div className="mr-5">
+              <GoogleIcon className="group-hover:fill-white" />
+            </div>
+            <div>Sign up with Google</div>
           </Button>
           <OnDivider />
-          <div className="mb-5 w-full">
+          <div className="mb-5 w-full text-left">
             <Controller
               control={control}
               name="name"
@@ -71,7 +74,7 @@ export const Register = () => {
               )}
             />
           </div>
-          <div className="mb-5 w-full">
+          <div className="mb-5 w-full text-left">
             <Controller
               control={control}
               name="email"
@@ -84,7 +87,7 @@ export const Register = () => {
               )}
             />
           </div>
-          <div className="mb-5 w-full">
+          <div className="mb-5 w-full text-left">
             <Controller
               control={control}
               name="password"
@@ -98,7 +101,7 @@ export const Register = () => {
               )}
             />
           </div>
-          <div className="mb-5 w-full">
+          <div className="mb-5 w-full text-left">
             <Controller
               control={control}
               name="passwordConfirmation"
