@@ -20,6 +20,9 @@ const authManager = {
   signUp(params: ISignUpParams) {
     return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/register`, params)
   },
+  googleSignIn() {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/google`)
+  },
 }
 
 export default authManager
