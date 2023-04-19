@@ -1,11 +1,18 @@
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
-import { AppDispatch } from '@redux/store'
+import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setError, setNewsList, setIndividualNews, setNewsListLoading, setIndividualNewsLoading } =
-  slice.actions
+const {
+  setError,
+  setIndividualNews,
+  setNewsListLoading,
+  setIndividualNewsLoading,
+  setTotalItems,
+  setPageSize,
+  setNewsList,
+} = slice.actions
 
 const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
   try {
@@ -17,7 +24,13 @@ const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
 
     const response = await API.news.getNews(reqBody)
 
-    dispatch(setNewsList(response.data.data))
+    const responseData = response.data
+
+    const { newsList } = store.getState().news.news
+
+    dispatch(setNewsList([...newsList, ...responseData.data]))
+    dispatch(setTotalItems(responseData.totalItems))
+    dispatch(setPageSize(responseData.pageSize))
 
     dispatch(setError(null))
   } catch (error) {

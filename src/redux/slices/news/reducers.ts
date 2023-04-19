@@ -13,13 +13,20 @@ const reducers = createReducer({
     state.news.newsList = action.payload
   },
   setIndividualNews(state, action: IAction<INewsResponse>) {
-    state.news.individualNews = action.payload
+    state.individualNews = action.payload
   },
   setNewsListLoading(state, action: IAction<boolean>) {
     state.news.isNewsListLoading = action.payload
   },
   setIndividualNewsLoading(state, action: IAction<boolean>) {
-    state.news.isIndividualNewsLoading = action.payload
+    state.isIndividualNewsLoading = action.payload
+  },
+  setPageSize(state, action: IAction<number>) {
+    state.news.pageSize = action.payload
+  },
+
+  setTotalItems(state, action: IAction<number>) {
+    state.news.totalItems = action.payload
   },
 })
 

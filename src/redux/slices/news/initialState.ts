@@ -3,9 +3,11 @@ import { INewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 export const getInitialState = (): INewsProps => ({
   news: {
     error: null,
-    newsList: null,
-    individualNews: null,
+    newsList: [],
     isNewsListLoading: false,
-    isIndividualNewsLoading: false,
+    pageSize: 0,
+    totalItems: 0,
   },
+  individualNews: null,
+  isIndividualNewsLoading: false,
 })
