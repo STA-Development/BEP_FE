@@ -23,6 +23,12 @@ const reducers = createReducer({
   setSignInLoading(state, action: IAction<boolean>) {
     state.user.isSignInLoading = action.payload
   },
+  setLanguage(state, action: IAction<string>) {
+    state.user.language = action.payload
+  },
+  setLanguageChangeLoading(state, action: IAction<boolean>) {
+    state.user.isLanguageChangeLoading = action.payload
+  },
 })
 
 export default reducers
