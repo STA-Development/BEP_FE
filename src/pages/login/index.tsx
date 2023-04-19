@@ -103,7 +103,7 @@ export const Login = () => {
           <div className="mb-44 mt-7 w-full">
             <Link href="/reset-password">
               <Button
-                className="ml-2	font-normal	"
+                className="ml-2	font-normal"
                 size="xs"
                 variant="text"
               >
