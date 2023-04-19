@@ -9,5 +9,6 @@ export const getInitialState = (): IUserProps => ({
     fullName: '',
     isAuthenticated: false,
     email: '',
+    errorGoogleSignIn: '',
   },
 })
