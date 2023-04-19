@@ -2,6 +2,8 @@ import React from 'react'
 import { Container } from '@components/Container/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
+import { dispatch } from '@redux/hooks'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
@@ -80,6 +82,16 @@ const NewsList = () => {
     },
   ]
 
+  const redirectToIndividualNews = (id: number) => {
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/news/${id}`,
+        params: '',
+        apply: true,
+      })
+    )
+  }
+
   return (
     <Container>
       <PageHeader
@@ -99,6 +111,7 @@ const NewsList = () => {
               variant="text"
               size="xs"
               RightIcon={RightIcon}
+              onClick={() => redirectToIndividualNews(news.id)}
             >
               Read More
             </Button>
