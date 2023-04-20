@@ -2,20 +2,25 @@ import React, { useEffect } from 'react'
 import { Container } from '@components/Container'
 import { User } from '@components/Header/User'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
+import { LanguageSelector } from '@components/LanguageSelector'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'About Us', href: '/about-us', current: false },
-  { name: 'Contact Us', href: '/contact-us', current: false },
-  { name: 'Educational Institutes', href: '/educational-institutes', current: false },
-]
-
 export const Header = () => {
+  // TODO update later
+  const navigation = [
+    // {
+    //   name: t(Translation.NAVBAR_HOME),
+    //   href: '/',
+    //   current: false,
+    // },
+    { name: 'About Us', href: '/about-us', current: false },
+    { name: 'Educational Institutes', href: '/educational-institutes', current: false },
+    { name: 'Contact Us', href: '/contact-us', current: false },
+  ]
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 
   useEffect(() => {
@@ -24,6 +29,10 @@ export const Header = () => {
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
+  }
+
+  const handleClearError = () => {
+    dispatch(usersMiddleware.clearError())
   }
 
   return (
@@ -59,7 +68,8 @@ export const Header = () => {
                         {item.name}
                       </Link>
                     ))}
-                    <div className="flex flex-1 justify-end">
+                    <LanguageSelector />
+                    <div className="flex flex-1 items-center justify-end">
                       {isAuthenticated ? (
                         <User handleLogOut={handleLogOut} />
                       ) : (
@@ -68,7 +78,9 @@ export const Header = () => {
                             <Link href="/login">
                               <Button
                                 variant="text"
+                                size="xs"
                                 color="primary"
+                                onClick={handleClearError}
                               >
                                 Login
                               </Button>
@@ -79,6 +91,7 @@ export const Header = () => {
                               <Button
                                 color="primary"
                                 variant="outlined"
+                                onClick={handleClearError}
                               >
                                 Register
                               </Button>

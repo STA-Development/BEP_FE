@@ -1,142 +1,146 @@
-import React, { useState } from 'react'
-import { UserTypes } from '@allTypes/user'
+import React from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { IRegisterData } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
-import { EyeIcon } from '@components/Icons'
+import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
+import { Input, InputCheckbox } from '@uiComponents/Input'
+
+import { registerValidationSchema } from '../../validation/auth/register'
 
 export const Register = () => {
-  const { isSignUpLoading, error } = useAppSelector(usersSelector.user)
-  const [show, setShow] = useState(false)
-  const [fullName, setFullName] = useState<string>('')
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
+  const { isSignUpLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
-  const handleRegister = () => {
-    dispatch(usersMiddleware.register({ email, role: UserTypes.JOBSEEKER, password }))
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+      remember: false,
+    },
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(registerValidationSchema),
+  })
+
+  const onSubmit = (data: IRegisterData) => {
+    dispatch(
+      usersMiddleware.register({
+        email: data.email,
+        password: data.password,
+      })
+    )
   }
 
-  const handleChangeFullName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFullName(e.target.value)
+  const handleGoogleSignIn = () => {
+    dispatch(usersMiddleware.googleSignIn())
   }
 
   return (
     <Container className="pt-10">
       <div className="mx-auto flex w-[380px] flex-col items-center pb-28">
-        <h1 className="mb-5 text-xl">Create an account</h1>
-        <Button
-          variant="outlined"
-          size="fl"
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full text-center"
         >
-          Continue with Google
-        </Button>
-        <OnDivider />
-        <div className="mb-5 w-full">
-          <input
-            value={fullName}
-            onChange={handleChangeFullName}
-            type="text"
-            id="name"
-            placeholder="Full Name"
-            className={`${
-              error && !fullName
-                ? 'border-red placeholder:text-red'
-                : 'border-gray-light placeholder:text-black'
-            } w-full rounded border border-gray-light px-5 py-2.5 outline-0 placeholder:text-base placeholder:text-black`}
-          />
-          {error && !fullName ? <p className="mt-2.5 text-red">Full Name not valid</p> : null}
-        </div>
-        <div className="mb-5 w-full">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            id="email"
-            placeholder="Email"
-            className={`${
-              error && !email
-                ? 'border-red placeholder:text-red'
-                : 'border-gray-light placeholder:text-black'
-            } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
-          />
-          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
-        </div>
-        <div className="mb-5 w-full">
-          <div className="relative">
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type={show ? 'text' : 'password'}
-              id="password"
-              placeholder="Password"
-              className={`${
-                error && !password
-                  ? 'border-red placeholder:text-red'
-                  : 'border-gray-light placeholder:text-black'
-              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
-            />
-            <div className="absolute inset-y-0 right-4 flex items-center">
-              <button
-                type="button"
-                onClick={() => setShow((prev) => !prev)}
-              >
-                <EyeIcon />
-              </button>
-            </div>
-          </div>
-          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
-        </div>
-        <div className="mb-5 w-full">
-          <div className="relative">
-            <input
-              type={show ? 'text' : 'password'}
-              id="confirm-password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm Password"
-              className={`${
-                error && (!confirmPassword || confirmPassword !== password)
-                  ? 'border-red placeholder:text-red'
-                  : 'border-gray-light placeholder:text-black'
-              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
-            />
-            <div className="absolute inset-y-0 right-4 flex items-center">
-              <button
-                type="button"
-                onClick={() => setShow((prev) => !prev)}
-              >
-                <EyeIcon />
-              </button>
-            </div>
-          </div>
-          {error && (!confirmPassword || confirmPassword !== password) ? (
-            <p className="mt-2.5 text-red">Passwords do not match</p>
-          ) : null}
-        </div>
-        <div className="mb-5 flex w-full items-center">
-          <input
-            id="remember-me"
-            type="checkbox"
-            className="ml-1 h-5 w-5 rounded-sm border-black"
-          />
-          <label
-            htmlFor="remember-me"
-            className="ml-6 text-sm"
+          <h1 className="mb-5 text-xl">Create an account</h1>
+          <Button
+            variant="outlined"
+            size="fl"
+            className="border-light-blue group text-black"
+            onClick={handleGoogleSignIn}
           >
-            Remember me
-          </label>
-        </div>
-        <Button
-          disabled={isSignUpLoading}
-          size="fl"
-          onClick={handleRegister}
-        >
-          Create Account
-        </Button>
-        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
+            <div className="mr-5">
+              <GoogleIcon className="group-hover:fill-white" />
+            </div>
+            <div>Sign up with Google</div>
+          </Button>
+          <OnDivider />
+          <div className="mb-5 w-full text-left">
+            <Controller
+              control={control}
+              name="name"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Full Name"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full text-left">
+            <Controller
+              control={control}
+              name="email"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="example@email.com"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full text-left">
+            <Controller
+              control={control}
+              name="password"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Password"
+                  type="password"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full text-left">
+            <Controller
+              control={control}
+              name="passwordConfirmation"
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  placeholder="Confirm Password"
+                  type="password"
+                  error={fieldState.error ? fieldState.error.message : null}
+                />
+              )}
+            />
+          </div>
+          <div className="mb-5 w-full">
+            <Controller
+              control={control}
+              render={({ field }) => (
+                <InputCheckbox
+                  {...field}
+                  label="Remember me"
+                  id="remember-me"
+                />
+              )}
+              name="remember"
+            />
+          </div>
+          <Button
+            disabled={isSignUpLoading}
+            size="fl"
+            type="submit"
+          >
+            Create Account
+          </Button>
+          <div className="w-full">
+            {error || errorGoogleSignIn ? (
+              <p className="mt-2.5 text-red">{error ?? errorGoogleSignIn}</p>
+            ) : null}
+          </div>
+        </form>
       </div>
     </Container>
   )
