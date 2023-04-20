@@ -78,7 +78,7 @@ export const Button: FC<ButtonProps> = ({
       size === 'sm' && 'px-5 py-2.5 text-sm font-normal',
       size === 'bs' && 'px-10 py-2.5',
       size === 'lg' && 'w-full px-20 py-2.5 xl:w-auto',
-      size === 'fl' && 'w-full p-2.5',
+      size === 'fl' && 'w-full py-2.5',
       size === 'hg' && 'w-full p-10',
       size === 'app' && 'h-[191px] w-[224px]',
     ],

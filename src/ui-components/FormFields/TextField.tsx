@@ -6,9 +6,10 @@ export interface ITextFieldProps {
   fieldName: string
   type?: string
   placeholder?: string
+  rows?: number
 }
 
-const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder }) => {
+const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder, rows }) => {
   const { control } = useFormContext()
   const { field, fieldState } = useController({ name: fieldName, control })
 
@@ -17,6 +18,7 @@ const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder }) => {
       {...field}
       placeholder={placeholder}
       type={type}
+      rows={rows}
       error={fieldState.error ? fieldState.error.message : null}
     />
   )
