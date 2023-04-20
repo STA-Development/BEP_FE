@@ -64,8 +64,8 @@ export const LanguageSelector = () => {
         <>
           <Menu.Button className="inline-flex w-full items-center py-2 text-base font-medium text-primary">
             Language:
-            <span className="ml-5"> {selectedLanguage && <selectedLanguage.icon />}</span>
-            <div className="ml-3">
+            <span className="ml-5">{selectedLanguage && <selectedLanguage.icon />}</span>
+            <div className="ml-2.5">
               {open ? <ChevronIcon className="rotate-90" /> : <ChevronIcon />}
             </div>
           </Menu.Button>
