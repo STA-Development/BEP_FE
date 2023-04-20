@@ -3,7 +3,7 @@ export interface ISupportProps {
 }
 
 export interface ISupportPropsList {
-  error: null | string
+  error: null | Error | string
   isHelpLoading: boolean
 }
 

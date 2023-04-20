@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef, ComponentType, FC } from 'react'
 import IconProps from '@allTypes/svg-icon'
 import clsxMerge from '@lib/clsxm'
 
-const ButtonVariant = ['contained', 'outlined', 'text'] as const
+const ButtonVariant = ['contained', 'outlined', 'flat', 'text'] as const
 const ButtonColor = ['primary', 'secondary', 'gray'] as const
 const ButtonSize = ['xs', 'sm', 'bs', 'lg', 'fl', 'hg', 'app'] as const
 const ButtonRadius = ['all', 'r', 'l'] as const
@@ -61,6 +61,10 @@ export const Button: FC<ButtonProps> = ({
         'hover:border-primary-light hover:bg-primary-light',
         color === 'primary' && 'border-primary bg-secondary text-primary hover:text-secondary',
         color === 'secondary' && 'border-secondary bg-primary text-secondary',
+      ],
+      variant === 'flat' && [
+        'hover:border-primary-light hover:bg-primary-light',
+        color === 'primary' && 'border-secondary text-primary justify-start hover:text-secondary',
       ],
       variant === 'text' && [
         'border-transparent hover:underline',

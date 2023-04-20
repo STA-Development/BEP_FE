@@ -1,15 +1,18 @@
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
+import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch } from '@redux/hooks'
 import { supportMiddleware } from '@redux/slices/support'
 import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
-
-import { helpValidationSchema } from '../../../validation/support/help'
+import { helpValidationSchema } from '@validation/support/help'
 
 export const Help = () => {
+  const [t] = useTranslation()
+
   const { control, handleSubmit } = useForm({
     defaultValues: {
       headline: '',
@@ -30,11 +33,8 @@ export const Help = () => {
 
   return (
     <div className="grid gap-4 rounded bg-gray-thin p-5 xl:p-10">
-      <h2 className="text-lg">Tell us about your problem:</h2>
-      <p className="text-base text-black-light">
-        Try to support your explanation with a screenshot, with that we can solve your problem
-        faster.
-      </p>
+      <h2 className="text-lg">{t(Translation.HELP_TEL_PROBLEM)}</h2>
+      <p className="text-base text-black-light">{t(Translation.HELP_TEXT)}</p>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full text-center"
@@ -46,8 +46,8 @@ export const Help = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                placeholder="Headline"
-                error={fieldState.error ? fieldState.error.message : null}
+                placeholder={`${t(Translation.HELP_HEADLINE)}`}
+                error={fieldState.error ? t(Translation.HELP_HEADLINE_REQUIRED) : null}
               />
             )}
           />
@@ -59,19 +59,19 @@ export const Help = () => {
             render={({ field, fieldState }) => (
               <Input
                 {...field}
-                placeholder="Type your problem here..."
+                placeholder={`${t(Translation.HELP_PROBLEM)}`}
                 rows={7}
-                error={fieldState.error ? fieldState.error.message : null}
+                error={fieldState.error ? t(Translation.HELP_PROBLEM_REQUIRED) : null}
               />
             )}
           />
         </div>
         <div className="w-full">
           <Button
-            size="lg"
+            size="fl"
             type="submit"
           >
-            Submit
+            {t(Translation.HELP_BUTTON)}
           </Button>
         </div>
       </form>

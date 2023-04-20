@@ -1,0 +1,11 @@
+{
+  "navbar.about.us": "Pro nas",
+  "navbar.home": "Главная",
+  "help.tel.problem": "Расскажите нам о своей проблеме",
+  "help.text": "Попробуйте подкрепить свое объяснение скриншотом, с ним мы быстрее решим вашу проблему.",
+  "help.headline": "Заголовок",
+  "help.problem": "Напишите свою проблему здесь",
+  "help.button": "Отправлять",
+  "help.headline.required": "Заголовок обязателен",
+  "help.problem.required": "Проблема обязателен"
+}

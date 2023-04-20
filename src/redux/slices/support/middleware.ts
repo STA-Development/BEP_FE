@@ -13,7 +13,6 @@ const fetchHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispat
 
     await API.support.sendHelpData(message)
     dispatch(setError(null))
-    dispatch(setHelpLoading(false))
   } catch (error) {
     dispatch(setError((error as IError).response.data.status.message))
   } finally {
