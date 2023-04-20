@@ -45,8 +45,7 @@ export const Input = React.forwardRef(
       'px-5',
       'py-2.5',
       'outline-0',
-      'placeholder:text-base',
-      'placeholder:text-black',
+      'placeholder:text-black-light',
       'w-full',
       'border-2',
       [
@@ -90,10 +89,10 @@ export const Input = React.forwardRef(
           ) : (
             <>
               <input
-                id={id}
                 type={inputType ? 'text' : type}
                 placeholder={placeholder}
                 value={value}
+                id={id}
                 className={style}
                 onChange={onChange}
                 ref={ref}

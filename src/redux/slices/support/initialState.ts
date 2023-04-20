@@ -6,5 +6,6 @@ export const getInitialState = (): ISupportProps => ({
     isHelpLoading: false,
     isContactUsLoading: false,
     contactUsStatus: null,
+    isHelpMessageSuccess: false,
   },
 })

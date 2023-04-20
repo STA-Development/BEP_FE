@@ -5,6 +5,7 @@ export interface ISupportProps {
 export interface ISupportPropsList {
   error: null | Error | string
   isHelpLoading: boolean
+  isHelpMessageSuccess: boolean
   isContactUsLoading: boolean
   contactUsStatus: null | number
 }

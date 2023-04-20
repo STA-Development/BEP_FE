@@ -17,6 +17,9 @@ const reducers = createReducer({
   setContactUsStatus(state, action: IAction<null | number>) {
     state.support.contactUsStatus = action.payload
   },
+  setHelpMessageSuccess(state, action: IAction<boolean>) {
+    state.support.isHelpMessageSuccess = action.payload
+  },
 })
 
 export default reducers
