@@ -4,5 +4,6 @@ export const getInitialState = (): ISupportProps => ({
   support: {
     error: null,
     isHelpLoading: false,
+    helpStatus: null,
   },
 })

@@ -11,6 +11,9 @@ const reducers = createReducer({
   setHelpLoading(state, action: IAction<boolean>) {
     state.support.isHelpLoading = action.payload
   },
+  setHelpStatus(state, action: IAction<null | number>) {
+    state.support.helpStatus = action.payload
+  },
 })
 
 export default reducers

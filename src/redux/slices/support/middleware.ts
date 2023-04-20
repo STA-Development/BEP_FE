@@ -5,13 +5,16 @@ import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setError, setHelpLoading } = slice.actions
+const { setError, setHelpLoading, setHelpStatus } = slice.actions
 
 const fetchHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setHelpLoading(true))
 
-    await API.support.sendHelpData(message)
+    const response = await API.support.sendHelpData(message)
+
+    dispatch(setHelpStatus(response.status))
+
     dispatch(setError(null))
   } catch (error) {
     dispatch(setError((error as IError).response.data.status.message))
