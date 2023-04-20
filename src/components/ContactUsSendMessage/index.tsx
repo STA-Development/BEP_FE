@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { IContactUsProps } from '@allTypes/reduxTypes/supportStateTypes'
 import { Translation } from '@constants/translations'
@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { supportMiddleware, supportSelector } from '@redux/slices/support'
 import { Button } from '@uiComponents/Button'
-import { Input } from '@uiComponents/Input'
+import TextField from '@uiComponents/FormFields/TextField'
 import { contactUsValidationSchema } from '@validation/support/contactUs'
 
 const defaultValues = {
@@ -19,17 +19,20 @@ const defaultValues = {
 
 const ContactUsSendMessage = () => {
   const [t] = useTranslation()
-  const { contactUsStatus } = useAppSelector(supportSelector.support)
 
-  const { control, handleSubmit, reset } = useForm({
+  const isContactUsMessageSuccess = useAppSelector(supportSelector.isContactUsMessageSuccess)
+
+  const methods = useForm({
     defaultValues,
     mode: 'onSubmit',
     resolver: yupResolver(contactUsValidationSchema),
   })
 
+  const { handleSubmit, reset } = methods
+
   const onSubmit = (data: IContactUsProps) => {
     dispatch(
-      supportMiddleware.fetchContactUsMessage({
+      supportMiddleware.createContactUsMessage({
         fullName: data.fullName,
         email: data.email,
         phone: data.phone.toString(),
@@ -39,87 +42,56 @@ const ContactUsSendMessage = () => {
   }
 
   useEffect(() => {
-    if (contactUsStatus === 200) {
+    if (isContactUsMessageSuccess) {
       reset({ ...defaultValues })
     }
-  }, [contactUsStatus, reset])
+  }, [isContactUsMessageSuccess, reset])
 
   return (
     <div className="xl:pr-20">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-5 flex flex-col">
-          <Controller
-            control={control}
-            name="fullName"
-            defaultValue=""
-            render={({ field, fieldState }) => (
-              <Input
-                id="name"
-                label={`${t(Translation.CONTACT_US_FULL_NAME)}`}
-                {...field}
-                error={fieldState.error ? t(Translation.CONTACT_US_FULL_NAME_REQUIRED) : null}
-              />
-            )}
-          />
-        </div>
-        <div className="columns-1 gap-5 xl:columns-2">
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5 flex flex-col">
-            <Controller
-              control={control}
-              name="email"
-              defaultValue=""
-              render={({ field, fieldState }) => (
-                <Input
-                  type="email"
-                  id="email"
-                  label={`${t(Translation.CONTACT_US_MAIL)}`}
-                  {...field}
-                  error={fieldState.error ? t(Translation.CONTACT_US_MAIL_REQUIRED) : null}
-                />
-              )}
+            <TextField
+              id="name"
+              fieldName="fullName"
+              label={`${t(Translation.CONTACT_US_FULL_NAME)}`}
             />
           </div>
-          <div className="mb-5 flex flex-col">
-            <Controller
-              control={control}
-              name="phone"
-              defaultValue=""
-              render={({ field, fieldState }) => (
-                <Input
-                  {...field}
-                  id="telephone"
-                  label={`${t(Translation.CONTACT_US_PHONE)}`}
-                  type="number"
-                  {...field}
-                  error={fieldState.error ? t(Translation.CONTACT_US_PHONE_REQUIRED) : null}
-                />
-              )}
+          <div className="columns-1 gap-5 xl:columns-2">
+            <div className="mb-5 flex flex-col">
+              <TextField
+                fieldName="email"
+                type="email"
+                id="email"
+                label={`${t(Translation.CONTACT_US_MAIL)}`}
+              />
+            </div>
+            <div className="mb-5 flex flex-col">
+              <TextField
+                fieldName="phone"
+                type="number"
+                id="telephone"
+                label={`${t(Translation.CONTACT_US_PHONE)}`}
+              />
+            </div>
+          </div>
+          <div className="mb-10 flex flex-col">
+            <TextField
+              fieldName="message"
+              id="message"
+              label={`${t(Translation.CONTACT_US_MESSAGE)}`}
+              rows={7}
             />
           </div>
-        </div>
-        <div className="mb-10 flex flex-col">
-          <Controller
-            control={control}
-            name="message"
-            defaultValue=""
-            render={({ field, fieldState }) => (
-              <Input
-                label={`${t(Translation.CONTACT_US_MESSAGE)}`}
-                id="message"
-                {...field}
-                rows={7}
-                error={fieldState.error ? t(Translation.CONTACT_US_MESSAGE_REQUIRED) : null}
-              />
-            )}
-          />
-        </div>
-        <Button
-          type="submit"
-          size="fl"
-        >
-          {t(Translation.HELP_BUTTON)}
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            size="fl"
+          >
+            {t(Translation.HELP_BUTTON)}
+          </Button>
+        </form>
+      </FormProvider>
     </div>
   )
 }

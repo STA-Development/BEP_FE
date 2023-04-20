@@ -5,8 +5,13 @@ import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setError, setHelpLoading, setHelpMessageSuccess, setContactUsLoading, setContactUsStatus } =
-  slice.actions
+const {
+  setError,
+  setHelpLoading,
+  setHelpMessageSuccess,
+  setContactUsLoading,
+  setContactUsMessageSuccess,
+} = slice.actions
 
 const createHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispatch) => {
   try {
@@ -21,17 +26,20 @@ const createHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispa
     dispatch(setError((error as IError).response.data.status.message))
   } finally {
     dispatch(setHelpLoading(false))
-    dispatch(setHelpMessageSuccess(false))
   }
 }
 
-const fetchContactUsMessage = (message: IContactUsProps) => async (dispatch: AppDispatch) => {
+const resetHelpMessageSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setHelpMessageSuccess(false))
+}
+
+const createContactUsMessage = (message: IContactUsProps) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setContactUsLoading(true))
 
-    const response = await API.support.sendContactUsData(message)
+    await API.support.sendContactUsData(message)
 
-    dispatch(setContactUsStatus(response.status))
+    dispatch(setContactUsMessageSuccess(true))
 
     dispatch(setError(null))
   } catch (error) {
@@ -41,7 +49,13 @@ const fetchContactUsMessage = (message: IContactUsProps) => async (dispatch: App
   }
 }
 
+const resetContactUsMessageSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setContactUsMessageSuccess(false))
+}
+
 export default {
   createHelpMessage,
-  fetchContactUsMessage,
+  createContactUsMessage,
+  resetHelpMessageSuccess,
+  resetContactUsMessageSuccess,
 }

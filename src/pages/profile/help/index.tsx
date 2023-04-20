@@ -17,7 +17,7 @@ const defaultValues = {
 
 export const Help = () => {
   const [t] = useTranslation()
-  const { isHelpMessageSuccess } = useAppSelector(supportSelector.support)
+  const isHelpMessageSuccess = useAppSelector(supportSelector.isHelpMessageSuccess)
 
   const methods = useForm({
     defaultValues,
@@ -38,6 +38,7 @@ export const Help = () => {
   useEffect(() => {
     if (isHelpMessageSuccess) {
       reset({ ...defaultValues })
+      dispatch(supportMiddleware.resetHelpMessageSuccess())
     }
   }, [isHelpMessageSuccess, reset])
 

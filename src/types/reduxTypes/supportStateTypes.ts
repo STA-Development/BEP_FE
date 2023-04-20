@@ -3,11 +3,20 @@ export interface ISupportProps {
 }
 
 export interface ISupportPropsList {
+  help: IHelpPropsList
+  contactUs: IContactUsPropsList
+}
+
+export interface IHelpPropsList {
   error: null | Error | string
   isHelpLoading: boolean
   isHelpMessageSuccess: boolean
+}
+
+export interface IContactUsPropsList {
+  error: null | Error | string
   isContactUsLoading: boolean
-  contactUsStatus: null | number
+  isContactUsMessageSuccess: boolean
 }
 
 export interface IHelpDataProps {
