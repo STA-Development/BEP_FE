@@ -43,12 +43,12 @@ export const Header = () => {
             <Container>
               <div className="relative flex h-23 items-center justify-between">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
-                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-gray-400 xl:hidden">
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-primary xl:hidden">
                     <span className="sr-only">Open main menu</span>
                     {open ? <CloseIcon /> : <BarsIcon />}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-start pt-5 xl:ml-0 xl:items-stretch">
+                <div className="flex flex-1 items-center justify-start xl:ml-0 xl:items-stretch">
                   <div className="flex items-center">
                     <Link
                       href="/"
