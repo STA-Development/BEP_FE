@@ -6,7 +6,7 @@ export interface ISupportPropsList {
   error: null | Error | string
   isHelpLoading: boolean
 
-  helpStatus: null | number
+  isHelpMessageSuccess: boolean
 }
 
 export interface IHelpDataProps {
