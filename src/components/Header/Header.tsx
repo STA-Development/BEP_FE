@@ -1,21 +1,29 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import HeaderUser from '@components/Header/HeaderUser'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
+import LanguageSelector from '@components/LanguageSelector'
+import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'About Us', href: '/about-us', current: false },
-  { name: 'Contact Us', href: '/contact-us', current: false },
-  { name: 'News', href: '/news', current: false },
-]
-
 export const Header = () => {
+  const [t] = useTranslation()
+
+  const navigation = [
+    {
+      name: t(Translation.NAVBAR_HOME),
+      href: '/',
+      current: false,
+    },
+    { name: 'About Us', href: '/about-us', current: false },
+    { name: 'Contact Us', href: '/contact-us', current: false },
+    { name: 'News', href: '/news', current: false },
+  ]
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 
   useEffect(() => {
@@ -24,6 +32,10 @@ export const Header = () => {
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
+  }
+
+  const handleClearError = () => {
+    dispatch(usersMiddleware.clearError())
   }
 
   return (
@@ -58,6 +70,7 @@ export const Header = () => {
                       {item.name}
                     </Link>
                   ))}
+                  <LanguageSelector />
                 </div>
               </div>
               <div className="sm:static sm:inset-auto sm:ml-6 sm:pr-0 absolute inset-y-0 right-0 hidden items-center xl:flex">
@@ -68,6 +81,7 @@ export const Header = () => {
                     <div className="ml-[60px]">
                       <Link href="/login">
                         <Button
+                          onClick={handleClearError}
                           variant="text"
                           color="secondary"
                         >
@@ -78,6 +92,7 @@ export const Header = () => {
                     <div className="ml-[60px]">
                       <Link href="/register">
                         <Button
+                          onClick={handleClearError}
                           color="primary"
                           variant="outlined"
                         >

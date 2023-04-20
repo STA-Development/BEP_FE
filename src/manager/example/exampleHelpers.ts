@@ -7,7 +7,7 @@ interface ExampleListParams {
 const exampleFunction = (params: ExampleListParams) => {
   const { page, value } = params
 
-  return value[page]
+  return value[Number(page)]
 }
 
 const exampleHelpers = {

@@ -7,6 +7,8 @@ import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
 import { useRouter } from 'next/router'
 
+import { testEmail } from '@utils/testEmail'
+
 export enum RouterQueryTypes {
   verifyOtp = 'verify-otp',
   confirmPassword = 'confirm-password',
@@ -18,7 +20,7 @@ export const ResetPassword = () => {
   const [emailVerificationError, setEmailVerificationError] = useState<string>()
 
   const handleEmailSend = () => {
-    const emailVerification: boolean = /\S+@\S+\.\S+/.test(emailValue)
+    const emailVerification: boolean = testEmail(emailValue)
 
     if (!emailVerification || !emailValue.length) {
       setEmailVerificationError('Email not recognized')
@@ -48,7 +50,7 @@ export const ResetPassword = () => {
       <div className="flex w-full justify-center">
         {!router.query.tab && (
           <div className="w-full max-w-[480px]">
-            <h1 className="mb-5 text-xl">Forgot your password</h1>
+            <h1 className="mb-5 text-xl">Forgot your password?</h1>
             <p className="mb-5 text-base text-black-light">
               Enter the email that you’ve registered with in the field below. You will receive a
               link for password recovery

@@ -27,6 +27,9 @@ const authManager = {
       { email: params }
     )
   },
+  googleSignIn() {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/google`)
+  },
 }
 
 export default authManager

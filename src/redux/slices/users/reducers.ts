@@ -8,6 +8,9 @@ const reducers = createReducer({
   setError(state, action: IAction<string | null>) {
     state.user.error = action.payload
   },
+  setErrorGoogleSignIn(state, action: IAction<string | null>) {
+    state.user.errorGoogleSignIn = action.payload
+  },
   setSignUpLoading(state, action: IAction<boolean>) {
     state.user.isSignUpLoading = action.payload
   },
@@ -19,6 +22,12 @@ const reducers = createReducer({
   },
   setSignInLoading(state, action: IAction<boolean>) {
     state.user.isSignInLoading = action.payload
+  },
+  setLanguage(state, action: IAction<string>) {
+    state.user.language = action.payload
+  },
+  setLanguageChangeLoading(state, action: IAction<boolean>) {
+    state.user.isLanguageChangeLoading = action.payload
   },
 })
 
