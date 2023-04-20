@@ -1,11 +1,11 @@
 {
-  "navbar.about.us": "About Us",
-  "navbar.home": "Home",
+  "help.button": "Submit",
+  "help.headline": "Headline",
+  "help.headline.required": "Headline is required",
+  "help.problem": "Type your problem here...",
+  "help.problem.required": "Problem is required",
   "help.tel.problem": "Tell us about your problem:",
   "help.text": "Try to support your explanation with a screenshot, with that we can solve your problem faster.",
-  "help.headline": "Headline",
-  "help.problem": "Type your problem here...",
-  "help.button": "Submit",
-  "help.headline.required": "Headline is required",
-  "help.problem.required": "Problem is required"
+  "navbar.about.us": "About Us",
+  "navbar.home": "Home"
 }
