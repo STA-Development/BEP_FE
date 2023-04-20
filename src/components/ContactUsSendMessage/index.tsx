@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { IContactUsProps } from '@allTypes/reduxTypes/supportStateTypes'
-import { defaultValues } from '@constants/contactusDefaultValues'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -10,6 +9,13 @@ import { supportMiddleware, supportSelector } from '@redux/slices/support'
 import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
 import { contactUsValidationSchema } from '@validation/support/contactUs'
+
+const defaultValues = {
+  fullName: '',
+  email: '',
+  phone: '',
+  message: '',
+}
 
 const ContactUsSendMessage = () => {
   const [t] = useTranslation()
