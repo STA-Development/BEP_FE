@@ -7,5 +7,17 @@
   "help.problem": "Напишите свою проблему здесь",
   "help.button": "Отправлять",
   "help.headline.required": "Заголовок обязателен",
-  "help.problem.required": "Проблема обязателен"
+  "help.problem.required": "Проблема обязателен",
+  "contact_us": "Связаться с нами",
+  "contact.us.full.name": "Full Name",
+  "contact.us.mail": "E-mail",
+  "contact.us.phone": "телефон",
+  "contact.us.message": "Message",
+  "contact.us.google.button": "Open Google Maps",
+  "contact.us.address": "Abovyan st. 29, Yerevan",
+  "contact.us.find.us": "Where to find us",
+  "contact.us.full.name.required": "Full name is required",
+  "contact.us.email.required": "Email is required",
+  "contact.us.phone.required": "Phone Number is required",
+  "contact.us.message.required": "Message Number is required"
 }

@@ -1,14 +1,20 @@
-import { IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
+import { IContactUsProps, IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
-const baseURL = 'help'
+const helpURL = 'help'
+const contactUsURL = 'contact-us'
 
 const axiosInstance = Axios()
 const supportManager = {
   axiosInstance,
   sendHelpData(message: IHelpDataProps) {
-    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(`${baseURL}`, {
+    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(`${helpURL}`, {
+      ...message,
+    })
+  },
+  sendContactUsData(message: IContactUsProps) {
+    return axiosInstance.post<IContactUsProps, IAxiosResponse<IHelpDataProps>>(`${contactUsURL}`, {
       ...message,
     })
   },

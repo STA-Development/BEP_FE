@@ -11,6 +11,12 @@ const reducers = createReducer({
   setHelpLoading(state, action: IAction<boolean>) {
     state.support.isHelpLoading = action.payload
   },
+  setContactUsLoading(state, action: IAction<boolean>) {
+    state.support.isContactUsLoading = action.payload
+  },
+  setContactUsStatus(state, action: IAction<null | number>) {
+    state.support.contactUsStatus = action.payload
+  },
 })
 
 export default reducers
