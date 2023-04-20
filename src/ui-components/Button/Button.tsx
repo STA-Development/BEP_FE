@@ -4,7 +4,7 @@ import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'text'] as const
 const ButtonColor = ['primary', 'secondary', 'gray'] as const
-const ButtonSize = ['xs', 'sm', 'sm2', 'bs', 'lg', 'fl', 'hg', 'app'] as const
+const ButtonSize = ['xs', 'sm', 'md', 'bs', 'lg', 'fl', 'hg', 'app'] as const
 const ButtonRadius = ['all', 'r', 'l'] as const
 
 export type ButtonProps = {
@@ -72,7 +72,7 @@ export const Button: FC<ButtonProps> = ({
     [
       size === 'xs' && 'p-0',
       size === 'sm' && 'px-5 py-2.5',
-      size === 'sm2' && 'px-5 py-2.5 text-sm font-normal',
+      size === 'md' && 'px-5 py-2.5 text-sm font-normal',
       size === 'bs' && 'px-10 py-2.5',
       size === 'lg' && 'w-full px-20 py-2.5 xl:w-auto',
       size === 'fl' && 'w-full py-2.5',

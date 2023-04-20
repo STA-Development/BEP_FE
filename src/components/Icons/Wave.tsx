@@ -7,8 +7,6 @@ export const Wave: FC<IconProps> = ({ fill = 'fill-gray-wave', className, ...res
 
   return (
     <svg
-      // width="1440"
-      // height="213"
       viewBox="0 0 1440 213"
       width="100%"
       xmlns="http://www.w3.org/2000/svg"

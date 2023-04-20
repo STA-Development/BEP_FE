@@ -27,7 +27,7 @@ export const Header = () => {
   }
 
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-40">
       <Disclosure as="nav">
         {({ open }) => (
           <>
