@@ -1,1 +1,8 @@
-{ "navbar.about.us": "About Us", "navbar.home": "Home" }
+{
+  "footer.copyright": "Copyright © 2023 with all rights reserved",
+  "navbar.about.us": "About Us",
+  "navbar.contact.us": "Contact Us",
+  "navbar.educational.institutes": "Educational Institutes",
+  "navbar.home": "Home",
+  "navbar.language": "Language"
+}

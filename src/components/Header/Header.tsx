@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { LanguageSelector, User } from '@components/Header'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
+import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -9,16 +11,16 @@ import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 export const Header = () => {
-  // TODO update later
+  const [t] = useTranslation()
+
   const navigation = [
-    // {
-    //   name: t(Translation.NAVBAR_HOME),
-    //   href: '/',
-    //   current: false,
-    // },
-    { name: 'About Us', href: '/about-us', current: false },
-    { name: 'Educational Institutes', href: '/educational-institutes', current: false },
-    { name: 'Contact Us', href: '/contact-us', current: false },
+    { name: t(Translation.NAVBAR_ABOUT_US), href: '/about-us', current: false },
+    {
+      name: t(Translation.NAVBAR_EDUCATIONAL_INSTITUTES),
+      href: '/educational-institutes',
+      current: false,
+    },
+    { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
   ]
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 

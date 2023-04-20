@@ -1,1 +1,8 @@
-{ "navbar.about.us": "Pro nas", "navbar.home": "Главная" }
+{
+  "navbar.home": "Главная",
+  "navbar.about.us": "О нас",
+  "navbar.educational.institutes": "Образовательные институты",
+  "navbar.contact.us": "Связаться с нами",
+  "navbar.language": "Язык",
+  "footer.copyright": "Copyright © 2023 with all rights reserved"
+}

@@ -1,1 +1,8 @@
-{ "navbar.about.us": "Mer Masin", "navbar.home": "Գլխավոր" }
+{
+  "navbar.home": "Գլխավոր",
+  "navbar.about.us": "Մեր մասին",
+  "navbar.educational.institutes": "Ուսումնական հաստատություններ",
+  "navbar.contact.us": "Կապ մեզ հետ",
+  "navbar.language": "Լեզու",
+  "footer.copyright": "Copyright © 2023 with all rights reserved"
+}
