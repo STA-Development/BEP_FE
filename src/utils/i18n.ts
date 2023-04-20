@@ -21,7 +21,7 @@ const localizationResources = {
 
 i18n.use(initReactI18next).init({
   resources: localizationResources,
-  lng: `${selectedLanguage}`,
+  lng: selectedLanguage,
   fallbackLng: ['en', 'ru', 'arm'],
   debug: false,
   keySeparator: false,
