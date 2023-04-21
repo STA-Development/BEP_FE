@@ -26,6 +26,7 @@
       "@axios/*": ["./src/manager/*"],
       "@utils/*": ["./src/utils/*"],
       "@constants/*": ["./src/constants/*"],
+      "@validation/*": ["./src/validation/*"],
       "~/*": ["./public/*"]
     },
     "resolveJsonModule": true /* Enable importing .json files */ /* Emit */,
