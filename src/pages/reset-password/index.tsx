@@ -1,118 +1,54 @@
 import React, { useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { IResetPasswordParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
-import { ChekInIcon } from '@components/Icons/CheckInIcon'
+import { yupResolver } from '@hookform/resolvers/yup'
+import ConfirmPassword from '@pages/reset-password/confirm-password'
+import RequestPassword from '@pages/reset-password/request-password'
+import VerifyOtp from '@pages/reset-password/verify-otp'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
-import { Button } from '@uiComponents/Button'
-import { Input } from '@uiComponents/Input'
-import { useRouter } from 'next/router'
 
-import { testEmail } from '@utils/testEmail'
-
-export enum RouterQueryTypes {
-  verifyOtp = 'verify-otp',
-  confirmPassword = 'confirm-password',
-}
+import { resetPasswordValidationSchema } from '../../validation/auth/resetPassword'
 
 export const ResetPassword = () => {
-  const router = useRouter()
-  const [emailValue, setEmailValue] = useState<string>('')
-  const [emailVerificationError, setEmailVerificationError] = useState<string>()
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const handleEmailSend = () => {
-    const emailVerification: boolean = testEmail(emailValue)
+  const methods = useForm({
+    mode: 'all',
+    defaultValues: {
+      email: '',
+      otp: '',
+      password: '',
+    },
+    resolver: yupResolver(resetPasswordValidationSchema),
+  })
 
-    if (!emailVerification || !emailValue.length) {
-      setEmailVerificationError('Email not recognized')
-
-      return
-    }
-
-    dispatch(usersMiddleware.resetPassword(emailValue))
-    // router.query.tab = RouterQueryTypes.verifyOtp
-    // router.push(router)
-    setEmailVerificationError('')
+  const onSubmit = (data: IResetPasswordParams) => {
+    dispatch(usersMiddleware.forgotPassword(data))
+    setSelectedIndex((prev) => (prev > 1 ? 1 : prev) + 1)
   }
 
-  const onEnterCode = (value: string) => {
-    if (value.length === 6) {
-      router.query.tab = RouterQueryTypes.confirmPassword
-      router.push(router)
-    }
-  }
-
-  const onSetEmail = (value: string) => {
-    setEmailValue(value)
+  const nextPage = () => {
+    setSelectedIndex((prev) => (prev > 1 ? 1 : prev) + 1)
   }
 
   return (
     <Container className="pb-40 pt-10">
       <div className="flex w-full justify-center">
-        {!router.query.tab && (
-          <div className="w-full max-w-[480px]">
-            <h1 className="mb-5 text-xl">Forgot your password?</h1>
-            <p className="mb-5 text-base text-black-light">
-              Enter the email that you’ve registered with in the field below. You will receive a
-              link for password recovery
-            </p>
-            <div className="mb-5 w-full">
-              <Input
-                type="email"
-                error={emailVerificationError}
-                placeholder="Email"
-                onChange={(e) => onSetEmail(e.target.value)}
-              />
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <div className={`${selectedIndex !== 0 && 'hidden'}`}>
+              <RequestPassword nextPage={nextPage} />
             </div>
-            <Button
-              size="fl"
-              onClick={handleEmailSend}
-            >
-              Request password reset
-            </Button>
-          </div>
-        )}
-        {router.query.tab === RouterQueryTypes.verifyOtp && (
-          <div className="w-full max-w-[480px]">
-            <h1 className="text-xl font-medium text-black xl:font-normal">
-              The link was sent to your email
-            </h1>
-            <div className="mt-5 flex border-b border-gray-thin pb-5">
-              <ChekInIcon className="mr-5" />
-              <p className="text-base text-black-light">
-                Check your inbox and click on the link for password recovery
-              </p>
+            <div className={`${selectedIndex !== 1 && 'hidden'}`}>
+              <VerifyOtp nextPage={nextPage} />
             </div>
-            <div className="mb-5 mt-5">
-              <p className="mb-5 text-base text-black-light">
-                Didn’t get the password? Click “Resend”
-              </p>
-              <Input
-                type="email"
-                placeholder="Enter Code"
-                onChange={(e) => onEnterCode(e.target.value)}
-              />
+            <div className={`${selectedIndex !== 2 && 'hidden'}`}>
+              <ConfirmPassword />
             </div>
-            <Button size="fl">Resend Email</Button>
-          </div>
-        )}
-        {router.query.tab === RouterQueryTypes.confirmPassword && (
-          <div className="w-full max-w-[480px]">
-            <h1 className="mb-5 text-xl">Create a new password</h1>
-            <div className="grid w-full gap-5">
-              <Input
-                placeholder="Enter a new password"
-                type="password"
-                id="password"
-              />
-              <Input
-                placeholder="Confirm password"
-                type="password"
-                id="confirm_password"
-              />
-              <Button size="fl">Submit Password</Button>
-            </div>
-          </div>
-        )}
+          </form>
+        </FormProvider>
       </div>
     </Container>
   )

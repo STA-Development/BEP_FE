@@ -4,6 +4,12 @@ export interface ISignInResponse {
   remember: boolean
 }
 
+export interface IResetPasswordParams {
+  email?: string
+  password?: string
+  otp?: string
+}
+
 export interface ISignInParams {
   email: string
   password: string

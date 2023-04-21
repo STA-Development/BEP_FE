@@ -30,7 +30,7 @@ export const Login = () => {
     defaultValues: {
       email: '',
       password: '',
-      remember: false,
+      // remember: false,
     },
     resolver: yupResolver(loginValidationSchema),
   })

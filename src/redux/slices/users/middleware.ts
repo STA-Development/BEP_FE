@@ -1,6 +1,11 @@
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
-import { IError, ISignInParams, ISignUpParams } from '@axios/authentication/authManagerTypes'
+import {
+  IError,
+  IResetPasswordParams,
+  ISignInParams,
+  ISignUpParams,
+} from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
 import i18n from 'i18next'
 
@@ -93,14 +98,45 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
   }
 }
 
-const resetPassword = (params: string) => async (dispatch: AppDispatch) => {
+const forgotPassword = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
+  try {
+    await API.auth.forgotPassword(params)
+    dispatch(
+      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
+    )
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response.data.status.message))
+  } finally {
+    dispatch(setSignUpLoading(false))
+  }
+}
+
+const verifyOtp = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
+  try {
+    console.log(99)
+    await API.auth.verifyOtp(params)
+    dispatch(
+      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
+    )
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response.data.status.message))
+  } finally {
+    dispatch(setSignUpLoading(false))
+  }
+}
+
+const resetPassword = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
   try {
     // dispatch(setSignUpLoading(true))
 
     console.log(params, 'params')
-    await API.auth.forgotPassword(params)
+    await API.auth.resetPassword(params)
 
-    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
+    dispatch(
+      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
+    )
     dispatch(setError(null))
   } catch (error) {
     dispatch(setError((error as IError).response.data.status.message))
@@ -136,6 +172,8 @@ export default {
   logOut,
   googleSignIn,
   isAuthenticated,
+  forgotPassword,
+  verifyOtp,
   register,
   resetPassword,
   clearError,

@@ -1,4 +1,5 @@
 import {
+  IResetPasswordParams,
   ISignInParams,
   ISignInResponse,
   ISignUpParams,
@@ -20,11 +21,19 @@ const authManager = {
   signUp(params: ISignUpParams) {
     return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/register`, params)
   },
-
-  forgotPassword(params: string) {
-    return axiosInstance.post<ISignInResponse, IAxiosResponse<ISignInResponse>>(
+  verifyOtp(params: IResetPasswordParams) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/verify-otp`, params)
+  },
+  forgotPassword(params: IResetPasswordParams) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
       `${baseURL}/v1/auth/forgot-password`,
-      { email: params }
+      params
+    )
+  },
+  resetPassword(params: IResetPasswordParams) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/auth/reset-password`,
+      params
     )
   },
   googleSignIn() {
