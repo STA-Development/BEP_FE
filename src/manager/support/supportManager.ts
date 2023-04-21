@@ -14,9 +14,12 @@ const supportManager = {
     })
   },
   sendContactUsData(message: IContactUsProps) {
-    return axiosInstance.post<IContactUsProps, IAxiosResponse<IHelpDataProps>>(`${contactUsURL}`, {
-      ...message,
-    })
+    return axiosInstance.post<IContactUsProps, IAxiosResponse<IHelpDataProps>>(
+      `/core/v1/${contactUsURL}`,
+      {
+        ...message,
+      }
+    )
   },
 }
 
