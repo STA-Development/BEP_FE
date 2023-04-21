@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IEventsListProps } from '@allTypes/reduxTypes/eventsStateTypes'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
+import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { eventsMiddleware, eventsSelector } from '@redux/slices/events'
 import { viewsMiddleware } from '@redux/slices/views'
@@ -13,6 +15,7 @@ import Image from 'next/image'
 const PAGE_BOTTOM = 600
 
 const Events = () => {
+  const [t] = useTranslation()
   const [page, setPage] = useState<number>(1)
   const { eventsList, pageSize, isEventsLoading, totalItems } = useAppSelector(
     eventsSelector.eventsData
@@ -55,8 +58,8 @@ const Events = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title="Events"
-        description="Keep up with the following events"
+        title={`${t(Translation.PAGE_EVENTS_MAIN_TITLE)}`}
+        description={`${t(Translation.PAGE_EVENTS_MAIN_DESCRIPTION)}`}
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">

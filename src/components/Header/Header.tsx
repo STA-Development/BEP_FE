@@ -20,9 +20,9 @@ export const Header = () => {
       href: '/',
       current: false,
     },
-    { name: 'About Us', href: '/about-us', current: false },
-    { name: 'Contact Us', href: '/contact-us', current: false },
-    { name: 'News', href: '/news', current: false },
+    { name: t(Translation.NAVBAR_ABOUT_US), href: '/about-us', current: false },
+    { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
+    { name: t(Translation.NAVBAR_NEWS), href: '/news', current: false },
   ]
   const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
 
@@ -46,7 +46,7 @@ export const Header = () => {
             <div className="relative flex h-23 items-center justify-between bg-primary">
               <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-gray-400 xl:hidden">
-                  <span className="sr-only">Open main menu</span>
+                  <span className="sr-only">Ozdfzgzdgsxgsdgsdgsdgsdgsdgdsgu</span>
                   {open ? <CloseIcon /> : <BarsIcon />}
                 </Disclosure.Button>
               </div>
@@ -85,7 +85,7 @@ export const Header = () => {
                           variant="text"
                           color="secondary"
                         >
-                          Login
+                          {t(Translation.NAVBAR_LOGIN)}
                         </Button>
                       </Link>
                     </div>
@@ -96,7 +96,7 @@ export const Header = () => {
                           color="primary"
                           variant="outlined"
                         >
-                          Register
+                          {t(Translation.NAVBAR_REGISTER)}
                         </Button>
                       </Link>
                     </div>

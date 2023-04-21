@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import IconProps from '@allTypes/svg-icon'
 import { DownIcon } from '@components/Icons/DownIcon'
 import { ArmIcon } from '@components/Icons/lang/ArmIcon'
 import { EnIcon } from '@components/Icons/lang/EnIcon'
 import { RuIcon } from '@components/Icons/lang/RuIcon'
+import { Translation } from '@constants/translations'
 import { Menu } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -41,6 +43,7 @@ export const LanguageSelector = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<ISelectedLanguageProps>()
   const localLang = typeof window !== 'undefined' ? window.localStorage.getItem('language') : 'en'
   const { language } = useAppSelector(usersSelector.user)
+  const [t] = useTranslation()
 
   const onSetLanguage = (value: string) => {
     dispatch(usersMiddleware.changeLanguage(value))
@@ -64,7 +67,7 @@ export const LanguageSelector = () => {
       {({ open }) => (
         <>
           <Menu.Button className="inline-flex w-full items-center px-4 py-2 text-base text-white">
-            Language:
+            {t(Translation.NAVBAR_LANGUAGE)}
             <span className="ml-5"> {selectedLanguage && <selectedLanguage.icon />}</span>
             <div className="ml-3">{open ? <DownIcon className="rotate-180" /> : <DownIcon />}</div>
           </Menu.Button>

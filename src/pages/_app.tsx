@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
   useEffect(() => {
     const data = window.localStorage.getItem('language')
 
-    if (data !== null) {
+    if (data) {
       dispatch(usersMiddleware.changeLanguage(data))
     }
   }, [])
