@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
+import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import { Input } from '@uiComponents/Input'
 import { useRouter } from 'next/router'
@@ -13,6 +15,8 @@ export enum RouterQueryTypes {
 }
 
 export const ResetPassword = () => {
+  const [t] = useTranslation()
+
   const router = useRouter()
   const [emailValue, setEmailValue] = useState<string>('')
   const [emailVerificationError, setEmailVerificationError] = useState<string>()
@@ -47,16 +51,15 @@ export const ResetPassword = () => {
       <div className="flex w-full justify-center">
         {!router.query.tab && (
           <div className="w-full max-w-[480px]">
-            <h1 className="mb-5 text-xl">Forgot your password?</h1>
+            <h1 className="mb-5 text-xl">{t(Translation.PAGE_RESET_PASSWORD_TITLE)}</h1>
             <p className="mb-5 text-base text-black-light">
-              Enter the email that you’ve registered with in the field below. You will receive a
-              link for password recovery
+              {t(Translation.PAGE_RESET_PASSWORD_DESCRIPTION)}
             </p>
             <div className="mb-5 w-full">
               <Input
                 type="email"
                 error={emailVerificationError}
-                placeholder="Email"
+                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_INPUT_PLACEHOLDER)}`}
                 onChange={(e) => onSetEmail(e.target.value)}
               />
             </div>
@@ -64,49 +67,57 @@ export const ResetPassword = () => {
               size="fl"
               onClick={handleEmailSend}
             >
-              Request password reset
+              {t(Translation.PAGE_RESET_PASSWORD_ACTIONS_REQUEST_PASSWORD_RESET)}
             </Button>
           </div>
         )}
         {router.query.tab === RouterQueryTypes.verifyOtp && (
           <div className="w-full max-w-[480px]">
             <h1 className="text-xl font-medium text-black xl:font-normal">
-              The link was sent to your email
+              {t(Translation.PAGE_RESET_PASSWORD_VERIFICATION_TITLE)}
             </h1>
             <div className="mt-5 flex border-b border-gray-thin pb-5">
               <ChekInIcon className="mr-5" />
               <p className="text-base text-black-light">
-                Check your inbox and click on the link for password recovery
+                {t(Translation.PAGE_RESET_PASSWORD_VERIFICATION_DESCRIPTION)}
               </p>
             </div>
             <div className="mb-5 mt-5">
               <p className="mb-5 text-base text-black-light">
-                Didn’t get the password? Click “Resend”
+                {t(Translation.PAGE_RESET_PASSWORD_VERIFICATION_CODE_RESEND)}
               </p>
               <Input
                 type="email"
-                placeholder="Enter Code"
+                placeholder={`${t(
+                  Translation.PAGE_RESET_PASSWORD_VERIFICATION_CODE_INPUT_PLACEHOLDER
+                )}`}
                 onChange={(e) => onEnterCode(e.target.value)}
               />
             </div>
-            <Button size="fl">Resend Email</Button>
+            <Button size="fl">
+              {t(Translation.PAGE_RESET_PASSWORD_VERIFICATION_ACTIONS_RESEND_EMAIL)}
+            </Button>
           </div>
         )}
         {router.query.tab === RouterQueryTypes.confirmPassword && (
           <div className="w-full max-w-[480px]">
-            <h1 className="mb-5 text-xl">Create a new password</h1>
+            <h1 className="mb-5 text-xl">
+              {t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_TITLE)}
+            </h1>
             <div className="grid w-full gap-5">
               <Input
-                placeholder="Enter a new password"
+                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD)}`}
                 type="password"
                 id="password"
               />
               <Input
-                placeholder="Confirm password"
+                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD_CONFIRM)}`}
                 type="password"
                 id="confirm_password"
               />
-              <Button size="fl">Submit Password</Button>
+              <Button size="fl">
+                {t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_ACTIONS_SUBMIT)}
+              </Button>
             </div>
           </div>
         )}

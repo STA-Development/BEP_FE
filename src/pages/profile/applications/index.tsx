@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
 import { AddIcon, DeleteIcon } from '@components/Icons'
+import { Translation } from '@constants/translations'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
@@ -43,6 +45,8 @@ const applications = [
 ]
 
 export const Applications = () => {
+  const [t] = useTranslation()
+
   const onOpenAddApplicationModal = useCallback(() => {
     dispatch(
       viewsMiddleware.openModal({
@@ -83,13 +87,13 @@ export const Applications = () => {
                 size="bs"
                 variant="outlined"
               >
-                Deactivate Application
+                {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DEACTIVATE)}
               </Button>
               <Button
                 size="bs"
                 variant="contained"
               >
-                Edit Form
+                {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_EDIT)}
               </Button>
             </div>
             <Button
@@ -97,7 +101,7 @@ export const Applications = () => {
               LeftIcon={DeleteIcon}
               onClick={onDeleteAddApplicationModal}
             >
-              Delete Application
+              {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DELETE)}
             </Button>
           </div>
         </div>

@@ -1,9 +1,11 @@
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
 import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
@@ -15,6 +17,8 @@ import Link from 'next/link'
 import { loginValidationSchema } from '../../validation/auth/login'
 
 export const Login = () => {
+  const [t] = useTranslation()
+
   const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
   const onSubmit = (data: ISignInParams) => {
@@ -42,7 +46,7 @@ export const Login = () => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mx-auto flex w-[380px] flex-col items-center">
-            <h1 className="mb-5 text-xl">Log In</h1>
+            <h1 className="mb-5 text-xl">{t(Translation.PAGE_LOGIN_TITLE)}</h1>
             <Button
               variant="outlined"
               size="fl"
@@ -52,7 +56,7 @@ export const Login = () => {
               <div className="mr-5">
                 <GoogleIcon className="group-hover:fill-white" />
               </div>
-              <div>Sign in with Google</div>
+              <div>{t(Translation.PAGE_LOGIN_GOOGLE_SIGN_IN)}</div>
             </Button>
             <OnDivider />
             <div className="mb-5 w-full">
@@ -65,7 +69,7 @@ export const Login = () => {
               <div className="relative">
                 <TextField
                   fieldName="password"
-                  placeholder="Password"
+                  placeholder={`${t(Translation.PAGE_LOGIN_INPUT_PASSWORD)}`}
                   type="password"
                 />
               </div>
@@ -73,7 +77,7 @@ export const Login = () => {
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label="Remember me"
+                label={`${t(Translation.PAGE_LOGIN_INPUT_CHECKBOX)}`}
                 id="remember-me"
               />
             </div>
@@ -82,7 +86,7 @@ export const Login = () => {
               disabled={isSignInLoading}
               type="submit"
             >
-              Log In
+              {t(Translation.PAGE_LOGIN_INPUT_ACTIONS_LOGIN)}
             </Button>
             {error || errorGoogleSignIn ? (
               <div className="mt-2.5 w-full">
@@ -96,7 +100,7 @@ export const Login = () => {
                   size="xs"
                   variant="text"
                 >
-                  Forgot Password?
+                  {t(Translation.PAGE_LOGIN_INPUT_ACTIONS_FORGOT_PASSWORD)}
                 </Button>
               </Link>
             </div>
