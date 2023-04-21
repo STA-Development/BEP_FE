@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
-import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -30,74 +29,69 @@ export const Footer = () => {
     { href: 'http://gg.com', icon: <GGIcon /> },
   ]
 
+  // TODO Update links
+
+  const copyright = t(Translation.FOOTER_COPYRIGHT)
+
+  const policiesAndTerms = [t(Translation.FOOTER_PRIVACY_POLICY), t(Translation.FOOTER_TERMS)]
+  const dontMissOut = [
+    { label: t(Translation.FOOTER_NEWS), href: '/news' },
+    {
+      label: t(Translation.FOOTER_EVENTS),
+      href: '/events',
+    },
+  ]
+
   return (
     <Container color="primary">
-      <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white xl:grid-flow-col">
-        <div className="row-span-2 mb-10 xl:mb-0">
-          <p className="mb-5 text-base font-medium">{t(Translation.FOOTER_CONTACTS)}</p>
-          <ul>
-            {contacts.map((contact) => (
-              <li
-                key={contact}
-                className="mb-2.5 text-sm"
-              >
-                {contact}
+      <div className="flex flex-col justify-between py-10 text-white xl:flex-row xl:pb-5">
+        <div className="order-2 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-1 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">{t(Translation.FOOTER_CONTACTS)}</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {contacts.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="order-4 space-y-5 divide-gray-thin xl:order-2 xl:divide-y">
+          <p className="text-base font-medium">{t(Translation.FOOTER_POLICIES_TITLE)}</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {policiesAndTerms.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="order-3 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-3 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">{t(Translation.FOOTER_NEWS_EVENTS_TITLE)}</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {dontMissOut.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
         </div>
-        <div className="xl:0 row-span-2 mb-10">
-          <p className="mb-5 text-base font-medium">{t(Translation.FOOTER_POLICIES_TITLE)}</p>
-          <ul className="mb-9">
-            <li className="mb-2.5 text-base">
-              <Link
-                href="youtube.com"
-                className="hover:underline"
-              >
-                {t(Translation.FOOTER_PRIVACY_POLICY)}
-              </Link>
-            </li>
-            <li className="mb-2.5 text-base">
-              <Link
-                href="youtube.com"
-                className="hover:underline"
-              >
-                {t(Translation.FOOTER_TERMS)}
-              </Link>
-            </li>
-          </ul>
-          <p className="text-base underline">{t(Translation.FOOTER_COPYRIGHT)}</p>
-        </div>
-        <div className="order-first mb-10 flex xl:order-none xl:mb-7.5">
-          <input
-            type="text"
-            placeholder={`${t(Translation.FOOTER_EMAIL_INPUT)}`}
-            className="rounded-l border-0 px-5 py-2.5 text-base text-black outline-0 placeholder:text-base placeholder:text-black-light"
-          />
-          <Button
-            variant="outlined"
-            color="secondary"
-            radius="r"
-          >
-            {t(Translation.FOOTER_SUBSCRIBE)}
-          </Button>
-        </div>
-        <div>
-          <p className="mb-5 text-base font-medium">{t(Translation.FOOTER_SOCIAL_MEDIA)}</p>
-          <div className="flex">
-            {socials.map((social) => (
-              <Link
-                key={social.href}
-                href={social.href}
-                target="_blank"
-                className="mr-5 flex h-12 w-12 items-center justify-center rounded-full bg-white"
-              >
-                {social.icon}
-              </Link>
-            ))}
+        <div className="order-1 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-4 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">{t(Translation.FOOTER_SOCIAL_MEDIA_TITLE)}</p>
+          <div className="text-sm text-gray-thin">
+            <ul className="flex space-x-5 pt-0 xl:pt-5">
+              {socials.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    target="_blank"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-white"
+                  >
+                    {item.icon}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-12 hidden text-sm text-gray-thin underline xl:block">{copyright}</p>
           </div>
         </div>
       </div>
+      <p className="block pb-10 text-sm text-gray-thin underline xl:hidden">{copyright}</p>
     </Container>
   )
 }
