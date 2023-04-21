@@ -1,6 +1,5 @@
 import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Container } from '@components/Container'
-import { Wave } from '@components/Icons/Wave'
 
 const ContentColor = ['primary', 'secondary', 'wave'] as const
 
@@ -24,13 +23,7 @@ export const Introduction = ({
 }: IIntroductionProps) => (
   <>
     {wave ? (
-      <div className="max-h-[213px] overflow-hidden bg-gray-wave">
-        <Container>
-          <div className="bg-white">
-            <Wave className="w-full" />
-          </div>
-        </Container>
-      </div>
+      <div className="h-[213px] w-full bg-[url('/vawe.svg')] bg-cover bg-center bg-no-repeat" />
     ) : null}
     <Container
       color={color}

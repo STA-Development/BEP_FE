@@ -94,6 +94,7 @@ const Home = () => {
           ))}
         </div>
       </Container>
+      <div className="h-[95px] w-full bg-[url('/vawe2.svg')] bg-cover bg-center bg-no-repeat" />
 
       <Container className="my-30 xl:my-60">
         <h2 className="mb-10 text-xl font-medium xl:mt-25 xl:text-2xl">

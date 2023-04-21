@@ -41,6 +41,7 @@ export const Header = () => {
       <Disclosure as="nav">
         {({ open }) => (
           <>
+            <div className="absolute h-[120px] w-full bg-[url('/vawe1.svg')] bg-cover bg-center bg-no-repeat" />
             <Container>
               <div className="relative flex h-23 items-center justify-between">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
