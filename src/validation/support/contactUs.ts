@@ -8,6 +8,10 @@ export const contactUsValidationSchema = object({
     .email()
     .matches(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Invalid name address')
     .required('Email is required'),
-  phone: string().required('Phone Number is required'),
+  phone: string()
+    .matches(
+      /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    )
+    .required('Phone Number is required'),
   message: string().required('Message is required'),
 })
