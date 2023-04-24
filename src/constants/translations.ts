@@ -1,6 +1,8 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY !!! */
 
 export enum Translation {
+  ABOUT_US_PAGE_DESC = 'about.us.page.desc',
+  ABOUT_US_PAGE_TITLE = 'about.us.page.title',
   FOOTER_COPYRIGHT = 'footer.copyright',
   NAVBAR_ABOUT_US = 'navbar.about.us',
   NAVBAR_CONTACT_US = 'navbar.contact.us',

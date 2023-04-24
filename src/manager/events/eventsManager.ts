@@ -9,7 +9,7 @@ const eventsManager = {
   axiosInstance,
   getEvents(params: IEventsListParams) {
     return axiosInstance.get<IEventsListProps, IAxiosResponsePaginated<IEventsListProps[]>>(
-      `${baseURL}`,
+      `/core/v1/${baseURL}`,
       {
         params,
       }
@@ -17,7 +17,7 @@ const eventsManager = {
   },
   getIndividualEvent(id: string) {
     return axiosInstance.get<IEventsListProps, IAxiosResponsePaginated<IEventsListProps>>(
-      `${baseURL}/${id}`
+      `/core/v1/${baseURL}/${id}`
     )
   },
 }

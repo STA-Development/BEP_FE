@@ -9,7 +9,7 @@ const newsManager = {
   axiosInstance,
   getNews(params: INewsParams) {
     return axiosInstance.get<INewsResponse, IAxiosResponsePaginated<INewsResponse[]>>(
-      `${baseURL}`,
+      `/core/v1/${baseURL}`,
       {
         params,
       }
@@ -17,7 +17,7 @@ const newsManager = {
   },
   getIndividualNews(id: string) {
     return axiosInstance.get<IIndividualNewsResponse, IAxiosResponse<IIndividualNewsResponse>>(
-      `${baseURL}/${id}`
+      `/core/v1/${baseURL}/${id}`
     )
   },
 }
