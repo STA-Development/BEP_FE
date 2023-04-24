@@ -7,55 +7,55 @@ import slice from './slice'
 
 const {
   setError,
-  setHelpLoading,
-  setHelpMessageSuccess,
-  setContactUsLoading,
-  setContactUsMessageSuccess,
+  setHelpSubmittingLoading,
+  setHelpSubmitSuccess,
+  setIsContactUsSubmittingLoading,
+  setContactUsSubmitSuccess,
 } = slice.actions
 
-const createHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispatch) => {
+const sendHelpData = (helpData: IHelpDataProps) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setHelpLoading(true))
+    dispatch(setHelpSubmittingLoading(true))
 
-    await API.support.sendHelpData(message)
+    await API.support.sendHelpData(helpData)
 
-    dispatch(setHelpMessageSuccess(true))
+    dispatch(setHelpSubmitSuccess(true))
 
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setHelpLoading(false))
+    dispatch(setHelpSubmittingLoading(false))
   }
 }
 
-const resetHelpMessageSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setHelpMessageSuccess(false))
+const resetHelpSubmitDataSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setHelpSubmitSuccess(false))
 }
 
-const createContactUsMessage = (message: IContactUsProps) => async (dispatch: AppDispatch) => {
+const sendContactUsData = (contactUsData: IContactUsProps) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setContactUsLoading(true))
+    dispatch(setIsContactUsSubmittingLoading(true))
 
-    await API.support.sendContactUsData(message)
+    await API.support.sendContactUsData(contactUsData)
 
-    dispatch(setContactUsMessageSuccess(true))
+    dispatch(setContactUsSubmitSuccess(true))
 
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response.data?.status?.message))
   } finally {
-    dispatch(setContactUsLoading(false))
+    dispatch(setIsContactUsSubmittingLoading(false))
   }
 }
 
-const resetContactUsMessageSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setContactUsMessageSuccess(false))
+const resetContactUsSubmitDataSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setContactUsSubmitSuccess(false))
 }
 
 export default {
-  createHelpMessage,
-  createContactUsMessage,
-  resetHelpMessageSuccess,
-  resetContactUsMessageSuccess,
+  sendHelpData,
+  sendContactUsData,
+  resetHelpSubmitDataSuccess,
+  resetContactUsSubmitDataSuccess,
 }

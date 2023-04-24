@@ -4,13 +4,13 @@ export const getInitialState = (): ISupportProps => ({
   support: {
     help: {
       error: null,
-      isHelpLoading: false,
-      isHelpMessageSuccess: false,
+      isHelpDataSublittingLoading: false,
+      isHelpDataSubmittedSuccess: false,
     },
     contactUs: {
       error: null,
-      isContactUsLoading: false,
-      isContactUsMessageSuccess: false,
+      isContactUsSubmittingLoading: false,
+      isContactUsDataSubmittedSuccess: false,
     },
   },
 })

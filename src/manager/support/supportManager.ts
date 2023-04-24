@@ -8,16 +8,19 @@ const contactUsURL = 'contact-us'
 const axiosInstance = Axios()
 const supportManager = {
   axiosInstance,
-  sendHelpData(message: IHelpDataProps) {
-    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(`${helpURL}`, {
-      ...message,
-    })
+  sendHelpData(helpData: IHelpDataProps) {
+    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(
+      `/core/v1/${helpURL}`,
+      {
+        ...helpData,
+      }
+    )
   },
-  sendContactUsData(message: IContactUsProps) {
+  sendContactUsData(contactUsData: IContactUsProps) {
     return axiosInstance.post<IContactUsProps, IAxiosResponse<IHelpDataProps>>(
       `/core/v1/${contactUsURL}`,
       {
-        ...message,
+        ...contactUsData,
       }
     )
   },

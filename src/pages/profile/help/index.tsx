@@ -17,7 +17,7 @@ const defaultValues = {
 
 export const Help = () => {
   const [t] = useTranslation()
-  const isHelpMessageSuccess = useAppSelector(supportSelector.isHelpMessageSuccess)
+  const isHelpDataSubmittedSuccess = useAppSelector(supportSelector.isHelpDataSubmittedSuccess)
 
   const methods = useForm({
     defaultValues,
@@ -28,7 +28,7 @@ export const Help = () => {
   const { handleSubmit, reset } = methods
   const onSubmit = (data: IHelpDataProps) => {
     dispatch(
-      supportMiddleware.createHelpMessage({
+      supportMiddleware.sendHelpData({
         headline: data.headline,
         problem: data.problem,
       })
@@ -36,11 +36,11 @@ export const Help = () => {
   }
 
   useEffect(() => {
-    if (isHelpMessageSuccess) {
+    if (isHelpDataSubmittedSuccess) {
       reset({ ...defaultValues })
-      dispatch(supportMiddleware.resetHelpMessageSuccess())
+      dispatch(supportMiddleware.resetHelpSubmitDataSuccess())
     }
-  }, [isHelpMessageSuccess, reset])
+  }, [isHelpDataSubmittedSuccess, reset])
 
   return (
     <div className="grid gap-4 rounded bg-gray-thin p-5 xl:p-10">

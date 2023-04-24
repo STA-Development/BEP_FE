@@ -20,7 +20,9 @@ const defaultValues = {
 const ContactUsSendMessage = () => {
   const [t] = useTranslation()
 
-  const isContactUsMessageSuccess = useAppSelector(supportSelector.isContactUsMessageSuccess)
+  const isContactUsDataSubmittedSuccess = useAppSelector(
+    supportSelector.isContactUsDataSubmittedSuccess
+  )
 
   const methods = useForm({
     defaultValues,
@@ -32,7 +34,7 @@ const ContactUsSendMessage = () => {
 
   const onSubmit = (data: IContactUsProps) => {
     dispatch(
-      supportMiddleware.createContactUsMessage({
+      supportMiddleware.sendContactUsData({
         fullName: data.fullName,
         email: data.email,
         phone: data.phone.toString(),
@@ -42,10 +44,10 @@ const ContactUsSendMessage = () => {
   }
 
   useEffect(() => {
-    if (isContactUsMessageSuccess) {
+    if (isContactUsDataSubmittedSuccess) {
       reset({ ...defaultValues })
     }
-  }, [isContactUsMessageSuccess, reset])
+  }, [isContactUsDataSubmittedSuccess, reset])
 
   return (
     <div className="xl:pr-20">
@@ -88,7 +90,7 @@ const ContactUsSendMessage = () => {
             type="submit"
             size="fl"
           >
-            {t(Translation.HELP_BUTTON)}
+            {t(Translation.CONTACT_US_SUBMIT_BUTTON)}
           </Button>
         </form>
       </FormProvider>

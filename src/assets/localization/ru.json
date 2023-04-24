@@ -23,5 +23,6 @@
   "contact.us.full.name.required": "Full name is required",
   "contact.us.email.required": "Email is required",
   "contact.us.phone.required": "Phone Number is required",
-  "contact.us.message.required": "Message Number is required"
+  "contact.us.message.required": "Message Number is required",
+  "contact.us.submit.button": "Submit"
 }

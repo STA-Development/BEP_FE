@@ -9,14 +9,14 @@ export interface ISupportPropsList {
 
 export interface IHelpPropsList {
   error: null | Error | string
-  isHelpLoading: boolean
-  isHelpMessageSuccess: boolean
+  isHelpDataSublittingLoading: boolean
+  isHelpDataSubmittedSuccess: boolean
 }
 
 export interface IContactUsPropsList {
   error: null | Error | string
-  isContactUsLoading: boolean
-  isContactUsMessageSuccess: boolean
+  isContactUsSubmittingLoading: boolean
+  isContactUsDataSubmittedSuccess: boolean
 }
 
 export interface IHelpDataProps {
