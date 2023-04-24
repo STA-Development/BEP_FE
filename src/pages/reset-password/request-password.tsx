@@ -1,18 +1,22 @@
 import React from 'react'
+import { useFormContext } from 'react-hook-form'
 import { Button } from '@uiComponents/Button'
 import TextField from '@uiComponents/FormFields/TextField'
 
-const RequestPassword = ({ nextPage }: { nextPage: () => void }) => (
-  // const { formState, control, handleSubmit } = useForm()
+export interface IRequestPasswordProps {
+  setSelectedIndex: (value: (prev: number) => number) => void
+}
 
-  // console.log(formState, 'control')
+const RequestPassword = ({ setSelectedIndex }: IRequestPasswordProps) => {
+  const methods = useFormContext()
 
-  // const onSubmit = (data: IResetPasswordParams) => {
-  //   dispatch(usersMiddleware.forgotPassword(data))
-  //   nextTab()
-  // }
+  const sendEmail = () => {
+    if (methods.getValues('email')) {
+      setSelectedIndex((prev) => (prev > 1 ? 1 : prev) + 1)
+    }
+  }
 
-  <form>
+  return (
     <div className="w-full max-w-[480px]">
       <h1 className="mb-5 text-xl">Forgot your password?</h1>
       <p className="mb-5 text-base text-black-light">
@@ -22,19 +26,18 @@ const RequestPassword = ({ nextPage }: { nextPage: () => void }) => (
       <div className="mb-5 w-full">
         <TextField
           fieldName="email"
-          placeholder="Email"
-          // error={fieldState.error ? fieldState.error.message : null}
+          {...methods}
         />
       </div>
       <Button
         size="fl"
         type="button"
-        onClick={nextPage}
+        onClick={sendEmail}
       >
         Request password reset
       </Button>
     </div>
-  </form>
-)
+  )
+}
 
 export default RequestPassword

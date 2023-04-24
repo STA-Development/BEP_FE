@@ -7,6 +7,7 @@ export interface ISignInResponse {
 export interface IResetPasswordParams {
   email?: string
   password?: string
+  confirm_password?: string
   otp?: string
 }
 
