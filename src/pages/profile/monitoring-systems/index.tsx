@@ -92,7 +92,7 @@ const MonitoringSystems = () => (
                 placeholder="Region"
               />
             </div>
-            <Button size="sm">Apply filters</Button>
+            <Button size="md">Apply filters</Button>
           </div>
         </div>
         {tabs.map((tab) => (

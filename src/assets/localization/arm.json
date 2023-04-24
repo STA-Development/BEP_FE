@@ -1,6 +1,10 @@
 {
-  "navbar.about.us": "Mer Masin",
   "navbar.home": "Գլխավոր",
+  "navbar.about.us": "Մեր մասին",
+  "navbar.educational.institutes": "Ուսումնական հաստատություններ",
+  "navbar.contact.us": "Կապ մեզ հետ",
+  "navbar.language": "Լեզու",
+  "footer.copyright": "Copyright © 2023 with all rights reserved",
   "help.tel.problem": "Ասա մեզ քո խնդրի մասին.",
   "help.text": "Փորձեք աջակցել ձեր բացատրությանը սքրինշոթով, դրանով մենք կարող ենք ավելի արագ լուծել ձեր խնդիրը:",
   "help.headline": "Վերնագիր",

@@ -10,11 +10,11 @@ const links = [
   { href: '/settings', label: 'Edit Profile' },
 ]
 
-interface IHeaderUserProps {
+export interface IHeaderUserProps {
   handleLogOut: () => void
 }
 
-const HeaderUser = ({ handleLogOut }: IHeaderUserProps) => (
+export const User = ({ handleLogOut }: IHeaderUserProps) => (
   <Menu
     as="div"
     className="relative"
@@ -67,5 +67,3 @@ const HeaderUser = ({ handleLogOut }: IHeaderUserProps) => (
     </Transition>
   </Menu>
 )
-
-export default HeaderUser
