@@ -11,7 +11,6 @@
   "help.problem": "Напишите свою проблему здесь",
   "help.button": "Отправлять",
   "help.headline.required": "Заголовок обязателен",
-  "help.problem.required": "Проблема обязателен",
   "contact_us": "Связаться с нами",
   "contact.us.full.name": "Full Name",
   "contact.us.mail": "E-mail",
@@ -24,5 +23,8 @@
   "contact.us.email.required": "Email is required",
   "contact.us.phone.required": "Phone Number is required",
   "contact.us.message.required": "Message Number is required",
-  "contact.us.submit.button": "Submit"
+  "contact.us.submit.button": "Submit",
+  "help.problem.required": "Проблема обязателен",
+  "about.us.page.title": "Кто мы?",
+  "about.us.page.desc": "Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis."
 }

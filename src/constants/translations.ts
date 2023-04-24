@@ -1,6 +1,8 @@
 /* AUTO GENERATED FILE. DO NOT MODIFY !!! */
 
 export enum Translation {
+  ABOUT_US_PAGE_DESC = 'about.us.page.desc',
+  ABOUT_US_PAGE_TITLE = 'about.us.page.title',
   CONTACT_US = 'contact.us',
   CONTACT_US_ADDRESS = 'contact.us.address',
   CONTACT_US_FIND_US = 'contact.us.find.us',
