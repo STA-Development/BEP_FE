@@ -96,7 +96,9 @@ export const Input = React.forwardRef(
                 className={style}
                 onChange={onChange}
                 onKeyDown={(e) =>
-                  (e.keyCode === 69 || e.keyCode === 190) && type === 'number' && e.preventDefault()
+                  (e.keyCode === 69 || e.keyCode === 189 || e.keyCode === 190) &&
+                  type === 'number' &&
+                  e.preventDefault()
                 }
                 ref={ref}
               />
