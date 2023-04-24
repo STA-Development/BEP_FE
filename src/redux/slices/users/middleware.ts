@@ -19,7 +19,10 @@ const {
   setLogoutLoading,
   setSignUpLoading,
   setError,
+  setSelectedIndex,
+  setIsResetPasswordLoading,
   setLanguage,
+  setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
 } = slice.actions
@@ -98,56 +101,57 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
   }
 }
 
-const forgotPassword = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
-  try {
-    await API.auth.forgotPassword(params)
-    dispatch(
-      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
-    )
-    dispatch(setError(null))
-  } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
-  } finally {
-    dispatch(setSignUpLoading(false))
-  }
-}
+const forgotPassword =
+  (params: IResetPasswordParams, selectedIndex: number) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setIsResetPasswordLoading(true))
 
-const verifyOtp = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
-  try {
-    console.log(99)
-    await API.auth.verifyOtp(params)
-    dispatch(
-      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
-    )
-    dispatch(setError(null))
-  } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
-  } finally {
-    dispatch(setSignUpLoading(false))
+      const response = await API.auth.forgotPassword(params)
+
+      dispatch(setOtp(response.data.data.otp))
+      dispatch(setError(null))
+      dispatch(setSelectedIndex(selectedIndex + 1))
+    } catch (error) {
+      dispatch(setError((error as IError).response.data.status.message))
+    } finally {
+      dispatch(setIsResetPasswordLoading(false))
+    }
   }
-}
+
+const verifyOtp =
+  (params: IResetPasswordParams, selectedIndex: number) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setIsResetPasswordLoading(true))
+
+      const response = await API.auth.verifyOtp(params)
+
+      localStorage.setItem('accessToken', response.data.data.verifyOtpToken)
+      dispatch(setError(null))
+      dispatch(setSelectedIndex(selectedIndex + 1))
+    } catch (error) {
+      dispatch(setError((error as IError).response.data.status.message))
+    } finally {
+      dispatch(setIsResetPasswordLoading(false))
+    }
+  }
 
 const resetPassword = (params: IResetPasswordParams) => async (dispatch: AppDispatch) => {
   try {
-    // dispatch(setSignUpLoading(true))
-
-    console.log(params, 'params')
+    dispatch(setIsResetPasswordLoading(true))
     await API.auth.resetPassword(params)
-
-    dispatch(
-      setRedirectionState({ path: '/reset-password', params: 'tab=verify-otp', apply: true })
-    )
     dispatch(setError(null))
   } catch (error) {
     dispatch(setError((error as IError).response.data.status.message))
   } finally {
-    dispatch(setSignUpLoading(false))
+    dispatch(setIsResetPasswordLoading(false))
   }
 }
 
 const clearError = () => async (dispatch: AppDispatch) => {
   dispatch(setError(null))
   dispatch(setErrorGoogleSignIn(null))
+  dispatch(setSelectedIndex(0))
+  dispatch(setOtp(null))
 }
 
 const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {

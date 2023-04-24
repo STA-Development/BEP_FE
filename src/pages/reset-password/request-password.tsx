@@ -1,18 +1,18 @@
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import TextField from '@uiComponents/FormFields/TextField'
 
-export interface IRequestPasswordProps {
-  setSelectedIndex: (value: (prev: number) => number) => void
-}
-
-const RequestPassword = ({ setSelectedIndex }: IRequestPasswordProps) => {
+const RequestPassword = () => {
   const methods = useFormContext()
+  const { selectedIndex, error, isResetPasswordLoading } = useAppSelector(usersSelector.user)
 
   const sendEmail = () => {
     if (methods.getValues('email')) {
-      setSelectedIndex((prev) => (prev > 1 ? 1 : prev) + 1)
+      methods.clearErrors()
+      dispatch(usersMiddleware.forgotPassword({ email: methods.getValues('email') }, selectedIndex))
     }
   }
 
@@ -31,11 +31,17 @@ const RequestPassword = ({ setSelectedIndex }: IRequestPasswordProps) => {
       </div>
       <Button
         size="fl"
-        type="button"
+        type="submit"
         onClick={sendEmail}
+        disabled={isResetPasswordLoading}
       >
         Request password reset
       </Button>
+      {error ? (
+        <div className="mt-2.5 w-full">
+          <p className="text-red">{error}</p>
+        </div>
+      ) : null}
     </div>
   )
 }

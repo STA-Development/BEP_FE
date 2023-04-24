@@ -4,11 +4,19 @@ export interface ISignInResponse {
   remember: boolean
 }
 
+export interface IVerifyOtpResponse {
+  verifyOtpToken: string
+}
+
+export interface IForgotPasswordResponse {
+  otp: number | null
+}
+
 export interface IResetPasswordParams {
   email?: string
   password?: string
   confirm_password?: string
-  otp?: string
+  otp?: string | null
 }
 
 export interface ISignInParams {

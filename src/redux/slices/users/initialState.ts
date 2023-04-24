@@ -5,6 +5,7 @@ export const getInitialState = (): IUserProps => ({
     isSignInLoading: false,
     isSignUpLoading: false,
     isLogOutLoading: false,
+    isResetPasswordLoading: false,
     error: null,
     fullName: '',
     isAuthenticated: false,
@@ -12,5 +13,7 @@ export const getInitialState = (): IUserProps => ({
     language: 'en',
     isLanguageChangeLoading: false,
     errorGoogleSignIn: '',
+    selectedIndex: 0,
+    otp: null,
   },
 })

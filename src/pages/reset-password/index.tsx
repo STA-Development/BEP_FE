@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
@@ -6,8 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ConfirmPassword from '@pages/reset-password/confirm-password'
 import RequestPassword from '@pages/reset-password/request-password'
 import VerifyOtp from '@pages/reset-password/verify-otp'
-import { dispatch } from '@redux/hooks'
-import { usersMiddleware } from '@redux/slices/users'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 
 import { resetPasswordValidationSchema } from '../../validation/auth/resetPassword'
 
@@ -19,17 +19,25 @@ const defaultValues = {
 }
 
 export const ResetPassword = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const { selectedIndex } = useAppSelector(usersSelector.user)
 
   const methods = useForm({
     defaultValues,
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(resetPasswordValidationSchema),
   })
 
+  useEffect(() => {
+    dispatch(usersMiddleware.clearError())
+  }, [])
+
   const onSubmit = (data: ISignInParams) => {
-    // TODO chagne data type to IResetPasswordParams
-    dispatch(usersMiddleware.login(data))
+    methods.clearErrors()
+    dispatch(
+      usersMiddleware.resetPassword({
+        password: data.password,
+      })
+    )
   }
 
   return (
@@ -38,10 +46,10 @@ export const ResetPassword = () => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className={`${selectedIndex !== 0 && 'hidden'}`}>
-              <RequestPassword setSelectedIndex={setSelectedIndex} />
+              <RequestPassword />
             </div>
             <div className={`${selectedIndex !== 1 && 'hidden'}`}>
-              <VerifyOtp setSelectedIndex={setSelectedIndex} />
+              <VerifyOtp />
             </div>
             <div className={`${selectedIndex !== 2 && 'hidden'}`}>
               <ConfirmPassword />
