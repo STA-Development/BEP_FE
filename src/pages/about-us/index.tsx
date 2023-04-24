@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
+import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
 import Image from 'next/image'
 
 const AboutUs = () => {
   const { aboutUsList } = useAppSelector(aboutUsSelector.aboutUs)
+
+  const [t] = useTranslation()
 
   useEffect(() => {
     dispatch(aboutUsMiddleware.fetchAboutUsList())
@@ -17,11 +21,8 @@ const AboutUs = () => {
     <>
       <Introduction
         img={<TeamIcon />}
-        title="Who are we?"
-        desc="Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus
-          ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum
-          dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices
-          pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis."
+        title={t(Translation.ABOUT_US_PAGE_TITLE)}
+        desc={t(Translation.ABOUT_US_PAGE_DESC)}
       />
 
       <Container color="secondary">

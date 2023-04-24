@@ -7,5 +7,7 @@
   "help.problem": "Մուտքագրեք ձեր խնդիրը այստեղ",
   "help.button": "Ուղարկել",
   "help.headline.required": "Վերնագիրը պարտադիր է",
-  "help.problem.required": "Խնդիրը պարտադիր է"
+  "help.problem.required": "Խնդիրը պարտադիր է",
+  "about.us.page.title": "Ո՞վ ենք մենք",
+  "about.us.page.desc": "Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis."
 }
