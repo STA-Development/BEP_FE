@@ -1,4 +1,9 @@
 {
+  "pnpm": {
+    "overrides": {
+      "yaml": "2.2.2"
+    }
+  },
   "name": "bep-armenia",
   "version": "0.1.0",
   "private": true,
