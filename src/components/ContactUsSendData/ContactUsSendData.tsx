@@ -17,7 +17,7 @@ const defaultValues = {
   message: '',
 }
 
-const ContactUsSendMessage = () => {
+export const ContactUsSendData = () => {
   const [t] = useTranslation()
 
   const isContactUsDataSubmittedSuccess = useAppSelector(
@@ -97,5 +97,3 @@ const ContactUsSendMessage = () => {
     </div>
   )
 }
-
-export default ContactUsSendMessage

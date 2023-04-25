@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import ContactUsSendMessage from '@components/ContactUsSendMessage'
+import { ContactUsSendData } from '@components/ContactUsSendData'
 import { Container } from '@components/Container'
 import { LocationIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
@@ -17,7 +17,7 @@ const ContactUs = () => {
         paths={[`${t(Translation.NAVBAR_HOME)}`, `${t(Translation.CONTACT_US)}`]}
       />
       <div className="mb-10 grid grid-cols-1 gap-10 divide-gray-thin pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
-        <ContactUsSendMessage />
+        <ContactUsSendData />
         <div className="flex flex-col xl:mb-0 xl:pl-20">
           <h3 className="mb-2.5 text-lg font-medium xl:hidden">
             {t(Translation.CONTACT_US_FIND_US)}:
