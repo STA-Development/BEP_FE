@@ -55,7 +55,7 @@ const AboutUs = () => {
                 loader={() => member.imageURL ?? ''}
                 width={350}
                 height={400}
-                className="max-w-[350px]xl:mb-5 max-h-[350px]"
+                className="max-h-[350px] max-w-[350px] xl:mb-5"
                 alt="picture"
               />
               <p className="hidden text-base italic text-black-light group-odd:text-right xl:block xl:text-left">

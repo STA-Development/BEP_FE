@@ -20,7 +20,14 @@ export const Footer = () => {
     )} 7`,
     `${t(Translation.FOOTER_CONTACTS_ADDRESS_RA)}, Yerevan, 0009,`,
   ]
-
+  const policiesAndTerms = [t(Translation.FOOTER_PRIVACY_POLICY), t(Translation.FOOTER_TERMS)]
+  const dontMissOut = [
+    { label: t(Translation.FOOTER_NEWS), href: '/news' },
+    {
+      label: t(Translation.FOOTER_EVENTS),
+      href: '/events',
+    },
+  ]
   const socials = [
     { href: 'http://fb.com', icon: <FBIcon /> },
     { href: 'http://tw.com', icon: <TWIcon /> },
@@ -32,15 +39,6 @@ export const Footer = () => {
   // TODO Update links
 
   const copyright = t(Translation.FOOTER_COPYRIGHT)
-
-  const policiesAndTerms = [t(Translation.FOOTER_PRIVACY_POLICY), t(Translation.FOOTER_TERMS)]
-  const dontMissOut = [
-    { label: t(Translation.FOOTER_NEWS), href: '/news' },
-    {
-      label: t(Translation.FOOTER_EVENTS),
-      href: '/events',
-    },
-  ]
 
   return (
     <Container color="primary">
