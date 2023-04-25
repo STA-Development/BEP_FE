@@ -13,6 +13,7 @@ module.exports = {
         7.5: '1.875rem',
         9.75: '2.438rem',
         15: '3.75rem',
+        18: '4.5rem',
         23: '5.75rem',
         25: '6.25rem',
         26: '6.5rem',
@@ -29,6 +30,7 @@ module.exports = {
           DEFAULT: '#fff',
         },
         gray: {
+          wave: '#f9fbfc',
           thin: '#EAF0F3',
           light: '#D9D9D9',
           DEFAULT: '#E6E6E6',
@@ -50,7 +52,7 @@ module.exports = {
       },
     },
     screens: {
-      xl: '1440px',
+      xl: '1280px',
     },
     container: {
       center: true,

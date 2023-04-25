@@ -1,7 +1,8 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
-import { Button } from '@uiComponents/Button'
+import { Translation } from '@constants/translations'
 import Link from 'next/link'
 
 const contacts = [
@@ -10,7 +11,14 @@ const contacts = [
   '34 Abovyan Street, office 7',
   'RA, Yerevan, 0009,',
 ]
-
+const policiesAndTerms = ['Privacy Policy', 'Terms of Use']
+const dontMissOut = [
+  { label: 'News', href: '/news' },
+  {
+    label: 'Events',
+    href: '/events',
+  },
+]
 const socials = [
   { href: 'http://fb.com', icon: <FBIcon /> },
   { href: 'http://tw.com', icon: <TWIcon /> },
@@ -20,73 +28,61 @@ const socials = [
 ]
 
 // TODO Update links
-export const Footer = () => (
-  <Container color="primary">
-    <div className="grid grid-flow-row grid-rows-footer-subscribe justify-between py-[40px] text-white xl:grid-flow-col">
-      <div className="row-span-2 mb-10 xl:mb-0">
-        <p className="mb-5 text-base font-medium">Contacts</p>
-        <ul>
-          {contacts.map((contact) => (
-            <li
-              key={contact}
-              className="mb-2.5 text-sm"
-            >
-              {contact}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="xl:0 row-span-2 mb-10">
-        <p className="mb-5 text-base font-medium">Policies and Terms of use</p>
-        <ul className="mb-9">
-          <li className="mb-2.5 text-base">
-            <Link
-              href="youtube.com"
-              className="hover:underline"
-            >
-              Privacy Policy
-            </Link>
-          </li>
-          <li className="mb-2.5 text-base">
-            <Link
-              href="youtube.com"
-              className="hover:underline"
-            >
-              Terms of Use
-            </Link>
-          </li>
-        </ul>
-        <p className="text-base underline">Copyright © 2023 with all rights reserved</p>
-      </div>
-      <div className="order-first mb-10 flex xl:order-none xl:mb-7.5">
-        <input
-          type="text"
-          placeholder="Your Email"
-          className="rounded-l border-0 px-5 py-2.5 text-base text-black outline-0 placeholder:text-base placeholder:text-black-light"
-        />
-        <Button
-          variant="outlined"
-          color="secondary"
-          radius="r"
-        >
-          Subscribe
-        </Button>
-      </div>
-      <div>
-        <p className="mb-5 text-base font-medium">Get in touch with us:</p>
-        <div className="flex">
-          {socials.map((social) => (
-            <Link
-              key={social.href}
-              href={social.href}
-              target="_blank"
-              className="mr-5 flex h-12 w-12 items-center justify-center rounded-full bg-white"
-            >
-              {social.icon}
-            </Link>
-          ))}
+export const Footer = () => {
+  const [t] = useTranslation()
+
+  const copyright = t(Translation.FOOTER_COPYRIGHT)
+
+  return (
+    <Container color="primary">
+      <div className="flex flex-col justify-between py-10 text-white xl:flex-row xl:pb-5">
+        <div className="order-2 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-1 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">Contacts:</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {contacts.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="order-4 space-y-5 divide-gray-thin xl:order-2 xl:divide-y">
+          <p className="text-base font-medium">Policies and Terms of use:</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {policiesAndTerms.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="order-3 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-3 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">Don’t miss out:</p>
+          <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            {dontMissOut.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href}>{item.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="order-1 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-4 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <p className="text-base font-medium">Get in touch with us:</p>
+          <div className="text-sm text-gray-thin">
+            <ul className="flex space-x-5 pt-0 xl:pt-5">
+              {socials.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    target="_blank"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-white"
+                  >
+                    {item.icon}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-12 hidden text-sm text-gray-thin underline xl:block">{copyright}</p>
+          </div>
         </div>
       </div>
-    </div>
-  </Container>
-)
+      <p className="block pb-10 text-sm text-gray-thin underline xl:hidden">{copyright}</p>
+    </Container>
+  )
+}
