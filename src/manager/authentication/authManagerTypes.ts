@@ -20,7 +20,14 @@ export interface IError {
 }
 
 export interface ISignUpParams {
-  role: string
   password: string
   email: string
+}
+
+export interface IRegisterData {
+  name: string
+  email: string
+  password: string
+  passwordConfirmation: string
+  remember: boolean
 }

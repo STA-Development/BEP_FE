@@ -1,17 +1,13 @@
 import React from 'react'
 import { EducationalInstitutesSingle } from '@components/EducationalInstitutesSingle'
-import { useRouter } from 'next/router'
 
 const EducationalInstitutePage = () => {
-  const router = useRouter()
-  const { id } = router.query
+  const idString = '1'
 
-  const idString = Array.isArray(id) ? id[0].toString() : id?.toString()
-
-  if (idString) {
-    return (
-      <div className="flex w-full flex-col items-center justify-center">
-        <div className="mt-4 flex w-3/4 flex-col items-center justify-center">
+  return (
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="mt-4 flex w-3/4 flex-col items-center justify-center">
+        {idString ? (
           <EducationalInstitutesSingle
             id={idString}
             description="Lorem ipsum dolor sit amet consectetur. Placerat etiam aliquam aliquam non elit tempor
@@ -41,12 +37,12 @@ const EducationalInstitutePage = () => {
         volutpat. Lacus tristique donec sem eget ullamcorper sed. Ullamcorper ultricies semper
         vestibulum nibh est et. Enim ligula ipsum amet."
           />
-        </div>
+        ) : (
+          <div>Id is undefined</div>
+        )}
       </div>
-    )
-  }
-
-  return <div>Id is undefined</div>
+    </div>
+  )
 }
 
 export default EducationalInstitutePage

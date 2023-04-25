@@ -6,7 +6,8 @@ import { PeopleQueue } from '@components/Icons/PeopleQueue'
 import { PersonAccount } from '@components/Icons/PersonAccount'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
 import { Toolbox } from '@components/Icons/Toolbox'
-import { IndividualCarousel } from '@components/IndividualCarousel'
+import { Images, IndividualCarousel } from '@components/IndividualCarousel'
+import { Maps } from '@components/Maps'
 import { PageHeader } from '@components/PageHeader'
 import { Button } from '@uiComponents/Button'
 
@@ -14,6 +15,13 @@ interface IIndividualPageProps {
   id: string
   description: string
 }
+
+const images: Images[] = [
+  { src: '/image1.jpg', id: 1 },
+  { src: '/default.png', id: 2 },
+  { src: '/image1.jpg', id: 3 },
+]
+
 export const EducationalInstitutesSingle = ({ id, description }: IIndividualPageProps) => (
   <div className="flex w-full flex-col items-center justify-center">
     <div className="mb-8 flex w-full flex-row">
@@ -25,11 +33,11 @@ export const EducationalInstitutesSingle = ({ id, description }: IIndividualPage
 
     <div className="flex w-full flex-col xl:flex-row">
       <div className="flex h-80 w-full items-center justify-center overflow-hidden bg-white xl:h-auto xl:w-1/2">
-        <IndividualCarousel />
+        <IndividualCarousel images={images} />
       </div>
       <div className="flex w-full flex-col flex-wrap items-start xl:w-1/2 xl:items-center">
         <div className="flex w-full flex-col flex-wrap xl:w-3/4">
-          <p className="w-full py-2 pt-16 text-lg">Institute Of Yerevan</p>
+          <p className="w-full py-2 pt-8 text-lg">Institute Of Yerevan</p>
           <p className="hidden w-full text-sm xl:flex">
             Lorem ipsum dolor sit amet consectetur. Ac sed consequat mauris egestas consequat ac et.
             Mauris egestas consequat.
@@ -85,22 +93,18 @@ export const EducationalInstitutesSingle = ({ id, description }: IIndividualPage
       </div>
     </div>
     <div className="flex w-full flex-col flex-wrap py-2">
-      <iframe
-        title="map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam"
-        width="100%"
+      <Maps
+        mapURL="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam"
         height={500}
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
       />
       <div className="flex w-full flex-row py-4 xl:w-1/3">
         <Button
           size="lg"
           variant="outlined"
         >
-          Open Google Maps
+          <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam">
+            Open Google Maps
+          </a>
         </Button>
       </div>
     </div>

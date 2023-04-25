@@ -47,8 +47,8 @@ const menu: Menu = {
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter()
   const { pathname } = router
-  const menuItem = Object.keys(menu).find((item) => menu[item].href === pathname)
-  const label = menuItem ? menu?.[menuItem]?.label : ''
+  const menuItem = Object.keys(menu).find((item) => menu[String(item)].href === pathname)
+  const label = menuItem ? menu?.[String(menuItem)]?.label : ''
 
   return (
     <Container>

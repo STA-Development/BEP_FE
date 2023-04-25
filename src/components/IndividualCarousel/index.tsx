@@ -1,91 +1,125 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Container } from '@components/Container'
-import { ChevronIcon } from '@components/Icons'
-import { Button } from '@uiComponents/Button'
-import Image from 'next/image'
+import React, { useRef, useState } from 'react'
 
-export const IndividualCarousel = () => {
-  const [slider] = useState<number[]>([1, 2, 3])
+export interface Images {
+  id: number
+  src: string
+}
+interface CarouselProps {
+  images: Images[]
+}
 
-  const maxScrollWidth = useRef<number>(0)
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
-  const carousel = useRef<HTMLDivElement>(null)
+export const IndividualCarousel: React.FC<CarouselProps> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const imagesRef = useRef<HTMLDivElement>(null)
 
-  const movePrev = () => {
+  const handlePrevClick = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1)
+      setCurrentIndex(currentIndex - 1)
+    } else {
+      setCurrentIndex(images.length - 1)
     }
   }
 
-  const moveNext = () => {
-    if (
-      carousel.current !== null &&
-      carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
-    ) {
-      setCurrentIndex((prevState) => prevState + 1)
-      console.log(carousel.current.offsetWidth)
+  const handleNextClick = () => {
+    if (currentIndex < images.length - 1) {
+      setCurrentIndex(currentIndex + 1)
+    } else {
+      setCurrentIndex(0)
     }
   }
-
-  useEffect(() => {
-    if (carousel !== null && carousel.current !== null) {
-      carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex
-    }
-  }, [currentIndex])
-
-  useEffect(() => {
-    maxScrollWidth.current = carousel.current
-      ? carousel.current.scrollWidth - carousel.current.offsetWidth
-      : 0
-  }, [])
 
   return (
-    <Container className=" flex w-full overflow-hidden">
-      <div className="relative top-1/2 flex w-full items-center justify-center">
-        <div className=" flex w-[400px] flex-row">
-          <div className="z-40 flex w-1/2 items-start">
-            <Button
-              variant="text"
-              size="sm"
-              onClick={movePrev}
-              className="group h-16 border-0"
-            >
-              <ChevronIcon className="rotate-180 transform group-hover:fill-secondary" />
-            </Button>
-          </div>
-          <div className="z-40 flex w-1/2 justify-end">
-            <Button
-              variant="text"
-              color="secondary"
-              onClick={moveNext}
-              className="group h-16 border-0"
-            >
-              <ChevronIcon className="transform group-hover:fill-secondary" />
-            </Button>
-          </div>
-        </div>
-      </div>
-
+    <div
+      id="indicators-carousel"
+      className="relative w-full"
+      data-carousel="static"
+    >
       <div
-        ref={carousel}
-        className="relative z-0 m-auto flex w-[400px] touch-pan-x snap-x snap-mandatory
-        gap-7.5 overflow-hidden scroll-smooth"
+        className="relative h-96 overflow-hidden rounded-lg"
+        ref={imagesRef}
       >
-        {slider.map((item) => (
+        {images.map((image, index) => (
           <div
-            key={item}
-            className="min-w-[400px] snap-start rounded border border-gray-thin bg-secondary p-5"
+            className={`flex duration-700 ease-in-out ${
+              index === currentIndex ? 'active' : 'hidden'
+            }`}
+            data-carousel-item
+            key={image.id}
           >
-            <Image
-              src="/image1.jpg"
-              alt="news"
-              width={700}
-              height={222}
-              className="mb-5"
+            <img
+              src={image.src}
+              className="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
+              alt={`Slide ${index + 1}`}
             />
           </div>
         ))}
       </div>
-    </Container>
+
+      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
+        {images.map((image, index) => (
+          <button
+            type="button"
+            key={image.id}
+            className={`h-3 w-3 rounded-full ${index === currentIndex ? 'bg-white' : ''}`}
+            aria-current={index === currentIndex ? 'true' : 'false'}
+            aria-label={`Slide ${index + 1}`}
+            data-carousel-slide-to={index}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
+      </div>
+
+      <button
+        type="button"
+        className="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
+        data-carousel-prev
+        onClick={handlePrevClick}
+      >
+        <span className="sm:w-10 sm:h-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
+          <svg
+            aria-hidden="true"
+            className="sm:w-6 sm:h-6 h-5 w-5 text-white dark:text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span className="sr-only">Previous</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        className="z- 30 group absolute right-0  top-0 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
+        data-carousel-next
+        onClick={handleNextClick}
+      >
+        <span className="sm:w-10 sm:h-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
+          <svg
+            aria-hidden="true"
+            className="sm:w-6 sm:h-6 h-5 w-5 text-white dark:text-gray-800"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+          <span className="sr-only">Next</span>
+        </span>
+      </button>
+    </div>
   )
 }

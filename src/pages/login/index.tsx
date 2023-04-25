@@ -1,99 +1,108 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
-import { EyeIcon } from '@components/Icons'
+import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
+import Checkbox from '@uiComponents/FormFields/CheckBox'
+import TextField from '@uiComponents/FormFields/TextField'
+import Link from 'next/link'
+
+import { loginValidationSchema } from '../../validation/auth/login'
 
 export const Login = () => {
-  const { isSignInLoading, error } = useAppSelector(usersSelector.user)
+  const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
-  const [show, setShow] = useState<boolean>(false)
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
-  const handleLogin = () => {
-    dispatch(usersMiddleware.login({ email, password }))
+  const onSubmit = (data: ISignInParams) => {
+    dispatch(usersMiddleware.login(data))
   }
+
+  const onGoogleAuth = () => {
+    dispatch(usersMiddleware.googleSignIn())
+  }
+
+  const methods = useForm({
+    mode: 'onSubmit',
+    defaultValues: {
+      email: '',
+      password: '',
+      remember: false,
+    },
+    resolver: yupResolver(loginValidationSchema),
+  })
+
+  const { handleSubmit } = methods
 
   return (
     <Container className="pt-10">
-      <div className="mx-auto flex w-[380px] flex-col items-center">
-        <h1 className="mb-5 text-xl">Log In</h1>
-        <Button
-          variant="outlined"
-          size="fl"
-        >
-          Continue with Google
-        </Button>
-        <OnDivider />
-        <div className="mb-5 w-full">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            id="email"
-            placeholder="example@email.com"
-            className={`${
-              error && !email
-                ? 'border-red placeholder:text-red'
-                : 'border-gray-light placeholder:text-black'
-            } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
-          />
-          {error && !email ? <p className="mt-2.5 text-red">Email not valid</p> : null}
-        </div>
-        <div className="mb-5 w-full">
-          <div className="relative">
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type={show ? 'text' : 'password'}
-              id="password"
-              placeholder="Password"
-              className={`${
-                error && !password
-                  ? 'border-red placeholder:text-red'
-                  : 'border-gray-light placeholder:text-black'
-              } w-full rounded border px-5 py-2.5 outline-0 placeholder:text-base`}
-            />
-            <div className="absolute inset-y-0 right-4 flex items-center">
-              <button
-                type="button"
-                onClick={() => setShow((prev) => !prev)}
-              >
-                <EyeIcon />
-              </button>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mx-auto flex w-[380px] flex-col items-center">
+            <h1 className="mb-5 text-xl">Log In</h1>
+            <Button
+              variant="outlined"
+              size="fl"
+              className="border-light-blue text-black"
+              onClick={onGoogleAuth}
+            >
+              <div className="mr-5">
+                <GoogleIcon className="group-hover:fill-white" />
+              </div>
+              <div>Sign in with Google</div>
+            </Button>
+            <OnDivider />
+            <div className="mb-5 w-full">
+              <TextField
+                fieldName="email"
+                placeholder="example@email.com"
+              />
+            </div>
+            <div className="mb-5 w-full">
+              <div className="relative">
+                <TextField
+                  fieldName="password"
+                  placeholder="Password"
+                  type="password"
+                />
+              </div>
+            </div>
+            <div className="mb-5 w-full">
+              <Checkbox
+                fieldName="remember"
+                label="Remember me"
+                id="remember-me"
+              />
+            </div>
+            <Button
+              size="fl"
+              disabled={isSignInLoading}
+              type="submit"
+            >
+              Log In
+            </Button>
+            {error || errorGoogleSignIn ? (
+              <div className="mt-2.5 w-full">
+                <p className="text-red">{error ?? errorGoogleSignIn}</p>
+              </div>
+            ) : null}
+            <div className="mb-44 mt-7 w-full">
+              <Link href="/reset-password">
+                <Button
+                  className="ml-2	font-normal"
+                  size="xs"
+                  variant="text"
+                >
+                  Forgot Password?
+                </Button>
+              </Link>
             </div>
           </div>
-          {error && !password ? <p className="mt-2.5 text-red">Password not valid</p> : null}
-        </div>
-        <div className="mb-5 flex w-full items-center">
-          <input
-            id="remember-me"
-            type="checkbox"
-            className="ml-1 h-5 w-5 rounded-sm border-black"
-          />
-          <label
-            htmlFor="remember-me"
-            className="ml-6 text-sm"
-          >
-            Remember me
-          </label>
-        </div>
-        <Button
-          className="mb-7"
-          size="fl"
-          disabled={isSignInLoading}
-          onClick={handleLogin}
-        >
-          Log In
-        </Button>
-        <div className="w-full">{error ? <p className="mt-2.5 text-red">{error}</p> : null}</div>
-        <div className="mb-44 w-full">
-          <Button variant="text">Forgot Password?</Button>
-        </div>
-      </div>
+        </form>
+      </FormProvider>
     </Container>
   )
 }
