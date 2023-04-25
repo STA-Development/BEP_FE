@@ -27,6 +27,7 @@
   "navbar.login": "Login",
   "navbar.logout": "Log Out",
   "navbar.register": "Register",
+  "page.about.us.title": "Who are we?",
   "page.contact.us.email": "E-mail:",
   "page.contact.us.form.actions.submit": "Submit",
   "page.contact.us.form.email": "E-mail",
