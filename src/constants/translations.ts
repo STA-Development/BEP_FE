@@ -29,6 +29,7 @@ export enum Translation {
   NAVBAR_LOGIN = 'navbar.login',
   NAVBAR_LOGOUT = 'navbar.logout',
   NAVBAR_REGISTER = 'navbar.register',
+  PAGE_ABOUT_US_DESCRIPTION = 'page.about.us.description',
   PAGE_ABOUT_US_TITLE = 'page.about.us.title',
   PAGE_CONTACT_US_EMAIL = 'page.contact.us.email',
   PAGE_CONTACT_US_FORM_ACTIONS_SUBMIT = 'page.contact.us.form.actions.submit',

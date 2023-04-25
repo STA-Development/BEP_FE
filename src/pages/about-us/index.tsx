@@ -1,26 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
 import { Translation } from '@constants/translations'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
 import Image from 'next/image'
 
-// TODO remove after API integration
-const team = [{ id: Math.random() }, { id: Math.random() }]
-
 const AboutUs = () => {
+  const { aboutUsList } = useAppSelector(aboutUsSelector.aboutUs)
+
   const [t] = useTranslation()
+
+  useEffect(() => {
+    dispatch(aboutUsMiddleware.fetchAboutUsList())
+  }, [])
 
   return (
     <>
       <Introduction
         img={<TeamIcon />}
         title={t(Translation.PAGE_ABOUT_US_TITLE)}
-        desc="Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus
-          ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum
-          dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices
-          pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis."
+        desc={t(Translation.PAGE_ABOUT_US_DESCRIPTION)}
       />
 
       <Container color="secondary">
@@ -39,40 +41,36 @@ const AboutUs = () => {
       <Container className="pt-30">
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
 
-        {team.map((member) => (
+        {aboutUsList.map((member) => (
           <div
             className="group mb-30 flex flex-col xl:flex-row xl:px-30"
-            key={member.id}
+            key={member.uuid}
           >
             <div
               className="mb-10 mr-20 flex w-full flex-none justify-center group-odd:mr-0
               xl:w-[350px] xl:flex-row xl:flex-col xl:group-odd:order-last xl:group-odd:ml-20"
             >
               <Image
-                src="/default.png"
-                alt="img"
+                src={member.imageURL}
+                loader={() => member.imageURL ?? ''}
                 width={350}
                 height={400}
-                className="xl:mb-5"
+                className="max-w-[350px]xl:mb-5 max-h-[350px]"
+                alt="picture"
               />
               <p className="hidden text-base italic text-black-light group-odd:text-right xl:block xl:text-left">
-                Mary Green - Founder of BEP
+                {member.imageDescription}
               </p>
             </div>
 
             <div>
               <h3 className="mb-2.5 text-xl font-medium text-primary xl:text-2xl">
-                Lorem ipsum dolor sit amet consectetur.
+                {member.header}
               </h3>
-              <p className="mb-10 text-base text-black-light">
-                Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae.
-                Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim
-                tellus sagittis diam nisl mattis. Orci aenean rutrum nisi facilisis. Maecenas erat
-                vel rhoncus tortor sodales.
-              </p>
+              <p className="mb-10 text-base text-black-light">{member.paragraph}</p>
 
               <p className="block text-base italic text-black-light xl:hidden">
-                Mary Green - Founder of BEP
+                {member.imageDescription}
               </p>
             </div>
           </div>

@@ -11,5 +11,7 @@
   "help.problem": "Напишите свою проблему здесь",
   "help.button": "Отправлять",
   "help.headline.required": "Заголовок обязателен",
-  "help.problem.required": "Проблема обязателен"
+  "help.problem.required": "Проблема обязателен",
+  "about.us.page.title": "Кто мы?",
+  "about.us.page.desc": "Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis."
 }

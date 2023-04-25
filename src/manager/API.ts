@@ -1,3 +1,4 @@
+import aboutUsManager from '@axios/aboutUs/aboutUsManager'
 import authManager from '@axios/authentication/authManager'
 import eventsManager from '@axios/events/eventsManager'
 import exampleManager from '@axios/example/exampleManager'
@@ -10,6 +11,7 @@ const API = {
   auth: authManager,
   events: eventsManager,
   support: supportManager,
+  aboutUs: aboutUsManager,
 }
 
 export default API

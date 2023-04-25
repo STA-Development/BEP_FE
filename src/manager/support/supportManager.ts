@@ -8,9 +8,12 @@ const axiosInstance = Axios()
 const supportManager = {
   axiosInstance,
   sendHelpData(message: IHelpDataProps) {
-    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(`${baseURL}`, {
-      ...message,
-    })
+    return axiosInstance.post<IHelpDataProps, IAxiosResponse<IHelpDataProps>>(
+      `/core/v1/${baseURL}`,
+      {
+        ...message,
+      }
+    )
   },
 }
 
