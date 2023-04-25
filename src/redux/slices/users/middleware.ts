@@ -103,7 +103,7 @@ const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
     dispatch(setLanguageChangeLoading(true))
     dispatch(setLanguage(lng))
 
-    await i18n.changeLanguage(lng)
+    i18n.changeLanguage(lng)
     localStorage.setItem('language', lng)
 
     dispatch(setError(null))
