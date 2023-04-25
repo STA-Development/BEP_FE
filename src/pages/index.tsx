@@ -37,7 +37,7 @@ const helps = [
 const Home = () => {
   // TODO: remove this after first API implementation
   const clickFunc = () => {
-    dispatch(viewsMiddleware.getExampleValue({ dataFromFE: helps[0].name }))
+    dispatch(viewsMiddleware.getExampleValue())
   }
 
   return (
