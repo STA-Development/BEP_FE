@@ -113,7 +113,7 @@ export const Applications = () => {
         LeftIcon={AddIcon}
         onClick={onOpenAddApplicationModal}
       >
-        Add Application
+        {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_ADD)}
       </Button>
     </>
   )

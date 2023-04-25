@@ -58,8 +58,8 @@ const Events = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title={`${t(Translation.PAGE_EVENTS_MAIN_TITLE)}`}
-        description={`${t(Translation.PAGE_EVENTS_MAIN_DESCRIPTION)}`}
+        title={t(Translation.PAGE_EVENTS_MAIN_TITLE)}
+        description={t(Translation.PAGE_EVENTS_MAIN_DESCRIPTION) as string}
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">

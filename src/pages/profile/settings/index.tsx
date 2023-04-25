@@ -11,26 +11,26 @@ export const Settings = () => {
     {
       id: 'name',
       type: 'text',
-      label: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_NAME)}`,
-      button: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_NAME_ACTIONS)}`,
+      label: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_NAME) as string,
+      button: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_NAME_ACTIONS) as string,
     },
     {
       id: 'email',
       type: 'text',
-      label: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL)}`,
-      button: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL_ACTIONS)}`,
+      label: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL) as string,
+      button: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL_ACTIONS) as string,
     },
     {
       id: 'phone',
       type: 'text',
-      label: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE)}`,
-      button: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE_ACTIONS)}`,
+      label: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE) as string,
+      button: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE_ACTIONS) as string,
     },
     {
       id: 'password',
       type: 'password',
-      label: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PASSWORD)}`,
-      button: `${t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PASSWORD_ACTIONS)}`,
+      label: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PASSWORD) as string,
+      button: t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PASSWORD_ACTIONS) as string,
     },
   ]
 

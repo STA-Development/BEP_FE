@@ -59,7 +59,7 @@ export const ResetPassword = () => {
               <Input
                 type="email"
                 error={emailVerificationError}
-                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_INPUT_PLACEHOLDER)}`}
+                placeholder={t(Translation.PAGE_RESET_PASSWORD_INPUT_PLACEHOLDER) as string}
                 onChange={(e) => onSetEmail(e.target.value)}
               />
             </div>
@@ -88,9 +88,9 @@ export const ResetPassword = () => {
               </p>
               <Input
                 type="email"
-                placeholder={`${t(
-                  Translation.PAGE_RESET_PASSWORD_VERIFICATION_CODE_INPUT_PLACEHOLDER
-                )}`}
+                placeholder={
+                  t(Translation.PAGE_RESET_PASSWORD_VERIFICATION_CODE_INPUT_PLACEHOLDER) as string
+                }
                 onChange={(e) => onEnterCode(e.target.value)}
               />
             </div>
@@ -106,12 +106,14 @@ export const ResetPassword = () => {
             </h1>
             <div className="grid w-full gap-5">
               <Input
-                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD)}`}
+                placeholder={t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD) as string}
                 type="password"
                 id="password"
               />
               <Input
-                placeholder={`${t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD_CONFIRM)}`}
+                placeholder={
+                  t(Translation.PAGE_RESET_PASSWORD_CONFIRMATION_PASSWORD_CONFIRM) as string
+                }
                 type="password"
                 id="confirm_password"
               />

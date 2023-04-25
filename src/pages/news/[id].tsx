@@ -25,8 +25,8 @@ const IndividualNewsPage = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title={`${t(Translation.PAGE_NEWS_INDIVIDUAL_TITLE)}`}
-        description={`${t(Translation.PAGE_NEWS_INDIVIDUAL_DESCRIPTION)}`}
+        title={t(Translation.PAGE_NEWS_INDIVIDUAL_TITLE)}
+        description={t(Translation.PAGE_NEWS_INDIVIDUAL_DESCRIPTION) as string}
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">

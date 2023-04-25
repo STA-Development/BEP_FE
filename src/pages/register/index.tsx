@@ -72,7 +72,7 @@ export const Register = () => {
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="name"
-                placeholder={`${t(Translation.PAGE_REGISTER_INPUT_FULL_NAME)}`}
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_FULL_NAME) as string}
               />
             </div>
             <div className="mb-5 w-full text-left">
@@ -84,21 +84,21 @@ export const Register = () => {
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="password"
-                placeholder={`${t(Translation.PAGE_REGISTER_INPUT_PASSWORD)}`}
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_PASSWORD) as string}
                 type="password"
               />
             </div>
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="passwordConfirmation"
-                placeholder={`${t(Translation.PAGE_REGISTER_INPUT_PASSWORD_CONFIRM)}`}
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_PASSWORD_CONFIRM) as string}
                 type="password"
               />
             </div>
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label={`${t(Translation.PAGE_REGISTER_INPUT_CHECKBOX)}`}
+                label={t(Translation.PAGE_REGISTER_INPUT_CHECKBOX) as string}
                 id="remember-me"
               />
             </div>

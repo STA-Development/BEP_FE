@@ -58,9 +58,9 @@ const NewsList = () => {
   return (
     <Container>
       <PageHeader
-        title={`${t(Translation.PAGE_NEWS_MAIN_TITLE)}`}
+        title={t(Translation.PAGE_NEWS_MAIN_TITLE)}
         paths={['Home', 'News']}
-        description={`${t(Translation.PAGE_NEWS_MAIN_DESCRIPTION)}`}
+        description={t(Translation.PAGE_NEWS_MAIN_DESCRIPTION) as string}
       />
       {isNewsListLoading && !newsList?.length ? (
         <Loading />

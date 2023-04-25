@@ -27,8 +27,8 @@ const IndividualEventPage = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title={`${t(Translation.PAGE_EVENTS_INDIVIDUAL_TITLE)}`}
-        description={`${t(Translation.PAGE_EVENTS_INDIVIDUAL_DESCRIPTION)}`}
+        title={t(Translation.PAGE_EVENTS_INDIVIDUAL_TITLE)}
+        description={t(Translation.PAGE_EVENTS_INDIVIDUAL_DESCRIPTION) as string}
         paths={['Home', 'Events']}
       />
       {isSingleEventLoading ? (

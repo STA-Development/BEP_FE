@@ -53,14 +53,14 @@ export const Help = () => {
           <div className="mb-5">
             <TextField
               fieldName="headline"
-              placeholder={`${t(Translation.PAGE_PROFILE_MENU_HELP_HEADLINE)}`}
+              placeholder={t(Translation.PAGE_PROFILE_MENU_HELP_HEADLINE) as string}
             />
           </div>
           <div className="mb-5">
             <TextField
               fieldName="problem"
               rows={7}
-              placeholder={`${t(Translation.PAGE_PROFILE_MENU_HELP_PROBLEM)}`}
+              placeholder={t(Translation.PAGE_PROFILE_MENU_HELP_PROBLEM) as string}
             />
           </div>
           <div className="w-full">

@@ -69,7 +69,7 @@ export const Login = () => {
               <div className="relative">
                 <TextField
                   fieldName="password"
-                  placeholder={`${t(Translation.PAGE_LOGIN_INPUT_PASSWORD)}`}
+                  placeholder={t(Translation.PAGE_LOGIN_INPUT_PASSWORD) as string}
                   type="password"
                 />
               </div>
@@ -77,7 +77,7 @@ export const Login = () => {
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label={`${t(Translation.PAGE_LOGIN_INPUT_CHECKBOX)}`}
+                label={t(Translation.PAGE_LOGIN_INPUT_CHECKBOX) as string}
                 id="remember-me"
               />
             </div>

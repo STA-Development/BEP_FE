@@ -84,25 +84,25 @@ const MonitoringSystems = () => {
               <div className="w-[124px]">
                 <Autocomplete
                   items={years}
-                  placeholder={`${t(
-                    Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_YEARS
-                  )}`}
+                  placeholder={
+                    t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_YEARS) as string
+                  }
                 />
               </div>
               <div className="w-[124px]">
                 <Autocomplete
                   items={years}
-                  placeholder={`${t(
-                    Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION
-                  )}`}
+                  placeholder={
+                    t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string
+                  }
                 />
               </div>
               <div className="w-[124px]">
                 <Autocomplete
                   items={years}
-                  placeholder={`${t(
-                    Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION
-                  )}`}
+                  placeholder={
+                    t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string
+                  }
                 />
               </div>
               <Button size="md">

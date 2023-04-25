@@ -23,7 +23,7 @@ const ContactUs = () => {
               <Input
                 type="text"
                 id="name"
-                label={`${t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME)}`}
+                label={t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME) as string}
                 required
               />
             </div>
@@ -32,7 +32,7 @@ const ContactUs = () => {
                 <Input
                   type="email"
                   id="email"
-                  label={`${t(Translation.PAGE_CONTACT_US_FORM_EMAIL)}`}
+                  label={t(Translation.PAGE_CONTACT_US_FORM_EMAIL) as string}
                   required
                 />
               </div>
@@ -40,14 +40,14 @@ const ContactUs = () => {
                 <Input
                   type="text"
                   id="telephone"
-                  label={`${t(Translation.PAGE_CONTACT_US_FORM_TELEPHONE)}`}
+                  label={t(Translation.PAGE_CONTACT_US_FORM_TELEPHONE) as string}
                   required
                 />
               </div>
             </div>
             <div className="mb-10 flex flex-col">
               <Input
-                label={`${t(Translation.PAGE_CONTACT_US_FORM_MESSAGE)}`}
+                label={t(Translation.PAGE_CONTACT_US_FORM_MESSAGE) as string}
                 id="message"
                 rows={5}
                 required

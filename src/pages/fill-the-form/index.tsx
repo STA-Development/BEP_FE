@@ -39,7 +39,7 @@ const FillTheForm = () => {
             setSelectedIndex((prev) => prev - 1)
           }}
         >
-          Go back
+          {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
         </Button>
       </div>
       <div className="mx-auto flex w-[380px] flex-col items-center">
@@ -62,25 +62,25 @@ const FillTheForm = () => {
               <div className="mb-5 w-full">
                 <Autocomplete
                   items={people}
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_UNIVERSITY)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_UNIVERSITY) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <Autocomplete
                   items={people}
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_DEGREE)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_DEGREE) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <Autocomplete
                   items={people}
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_FACULTY)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_FACULTY) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <input
                   type="text"
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_STUDENT_CODE)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_STUDENT_CODE) as string}
                   className="w-full rounded border border-gray-thin px-5 py-2.5 outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
@@ -94,32 +94,32 @@ const FillTheForm = () => {
               <div className="mb-5 w-full">
                 <Autocomplete
                   items={people}
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_COUNTRY)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_COUNTRY) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <input
                   type="text"
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_PROVINCE)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_PROVINCE) as string}
                   className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
               <div className="mb-5 flex w-full justify-between gap-5">
                 <input
                   type="text"
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_CITY)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_CITY) as string}
                   className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
                 <input
                   type="text"
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_ZIP_CODE)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_ZIP_CODE) as string}
                   className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
               <div className="mb-5 w-full">
                 <input
                   type="text"
-                  placeholder={`${t(Translation.PAGE_FILL_THE_FORM_INPUT_ADDRESS)}`}
+                  placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_ADDRESS) as string}
                   className="w-full rounded border border-gray-thin px-5 py-2.5 text-base outline-0 placeholder:text-base placeholder:text-black"
                 />
               </div>
@@ -132,7 +132,7 @@ const FillTheForm = () => {
           size="fl"
           onClick={nextTab}
         >
-          Next
+          {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_NEXT)}
         </Button>
       </div>
     </Container>
