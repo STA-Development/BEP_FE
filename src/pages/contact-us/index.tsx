@@ -1,11 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { ContactUsSendData } from '@components/ContactUsSendData'
 import { Container } from '@components/Container'
 import { LocationIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
-import { Input } from '@uiComponents/Input'
 
 const ContactUs = () => {
   const [t] = useTranslation()
@@ -14,55 +14,19 @@ const ContactUs = () => {
     <Container className="pb-30">
       <PageHeader
         title={t(Translation.PAGE_CONTACT_US_MAIN_TITLE)}
-        paths={['Home', 'Contact Us']}
+        paths={[t(Translation.NAVBAR_HOME), t(Translation.NAVBAR_CONTACT_US)]}
       />
       <div className="mb-10 grid grid-cols-1 gap-10 divide-gray-thin pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
-        <div className="xl:pr-20">
-          <form action="">
-            <div className="mb-5 flex flex-col">
-              <Input
-                type="text"
-                id="name"
-                label={t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME) as string}
-                required
-              />
-            </div>
-            <div className="columns-1 gap-5 xl:columns-2">
-              <div className="mb-5 flex flex-col">
-                <Input
-                  type="email"
-                  id="email"
-                  label={t(Translation.PAGE_CONTACT_US_FORM_EMAIL) as string}
-                  required
-                />
-              </div>
-              <div className="mb-5 flex flex-col">
-                <Input
-                  type="text"
-                  id="telephone"
-                  label={t(Translation.PAGE_CONTACT_US_FORM_TELEPHONE) as string}
-                  required
-                />
-              </div>
-            </div>
-            <div className="mb-10 flex flex-col">
-              <Input
-                label={t(Translation.PAGE_CONTACT_US_FORM_MESSAGE) as string}
-                id="message"
-                rows={5}
-                required
-              />
-            </div>
-            <Button size="fl">{t(Translation.PAGE_CONTACT_US_FORM_ACTIONS_SUBMIT)}</Button>
-          </form>
-        </div>
+        <ContactUsSendData />
         <div className="flex flex-col xl:mb-0 xl:pl-20">
           <h3 className="mb-2.5 text-lg font-medium xl:hidden">
             {t(Translation.PAGE_CONTACT_US_MAP_TITLE)}
           </h3>
           <div className="mb-5 flex items-center">
             <LocationIcon />
-            <p className="ml-2.5 text-sm text-black-light xl:ml-4">Abovyan st. 29, Yerevan</p>
+            <p className="ml-2.5 text-sm text-black-light xl:ml-4">
+              {t(Translation.PAGE_CONTACT_US_ADDRESS)}
+            </p>
           </div>
           <div className="mb-5 h-full xl:mb-12">
             <iframe
