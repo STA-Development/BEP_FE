@@ -57,7 +57,7 @@ export const EventsCarusel = () => {
   return (
     <Container
       color="secondary"
-      className="pb-30 pt-10 xl:pt-30"
+      className="pb-30 pt-10 xl:pt-10"
     >
       <div className="flex items-start justify-between">
         <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">Events:</h2>
@@ -83,7 +83,7 @@ export const EventsCarusel = () => {
         ref={carousel}
         className="relative z-0 flex touch-pan-x snap-x snap-mandatory gap-7.5 overflow-hidden scroll-smooth"
       >
-        {slider.map((item, index) => (
+        {slider.map((item) => (
           <div
             key={item.uuid}
             className="min-w-[380px] snap-start rounded border border-gray-thin bg-secondary p-5"
@@ -94,21 +94,20 @@ export const EventsCarusel = () => {
               loader={() => item.imageURL}
               width={340}
               height={222}
-              className="mb-5"
+              className="mb-5 h-full max-h-[221px] w-full max-w-[340px] object-cover"
             />
-            <h3 className="mb-2.5 text-lg">
-              <b>{index + 1}</b>: {item.header}
-            </h3>
-            <p className="mb-5 text-base text-black-light">{item.paragraph}</p>
-            <p className="mb-5 text-sm text-black-light xl:mb-8">{item.postedAt}</p>
-            <div className="mb-0 flex w-full">
-              <Button
-                size="fl"
-                onClick={() => redirectToIndividualNews(item.uuid)}
-              >
-                Read All
-              </Button>
+            <h3 className="mb-2.5 text-2xl">{item.postedAt}</h3>
+            <div className="mb-5 h-18">
+              <p className="text-lg text-black-light line-clamp-2 ">{item.header}</p>
             </div>
+
+            <Button
+              size="fl"
+              variant="outlined"
+              onClick={() => redirectToIndividualNews(item.uuid)}
+            >
+              Read All
+            </Button>
           </div>
         ))}
       </div>

@@ -17,6 +17,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@hookform/resolvers": "^3.0.1",
+    "@neojp/tailwindcss-line-clamp-utilities": "^1.0.1",
     "@reduxjs/toolkit": "^1.9.3",
     "@storybook/addon-essentials": "7.0.0-rc.4",
     "@storybook/addon-interactions": "7.0.0-rc.4",
