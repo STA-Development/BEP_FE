@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Container } from '@components/Container'
 import { ChevronIcon, RightIcon } from '@components/Icons'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { newsSelector } from '@redux/slices/news'
+import { eventsSelector } from '@redux/slices/events'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-export const NewsCarousel = () => {
-  const { newsList: slider } = useAppSelector(newsSelector.news)
+export const EventsCarusel = () => {
+  const { eventsList: slider } = useAppSelector(eventsSelector.eventsData)
 
   const router = useRouter()
 
@@ -35,7 +35,7 @@ export const NewsCarousel = () => {
   const redirectToIndividualNews = (id: string) => {
     dispatch(
       viewsMiddleware.setRedirectionState({
-        path: `/news/${id}`,
+        path: `/events/${id}`,
         params: '',
         apply: true,
       })
@@ -60,7 +60,7 @@ export const NewsCarousel = () => {
       className="pb-30 pt-10 xl:pt-30"
     >
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">News:</h2>
+        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">Events:</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
@@ -116,9 +116,9 @@ export const NewsCarousel = () => {
         <Button
           size="bs"
           RightIcon={RightIcon}
-          onClick={() => router.push('/news')}
+          onClick={() => router.push('/events')}
         >
-          Show All news
+          Show All events
         </Button>
       </div>
     </Container>

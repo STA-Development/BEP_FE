@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from '@components/Container'
+import { EventsCarusel } from '@components/EventsCarusel'
 import {
   BuildingBankIcon,
   BuildingBankToolboxIcon,
@@ -15,6 +16,8 @@ import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
+import { eventsMiddleware } from '@redux/slices/events'
+import { newsMiddleware } from '@redux/slices/news'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
@@ -39,6 +42,24 @@ const Home = () => {
   const clickFunc = () => {
     dispatch(viewsMiddleware.getExampleValue({ dataFromFE: helps[0].name }))
   }
+
+  useEffect(() => {
+    Array(4)
+      .fill(1)
+      .map((x, y) => x + y)
+      .forEach((i) => {
+        dispatch(newsMiddleware.getNewsList(i))
+      })
+  })
+
+  useEffect(() => {
+    Array(4)
+      .fill(1)
+      .map((x, y) => x + y)
+      .forEach((i) => {
+        dispatch(eventsMiddleware.fetchEventsList(i))
+      })
+  })
 
   return (
     <>
@@ -146,6 +167,8 @@ const Home = () => {
       </Container>
 
       <NewsCarousel />
+
+      <EventsCarusel />
     </>
   )
 }
