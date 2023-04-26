@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import IconProps from '@allTypes/svg-icon'
 import clsxMerge from '@lib/clsxm'
 
-export const CloseIcon: FC<IconProps> = ({ fill = 'fill-white', className, ...rest }) => {
+export const CloseIcon: FC<IconProps> = ({ fill = 'fill-primary', className, ...rest }) => {
   const style = clsxMerge(fill, className)
 
   return (

@@ -6,13 +6,19 @@ const createReducer = <T extends SliceCaseReducers<ISupportProps>>(reducer: T) =
 
 const reducers = createReducer({
   setError(state, action: IAction<null | Error | string>) {
-    state.support.error = action.payload
+    state.support.help.error = action.payload
   },
-  setHelpLoading(state, action: IAction<boolean>) {
-    state.support.isHelpLoading = action.payload
+  setHelpSubmittingLoading(state, action: IAction<boolean>) {
+    state.support.help.isHelpDataSublittingLoading = action.payload
   },
-  setHelpMessageSuccess(state, action: IAction<boolean>) {
-    state.support.isHelpMessageSuccess = action.payload
+  setHelpSubmitSuccess(state, action: IAction<boolean>) {
+    state.support.help.isHelpDataSubmittedSuccess = action.payload
+  },
+  setIsContactUsSubmittingLoading(state, action: IAction<boolean>) {
+    state.support.contactUs.isContactUsSubmittingLoading = action.payload
+  },
+  setContactUsSubmitSuccess(state, action: IAction<boolean>) {
+    state.support.contactUs.isContactUsDataSubmittedSuccess = action.payload
   },
 })
 
