@@ -1,6 +1,6 @@
 import React from 'react'
 
-export interface IBreadCrumbsProps {
+interface IBreadCrumbsProps {
   paths?: string[]
 }
 

@@ -16,8 +16,6 @@ import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
-import { dispatch } from '@redux/hooks'
-import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
@@ -55,11 +53,6 @@ const Home = () => {
     },
   ]
 
-  // TODO: remove this after first API implementation
-  const clickFunc = () => {
-    dispatch(viewsMiddleware.getExampleValue({ dataFromFE: helps[0].name }))
-  }
-
   return (
     <>
       <Introduction
@@ -71,7 +64,6 @@ const Home = () => {
             <Button
               size="lg"
               RightIcon={RightIcon}
-              onClick={clickFunc}
             >
               {t(Translation.PAGE_HOME_MAIN_ACTIONS_START_NOW)}
             </Button>
