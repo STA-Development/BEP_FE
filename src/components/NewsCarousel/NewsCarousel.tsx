@@ -41,10 +41,10 @@ export const NewsCarousel = () => {
   return (
     <Container
       color="secondary"
-      className="pt-10 pb-30 xl:pt-30"
+      className="pb-30 pt-10 xl:pt-30"
     >
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-semibold font-medium xl:text-2xl">News:</h2>
+        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">News:</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"

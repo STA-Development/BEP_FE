@@ -65,14 +65,14 @@ export const Autocomplete = <T extends Item>({
           >
             <Combobox.Options className="absolute z-10 max-h-60 w-full overflow-auto rounded-b border border-t-0 border-gray-thin bg-white">
               {!filteredItems.length && query !== '' ? (
-                <div className="relative cursor-default select-none py-2.5 px-5 text-base">
+                <div className="relative cursor-default select-none px-5 py-2.5 text-base">
                   Nothing found.
                 </div>
               ) : (
                 filteredItems.map((item) => (
                   <Combobox.Option
                     key={item.id}
-                    className="relative cursor-pointer select-none border-b border-gray-thin py-2.5 px-5 text-base"
+                    className="relative cursor-pointer select-none border-b border-gray-thin px-5 py-2.5 text-base"
                     value={item}
                   >
                     <span className="block truncate">{item.name}</span>

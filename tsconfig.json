@@ -14,6 +14,7 @@
     "baseUrl": "./",
     "paths": {
       /* Specify a set of entries that re-map imports to additional lookup locations. */
+      "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
       "@uiComponents/*": ["./src/ui-components/*"],
       "@redux/*": ["./src/redux/*"],
@@ -25,6 +26,7 @@
       "@axios/*": ["./src/manager/*"],
       "@utils/*": ["./src/utils/*"],
       "@constants/*": ["./src/constants/*"],
+      "@validation/*": ["./src/validation/*"],
       "~/*": ["./public/*"]
     },
     "resolveJsonModule": true /* Enable importing .json files */ /* Emit */,

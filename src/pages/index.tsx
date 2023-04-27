@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container } from '@components/Container'
 import {
-  AgreementIcon,
   BuildingBankIcon,
   BuildingBankToolboxIcon,
   ChevronIcon,
@@ -61,8 +60,8 @@ const Home = () => {
       />
       <Introduction
         className="mb-px"
-        color="secondary"
-        img={<AgreementIcon />}
+        color="wave"
+        wave
         title="What is BEP?"
         desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
           at supporting the sustainable development and enhancement of the Armenian education system
@@ -95,6 +94,7 @@ const Home = () => {
           ))}
         </div>
       </Container>
+      <div className="h-[95px] w-full bg-[url('/vawe2.svg')] bg-cover bg-center bg-no-repeat" />
 
       <Container className="my-30 xl:my-60">
         <h2 className="mb-10 text-xl font-medium xl:mt-25 xl:text-2xl">
@@ -105,11 +105,12 @@ const Home = () => {
         {helps.map((help) => (
           <Disclosure key={help.id}>
             {({ open }) => (
-              <div className="mb-5 last:mb-0 xl:mb-10">
-                <Disclosure.Button
-                  className={`border-outline flex w-full items-center justify-between rounded-lg p-5
-                    xl:py-10 xl:px-20 ${open && 'rounded-b-none outline-2 outline-primary'}`}
-                >
+              <div
+                className={`${
+                  open ? 'border-outline-active' : 'border-outline'
+                } mb-5 rounded last:mb-0 xl:mb-10`}
+              >
+                <Disclosure.Button className="flex w-full items-center justify-between p-5 xl:px-20 xl:py-10">
                   <div className="flex items-center">
                     <span className="mr-5 w-auto">{help.icon}</span>
                     <span className="text-lg font-medium xl:font-semibold">{help.name}</span>
@@ -118,10 +119,7 @@ const Home = () => {
                     <ChevronIcon className={`transform ${open && 'rotate-90'}`} />
                   </div>
                 </Disclosure.Button>
-                <Disclosure.Panel
-                  className="relative -m-0.5 rounded-b-lg border border-2 border-t-0 border-primary bg-white
-                    px-6 pb-10 outline-gray-thin xl:px-20"
-                >
+                <Disclosure.Panel className="px-6 pb-10 xl:px-20">
                   <div className="mb-10">
                     <p>
                       Lorem ipsum dolor sit amet consectetur. Aenean massa odio in tincidunt. Ac

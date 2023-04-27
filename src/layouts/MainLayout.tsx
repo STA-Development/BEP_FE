@@ -4,7 +4,7 @@ import { Header } from '@components/Header'
 
 const MainLayout = ({ children }: PropsWithChildren) => (
   <>
-    <Header loggedIn={false} />
+    <Header />
     {children}
     <Footer />
   </>

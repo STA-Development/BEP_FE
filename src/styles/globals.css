@@ -4,6 +4,17 @@
 
 @layer utilities {
   .border-outline {
-    @apply outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
+    @apply m-px outline outline-1 outline-gray-thin hover:outline-2 hover:outline-primary;
+  }
+  .border-outline-active {
+    @apply outline outline-2 outline-primary;
+  }
+}
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 }
