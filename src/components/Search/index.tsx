@@ -1,5 +1,7 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { SearchIcon } from '@components/Icons/SearchIcon'
+import { Translation } from '@constants/translations'
 import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
 
@@ -16,49 +18,55 @@ const people: Person[] = [
   { id: '5', name: 'Katelyn Rohan' },
 ]
 
-const SearchResult = () => (
-  <div className="inline-grid w-full grid-cols-1  xl:grid-cols-5">
-    <div className="rounded-l-[10px] py-2.5 text-start text-base xl:border">
-      <p className="flex justify-start xl:px-5">Specialization</p>
+const SearchResult = () => {
+  const [t] = useTranslation()
+
+  return (
+    <div className="inline-grid w-full grid-cols-1  xl:grid-cols-5">
+      <div className="rounded-l-[10px] py-2.5 text-start text-base xl:border">
+        <p className="flex justify-start xl:px-5">
+          {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TITLE_SPECIALIZATION)}
+        </p>
+      </div>
+      <div className="xl:border">
+        <Autocomplete
+          items={people}
+          placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_SPECIALIZATION)}
+          inputClasses="border-none pl-0 xl:px-5"
+        />
+      </div>
+      <div className="xl:border">
+        <Autocomplete
+          items={people}
+          placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_PROVINCE)}
+          inputClasses="border-none pl-0 xl:pl-5 text-black"
+        />
+      </div>
+      <div className="xl:border">
+        <Autocomplete
+          items={people}
+          placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_REGION)}
+          inputClasses="border-none pl-0 xl:pl-5"
+        />
+      </div>
+      <div className="hidden xl:block">
+        <Button
+          RightIcon={SearchIcon}
+          radius="r"
+        >
+          Search
+        </Button>
+      </div>
+      <div className="mt-5 xl:hidden">
+        <Button
+          size="lg"
+          RightIcon={SearchIcon}
+        >
+          {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_SEARCH)}
+        </Button>
+      </div>
     </div>
-    <div className="xl:border">
-      <Autocomplete
-        items={people}
-        placeholder="Specialization"
-        inputClasses="border-none pl-0 xl:px-5"
-      />
-    </div>
-    <div className="xl:border">
-      <Autocomplete
-        items={people}
-        placeholder="Specialization"
-        inputClasses="border-none pl-0 xl:pl-5 text-black"
-      />
-    </div>
-    <div className="xl:border">
-      <Autocomplete
-        items={people}
-        placeholder="Specialization"
-        inputClasses="border-none pl-0 xl:pl-5"
-      />
-    </div>
-    <div className="hidden xl:block">
-      <Button
-        RightIcon={SearchIcon}
-        radius="r"
-      >
-        Search
-      </Button>
-    </div>
-    <div className="mt-5 xl:hidden">
-      <Button
-        size="lg"
-        RightIcon={SearchIcon}
-      >
-        Search
-      </Button>
-    </div>
-  </div>
-)
+  )
+}
 
 export default SearchResult

@@ -13,19 +13,19 @@ const ContactUs = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title={`${t(Translation.CONTACT_US)}`}
-        paths={[`${t(Translation.NAVBAR_HOME)}`, `${t(Translation.CONTACT_US)}`]}
+        title={t(Translation.PAGE_CONTACT_US_MAIN_TITLE)}
+        paths={[t(Translation.NAVBAR_HOME), t(Translation.NAVBAR_CONTACT_US)]}
       />
       <div className="mb-10 grid grid-cols-1 gap-10 divide-gray-thin pt-10 xl:mb-20 xl:grid-cols-2 xl:gap-0 xl:divide-x">
         <ContactUsSendData />
         <div className="flex flex-col xl:mb-0 xl:pl-20">
           <h3 className="mb-2.5 text-lg font-medium xl:hidden">
-            {t(Translation.CONTACT_US_FIND_US)}:
+            {t(Translation.PAGE_CONTACT_US_MAP_TITLE)}
           </h3>
           <div className="mb-5 flex items-center">
             <LocationIcon />
             <p className="ml-2.5 text-sm text-black-light xl:ml-4">
-              {t(Translation.CONTACT_US_ADDRESS)}
+              {t(Translation.PAGE_CONTACT_US_ADDRESS)}
             </p>
           </div>
           <div className="mb-5 h-full xl:mb-12">
@@ -45,7 +45,7 @@ const ContactUs = () => {
               variant="outlined"
               size="fl"
             >
-              {t(Translation.CONTACT_US_GOOGLE_BUTTON)}
+              {t(Translation.PAGE_CONTACT_US_MAP_ACTIONS_GOOGLE_MAPS)}
             </Button>
           </div>
         </div>
@@ -53,13 +53,13 @@ const ContactUs = () => {
       <div className="grid w-1/2 grid-cols-1 gap-5 xl:grid-cols-2">
         <div>
           <h3 className="mb-2.5 text-lg font-medium xl:font-normal">
-            {t(Translation.CONTACT_US_MAIL)}:
+            {t(Translation.PAGE_CONTACT_US_EMAIL)}
           </h3>
           <p className="text-sm xl:text-base">example@email.com</p>
         </div>
         <div>
           <h3 className="mb-2.5 text-lg font-medium xl:font-normal">
-            {t(Translation.CONTACT_US_PHONE)}:
+            {t(Translation.PAGE_CONTACT_US_PHONE_NUMBER)}
           </h3>
           <p className="text-sm xl:text-base">+374 387 347 347</p>
         </div>

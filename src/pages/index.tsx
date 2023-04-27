@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import {
   BuildingBankIcon,
@@ -13,6 +14,7 @@ import {
 import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
+import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
@@ -25,16 +27,34 @@ const data1 = [
   { id: 3, number: '95', text: 'Lorem ipsum dolor sit amet consecteturamet.' },
 ]
 
-const helps = [
-  { id: 1, name: 'Masters', icon: <PeopleCommunityIcon /> },
-  { id: 2, name: 'Companies', icon: <BuildingBankToolboxIcon /> },
-  { id: 3, name: 'Educational Institutes', icon: <BuildingBankIcon /> },
-  { id: 4, name: 'Monitoring Systems', icon: <DesktopPulseIcon /> },
-  { id: 5, name: 'Jobs', icon: <ToolboxIcon /> },
-  { id: 6, name: 'Practice', icon: <ClipboardTaskListIcon /> },
-]
-
 const Home = () => {
+  const [t] = useTranslation()
+
+  const helps = [
+    { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
+    {
+      id: 2,
+      name: t(Translation.PAGE_HOME_SECTIONS_COMPANIES_TITLE),
+      icon: <BuildingBankToolboxIcon />,
+    },
+    {
+      id: 3,
+      name: t(Translation.PAGE_HOME_SECTIONS_EDUCATIONAL_INSTITUTES_TITLE),
+      icon: <BuildingBankIcon />,
+    },
+    {
+      id: 4,
+      name: t(Translation.PAGE_HOME_SECTIONS_MONITORING_SYSTEMS_TITLE),
+      icon: <DesktopPulseIcon />,
+    },
+    { id: 5, name: t(Translation.PAGE_HOME_SECTIONS_JOBS_TITLE), icon: <ToolboxIcon /> },
+    {
+      id: 6,
+      name: t(Translation.PAGE_HOME_SECTIONS_PRACTICE_TITLE),
+      icon: <ClipboardTaskListIcon />,
+    },
+  ]
+
   // TODO: remove this after first API implementation
   const clickFunc = () => {
     dispatch(viewsMiddleware.getExampleValue({ dataFromFE: helps[0].name }))
@@ -44,8 +64,8 @@ const Home = () => {
     <>
       <Introduction
         img={<BusinessDealIcon />}
-        title="Business and Education Partnership Foundation"
-        desc="Lorem ipsum dolor sit amet consectetur. Massa sed."
+        title={t(Translation.PAGE_HOME_MAIN_TITLE)}
+        desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
           <Link href="/">
             <Button
@@ -53,7 +73,7 @@ const Home = () => {
               RightIcon={RightIcon}
               onClick={clickFunc}
             >
-              Start now
+              {t(Translation.PAGE_HOME_MAIN_ACTIONS_START_NOW)}
             </Button>
           </Link>
         }
@@ -62,19 +82,15 @@ const Home = () => {
         className="mb-px"
         color="wave"
         wave
-        title="What is BEP?"
-        desc="“Business and Education Partnership” Foundation has been implementing the activities aimed
-          at supporting the sustainable development and enhancement of the Armenian education system
-          through introduction of innovative education models and mechanisms based on advanced
-          international experience, as well as providing an assistance to the result-oriented
-          process of vocational training."
+        title={t(Translation.PAGE_HOME_INTRODUCTION_TITLE)}
+        desc={t(Translation.PAGE_HOME_INTRODUCTION_DESCRIPTION)}
         button={
           <Link href="/fill-the-form">
             <Button
               size="lg"
               RightIcon={RightIcon}
             >
-              Fill the form
+              {t(Translation.PAGE_HOME_INTRODUCTION_ACTIONS_FILL_THE_FORM)}
             </Button>
           </Link>
         }
@@ -98,8 +114,8 @@ const Home = () => {
 
       <Container className="my-30 xl:my-60">
         <h2 className="mb-10 text-xl font-medium xl:mt-25 xl:text-2xl">
-          <span className="hidden xl:inline-block">What are you looking for?</span>
-          <span className="xl:hidden">How can we help?</span>
+          <span className="hidden xl:inline-block">{t(Translation.PAGE_HOME_SECTIONS_TITLE)}</span>
+          <span className="xl:hidden">{t(Translation.PAGE_HOME_SECTIONS_MOBILE_TITLE)}</span>
         </h2>
 
         {helps.map((help) => (
@@ -135,7 +151,7 @@ const Home = () => {
                       size="lg"
                       RightIcon={RightIcon}
                     >
-                      Fill the form
+                      {t(Translation.PAGE_HOME_SECTIONS_ACTIONS_FILL_THE_FORM)}
                     </Button>
                   </Link>
                 </Disclosure.Panel>

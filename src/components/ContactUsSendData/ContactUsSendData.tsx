@@ -57,7 +57,7 @@ export const ContactUsSendData = () => {
             <TextField
               id="name"
               fieldName="fullName"
-              label={`${t(Translation.CONTACT_US_FULL_NAME)}`}
+              label={`${t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME)}`}
             />
           </div>
           <div className="columns-1 gap-5 xl:columns-2">
@@ -66,7 +66,7 @@ export const ContactUsSendData = () => {
                 fieldName="email"
                 type="email"
                 id="email"
-                label={`${t(Translation.CONTACT_US_MAIL)}`}
+                label={`${t(Translation.PAGE_CONTACT_US_FORM_EMAIL)}`}
               />
             </div>
             <div className="mb-5 flex flex-col">
@@ -74,7 +74,7 @@ export const ContactUsSendData = () => {
                 fieldName="phone"
                 type="number"
                 id="telephone"
-                label={`${t(Translation.CONTACT_US_PHONE)}`}
+                label={`${t(Translation.PAGE_CONTACT_US_FORM_TELEPHONE)}`}
               />
             </div>
           </div>
@@ -82,7 +82,7 @@ export const ContactUsSendData = () => {
             <TextField
               fieldName="message"
               id="message"
-              label={`${t(Translation.CONTACT_US_MESSAGE)}`}
+              label={`${t(Translation.PAGE_CONTACT_US_FORM_MESSAGE)}`}
               rows={7}
             />
           </div>
@@ -90,7 +90,7 @@ export const ContactUsSendData = () => {
             type="submit"
             size="fl"
           >
-            {t(Translation.CONTACT_US_SUBMIT_BUTTON)}
+            {t(Translation.PAGE_CONTACT_US_FORM_ACTIONS_SUBMIT)}
           </Button>
         </form>
       </FormProvider>
