@@ -112,7 +112,7 @@ const forgotPassword =
       dispatch(setError(null))
       dispatch(setSelectedIndex(selectedIndex + 1))
     } catch (error) {
-      dispatch(setError((error as IError).response.data.status.message))
+      dispatch(setError((error as IError).response?.data.status.message))
     } finally {
       dispatch(setIsResetPasswordLoading(false))
     }
@@ -129,7 +129,7 @@ const verifyOtp =
       dispatch(setError(null))
       dispatch(setSelectedIndex(selectedIndex + 1))
     } catch (error) {
-      dispatch(setError((error as IError).response.data.status.message))
+      dispatch(setError((error as IError).response?.data.status.message))
     } finally {
       dispatch(setIsResetPasswordLoading(false))
     }
@@ -140,8 +140,9 @@ const resetPassword = (params: IResetPasswordParams) => async (dispatch: AppDisp
     dispatch(setIsResetPasswordLoading(true))
     await API.auth.resetPassword(params)
     dispatch(setError(null))
+    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data.status.message))
   } finally {
     dispatch(setIsResetPasswordLoading(false))
   }

@@ -1,28 +1,25 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import TextField from '@uiComponents/FormFields/TextField'
 
-const ConfirmPassword = () => {
+const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
   const { error, isResetPasswordLoading } = useAppSelector(usersSelector.user)
+  const [t] = useTranslation()
 
   return (
     <div className="w-full max-w-[480px]">
-      <h1 className="mb-5 text-xl">Create a new password</h1>
+      <h1 className="mb-5 text-xl">{t(Translation.PAGE_CONFIRM_PASSWORD_TITLE)}</h1>
       <div className=" w-full">
-        <div className="mb-5 w-full">
-          <TextField fieldName="password" />
-        </div>
-        <div className="mb-5 w-full">
-          <TextField fieldName="confirm_password" />
-        </div>
+        {children}
         <Button
           size="fl"
           type="submit"
           disabled={isResetPasswordLoading}
         >
-          Submit Password
+          {t(Translation.PAGE_CONFIRM_PASSWORD_BUTTON)}
         </Button>
         {error ? (
           <div className="mt-2.5 w-full">

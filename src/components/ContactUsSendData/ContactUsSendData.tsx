@@ -55,7 +55,6 @@ export const ContactUsSendData = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5 flex flex-col">
             <TextField
-              id="name"
               fieldName="fullName"
               label={`${t(Translation.PAGE_CONTACT_US_FULL_NAME)}`}
             />
@@ -65,7 +64,6 @@ export const ContactUsSendData = () => {
               <TextField
                 fieldName="email"
                 type="email"
-                id="email"
                 label={`${t(Translation.PAGE_CONTACT_US_MAIL)}`}
               />
             </div>
@@ -73,7 +71,6 @@ export const ContactUsSendData = () => {
               <TextField
                 fieldName="phone"
                 type="number"
-                id="telephone"
                 label={`${t(Translation.PAGE_CONTACT_US_PHONE)}`}
               />
             </div>
@@ -81,7 +78,6 @@ export const ContactUsSendData = () => {
           <div className="mb-10 flex flex-col">
             <TextField
               fieldName="message"
-              id="message"
               label={`${t(Translation.PAGE_CONTACT_US_MESSAGE)}`}
               rows={7}
             />
