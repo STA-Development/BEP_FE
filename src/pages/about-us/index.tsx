@@ -21,8 +21,8 @@ const AboutUs = () => {
     <>
       <Introduction
         img={<TeamIcon />}
-        title={t(Translation.ABOUT_US_PAGE_TITLE)}
-        desc={t(Translation.ABOUT_US_PAGE_DESC)}
+        title={t(Translation.PAGE_ABOUT_US_TITLE)}
+        desc={t(Translation.PAGE_ABOUT_US_DESCRIPTION)}
       />
 
       <Container color="secondary">

@@ -17,8 +17,9 @@ import Link from 'next/link'
 import { loginValidationSchema } from '../../validation/auth/login'
 
 export const Login = () => {
-  const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
   const [t] = useTranslation()
+
+  const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
 
   const onSubmit = (data: ISignInParams) => {
     dispatch(usersMiddleware.login(data))
@@ -68,7 +69,7 @@ export const Login = () => {
               <div className="relative">
                 <TextField
                   fieldName="password"
-                  placeholder="Password"
+                  placeholder={t(Translation.PAGE_LOGIN_INPUT_PASSWORD) as string}
                   type="password"
                 />
               </div>

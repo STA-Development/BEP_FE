@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { PageHeader } from '@components/PageHeader'
+import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { newsMiddleware, newsSelector } from '@redux/slices/news'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 const IndividualNewsPage = () => {
+  const [t] = useTranslation()
+
   const router = useRouter()
   const newsId = router.query.id
 
@@ -21,8 +25,8 @@ const IndividualNewsPage = () => {
   return (
     <Container className="pb-30">
       <PageHeader
-        title="News"
-        description="The Latest News From our Foundation"
+        title={t(Translation.PAGE_NEWS_INDIVIDUAL_TITLE)}
+        description={t(Translation.PAGE_NEWS_INDIVIDUAL_DESCRIPTION) as string}
         paths={['Home', 'Events']}
       />
       <div className="pt-5 xl:pt-10">
