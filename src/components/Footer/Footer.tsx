@@ -5,8 +5,6 @@ import { FBIcon, GGIcon, LNIcon, TWIcon, YTIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import Link from 'next/link'
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-
 // TODO Update links
 
 export const Footer = () => {
@@ -28,6 +26,8 @@ export const Footer = () => {
       href: '/events',
     },
   ]
+
+  // TODO Update links
   const socials = [
     { href: 'http://fb.com', icon: <FBIcon /> },
     { href: 'http://tw.com', icon: <TWIcon /> },
@@ -35,8 +35,6 @@ export const Footer = () => {
     { href: 'http://yt.com', icon: <YTIcon /> },
     { href: 'http://gg.com', icon: <GGIcon /> },
   ]
-
-  // TODO Update links
 
   const copyright = t(Translation.FOOTER_COPYRIGHT)
 

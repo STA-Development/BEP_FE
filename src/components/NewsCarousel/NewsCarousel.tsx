@@ -21,16 +21,13 @@ export const NewsCarousel = () => {
   }
 
   const moveNext = () => {
-    if (
-      carousel.current !== null &&
-      carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
-    ) {
+    if (carousel.current && carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current) {
       setCurrentIndex((prevState) => prevState + 1)
     }
   }
 
   useEffect(() => {
-    if (carousel !== null && carousel.current !== null) {
+    if (carousel && carousel.current) {
       carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex
     }
   }, [currentIndex])
