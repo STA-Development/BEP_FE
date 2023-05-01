@@ -5,6 +5,7 @@ import { IRegisterData } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
 import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import IsLoading from '@components/IsLoading'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -107,7 +108,11 @@ export const Register = () => {
               size="fl"
               type="submit"
             >
-              {t(Translation.PAGE_REGISTER_INPUT_ACTIONS_CREATE_ACCOUNT)}
+              {isSignUpLoading ? (
+                <IsLoading />
+              ) : (
+                t(Translation.PAGE_REGISTER_INPUT_ACTIONS_CREATE_ACCOUNT)
+              )}
             </Button>
             <div className="w-full">
               {error || errorGoogleSignIn ? (

@@ -5,6 +5,7 @@ import { ISignInParams } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
 import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import IsLoading from '@components/IsLoading'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -86,7 +87,7 @@ export const Login = () => {
               disabled={isSignInLoading}
               type="submit"
             >
-              {t(Translation.PAGE_LOGIN_BUTTON)}
+              {isSignInLoading ? <IsLoading /> : t(Translation.PAGE_LOGIN_BUTTON)}
             </Button>
             {error || errorGoogleSignIn ? (
               <div className="mt-2.5 w-full">

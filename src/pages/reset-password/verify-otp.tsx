@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ChekInIcon } from '@components/Icons/CheckInIcon'
+import IsLoading from '@components/IsLoading'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -28,7 +29,7 @@ const VerifyOtp = ({ children }: { children: JSX.Element }) => {
         type="submit"
         disabled={isResetPasswordLoading}
       >
-        {t(Translation.PAGE_VERIFY_OTP_BUTTON)}
+        {isResetPasswordLoading ? <IsLoading /> : t(Translation.PAGE_VERIFY_OTP_BUTTON)}
       </Button>
       {error ? (
         <div className="mt-2.5 w-full">
