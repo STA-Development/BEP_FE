@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 
 import { testEmail } from '@utils/testEmail'
 
-export enum RouterQueryTypes {
+enum RouterQueryTypes {
   verifyOtp = 'verify-otp',
   confirmPassword = 'confirm-password',
 }
