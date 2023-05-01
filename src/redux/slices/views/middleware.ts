@@ -46,26 +46,9 @@ const setToastNotificationPopUpState =
     dispatch(updateToastNotificationState(value))
   }
 
-//  TODO: remove this after first API implementation
-const getExampleValue = () => async (dispatch: AppDispatch) => {
-  try {
-    // Set loading state to true
-
-    // const response = await API.example.getExampleValue(params)
-
-    dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
-    //   Do Something with received data
-  } catch (error) {
-    // DO something in error case
-  } finally {
-    //  Set loading state to false
-  }
-}
-
 export default {
   setRedirectionState,
   activateMenuItem,
-  getExampleValue,
   openMenuDrawer,
   openModal,
   closeModal,
