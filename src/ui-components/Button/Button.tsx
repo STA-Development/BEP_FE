@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef, ComponentType, FC } from 'react'
 import IconProps from '@allTypes/svg-icon'
+import IsLoading from '@components/IsLoading'
 import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'flat', 'text'] as const
@@ -104,7 +105,7 @@ export const Button: FC<ButtonProps> = ({
           <LeftIcon fill={iconStyle} />
         </div>
       ) : null}
-      {children}
+      {disabled ? <IsLoading /> : children}
       {RightIcon ? (
         <div className="ml-2.5">
           <RightIcon fill={iconStyle} />

@@ -42,7 +42,9 @@ const authManager = {
     )
   },
   googleSignIn() {
-    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/google`)
+    return axiosInstance.get<null, IAxiosResponse<null>>(
+      `http://localhost:2002/users/v1/auth/google`
+    )
   },
 }
 

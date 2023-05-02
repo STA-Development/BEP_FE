@@ -1,6 +1,5 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import IsLoading from '@components/IsLoading'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -20,7 +19,7 @@ const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
           type="submit"
           disabled={isResetPasswordLoading}
         >
-          {isResetPasswordLoading ? <IsLoading /> : t(Translation.PAGE_CONFIRM_PASSWORD_BUTTON)}
+          {t(Translation.PAGE_CONFIRM_PASSWORD_BUTTON)}
         </Button>
         {error ? (
           <div className="mt-2.5 w-full">
