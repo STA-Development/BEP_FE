@@ -1,4 +1,7 @@
-import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import {
+  IEdInstitutesResponse,
+  IIndividualEducationalInstituteResponse,
+} from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -14,6 +17,25 @@ const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
   }, */
   setEducationalInstitutesList(state, action: IAction<IEdInstitutesResponse[]>) {
     state.edInstitute.edInstitutesList = action.payload
+  },
+  setIndividualEducationalInstitute(
+    state,
+    action: IAction<IIndividualEducationalInstituteResponse>
+  ) {
+    state.individualEduInstitute = action.payload
+  },
+  setEducationalInstituteListLoading(state, action: IAction<boolean>) {
+    state.isIndividualEduInstitutesLoading = action.payload
+  },
+  setPageSize(state, action: IAction<number>) {
+    state.edInstitute.pageSize = action.payload
+  },
+
+  setTotalItems(state, action: IAction<number>) {
+    state.edInstitute.totalItems = action.payload
+  },
+  setError(state, action: IAction<string | null>) {
+    state.edInstitute.error = action.payload
   },
 })
 

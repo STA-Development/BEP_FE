@@ -12,7 +12,6 @@ import { PageHeader } from '@components/PageHeader'
 import { Button } from '@uiComponents/Button'
 
 interface IIndividualPageProps {
-  id: string
   description: string
 }
 
@@ -22,7 +21,7 @@ const images: Images[] = [
   { src: '/image1.jpg', id: 3 },
 ]
 
-export const EducationalInstitutesSingle = ({ id, description }: IIndividualPageProps) => (
+export const EducationalInstitutesSingle = ({ description }: IIndividualPageProps) => (
   <div className="flex w-full flex-col items-center justify-center">
     <div className="mb-8 flex w-full flex-row">
       <PageHeader
@@ -108,8 +107,6 @@ export const EducationalInstitutesSingle = ({ id, description }: IIndividualPage
         </Button>
       </div>
     </div>
-
-    <div>{id}</div>
   </div>
 )
 

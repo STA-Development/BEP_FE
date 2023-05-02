@@ -1,7 +1,10 @@
 import { Axios } from '@axios/axiosInstance'
-import { IAxiosResponsePaginated } from '@axios/axiosTypes'
+import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 import { EducationalInstitutesPageParam } from '@axios/core/educational-institutes/educational-institutesManagerTypes'
-import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import {
+  IEdInstitutesResponse,
+  IIndividualEducationalInstituteResponse,
+} from '@axios/educational-institutes/edInstitutesManagerTypes'
 
 const axiosInstance = Axios()
 const educationalInstitutesManager = {
@@ -11,6 +14,12 @@ const educationalInstitutesManager = {
       EducationalInstitutesPageParam,
       IAxiosResponsePaginated<IEdInstitutesResponse[]>
     >(`educational-institution`, { params })
+  },
+  getIndividualEducationalInstitutes(id: string) {
+    return axiosInstance.get<
+      IIndividualEducationalInstituteResponse,
+      IAxiosResponse<IIndividualEducationalInstituteResponse>
+    >(`educational-institution/${id}`)
   },
 }
 
