@@ -1,29 +1,61 @@
-import { IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
+import { IContactUsProps, IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setError, setHelpLoading, setHelpMessageSuccess } = slice.actions
+const {
+  setError,
+  setHelpSubmittingLoading,
+  setHelpSubmitSuccess,
+  setIsContactUsSubmittingLoading,
+  setContactUsSubmitSuccess,
+} = slice.actions
 
-const createHelpMessage = (message: IHelpDataProps) => async (dispatch: AppDispatch) => {
+const sendHelpData = (helpData: IHelpDataProps) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setHelpLoading(true))
+    dispatch(setHelpSubmittingLoading(true))
 
-    await API.support.sendHelpData(message)
+    await API.support.sendHelpData(helpData)
 
-    dispatch(setHelpMessageSuccess(true))
+    dispatch(setHelpSubmitSuccess(true))
 
     dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data.status.message))
+    dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setHelpLoading(false))
-    dispatch(setHelpMessageSuccess(false))
+    dispatch(setHelpSubmittingLoading(false))
   }
 }
 
+const resetHelpSubmitDataSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setHelpSubmitSuccess(false))
+}
+
+const sendContactUsData = (contactUsData: IContactUsProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setIsContactUsSubmittingLoading(true))
+
+    await API.support.sendContactUsData(contactUsData)
+
+    dispatch(setContactUsSubmitSuccess(true))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response.data?.status?.message))
+  } finally {
+    dispatch(setIsContactUsSubmittingLoading(false))
+  }
+}
+
+const resetContactUsSubmitDataSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setContactUsSubmitSuccess(false))
+}
+
 export default {
-  createHelpMessage,
+  sendHelpData,
+  sendContactUsData,
+  resetHelpSubmitDataSuccess,
+  resetContactUsSubmitDataSuccess,
 }

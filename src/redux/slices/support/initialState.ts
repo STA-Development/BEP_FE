@@ -2,8 +2,15 @@ import { ISupportProps } from '@allTypes/reduxTypes/supportStateTypes'
 
 export const getInitialState = (): ISupportProps => ({
   support: {
-    error: null,
-    isHelpLoading: false,
-    isHelpMessageSuccess: false,
+    help: {
+      error: null,
+      isHelpDataSublittingLoading: false,
+      isHelpDataSubmittedSuccess: false,
+    },
+    contactUs: {
+      error: null,
+      isContactUsSubmittingLoading: false,
+      isContactUsDataSubmittedSuccess: false,
+    },
   },
 })
