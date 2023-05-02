@@ -26,6 +26,7 @@ const VerifyOtp = ({ children }: { children: JSX.Element }) => {
       </div>
       <Button
         type="submit"
+        isLoading={isResetPasswordLoading}
         disabled={isResetPasswordLoading}
       >
         {t(Translation.PAGE_VERIFY_OTP_BUTTON)}

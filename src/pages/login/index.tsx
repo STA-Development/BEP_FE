@@ -85,6 +85,7 @@ export const Login = () => {
               size="fl"
               disabled={isSignInLoading}
               type="submit"
+              isLoading={isSignInLoading}
             >
               {t(Translation.PAGE_LOGIN_BUTTON)}
             </Button>

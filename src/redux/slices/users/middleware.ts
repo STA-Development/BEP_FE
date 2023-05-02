@@ -106,11 +106,10 @@ const forgotPassword =
     try {
       dispatch(setIsResetPasswordLoading(true))
 
-      const response = await API.auth.forgotPassword(params)
+      await API.auth.forgotPassword(params)
 
-      dispatch(setOtp(response.data.data.otp))
-      dispatch(setError(null))
       dispatch(setSelectedIndex(selectedIndex + 1))
+      dispatch(setError(null))
     } catch (error) {
       dispatch(setError((error as IError).response?.data.status.message))
     } finally {

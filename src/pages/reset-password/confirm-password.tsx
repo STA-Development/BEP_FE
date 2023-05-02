@@ -17,6 +17,7 @@ const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
         <Button
           size="fl"
           type="submit"
+          isLoading={isResetPasswordLoading}
           disabled={isResetPasswordLoading}
         >
           {t(Translation.PAGE_CONFIRM_PASSWORD_BUTTON)}

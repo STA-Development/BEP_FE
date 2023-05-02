@@ -21,7 +21,7 @@ export type ButtonProps = {
 export const Button: FC<ButtonProps> = ({
   children,
   className,
-  disabled: buttonDisabled,
+  disabled,
   isLoading,
   variant = 'contained',
   color = 'primary',
@@ -31,8 +31,6 @@ export const Button: FC<ButtonProps> = ({
   RightIcon,
   ...rest
 }) => {
-  const disabled = isLoading ?? buttonDisabled
-
   const buttonStyle = clsxMerge(
     'flex',
     'items-center',
@@ -105,7 +103,7 @@ export const Button: FC<ButtonProps> = ({
           <LeftIcon fill={iconStyle} />
         </div>
       ) : null}
-      {disabled ? <IsLoading /> : children}
+      {isLoading ? <IsLoading /> : children}
       {RightIcon ? (
         <div className="ml-2.5">
           <RightIcon fill={iconStyle} />

@@ -20,6 +20,7 @@ const RequestPassword = ({ children }: { children: JSX.Element }) => {
         size="fl"
         type="submit"
         disabled={isResetPasswordLoading}
+        isLoading={isResetPasswordLoading}
       >
         {t(Translation.PAGE_RESET_PASSWORD_BUTTON)}
       </Button>
