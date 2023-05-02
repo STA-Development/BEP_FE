@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FilterIcon } from '@components/Icons/FilterIcon'
 import SearchResult from '@components/Search'
+import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 
 export const SearchHeader = () => {
+  const [t] = useTranslation()
+
   const [active, setActive] = useState(true)
 
   const openFilter = () => {
@@ -13,7 +17,7 @@ export const SearchHeader = () => {
   return (
     <div className="border-b border-gray-thin py-5 xl:py-10">
       <div className="flex flex-col xl:mb-5 xl:flex-row xl:justify-between">
-        <h1 className="text-xl">Educational Institutes</h1>
+        <h1 className="text-xl">{t(Translation.PAGE_EDUCATIONAL_INSTITUTES_MAIN_TITLE)}</h1>
         <div className="flex flex-row items-center justify-between">
           <p className="text-base text-black-light">Home / Master</p>
           <Button
@@ -22,7 +26,11 @@ export const SearchHeader = () => {
             LeftIcon={FilterIcon}
             className="xl:hidden"
           >
-            <p>{`${!active ? `Open Filters` : `Close Filters`}`}</p>
+            <p>{`${
+              !active
+                ? t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_OPEN)
+                : t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_CLOSE)
+            }`}</p>
           </Button>
         </div>
       </div>

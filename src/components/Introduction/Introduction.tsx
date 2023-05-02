@@ -3,7 +3,7 @@ import { Container } from '@components/Container'
 
 const ContentColor = ['primary', 'secondary', 'wave'] as const
 
-export interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
+interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
   wave?: boolean
   img?: ReactNode
   title: string

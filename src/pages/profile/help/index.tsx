@@ -44,8 +44,8 @@ export const Help = () => {
 
   return (
     <div className="grid gap-4 rounded bg-gray-thin p-5 xl:p-10">
-      <h2 className="text-lg">{t(Translation.HELP_TEL_PROBLEM)}</h2>
-      <p className="text-base text-black-light">{t(Translation.HELP_TEXT)}</p>
+      <h2 className="text-lg">{t(Translation.PAGE_PROFILE_MENU_HELP_TEL_PROBLEM)}</h2>
+      <p className="text-base text-black-light">{t(Translation.PAGE_PROFILE_MENU_HELP_TEXT)}</p>
       <FormProvider {...methods}>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -54,14 +54,14 @@ export const Help = () => {
           <div className="mb-5">
             <TextField
               fieldName="headline"
-              placeholder={`${t(Translation.HELP_HEADLINE)}`}
+              placeholder={t(Translation.PAGE_PROFILE_MENU_HELP_HEADLINE) as string}
             />
           </div>
           <div className="mb-5">
             <TextField
               fieldName="problem"
               rows={7}
-              placeholder={`${t(Translation.HELP_PROBLEM)}`}
+              placeholder={t(Translation.PAGE_PROFILE_MENU_HELP_PROBLEM) as string}
             />
           </div>
           <div className="w-full">
@@ -69,7 +69,7 @@ export const Help = () => {
               size="fl"
               type="submit"
             >
-              {t(Translation.HELP_BUTTON)}
+              {t(Translation.PAGE_PROFILE_MENU_HELP_ACTIONS_SUBMIT)}
             </Button>
           </div>
         </form>

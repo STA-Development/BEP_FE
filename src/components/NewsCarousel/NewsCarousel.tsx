@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { ChevronIcon } from '@components/Icons'
+import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
 export const NewsCarousel = () => {
+  const [t] = useTranslation()
   const [slider] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
   const maxScrollWidth = useRef(0)
@@ -18,16 +21,13 @@ export const NewsCarousel = () => {
   }
 
   const moveNext = () => {
-    if (
-      carousel.current !== null &&
-      carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
-    ) {
+    if (carousel.current && carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current) {
       setCurrentIndex((prevState) => prevState + 1)
     }
   }
 
   useEffect(() => {
-    if (carousel !== null && carousel.current !== null) {
+    if (carousel && carousel.current) {
       carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex
     }
   }, [currentIndex])
@@ -44,7 +44,9 @@ export const NewsCarousel = () => {
       className="pb-30 pt-10 xl:pt-30"
     >
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">News:</h2>
+        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">
+          {t(Translation.PAGE_HOME_NEWS_LIST_TITLE)}
+        </h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
@@ -89,7 +91,7 @@ export const NewsCarousel = () => {
               at.
             </p>
             <p className="mb-5 text-sm text-black-light xl:mb-8">22.01.2022</p>
-            <Button size="fl">Read All</Button>
+            <Button size="fl">{t(Translation.PAGE_HOME_NEWS_LIST_ACTIONS_READ_ALL)}</Button>
           </div>
         ))}
       </div>
