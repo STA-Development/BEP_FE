@@ -4,22 +4,21 @@ import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { newsSelector } from '@redux/slices/news'
+import { eventsSelector } from '@redux/slices/events'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import { Carousel } from '@uiComponents/Carousel'
 import { useRouter } from 'next/router'
 
-export const NewsCarousel = () => {
+export const EventsCarousel = () => {
+  const { eventsList: slider } = useAppSelector(eventsSelector.eventsData)
   const [t] = useTranslation()
-  const { newsList: slider } = useAppSelector(newsSelector.news)
-
   const router = useRouter()
 
-  const redirectToIndividualNews = (id: string) => {
+  const redirectToIndividualEvents = (id: string) => {
     dispatch(
       viewsMiddleware.setRedirectionState({
-        path: `/news/${id}`,
+        path: `/events/${id}`,
         params: '',
         apply: true,
       })
@@ -29,20 +28,20 @@ export const NewsCarousel = () => {
   return (
     <Container
       color="secondary"
-      className="pb-30 pt-10 xl:pt-30"
+      className="pb-30 pt-10 xl:pt-10"
     >
       <Carousel
-        redirectToIndividual={redirectToIndividualNews}
+        redirectToIndividual={redirectToIndividualEvents}
         slider={slider}
-        title={`${t(Translation.HOME_PAGE_NEWS_CAROUSEL_TITLE)}`}
+        title={`${t(Translation.HOME_PAGE_EVENTS_CAROUSEL_TITLE)}`}
       />
       <div className="mt-10 flex w-full justify-center">
         <Button
           size="bs"
           RightIcon={RightIcon}
-          onClick={() => router.push('/news')}
+          onClick={() => router.push('/events')}
         >
-          {t(Translation.HOME_PAGE_NEWS_CAROUSEL_SHOW_ALL_BUTTON)}
+          {t(Translation.HOME_PAGE_EVENTS_CAROUSEL_SHOW_ALL_BUTTON)}
         </Button>
       </div>
     </Container>

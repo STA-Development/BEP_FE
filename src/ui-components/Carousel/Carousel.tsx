@@ -1,21 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Container } from '@components/Container'
-import { ChevronIcon, RightIcon } from '@components/Icons'
-import { dispatch, useAppSelector } from '@redux/hooks'
-import { eventsSelector } from '@redux/slices/events'
-import { viewsMiddleware } from '@redux/slices/views'
+import { useTranslation } from 'react-i18next'
+import { IEventsListProps } from '@allTypes/reduxTypes/eventsStateTypes'
+import { INewsResponse } from '@axios/news/newsManagerTypes'
+import { ChevronIcon } from '@components/Icons'
+import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 
-export const EventsCarusel = () => {
-  const { eventsList: slider } = useAppSelector(eventsSelector.eventsData)
+interface ICarouselProps {
+  title: string
+  slider: IEventsListProps[] | INewsResponse[]
+  redirectToIndividual: (id: string) => void
+}
 
-  const router = useRouter()
+export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps) => {
+  const [t] = useTranslation()
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const carousel = useRef<HTMLDivElement>(null)
 
   const maxScrollWidth = useRef(0)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const carousel = useRef<HTMLDivElement>(null)
+
+  const moveNext = () => {
+    if (carousel.current && carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current) {
+      setCurrentIndex((prevState) => prevState + 1)
+    }
+  }
 
   const movePrev = () => {
     if (currentIndex > 0) {
@@ -23,27 +34,8 @@ export const EventsCarusel = () => {
     }
   }
 
-  const moveNext = () => {
-    if (
-      carousel.current !== null &&
-      carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current
-    ) {
-      setCurrentIndex((prevState) => prevState + 1)
-    }
-  }
-
-  const redirectToIndividualNews = (id: string) => {
-    dispatch(
-      viewsMiddleware.setRedirectionState({
-        path: `/events/${id}`,
-        params: '',
-        apply: true,
-      })
-    )
-  }
-
   useEffect(() => {
-    if (carousel !== null && carousel.current !== null) {
+    if (carousel && carousel.current) {
       carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex
     }
   }, [currentIndex])
@@ -55,12 +47,9 @@ export const EventsCarusel = () => {
   }, [slider])
 
   return (
-    <Container
-      color="secondary"
-      className="pb-30 pt-10 xl:pt-10"
-    >
+    <div>
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">Events:</h2>
+        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">{title}</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
@@ -78,7 +67,6 @@ export const EventsCarusel = () => {
           </Button>
         </div>
       </div>
-
       <div
         ref={carousel}
         className="relative z-0 flex touch-pan-x snap-x snap-mandatory gap-7.5 overflow-hidden scroll-smooth"
@@ -104,22 +92,13 @@ export const EventsCarusel = () => {
             <Button
               size="fl"
               variant="outlined"
-              onClick={() => redirectToIndividualNews(item.uuid)}
+              onClick={() => redirectToIndividual(item.uuid)}
             >
-              Read All
+              {t(Translation.HOME_PAGE_CAROUSEL_READ_ALL_BUTTON)}
             </Button>
           </div>
         ))}
       </div>
-      <div className="mt-10 flex w-full justify-center">
-        <Button
-          size="bs"
-          RightIcon={RightIcon}
-          onClick={() => router.push('/events')}
-        >
-          Show All events
-        </Button>
-      </div>
-    </Container>
+    </div>
   )
 }

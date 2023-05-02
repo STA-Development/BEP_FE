@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import {
   ApplicationsIcon,
@@ -7,6 +8,7 @@ import {
   SettingsIcon,
 } from '@components/Icons'
 import { HelpIcon } from '@components/Icons/HelpIcon'
+import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,32 +23,34 @@ interface Menu {
   [key: string]: MenuItem
 }
 
-const menu: Menu = {
-  settings: {
-    label: 'Settings',
-    href: '/profile/settings',
-    icon: <SettingsIcon />,
-  },
-  applications: {
-    label: 'Applications',
-    href: '/profile/applications',
-    icon: <ApplicationsIcon />,
-  },
-  'monitoring-systems': {
-    label: 'Monitoring Systems',
-    href: '/profile/monitoring-systems',
-    icon: <MonitoringSystemsIcon />,
-  },
-  help: {
-    label: 'Help',
-    href: '/profile/help',
-    icon: <HelpIcon />,
-  },
-}
-
 export const ProfileLayout = ({ children }: PropsWithChildren) => {
+  const [t] = useTranslation()
   const router = useRouter()
   const { pathname } = router
+
+  const menu: Menu = {
+    settings: {
+      label: t(Translation.PAGE_PROFILE_MENU_SETTINGS),
+      href: '/profile/settings',
+      icon: <SettingsIcon />,
+    },
+    applications: {
+      label: t(Translation.PAGE_PROFILE_MENU_APPLICATIONS),
+      href: '/profile/applications',
+      icon: <ApplicationsIcon />,
+    },
+    'monitoring-systems': {
+      label: t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS),
+      href: '/profile/monitoring-systems',
+      icon: <MonitoringSystemsIcon />,
+    },
+    help: {
+      label: t(Translation.PAGE_PROFILE_MENU_HELP),
+      href: '/profile/help',
+      icon: <HelpIcon />,
+    },
+  }
+
   const menuItem = Object.keys(menu).find((item) => menu[String(item)].href === pathname)
   const label = menuItem ? menu?.[String(menuItem)]?.label : ''
 
@@ -76,7 +80,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
               size="bs"
               LeftIcon={LogOutIcon}
             >
-              Log Out
+              {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
             </Button>
           </div>
         </aside>

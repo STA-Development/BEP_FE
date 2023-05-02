@@ -84,7 +84,7 @@ export const Header = () => {
                                 color="primary"
                                 onClick={handleClearError}
                               >
-                                Login
+                                {t(Translation.NAVBAR_LOGIN)}
                               </Button>
                             </Link>
                           </div>
@@ -95,7 +95,7 @@ export const Header = () => {
                                 variant="outlined"
                                 onClick={handleClearError}
                               >
-                                Register
+                                {t(Translation.NAVBAR_REGISTER)}
                               </Button>
                             </Link>
                           </div>
@@ -124,7 +124,7 @@ export const Header = () => {
                 onClick={handleLogOut}
                 LeftIcon={LogOutIcon}
               >
-                Log Out
+                {t(Translation.NAVBAR_LOGOUT)}
               </Button>
             </Disclosure.Panel>
           </>
