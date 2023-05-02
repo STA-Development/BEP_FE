@@ -42,6 +42,7 @@ const authManager = {
     )
   },
   googleSignIn() {
+    // TODO: use env variables for this call
     return axiosInstance.get<null, IAxiosResponse<null>>(
       `http://localhost:2002/users/v1/auth/google`
     )
