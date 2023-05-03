@@ -75,6 +75,8 @@ export enum Translation {
   PAGE_FILL_THE_FORM_INPUT_ZIP_CODE = 'page.fill.the.form.input.zip.code',
   PAGE_FILL_THE_FORM_JOB_ONE_BUTTON = 'page.fill.the.form.job.one.button',
   PAGE_FILL_THE_FORM_JOB_ONE_TITLE = 'page.fill.the.form.job.one.title',
+  PAGE_FILL_THE_FORM_JOB_SUBMIT = 'page.fill.the.form.job.submit',
+  PAGE_FILL_THE_FORM_JOB_TABS = 'page.fill.the.form.job.tabs',
   PAGE_FILL_THE_FORM_JOB_TWO_AREA = 'page.fill.the.form.job.two.area',
   PAGE_FILL_THE_FORM_JOB_TWO_BUTTON = 'page.fill.the.form.job.two.button',
   PAGE_FILL_THE_FORM_JOB_TWO_DETAILS = 'page.fill.the.form.job.two.details',

@@ -7,10 +7,10 @@ import slice from './slice'
 
 const { setJobSeekerLoading, setError, setJobSeekerSubmitSuccess } = slice.actions
 
-const areaSpecialization = (params: IJobSeekerProps) => async (dispatch: AppDispatch) => {
+const jobSeeker = (params: IJobSeekerProps) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setJobSeekerLoading(true))
-    await API.jobSeeker.jobSeeker(params)
+    await API.applications.jobSeeker(params)
 
     dispatch(setJobSeekerSubmitSuccess(true))
   } catch (error) {
@@ -25,6 +25,6 @@ const resetJobSeekerSubmitSuccess = () => (dispatch: AppDispatch) => {
 }
 
 export default {
-  areaSpecialization,
+  jobSeeker,
   resetJobSeekerSubmitSuccess,
 }

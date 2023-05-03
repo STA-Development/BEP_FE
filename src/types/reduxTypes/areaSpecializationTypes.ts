@@ -1,8 +1,8 @@
-export interface IAreaSpecializationProps {
-  jobSeeker: IJobSeeker
+export interface IApplicationsProps {
+  applications: IApplications
 }
 
-export interface IJobSeeker {
+export interface IApplications {
   isJobSeekerLoading: boolean
   error: null | string
 

@@ -4,7 +4,7 @@ import { getInitialState } from './initialState'
 import reducers from './reducers'
 
 const slice = createSlice({
-  name: 'users',
+  name: 'applications',
   initialState: getInitialState(),
   reducers,
 })

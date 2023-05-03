@@ -39,5 +39,7 @@
   "page.fill.the.form.job.two.posted.date": "Posted Date:",
   "page.fill.the.form.job.two.schedule": "Schedule:",
   "page.fill.the.form.job.two.workplace": "Workplace:",
-  "page.fill.the.form.job.two.details.button": "Change"
+  "page.fill.the.form.job.two.details.button": "Change",
+  "page.fill.the.form.job.submit": "Submit",
+  "page.fill.the.form.job.tabs": "Tab"
 }
