@@ -9,6 +9,7 @@ const ButtonRadius = ['all', 'r', 'l'] as const
 
 export type ButtonProps = {
   isLoading?: boolean
+  active?: boolean
   variant?: (typeof ButtonVariant)[number]
   color?: (typeof ButtonColor)[number]
   size?: (typeof ButtonSize)[number]
@@ -22,6 +23,7 @@ export const Button: FC<ButtonProps> = ({
   className,
   disabled: buttonDisabled,
   isLoading,
+  active,
   variant = 'contained',
   color = 'primary',
   size = 'sm',
@@ -55,7 +57,10 @@ export const Button: FC<ButtonProps> = ({
         'hover:border-primary-light hover:bg-primary-light',
         color === 'primary' && 'border-primary bg-primary text-secondary',
         color === 'secondary' && 'border-secondary bg-secondary text-primary hover:text-secondary',
-        color === 'gray' && 'border-gray-thin bg-gray-thin bg-gray-thin text-primary',
+        color === 'gray' && [
+          'border-gray-thin bg-gray-thin text-primary hover:bg-secondary',
+          active && 'border-primary-light bg-secondary',
+        ],
       ],
       variant === 'outlined' && [
         'hover:border-primary-light hover:bg-primary-light',
@@ -81,8 +86,8 @@ export const Button: FC<ButtonProps> = ({
       size === 'lg' && 'w-full px-20 py-2.5 xl:w-auto',
       size === 'fl' && 'w-full p-2.5',
       size === 'hg' && 'w-full p-10',
-      size === 'app' && 'h-[191px] w-[224px]',
-      size === 'role' && 'h-[191px] w-[340px]',
+      size === 'app' && 'h-[191px] w-[224px] flex-col',
+      size === 'role' && 'h-[191px] w-[340px] flex-col',
     ],
     className
   )

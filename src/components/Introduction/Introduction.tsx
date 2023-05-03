@@ -29,7 +29,11 @@ export const Introduction = ({
       color={color}
       className={className}
     >
-      <div className={`flex flex-col gap-0 py-20 xl:flex-row xl:gap-20 ${wave && 'xl:pt-0'}`}>
+      <div
+        className={`flex flex-col justify-between gap-0 py-20 xl:flex-row xl:gap-20 ${
+          wave && 'xl:pt-0'
+        }`}
+      >
         <div className="col-span-2">
           <h2 className="mb-2.5 text-xl font-medium xl:mb-5 xl:text-2xl">{title}</h2>
           <p className="mb-10 text-base text-black-light">{desc}</p>

@@ -29,6 +29,9 @@ const reducers = createReducer({
   setLanguageChangeLoading(state, action: IAction<boolean>) {
     state.user.isLanguageChangeLoading = action.payload
   },
+  setRole(state, action: IAction<string | null>) {
+    state.user.role = action.payload
+  },
 })
 
 export default reducers

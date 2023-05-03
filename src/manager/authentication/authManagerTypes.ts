@@ -12,6 +12,7 @@ export interface ISignInParams {
 export interface IError {
   response: {
     data: {
+      data: never
       status: {
         message: string
       }
@@ -30,4 +31,23 @@ export interface IRegisterData {
   password: string
   passwordConfirmation: string
   remember: boolean
+}
+
+export interface IRefreshTokenResponse {
+  accessToken: string
+}
+
+export interface IRefreshTokenParams {
+  refreshToken: string
+  remember: boolean
+}
+
+export interface IRoleParams {
+  role: string
+}
+
+export interface IGetProfileResponse {
+  imageURL: string
+  role: string | null
+  uuid: string
 }

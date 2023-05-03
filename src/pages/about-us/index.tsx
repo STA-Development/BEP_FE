@@ -48,7 +48,7 @@ const AboutUs = () => {
           >
             <div
               className="mb-10 mr-20 flex w-full flex-none justify-center group-odd:mr-0
-              xl:w-[350px] xl:flex-row xl:flex-col xl:group-odd:order-last xl:group-odd:ml-20"
+              xl:w-[350px] xl:flex-col xl:group-odd:order-last xl:group-odd:ml-20"
             >
               <Image
                 src={member.imageURL}

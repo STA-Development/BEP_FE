@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
@@ -10,6 +10,7 @@ import store from '@redux/store'
 import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import '@utils/i18n'
 
@@ -24,20 +25,102 @@ const roboto = Roboto({
 interface IAppProps {
   Component: NextComponentType<NextPageContext, never> & {
     Layout: keyof typeof Layouts
+    WithAuth: boolean
+    WithoutAuth: boolean
   }
   pageProps: JSX.IntrinsicAttributes
 }
 
 const App = ({ Component, pageProps }: IAppProps) => {
   const HierarchicalLayout = Layouts[Component.Layout]
+  const { WithAuth, WithoutAuth } = Component
+  const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
+  const [role, setRole] = useState<string | null>(null)
+  const [shouldGetProfile, setShouldGetProfile] = useState(true)
+
+  const unsubscribe = store.subscribe(() => {
+    setIsAuthenticated(store.getState().users.user.isAuthenticated)
+    setRole(store.getState().users.user.role)
+  })
 
   useEffect(() => {
-    const data = window.localStorage.getItem('language')
+    console.log({ WithAuth }, { WithoutAuth }, { isAuthenticated }, { role }, router.pathname)
 
-    if (data) {
-      dispatch(usersMiddleware.changeLanguage(data))
+    if (WithAuth) {
+      if (isAuthenticated === false) {
+        console.log(1)
+        router.push('/login')
+      } else if (isAuthenticated && !role && router.pathname !== '/after-registration') {
+        router.push('/after-registration')
+      } else if (isAuthenticated && role && router.pathname === '/after-registration') {
+        router.push('/profile/settings')
+      }
+    } else if (WithoutAuth) {
+      if (isAuthenticated) {
+        if (role) {
+          console.log(3)
+          router.push('/profile/settings')
+        } else {
+          console.log(4)
+          router.push('/after-registration')
+        }
+      }
     }
-  }, [])
+  }, [WithAuth, WithoutAuth, isAuthenticated, role, router])
+
+  useEffect(() => {
+    const lang = window.localStorage.getItem('language')
+
+    if (lang) {
+      dispatch(usersMiddleware.changeLanguage(lang))
+    }
+
+    // localStorage.setItem('accessToken', 'aaaaaa')
+    dispatch(usersMiddleware.isAuthenticated())
+    // dispatch(usersMiddleware.changeRole('role1'))
+
+    return () => {
+      unsubscribe()
+    }
+  }, [unsubscribe])
+
+  useEffect(() => {
+    if (shouldGetProfile) {
+      dispatch(usersMiddleware.getProfile())
+      setShouldGetProfile(false)
+    }
+
+    const handleRouteChange = async () => {
+      dispatch(usersMiddleware.getProfile())
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+    }
+  }, [router, shouldGetProfile])
+
+  if (
+    (WithAuth &&
+      (!isAuthenticated ||
+        (isAuthenticated &&
+          ((!role && router.pathname !== '/after-registration') ||
+            (role && router.pathname === '/after-registration'))))) ||
+    (WithoutAuth && (isAuthenticated || isAuthenticated === null))
+  ) {
+    return null
+  }
+
+  // if (
+  //   (WithAuth && (!isAuthenticated || (isAuthenticated && !role))) ||
+  //   (WithoutAuth && (isAuthenticated || isAuthenticated === null))
+  // ) {
+  //   console.log(WithAuth && (!isAuthenticated || (isAuthenticated && !role)))
+  //
+  //   return null
+  // }
 
   return (
     <>
@@ -84,5 +167,11 @@ const App = ({ Component, pageProps }: IAppProps) => {
     </>
   )
 }
+
+// Disable SSR for getServerSideProps()
+export const getServerSideProps = async () => ({
+  props: {},
+  ssr: false,
+})
 
 export default App

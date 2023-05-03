@@ -8,7 +8,8 @@ export interface IUser {
   isSignInLoading: boolean
   isSignUpLoading: boolean
   isLogOutLoading: boolean
-  isAuthenticated: boolean
+  isAuthenticated: boolean | null
+  role: string | null
   error: string | null
   errorGoogleSignIn: string | null
   language: string

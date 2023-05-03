@@ -32,9 +32,9 @@ export const Login = () => {
   const methods = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      email: '',
-      password: '',
-      remember: false,
+      email: 'Ars1@gmail.com',
+      password: 'Ars123**',
+      remember: true,
     },
     resolver: yupResolver(loginValidationSchema),
   })
@@ -112,3 +112,4 @@ export const Login = () => {
 }
 
 export default Login
+Login.WithoutAuth = true
