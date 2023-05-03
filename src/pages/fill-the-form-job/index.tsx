@@ -41,7 +41,7 @@ const FillTheForm = () => {
 
   const router = useRouter()
 
-  const { isJobSeekerSubmitSuccess } = useAppSelector(applicationsSelector.applications)
+  const { isJobSeekerSubmitSuccess } = useAppSelector(applicationsSelector.jobSeeker)
 
   const methods = useForm({
     defaultValues,
@@ -65,7 +65,7 @@ const FillTheForm = () => {
   useEffect(() => {
     if (isJobSeekerSubmitSuccess) {
       dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
-      router.push('/')
+      router.push('/profile/applications')
       reset(defaultValues)
     }
   }, [isJobSeekerSubmitSuccess, reset, router])
@@ -76,6 +76,7 @@ const FillTheForm = () => {
         <Button
           variant="text"
           LeftIcon={LeftIcon}
+          disabled={selectedIndex === 0}
           onClick={() => {
             setSelectedIndex((prev) => prev - 1)
           }}

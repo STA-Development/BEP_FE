@@ -8,13 +8,19 @@ const createReducer = <T extends SliceCaseReducers<IApplicationsProps>>(reducer:
 
 const reducers = createReducer({
   setJobSeekerLoading(state, action: IAction<boolean>) {
-    state.applications.isJobSeekerLoading = action.payload
+    state.applications.jobSeeker.isJobSeekerLoading = action.payload
   },
   setError(state, action: IAction<null | string>) {
-    state.applications.error = action.payload
+    state.applications.jobSeeker.error = action.payload
   },
   setJobSeekerSubmitSuccess(state, action: IAction<boolean>) {
-    state.applications.isJobSeekerSubmitSuccess = action.payload
+    state.applications.jobSeeker.isJobSeekerSubmitSuccess = action.payload
+  },
+  setOrganizationLoading(state, action: IAction<boolean>) {
+    state.applications.organization.isOrganizationLoading = action.payload
+  },
+  setOrganizationSubmitSuccess(state, action: IAction<boolean>) {
+    state.applications.organization.isOrganizationSubmitSuccess = action.payload
   },
 })
 

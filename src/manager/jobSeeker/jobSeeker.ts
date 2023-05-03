@@ -1,4 +1,4 @@
-import { IJobSeekerProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IJobSeekerProps, IOrganizationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
@@ -10,6 +10,14 @@ const applicationsManager = {
   jobSeeker(data: IJobSeekerProps) {
     return axiosInstance.post<IJobSeekerProps, IAxiosResponse<IJobSeekerProps>>(
       `${baseURL}/v1/job-seeker/application`,
+      {
+        ...data,
+      }
+    )
+  },
+  organization(data: IOrganizationProps) {
+    return axiosInstance.post<IOrganizationProps, IAxiosResponse<IOrganizationProps>>(
+      `${baseURL}/v1/organization/application`,
       {
         ...data,
       }

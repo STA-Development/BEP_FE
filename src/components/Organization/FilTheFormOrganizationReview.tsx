@@ -8,7 +8,7 @@ interface IFilTheFormJobReviewProps {
   setSelectedIndex: (prev: (prev: number) => number) => void
 }
 
-export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewProps) => {
+export const FilTheFormOrganizationReview = ({ setSelectedIndex }: IFilTheFormJobReviewProps) => {
   const [t] = useTranslation()
 
   const { getValues } = useFormContext()
