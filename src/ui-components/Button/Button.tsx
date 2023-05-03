@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef, ComponentType, FC } from 'react'
 import IconProps from '@allTypes/svg-icon'
+import IsLoading from '@components/IsLoading'
 import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'flat', 'text'] as const
@@ -20,7 +21,7 @@ export type ButtonProps = {
 export const Button: FC<ButtonProps> = ({
   children,
   className,
-  disabled: buttonDisabled,
+  disabled,
   isLoading,
   variant = 'contained',
   color = 'primary',
@@ -30,8 +31,6 @@ export const Button: FC<ButtonProps> = ({
   RightIcon,
   ...rest
 }) => {
-  const disabled = isLoading ?? buttonDisabled
-
   const buttonStyle = clsxMerge(
     'flex',
     'items-center',
@@ -104,7 +103,7 @@ export const Button: FC<ButtonProps> = ({
           <LeftIcon fill={iconStyle} />
         </div>
       ) : null}
-      {children}
+      {isLoading ? <IsLoading /> : children}
       {RightIcon ? (
         <div className="ml-2.5">
           <RightIcon fill={iconStyle} />

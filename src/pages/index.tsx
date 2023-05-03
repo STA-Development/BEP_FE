@@ -60,7 +60,7 @@ const Home = () => {
         title={t(Translation.PAGE_HOME_MAIN_TITLE)}
         desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
-          <Link href="/">
+          <Link href="/login">
             <Button
               size="lg"
               RightIcon={RightIcon}

@@ -55,7 +55,6 @@ export const ContactUsSendData = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5 flex flex-col">
             <TextField
-              id="name"
               fieldName="fullName"
               label={`${t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME)}`}
             />

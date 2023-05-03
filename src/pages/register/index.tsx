@@ -103,6 +103,7 @@ export const Register = () => {
               />
             </div>
             <Button
+              isLoading={isSignUpLoading}
               disabled={isSignUpLoading}
               size="fl"
               type="submit"

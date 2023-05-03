@@ -9,8 +9,11 @@ export interface IUser {
   isSignUpLoading: boolean
   isLogOutLoading: boolean
   isAuthenticated: boolean
+  isResetPasswordLoading: boolean
   error: string | null
   errorGoogleSignIn: string | null
   language: string
+  selectedIndex: number
   isLanguageChangeLoading: boolean
+  otp: number | null
 }
