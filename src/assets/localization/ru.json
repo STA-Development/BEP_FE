@@ -31,5 +31,20 @@
   "home.page.news.carousel.title": "News",
   "home.page.carousel.read.all.button": "Read All",
   "home.page.news.carousel.show.all.button": "Show All news",
-  "home.page.events.carousel.show.all.button ": "Show All events"
+  "home.page.events.carousel.show.all.button ": "Show All events",
+  "page.fill.the.form.job.one.title": "What is your area of specialization?",
+  "page.fill.the.form.job.one.button": "Next",
+  "page.fill.the.form.job.two.details": "Job details",
+  "page.fill.the.form.job.two.title": "Let’s Review and Submit",
+  "page.fill.the.form.job.two.button": "Submit",
+  "page.fill.the.form.job.two.type": "Job Details:",
+  "page.fill.the.form.job.two.area": "Job Details:",
+  "page.fill.the.form.job.two.salary": "Job Details:",
+  "page.fill.the.form.job.two.experience": "Job Details:",
+  "page.fill.the.form.job.two.posted.date": "Job Details:",
+  "page.fill.the.form.job.two.schedule": "Job Details:",
+  "page.fill.the.form.job.two.workplace": "Job Details:",
+  "page.fill.the.form.job.two.details.button": "Change",
+  "page.fill.the.form.job.submit": "Submit",
+  "page.fill.the.form.job.tabs": "Tab"
 }

@@ -31,5 +31,20 @@
   "home.page.news.carousel.title": "Նորություններ",
   "home.page.carousel.read.all.button": "Կարդացեք բոլորը",
   "home.page.news.carousel.show.all.button": "Տեսնել բոլոր նորությունները",
-  "home.page.events.carousel.show.all.button ": "Տեսնել բոլոր իրադարձություններ"
+  "home.page.events.carousel.show.all.button ": "Տեսնել բոլոր իրադարձություններ",
+  "page.fill.the.form.job.one.title": "Ո՞րն է ձեր մասնագիտացման ոլորտը:",
+  "page.fill.the.form.job.one.button": "Հաջորդը",
+  "page.fill.the.form.job.two.title": "Եկեք վերանայենք և ներկայացնենք",
+  "page.fill.the.form.job.two.button": "Ներկայացնել",
+  "page.fill.the.form.job.two.details": "Job details",
+  "page.fill.the.form.job.two.type": "Տիպ:",
+  "page.fill.the.form.job.two.area": "Տարածք:",
+  "page.fill.the.form.job.two.salary": "Աշխատավարձ:",
+  "page.fill.the.form.job.two.experience": "Փորձ:",
+  "page.fill.the.form.job.two.posted.date": "Posted Date:",
+  "page.fill.the.form.job.two.schedule": "Schedule:",
+  "page.fill.the.form.job.two.workplace": "Workplace:",
+  "page.fill.the.form.job.two.details.button": "Change",
+  "page.fill.the.form.job.submit": "Submit",
+  "page.fill.the.form.job.tabs": "Tab"
 }
