@@ -36,7 +36,6 @@ export const AddApplicationModal = () => {
           variant="contained"
           color="gray"
           size="app"
-          className="flex-col"
           onClick={onClose}
         >
           <div className="mb-5 w-auto">
@@ -48,7 +47,6 @@ export const AddApplicationModal = () => {
           variant="contained"
           color="gray"
           size="app"
-          className="flex-col"
           onClick={onClose}
         >
           <div className="mb-5 w-auto">

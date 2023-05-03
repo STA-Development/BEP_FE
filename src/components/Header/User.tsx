@@ -5,9 +5,9 @@ import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const links = [
-  { href: '/settings', label: 'Change Email' },
-  { href: '/settings', label: 'Apply' },
-  { href: '/settings', label: 'Edit Profile' },
+  { href: '/login', label: 'Login' },
+  { href: '/after-registration', label: 'After Registration' },
+  { href: '/profile/settings', label: 'Edit Profile' },
 ]
 
 export interface IHeaderUserProps {
@@ -44,11 +44,16 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => (
           <ul>
             {links.map((link) => (
               <Menu.Item key={link.href}>
-                <li className="mb-2.5">
-                  <Link href={link.href}>
-                    <Button variant="outlined">{link.label}</Button>
-                  </Link>
-                </li>
+                {({ close }) => (
+                  <li className="mb-2.5">
+                    <Link
+                      href={link.href}
+                      onClick={close}
+                    >
+                      <Button variant="outlined">{link.label}</Button>
+                    </Link>
+                  </li>
+                )}
               </Menu.Item>
             ))}
             <Menu.Item>

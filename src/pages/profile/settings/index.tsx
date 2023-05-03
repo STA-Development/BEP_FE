@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { ChangeEvent, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LocationIcon, UserIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
+import { dispatch } from '@redux/hooks'
+import { usersMiddleware } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
 export const Settings = () => {
@@ -34,6 +36,49 @@ export const Settings = () => {
     },
   ]
 
+  const fileInput = useRef<HTMLInputElement>(null)
+
+  const handleSubmit = async (file: File) => {
+    if (!file) {
+      return
+    }
+
+    const formData = new FormData()
+
+    formData.append('image', file)
+
+    console.log(formData)
+
+    dispatch(usersMiddleware.uploadAvatar(formData))
+
+    // try {
+    //   const response = await fetch('/api/upload-image', {
+    //     method: 'POST',
+    //     body: formData,
+    //   })
+    //
+    //   if (!response.ok) {
+    //     throw new Error(response.statusText)
+    //   }
+    //
+    //   // do something with the response
+    // } catch (error) {
+    //   console.error(error)
+    // }
+  }
+
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files
+
+    if (fileList?.length) {
+      handleSubmit(fileList[0])
+    }
+  }
+
+  const chooseFile = () => {
+    fileInput.current?.click()
+  }
+
   return (
     <div className="grid divide-y divide-gray-thin">
       <div className="flex flex-col items-center pb-5 xl:flex-row xl:items-start xl:pb-10">
@@ -44,10 +89,17 @@ export const Settings = () => {
             <LocationIcon className="mr-2.5" />
             Yerevan, Armenia
           </p>
+          <input
+            type="file"
+            onChange={(e) => handleFileChange(e)}
+            ref={fileInput}
+            className="hidden"
+          />
           <Button
             size="lg"
             variant="outlined"
             LeftIcon={UserIcon}
+            onClick={() => chooseFile()}
           >
             {t(Translation.PAGE_PROFILE_MENU_SETTINGS_ACTIONS_UPLOAD_AVATAR)}
           </Button>
@@ -76,7 +128,7 @@ export const Settings = () => {
                     className="w-full rounded border border-gray-light px-5 py-2.5 text-base text-black outline-0"
                   />
                 </td>
-                <td className="block w-1 w-full p-0 py-5 xl:table-cell xl:w-48 xl:py-10">
+                <td className="block w-full p-0 py-5 xl:table-cell xl:w-48 xl:py-10">
                   <Button
                     variant="outlined"
                     size="fl"
@@ -95,3 +147,4 @@ export const Settings = () => {
 
 export default Settings
 Settings.Layout = 'Profile'
+Settings.WithAuth = true
