@@ -62,7 +62,7 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    dispatch(eventsMiddleware.fetchEventsList(1))
+    dispatch(eventsMiddleware.getEventsList(1))
   }, [])
 
   return (

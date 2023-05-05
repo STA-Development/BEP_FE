@@ -32,7 +32,7 @@ const Events = () => {
   }
 
   useEffect(() => {
-    dispatch(eventsMiddleware.fetchEventsList(page))
+    dispatch(eventsMiddleware.getEventsList(page))
   }, [page])
 
   useEffect(() => {
