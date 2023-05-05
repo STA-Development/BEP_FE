@@ -26,6 +26,7 @@
     "@storybook/addon-essentials": "7.0.7",
     "@storybook/addon-interactions": "7.0.7",
     "@storybook/addon-links": "7.0.7",
+    "@neojp/tailwindcss-line-clamp-utilities": "^1.0.1",
     "@storybook/blocks": "7.0.7",
     "@storybook/nextjs": "7.0.7",
     "@storybook/react": "7.0.7",

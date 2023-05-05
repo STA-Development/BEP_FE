@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
+import { EventsCarousel } from '@components/EventsCarousel'
 import {
   BuildingBankIcon,
   BuildingBankToolboxIcon,
@@ -11,12 +12,15 @@ import {
   RightIcon,
   ToolboxIcon,
 } from '@components/Icons'
-import { BusinessDealIcon } from '@components/Icons/BusinessDeal'
 import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
+import { dispatch } from '@redux/hooks'
+import { eventsMiddleware } from '@redux/slices/events'
+import { newsMiddleware } from '@redux/slices/news'
 import { Button } from '@uiComponents/Button'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const data1 = [
@@ -53,10 +57,23 @@ const Home = () => {
     },
   ]
 
+  useEffect(() => {
+    dispatch(eventsMiddleware.clearEventsList())
+    dispatch(newsMiddleware.clearNewsList())
+  }, [])
+
   return (
     <>
       <Introduction
-        img={<BusinessDealIcon />}
+        img={
+          <Image
+            alt="students"
+            width={400}
+            height={400}
+            className="max-h-[400px] max-w-[400px]"
+            src="/students.png"
+          />
+        }
         title={t(Translation.PAGE_HOME_MAIN_TITLE)}
         desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
@@ -102,7 +119,7 @@ const Home = () => {
           ))}
         </div>
       </Container>
-      <div className="h-[95px] w-full bg-[url('/vawe2.svg')] bg-cover bg-center bg-no-repeat" />
+      <div className="h-[95px] w-full bg-[url('/wave2.svg')] bg-cover bg-center bg-no-repeat" />
 
       <Container className="my-30 xl:my-60">
         <h2 className="mb-10 text-xl font-medium xl:mt-25 xl:text-2xl">
@@ -152,8 +169,8 @@ const Home = () => {
           </Disclosure>
         ))}
       </Container>
-
       <NewsCarousel />
+      <EventsCarousel />
     </>
   )
 }

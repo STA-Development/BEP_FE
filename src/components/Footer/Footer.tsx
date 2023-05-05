@@ -40,27 +40,28 @@ export const Footer = () => {
 
   return (
     <footer>
-      <Container color="primary">
-        <div className="flex flex-col justify-between py-10 text-white xl:flex-row xl:pb-5">
-          <div className="order-2 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-1 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+      <div className="w-100 h-[120px] w-full bg-[url('/waveFooter.svg')] bg-cover bg-center bg-no-repeat" />
+      <Container color="secondary">
+        <div className="flex flex-col justify-between py-10 text-primary xl:flex-row xl:pb-5">
+          <div className="order-2 mb-10 space-y-5 divide-primary border-b border-gray-thin pb-10 xl:order-1 xl:m-0 xl:divide-y xl:border-none xl:p-0">
             <p className="text-base font-medium">{t(Translation.FOOTER_CONTACTS)}</p>
-            <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            <ul className="text-primary-thin space-y-2.5 pt-0 text-sm xl:pt-5">
               {contacts.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
-          <div className="order-4 space-y-5 divide-gray-thin xl:order-2 xl:divide-y">
+          <div className="order-4 space-y-5 divide-primary xl:order-2 xl:divide-y">
             <p className="text-base font-medium">{t(Translation.FOOTER_POLICIES_TITLE)}</p>
-            <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            <ul className="text-primary-thin space-y-2.5 pt-0 text-sm xl:pt-5">
               {policiesAndTerms.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
-          <div className="order-3 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-3 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <div className="order-3 mb-10 space-y-5 divide-primary border-b border-gray-thin pb-10 xl:order-3 xl:m-0 xl:divide-y xl:border-none xl:p-0">
             <p className="text-base font-medium">{t(Translation.FOOTER_NEWS_EVENTS_TITLE)}</p>
-            <ul className="space-y-2.5 pt-0 text-sm text-gray-thin xl:pt-5">
+            <ul className="text-primary-thin space-y-2.5 pt-0 text-sm xl:pt-5">
               {dontMissOut.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href}>{item.label}</Link>
@@ -68,9 +69,9 @@ export const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className="order-1 mb-10 space-y-5 divide-gray-thin border-b border-gray-thin pb-10 xl:order-4 xl:m-0 xl:divide-y xl:border-none xl:p-0">
+          <div className="order-1 mb-10 space-y-5 divide-primary border-b border-gray-thin pb-10 xl:order-4 xl:m-0 xl:divide-y xl:border-none xl:p-0">
             <p className="text-base font-medium">{t(Translation.FOOTER_SOCIAL_MEDIA_TITLE)}</p>
-            <div className="text-sm text-gray-thin">
+            <div className="text-primary-thin text-sm">
               <ul className="flex space-x-5 pt-0 xl:pt-5">
                 {socials.map((item) => (
                   <li key={item.href}>
@@ -84,11 +85,13 @@ export const Footer = () => {
                   </li>
                 ))}
               </ul>
-              <p className="mt-12 hidden text-sm text-gray-thin underline xl:block">{copyright}</p>
+              <p className="text-primary-thin mt-12 hidden text-sm underline xl:block">
+                {copyright}
+              </p>
             </div>
           </div>
         </div>
-        <p className="block pb-10 text-sm text-gray-thin underline xl:hidden">{copyright}</p>
+        <p className="text-primary-thin block pb-10 text-sm underline xl:hidden">{copyright}</p>
       </Container>
     </footer>
   )
