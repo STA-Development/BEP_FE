@@ -36,6 +36,10 @@ const Events = () => {
   }, [page])
 
   useEffect(() => {
+    dispatch(eventsMiddleware.clearEventsList())
+  }, [])
+
+  useEffect(() => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 

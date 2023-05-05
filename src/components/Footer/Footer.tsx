@@ -39,7 +39,7 @@ export const Footer = () => {
   const copyright = t(Translation.FOOTER_COPYRIGHT)
 
   return (
-    <>
+    <footer>
       <div className="w-100 h-[120px] w-full bg-[url('/waveFooter.svg')] bg-cover bg-center bg-no-repeat" />
       <Container color="secondary">
         <div className="flex flex-col justify-between py-10 text-primary xl:flex-row xl:pb-5">
@@ -93,6 +93,6 @@ export const Footer = () => {
         </div>
         <p className="text-primary-thin block pb-10 text-sm underline xl:hidden">{copyright}</p>
       </Container>
-    </>
+    </footer>
   )
 }
