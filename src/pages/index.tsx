@@ -22,6 +22,7 @@ import { newsMiddleware } from '@redux/slices/news'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const data1 = [
   { id: 1, number: '43', text: 'Lorem ipsum dolor sit amet consectetur' },
@@ -31,6 +32,13 @@ const data1 = [
 
 const Home = () => {
   const [t] = useTranslation()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query) {
+      localStorage.setItem('accessToken', router.query.accessToken as string)
+    }
+  }, [router])
 
   const helps = [
     { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
@@ -146,14 +154,7 @@ const Home = () => {
                 </Disclosure.Button>
                 <Disclosure.Panel className="px-6 pb-10 xl:px-20">
                   <div className="mb-10">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur. Aenean massa odio in tincidunt. Ac
-                      velit fringilla sed libero sed non turpis arcu. Ornare aliquet ullamcorper
-                      duis et vitae urna. Vel sit duis congue nibh morbi luctus nibh aliquet
-                      egestas. Habitasse nulla ante nunc nulla. Vestibulum condimentum quis
-                      adipiscing varius elit vehicula sem. Habitasse nulla ante nunc nulla.
-                      Vestibulum condimentum quis adipiscing varius elit vehicula sem.
-                    </p>
+                    <p>{t(Translation.PAGE_HOME_SECTIONS_EDUCATIONAL_INSTITUTES_DESCRIPTION)}</p>
                   </div>
                   <Link href="/fill-the-form">
                     <Button
