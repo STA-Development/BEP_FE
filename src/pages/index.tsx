@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
+import { EventsCarousel } from '@components/EventsCarousel'
 import {
   BuildingBankIcon,
   BuildingBankToolboxIcon,
@@ -15,6 +16,9 @@ import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
+import { dispatch } from '@redux/hooks'
+import { eventsMiddleware } from '@redux/slices/events'
+import { newsMiddleware } from '@redux/slices/news'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -52,6 +56,11 @@ const Home = () => {
       icon: <ClipboardTaskListIcon />,
     },
   ]
+
+  useEffect(() => {
+    dispatch(eventsMiddleware.clearEventsList())
+    dispatch(newsMiddleware.clearNewsList())
+  }, [])
 
   return (
     <>
@@ -160,8 +169,8 @@ const Home = () => {
           </Disclosure>
         ))}
       </Container>
-
       <NewsCarousel />
+      <EventsCarousel />
     </>
   )
 }

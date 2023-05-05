@@ -20,7 +20,7 @@ const IndividualEventPage = () => {
 
   useEffect(() => {
     if (eventsId) {
-      dispatch(eventsMiddleware.fetchSingleEvent(eventsId as string))
+      dispatch(eventsMiddleware.getSingleEvent(eventsId as string))
     }
   }, [eventsId])
 

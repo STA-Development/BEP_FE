@@ -14,7 +14,7 @@ const AboutUs = () => {
   const [t] = useTranslation()
 
   useEffect(() => {
-    dispatch(aboutUsMiddleware.fetchAboutUsList())
+    dispatch(aboutUsMiddleware.getAboutUsList())
   }, [])
 
   return (

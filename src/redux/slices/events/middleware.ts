@@ -14,7 +14,7 @@ const {
   setSingleEventData,
 } = slice.actions
 
-const fetchEventsList = (page: number) => async (dispatch: AppDispatch) => {
+const getEventsList = (page: number) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setEventsLoading(true))
 
@@ -39,7 +39,7 @@ const fetchEventsList = (page: number) => async (dispatch: AppDispatch) => {
   }
 }
 
-const fetchSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
+const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setSingleEventLoading(true))
 
@@ -53,7 +53,14 @@ const fetchSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const clearEventsList = () => async (dispatch: AppDispatch) => {
+  dispatch(setEventsList([]))
+  dispatch(setPageSize(0))
+  dispatch(setTotalItems(0))
+}
+
 export default {
-  fetchEventsList,
-  fetchSingleEvent,
+  getEventsList,
+  getSingleEvent,
+  clearEventsList,
 }

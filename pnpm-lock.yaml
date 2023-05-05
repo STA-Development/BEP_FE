@@ -8,6 +8,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.6.1
   '@headlessui/react': ^1.7.14
   '@hookform/resolvers': ^3.1.0
+  '@neojp/tailwindcss-line-clamp-utilities': ^1.0.1
   '@reduxjs/toolkit': ^1.9.5
   '@storybook/addon-essentials': 7.0.7
   '@storybook/addon-interactions': 7.0.7
@@ -62,6 +63,7 @@ specifiers:
 dependencies:
   '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 3.1.0_react-hook-form@7.43.9
+  '@neojp/tailwindcss-line-clamp-utilities': 1.0.1
   '@reduxjs/toolkit': 1.9.5_k4ae6lp43ej6mezo3ztvx6pykq
   '@storybook/addon-essentials': 7.0.7_biqbaboplfbrettd7655fr4n2y
   '@storybook/addon-interactions': 7.0.7_biqbaboplfbrettd7655fr4n2y
@@ -2934,6 +2936,10 @@ packages:
       pump: 3.0.0
       tar-fs: 2.1.1
     dev: true
+
+  /@neojp/tailwindcss-line-clamp-utilities/1.0.1:
+    resolution: {integrity: sha512-DAzEbTSM7NLxTeWUdbipB3MNt/MesveqXRAnbLX/yNnzpqxRhakzFls/kY4r5LWFGSNl+AHe9khOd27wcp6Ylw==}
+    dev: false
 
   /@next/env/13.3.1:
     resolution: {integrity: sha512-EDtCoedIZC7JlUQ3uaQpSc4aVmyhbLHmQVALg7pFfQgOTjgSnn7mKtA0DiCMkYvvsx6aFb5octGMtWrOtGXW9A==}
