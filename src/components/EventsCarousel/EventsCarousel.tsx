@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { eventsSelector } from '@redux/slices/events'
+import { eventsMiddleware, eventsSelector } from '@redux/slices/events'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import { Carousel } from '@uiComponents/Carousel'
 import { useRouter } from 'next/router'
 
 export const EventsCarousel = () => {
-  const { eventsList: slider } = useAppSelector(eventsSelector.eventsData)
+  const { eventsList } = useAppSelector(eventsSelector.eventsData)
   const [t] = useTranslation()
   const router = useRouter()
 
@@ -25,6 +25,14 @@ export const EventsCarousel = () => {
     )
   }
 
+  useEffect(() => {
+    dispatch(eventsMiddleware.getEventsList(1))
+  }, [])
+
+  if (!eventsList.length) {
+    return null
+  }
+
   return (
     <Container
       color="secondary"
@@ -32,7 +40,7 @@ export const EventsCarousel = () => {
     >
       <Carousel
         redirectToIndividual={redirectToIndividualEvents}
-        slider={slider}
+        slider={eventsList}
         title={`${t(Translation.HOME_PAGE_EVENTS_CAROUSEL_TITLE)}`}
       />
       <div className="mt-10 flex w-full justify-center">

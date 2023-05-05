@@ -53,7 +53,14 @@ const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const clearEventsList = () => async (dispatch: AppDispatch) => {
+  dispatch(setEventsList([]))
+  dispatch(setPageSize(0))
+  dispatch(setTotalItems(0))
+}
+
 export default {
   getEventsList,
   getSingleEvent,
+  clearEventsList,
 }

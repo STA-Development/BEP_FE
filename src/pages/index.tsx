@@ -58,11 +58,8 @@ const Home = () => {
   ]
 
   useEffect(() => {
-    dispatch(newsMiddleware.getNewsList(1))
-  }, [])
-
-  useEffect(() => {
-    dispatch(eventsMiddleware.getEventsList(1))
+    dispatch(eventsMiddleware.clearEventsList())
+    dispatch(newsMiddleware.clearNewsList())
   }, [])
 
   return (
@@ -164,9 +161,7 @@ const Home = () => {
           </Disclosure>
         ))}
       </Container>
-
       <NewsCarousel />
-
       <EventsCarousel />
     </>
   )

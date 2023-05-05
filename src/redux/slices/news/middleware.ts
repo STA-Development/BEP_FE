@@ -56,7 +56,14 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const clearNewsList = () => async (dispatch: AppDispatch) => {
+  dispatch(setNewsList([]))
+  dispatch(setPageSize(0))
+  dispatch(setTotalItems(0))
+}
+
 export default {
   getNewsList,
+  clearNewsList,
   getIndividualNewsById,
 }

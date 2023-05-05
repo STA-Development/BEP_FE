@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { newsSelector } from '@redux/slices/news'
+import { newsMiddleware, newsSelector } from '@redux/slices/news'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import { Carousel } from '@uiComponents/Carousel'
@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 
 export const NewsCarousel = () => {
   const [t] = useTranslation()
-  const { newsList: slider } = useAppSelector(newsSelector.news)
+  const { newsList } = useAppSelector(newsSelector.news)
 
   const router = useRouter()
 
@@ -26,6 +26,14 @@ export const NewsCarousel = () => {
     )
   }
 
+  useEffect(() => {
+    dispatch(newsMiddleware.getNewsList(1))
+  }, [])
+
+  if (!newsList.length) {
+    return null
+  }
+
   return (
     <Container
       color="secondary"
@@ -33,7 +41,7 @@ export const NewsCarousel = () => {
     >
       <Carousel
         redirectToIndividual={redirectToIndividualNews}
-        slider={slider}
+        slider={newsList}
         title={`${t(Translation.HOME_PAGE_NEWS_CAROUSEL_TITLE)}`}
       />
       <div className="mt-10 flex w-full justify-center">

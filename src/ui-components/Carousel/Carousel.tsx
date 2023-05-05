@@ -84,9 +84,12 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
               height={222}
               className="mb-5 h-full max-h-[221px] w-full max-w-[340px] object-cover"
             />
-            <h3 className="mb-2.5 text-2xl">{item.postedAt}</h3>
+            <h3 className="mb-2.5 text-xl	">{item.header}</h3>
             <div className="mb-5 h-18">
-              <p className="text-lg text-black-light line-clamp-2 ">{item.header}</p>
+              <p className="text-black-light line-clamp-2 ">{item.paragraph}</p>
+            </div>
+            <div className="h-15">
+              <p className="text-black-light line-clamp-2 ">{item.postedAt}</p>
             </div>
 
             <Button
