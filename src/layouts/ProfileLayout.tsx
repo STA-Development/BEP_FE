@@ -9,6 +9,8 @@ import {
 } from '@components/Icons'
 import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Translation } from '@constants/translations'
+import { dispatch } from '@redux/hooks'
+import { usersMiddleware } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -54,6 +56,10 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const menuItem = Object.keys(menu).find((item) => menu[String(item)].href === pathname)
   const label = menuItem ? menu?.[String(menuItem)]?.label : ''
 
+  const handleLogOut = () => {
+    dispatch(usersMiddleware.logOut())
+  }
+
   return (
     <Container>
       <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
@@ -77,6 +83,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
               ))}
             </ul>
             <Button
+              onClick={handleLogOut}
               size="bs"
               LeftIcon={LogOutIcon}
             >

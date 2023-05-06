@@ -23,7 +23,7 @@ class RequestManager {
       requestConfig.headers.set({
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: idToken,
+        Authorization: `Bearer ${idToken}`,
       })
 
       return requestConfig

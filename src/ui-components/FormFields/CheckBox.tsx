@@ -5,7 +5,7 @@ import { InputCheckbox } from '@uiComponents/Input'
 export interface ICheckBoxProps {
   fieldName: string
   id?: string
-  label?: string
+  label: string
 }
 
 const Checkbox: FC<ICheckBoxProps> = ({ fieldName, label, id }) => {

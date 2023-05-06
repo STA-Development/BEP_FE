@@ -1,4 +1,5 @@
 import { aboutUsSlice } from '@redux/slices/aboutUs'
+import { applicationsSlice } from '@redux/slices/applications'
 import { eventsSlice } from '@redux/slices/events'
 import { newsSlice } from '@redux/slices/news'
 import { supportSlice } from '@redux/slices/support'
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   support: supportSlice.reducer,
   educationalInstitutes: educationalInstitutesSlice.reducer,
   aboutUs: aboutUsSlice.reducer,
+  applications: applicationsSlice.reducer,
 })
 
 export default reducer

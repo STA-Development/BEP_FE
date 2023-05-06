@@ -29,6 +29,15 @@ const reducers = createReducer({
   setLanguageChangeLoading(state, action: IAction<boolean>) {
     state.user.isLanguageChangeLoading = action.payload
   },
+  setSelectedIndex(state, action: IAction<number>) {
+    state.user.selectedIndex = action.payload
+  },
+  setIsResetPasswordLoading(state, action: IAction<boolean>) {
+    state.user.isResetPasswordLoading = action.payload
+  },
+  setOtp(state, action: IAction<number | null>) {
+    state.user.otp = action.payload
+  },
 })
 
 export default reducers

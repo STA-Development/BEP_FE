@@ -83,6 +83,7 @@ const MonitoringSystems = () => {
             <div className="flex flex-row gap-5">
               <div className="w-[124px]">
                 <Autocomplete
+                  fieldName="years"
                   items={years}
                   placeholder={
                     t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_YEARS) as string
@@ -91,6 +92,7 @@ const MonitoringSystems = () => {
               </div>
               <div className="w-[124px]">
                 <Autocomplete
+                  fieldName="years"
                   items={years}
                   placeholder={
                     t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string
@@ -99,6 +101,7 @@ const MonitoringSystems = () => {
               </div>
               <div className="w-[124px]">
                 <Autocomplete
+                  fieldName="years"
                   items={years}
                   placeholder={
                     t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string

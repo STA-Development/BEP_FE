@@ -22,3 +22,21 @@ export interface IIndividualEducationalInstituteResponse {
     message: null
   }
 }
+
+export interface IEducationalInstitutesParams {
+  page: number
+  filters?: IFilters[]
+}
+
+export interface IFilters {
+  key: string
+  value: string
+}
+
+export interface IProvinces {
+  data: string[]
+}
+
+export interface EducationalInstitutesPageParam {
+  page: number
+}

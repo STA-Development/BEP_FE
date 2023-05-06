@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import Filters from '@components/Educationalnstitutes/Filters'
 import { FilterIcon } from '@components/Icons/FilterIcon'
-import SearchResult from '@components/Search'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 
-export const SearchHeader = () => {
+export const EducationalInstitutesHeader = () => {
   const [t] = useTranslation()
 
   const [active, setActive] = useState(true)
@@ -39,15 +39,15 @@ export const SearchHeader = () => {
           className={`w-full flex-col items-start xl:flex xl:flex-row ${active ? `flex` : `hidden`}
            `}
         >
-          <SearchResult />
+          <Filters />
         </div>
       </div>
 
       <div className="mt-4 hidden w-full flex-col items-center justify-center xl:flex">
-        <SearchResult />
+        <Filters />
       </div>
     </div>
   )
 }
 
-export default SearchHeader
+export default EducationalInstitutesHeader

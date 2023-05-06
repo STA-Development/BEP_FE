@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import Header from '@components/EducationalInstitutesHeader'
 import { LocationIcon } from '@components/Icons'
 import { MailIcon } from '@components/Icons/MailIcon'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
-import SearchHeader from '@components/SearchHeader'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { Button } from '@uiComponents/Button'
 import { Loading } from '@uiComponents/Loading'
@@ -21,7 +21,7 @@ const SearchPage = () => {
   const isEducationalInstitutesLoading = useAppSelector(
     educationalInstitutesSelector.isIndividualEduInstituteLoading
   )
-  const [page, setPage] = useState<number>(1)
+  const filters = useAppSelector(educationalInstitutesSelector.filters)
 
   const { edInstitutesList, pageSize, totalItems } = useAppSelector(
     educationalInstitutesSelector.educationalInstitutesData
@@ -38,20 +38,22 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
-    dispatch(educationalInstitutesMiddleware.getEducationalInstitutes(page))
-  }, [page])
+    dispatch(educationalInstitutesMiddleware.getEducationalInstitutes(filters))
+  }, [filters])
 
   useEffect(() => {
     const onScroll = () => {
-      const pageCount = totalItems / pageSize
+      const pageCount = Math.ceil(totalItems / pageSize)
 
-      if (page < Math.round(pageCount) && edInstitutesList?.length === page * pageSize) {
+      if (filters.page < Math.round(pageCount)) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
 
         if (scrollTop + clientHeight + PAGE_BOTTOM > scrollHeight) {
-          setPage((prev) => prev + 1)
+          dispatch(
+            educationalInstitutesMiddleware.setEIFilters({ ...filters, page: filters.page + 1 })
+          )
         }
       }
     }
@@ -59,11 +61,11 @@ const SearchPage = () => {
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
-  }, [edInstitutesList, page, pageSize, totalItems])
+  }, [edInstitutesList, filters, filters.page, pageSize, totalItems])
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <SearchHeader />
+      <Header />
       {isEducationalInstitutesLoading && !edInstitutesList?.length ? (
         <Loading />
       ) : (
@@ -80,17 +82,14 @@ const SearchPage = () => {
                   loader={() => institute.imageURL}
                   width={250}
                   height={250}
-                  className=""
+                  className="max-h-[300px] max-w-[300px]"
                 />
               </div>
             </div>
             <div className="flex w-3/4 flex-col flex-wrap py-8 text-start xl:w-1/3 xl:py-0">
-              <p className="flex w-full justify-start text-xl font-normal">
-                {institute.name}
-                {`"YMF"`}
-              </p>
+              <p className="flex w-full justify-start text-xl font-normal">{institute.name}</p>
               <p className="flex w-3/4 justify-start pt-4 text-sm font-normal">
-                {institute.subtitle}{' '}
+                {institute.subtitle}
               </p>
               <div className="flex w-full flex-row py-8 xl:w-3/4">
                 <Button
@@ -102,10 +101,6 @@ const SearchPage = () => {
               </div>
             </div>
             <div className="hidden w-full flex-col flex-wrap items-center py-16 text-center xl:flex xl:w-1/3">
-              <div className="flex w-full justify-start pt-3 text-sm font-normal">
-                <PhoneIcon />
-                +374 94 574 984
-              </div>
               <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">
                 <PhoneIcon />
                 {institute.phone}

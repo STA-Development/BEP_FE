@@ -61,18 +61,21 @@ const FillTheForm = () => {
 
               <div className="mb-5 w-full">
                 <Autocomplete
+                  fieldName="people"
                   items={people}
                   placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_UNIVERSITY) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <Autocomplete
+                  fieldName="people"
                   items={people}
                   placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_DEGREE) as string}
                 />
               </div>
               <div className="mb-5 w-full">
                 <Autocomplete
+                  fieldName="people"
                   items={people}
                   placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_FACULTY) as string}
                 />
@@ -93,6 +96,7 @@ const FillTheForm = () => {
 
               <div className="mb-5 w-full">
                 <Autocomplete
+                  fieldName="people"
                   items={people}
                   placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_COUNTRY) as string}
                 />

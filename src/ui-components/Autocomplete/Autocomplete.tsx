@@ -1,4 +1,5 @@
 import React, { Fragment, useMemo, useState } from 'react'
+import { useController } from 'react-hook-form'
 import { ChevronIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
 
@@ -12,6 +13,7 @@ interface AutocompleteProps<T> {
   placeholder: string
   classes?: string
   inputClasses?: string
+  fieldName: string
 }
 
 export const Autocomplete = <T extends Item>({
@@ -19,8 +21,9 @@ export const Autocomplete = <T extends Item>({
   placeholder,
   classes,
   inputClasses,
+  fieldName,
 }: AutocompleteProps<T>) => {
-  const [selected, setSelected] = useState()
+  const { field } = useController({ name: fieldName })
   const [query, setQuery] = useState('')
 
   const filteredItems = useMemo(
@@ -37,10 +40,7 @@ export const Autocomplete = <T extends Item>({
   )
 
   return (
-    <Combobox
-      value={selected}
-      onChange={setSelected}
-    >
+    <Combobox {...field}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
           <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
@@ -63,7 +63,7 @@ export const Autocomplete = <T extends Item>({
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute z-10 max-h-60 w-full overflow-auto rounded-b border border-t-0 border-gray-thin bg-white">
+            <Combobox.Options className="absolute z-10 max-h-60 w-full overflow-auto rounded-b border border-t-0 border-gray-thin bg-white shadow-lg">
               {!filteredItems.length && query !== '' ? (
                 <div className="relative cursor-default select-none px-5 py-2.5 text-base">
                   Nothing found.

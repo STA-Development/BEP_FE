@@ -6,6 +6,8 @@ export const getInitialState = (): IEdInstitutesProps => ({
     pageSize: 0,
     totalItems: 0,
   },
+  provinces: [],
+  filters: { page: 1, filters: [] },
   isIndividualEduInstitutesLoading: false,
   individualEduInstitute: null,
 })

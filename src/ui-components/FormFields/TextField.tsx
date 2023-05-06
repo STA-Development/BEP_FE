@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { useController, useFormContext } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 import { Input } from '@uiComponents/Input'
 
 export interface ITextFieldProps {
@@ -7,20 +7,19 @@ export interface ITextFieldProps {
   type?: string
   placeholder?: string
   rows?: number
-  id?: string
   label?: string
+  id?: string
 }
 
-const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder, rows, id, label }) => {
-  const { control } = useFormContext()
-  const { field, fieldState } = useController({ name: fieldName, control })
+const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder, rows, label, id }) => {
+  const { field, fieldState } = useController({ name: fieldName })
 
   return (
     <Input
       {...field}
       placeholder={placeholder}
-      id={id}
       label={label}
+      id={id}
       type={type}
       rows={rows}
       error={fieldState.error ? fieldState.error.message : null}

@@ -1,8 +1,11 @@
-import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
+import { IError } from '@axios/authentication/authManagerTypes'
+import {
+  IEducationalInstitutesParams,
+  IFilters,
+} from '@axios/educational-institutes/edInstitutesManagerTypes'
 import store, { AppDispatch } from '@redux/store'
 
-// import { IError } from '../../../manager/authentication/authManagerTypes'
 import slice from './slice'
 
 const {
@@ -10,45 +13,56 @@ const {
   setPageSize,
   setEducationalInstitutesList,
   setError,
-  setRedirection,
   setIndividualEducationalInstitute,
+  setFilters,
   setEducationalInstituteListLoading,
+  setProvinces,
 } = slice.actions
 
-const setRedirectionState = (value: RedirectionProps) => (dispatch: AppDispatch) => {
-  dispatch(setRedirection(value))
-}
+const getEducationalInstitutes =
+  (params: IEducationalInstitutesParams) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setEducationalInstituteListLoading(true))
 
-export const getEducationalInstitutes = (page: number) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(setEducationalInstituteListLoading(true))
+      const response = await API.educationalInstitutes.educationalInstitutes(params)
+      const responseData = response.data
+      const { edInstitutesList } = store.getState().educationalInstitutes.edInstitute
 
-    const reqBody = {
-      page,
+      dispatch(setEducationalInstitutesList([...edInstitutesList, ...responseData.data]))
+      dispatch(setTotalItems(responseData.totalItems))
+      dispatch(setPageSize(responseData.pageSize))
+      dispatch(setError(null))
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data?.status.message))
+    } finally {
+      dispatch(setEducationalInstituteListLoading(false))
     }
+  }
 
-    const response = await API.edu.educationalInstitutes(reqBody)
-    const responseData = response.data
-    const { edInstitutesList } = store.getState().educationalInstitutes.edInstitute
+const getProvince = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.educationalInstitutes.getProvinces()
 
-    dispatch(setEducationalInstitutesList([...edInstitutesList, ...responseData.data]))
-    dispatch(setTotalItems(responseData.totalItems))
-    dispatch(setPageSize(responseData.pageSize))
+    dispatch(setProvinces(response.data.data))
 
-    dispatch(slice.actions.setEducationalInstitutes(response.data))
     dispatch(setError(null))
   } catch (error) {
-    // dispatch(setError((error as IError).response?.data?.status?.message))
-    //
+    /* empty */
   }
-  // finally {
-  //   dispatch(setEducationalInstituteListLoading(false))
-  // }
 }
+
+const setEIFilters =
+  (filters: { page: number; filters: IFilters[] }) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setFilters(filters))
+    } catch (error) {
+      /* empty */
+    }
+  }
 
 const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await API.edu.getIndividualEducationalInstitutes(id)
+    const response = await API.educationalInstitutes.getIndividualEducationalInstitutes(id)
 
     dispatch(setIndividualEducationalInstitute(response.data.data))
 
@@ -58,8 +72,18 @@ const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: 
   }
 }
 
+const clearInstitutesList = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setEducationalInstitutesList([]))
+  } catch (error) {
+    /* empty */
+  }
+}
+
 export default {
   getEducationalInstitutes,
-  setRedirectionState,
+  getProvince,
+  clearInstitutesList,
+  setEIFilters,
   getIndividualEducationalInstitutesById,
 }

@@ -15,8 +15,14 @@ export const isIndividualEduInstituteLoading = createSelector(
   (state) => state.isIndividualEduInstitutesLoading
 )
 
+export const filters = createSelector([selector], (state) => state.filters)
+
+export const provinces = createSelector([selector], (state) => state.provinces)
+
 export default {
   educationalInstitutesData,
   individualEduInstitute,
+  filters,
   isIndividualEduInstituteLoading,
+  provinces,
 }

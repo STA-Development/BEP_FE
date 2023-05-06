@@ -56,7 +56,7 @@ export const Login = () => {
               <div className="mr-5">
                 <GoogleIcon className="group-hover:fill-white" />
               </div>
-              <div>{t(Translation.PAGE_LOGIN_GOOGLE_SIGN_IN)}</div>
+              <div>{t(Translation.PAGE_LOGIN_GOOGLE_BUTTON)}</div>
             </Button>
             <OnDivider />
             <div className="mb-5 w-full">
@@ -77,7 +77,7 @@ export const Login = () => {
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label={t(Translation.PAGE_LOGIN_INPUT_CHECKBOX) as string}
+                label={t(Translation.PAGE_LOGIN_REMEMBER_ME)}
                 id="remember-me"
               />
             </div>
@@ -85,8 +85,9 @@ export const Login = () => {
               size="fl"
               disabled={isSignInLoading}
               type="submit"
+              isLoading={isSignInLoading}
             >
-              {t(Translation.PAGE_LOGIN_INPUT_ACTIONS_LOGIN)}
+              {t(Translation.PAGE_LOGIN_BUTTON)}
             </Button>
             {error || errorGoogleSignIn ? (
               <div className="mt-2.5 w-full">
@@ -100,7 +101,7 @@ export const Login = () => {
                   size="xs"
                   variant="text"
                 >
-                  {t(Translation.PAGE_LOGIN_INPUT_ACTIONS_FORGOT_PASSWORD)}
+                  {t(Translation.PAGE_LOGIN_FORGOT_PASSWORD)}
                 </Button>
               </Link>
             </div>

@@ -1,99 +1,57 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
-import { ChevronIcon } from '@components/Icons'
+import { RightIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { newsMiddleware, newsSelector } from '@redux/slices/news'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
-import Image from 'next/image'
+import { Carousel } from '@uiComponents/Carousel'
+import { useRouter } from 'next/router'
 
 export const NewsCarousel = () => {
   const [t] = useTranslation()
-  const [slider] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+  const { newsList } = useAppSelector(newsSelector.news)
 
-  const maxScrollWidth = useRef(0)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const carousel = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
-  const movePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1)
-    }
-  }
-
-  const moveNext = () => {
-    if (carousel.current && carousel.current.offsetWidth * currentIndex <= maxScrollWidth.current) {
-      setCurrentIndex((prevState) => prevState + 1)
-    }
+  const redirectToIndividualNews = (id: string) => {
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/news/${id}`,
+        params: '',
+        apply: true,
+      })
+    )
   }
 
   useEffect(() => {
-    if (carousel && carousel.current) {
-      carousel.current.scrollLeft = carousel.current.offsetWidth * currentIndex
-    }
-  }, [currentIndex])
-
-  useEffect(() => {
-    maxScrollWidth.current = carousel.current
-      ? carousel.current.scrollWidth - carousel.current.offsetWidth
-      : 0
+    dispatch(newsMiddleware.getNewsList(1))
   }, [])
+
+  if (!newsList.length) {
+    return null
+  }
 
   return (
     <Container
       color="secondary"
       className="pb-30 pt-10 xl:pt-30"
     >
-      <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">
-          {t(Translation.PAGE_HOME_NEWS_LIST_TITLE)}
-        </h2>
-        <div className="flex gap-10">
-          <Button
-            color="secondary"
-            onClick={movePrev}
-            className="group h-16 rounded-full border-0"
-          >
-            <ChevronIcon className="rotate-180 transform group-hover:fill-secondary" />
-          </Button>
-          <Button
-            color="secondary"
-            onClick={moveNext}
-            className="group h-16 rounded-full border-0"
-          >
-            <ChevronIcon className="transform group-hover:fill-secondary" />
-          </Button>
-        </div>
-      </div>
-
-      <div
-        ref={carousel}
-        className="relative z-0 flex touch-pan-x snap-x snap-mandatory gap-7.5 overflow-hidden scroll-smooth"
-      >
-        {slider.map((item) => (
-          <div
-            key={item}
-            className="min-w-[380px] snap-start rounded border border-gray-thin bg-secondary p-5"
-          >
-            <Image
-              src="/image1.jpg"
-              alt="news"
-              width={340}
-              height={222}
-              className="mb-5"
-            />
-            <h3 className="mb-2.5 text-lg">
-              <b>{item}</b>: “Summer Camp / Business School” 2022
-            </h3>
-            <p className="mb-5 text-base text-black-light">
-              Lorem ipsum dolor sit amet consectetur. Accumsan nisl luctus nunc condimentum nec
-              tincidunt dolor magna nisl. Posuere scelerisque feugiat et lectus vitae arcu et
-              ornare. Curabitur vel velit tortor lacus. Gravida dictumst vulputate elit morbi urna
-              at.
-            </p>
-            <p className="mb-5 text-sm text-black-light xl:mb-8">22.01.2022</p>
-            <Button size="fl">{t(Translation.PAGE_HOME_NEWS_LIST_ACTIONS_READ_ALL)}</Button>
-          </div>
-        ))}
+      <Carousel
+        redirectToIndividual={redirectToIndividualNews}
+        slider={newsList}
+        title={`${t(Translation.HOME_PAGE_NEWS_CAROUSEL_TITLE)}`}
+      />
+      <div className="mt-10 flex w-full justify-center">
+        <Button
+          size="bs"
+          RightIcon={RightIcon}
+          onClick={() => router.push('/news')}
+        >
+          {t(Translation.HOME_PAGE_NEWS_CAROUSEL_SHOW_ALL_BUTTON)}
+        </Button>
       </div>
     </Container>
   )

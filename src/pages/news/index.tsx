@@ -36,6 +36,10 @@ const NewsList = () => {
   }, [page])
 
   useEffect(() => {
+    dispatch(newsMiddleware.clearNewsList())
+  }, [])
+
+  useEffect(() => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 

@@ -1,20 +1,17 @@
+import { IEdInstitutesProps } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 import {
   IEdInstitutesResponse,
+  IFilters,
   IIndividualEducationalInstituteResponse,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
-
-import { IEdInstitutesProps } from '../../../types/reduxTypes/edInstitutesStateTypes'
 
 const createReducer = <T extends SliceCaseReducers<IEdInstitutesProps>>(reducer: T) => ({
   ...reducer,
 })
 
 const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
-  /* setPage(state, action: IAction<number>) {
-    state.page = action.payload
-  }, */
   setEducationalInstitutesList(state, action: IAction<IEdInstitutesResponse[]>) {
     state.edInstitute.edInstitutesList = action.payload
   },
@@ -30,12 +27,17 @@ const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
   setPageSize(state, action: IAction<number>) {
     state.edInstitute.pageSize = action.payload
   },
-
+  setFilters(state, action: IAction<{ page: number; filters: IFilters[] }>) {
+    state.filters = action.payload
+  },
   setTotalItems(state, action: IAction<number>) {
     state.edInstitute.totalItems = action.payload
   },
   setError(state, action: IAction<string | null>) {
     state.edInstitute.error = action.payload
+  },
+  setProvinces(state, action: IAction<string[]>) {
+    state.provinces = action.payload
   },
 })
 

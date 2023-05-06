@@ -1,7 +1,8 @@
 import aboutUsManager from '@axios/aboutUs/aboutUsManager'
 import authManager from '@axios/authentication/authManager'
-import educationalInstitutesManager from '@axios/core/educational-institutes/educational-institutesManager'
+import educationalInstitutesManager from '@axios/educational-institutes/educational-institutesManager'
 import eventsManager from '@axios/events/eventsManager'
+import applicationsManager from '@axios/jobSeeker/jobSeeker'
 import newsManager from '@axios/news/newsManager'
 import supportManager from '@axios/support/supportManager'
 
@@ -11,7 +12,8 @@ const API = {
   events: eventsManager,
   support: supportManager,
   aboutUs: aboutUsManager,
-  edu: educationalInstitutesManager,
+  educationalInstitutes: educationalInstitutesManager,
+  applications: applicationsManager,
 }
 
 export default API

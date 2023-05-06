@@ -32,8 +32,12 @@ const Events = () => {
   }
 
   useEffect(() => {
-    dispatch(eventsMiddleware.fetchEventsList(page))
+    dispatch(eventsMiddleware.getEventsList(page))
   }, [page])
+
+  useEffect(() => {
+    dispatch(eventsMiddleware.clearEventsList())
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
