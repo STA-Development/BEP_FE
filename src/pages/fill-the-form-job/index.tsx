@@ -14,7 +14,7 @@ import {
   schedule,
   type,
   workplace,
-} from '@constants/filTheForm'
+} from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
