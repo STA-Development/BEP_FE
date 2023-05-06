@@ -12,8 +12,8 @@ const API = {
   events: eventsManager,
   support: supportManager,
   aboutUs: aboutUsManager,
-  educationalInstitutes: educationalInstitutesManager,
   applications: applicationsManager,
+  educationalInstitutes: educationalInstitutesManager,
 }
 
 export default API
