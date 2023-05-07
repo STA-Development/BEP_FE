@@ -43,8 +43,12 @@ const EducationalInstitutePage = () => {
         <div className="flex w-full flex-col items-center justify-center">
           <div className="mb-8 flex w-full flex-row">
             <PageHeader
-              title="Institute of Yerevan"
-              paths={['Home', 'Educational Institutes', 'Institute of Yerevan']}
+              title={`Institute of ${individualEduInstitutes?.province ?? ''}`}
+              paths={[
+                'Home',
+                'Educational Institutes',
+                `Institute of ${individualEduInstitutes?.province ?? ''}`,
+              ]}
             />
           </div>
           {individualEduInstitutes && !isLoading ? (

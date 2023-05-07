@@ -6,21 +6,20 @@ export interface IEdInstitutesResponse {
   email: string
   subtitle: string
   imageURL: string
+  province: string
+  type: string
 }
 export interface IIndividualEducationalInstituteResponse {
   uuid: string
   name: string
   subtitle: string
-  type: string
   imageURLs: string[]
   description: string
   address: string
   phone: string
   email: string
-  status: {
-    code: string
-    message: null
-  }
+  province: string
+  type: string
 }
 
 export interface IEducationalInstitutesParams {
