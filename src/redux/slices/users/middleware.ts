@@ -17,6 +17,12 @@ const {
   setLanguage,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
+  setImageUpload,
+  setImageUploadLoading,
+  setRole,
+  setProfileLoading,
+  setUserDataInfoLoading,
+  setUserDataInfo,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -70,6 +76,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
 const googleSignIn = () => async (dispatch: AppDispatch) => {
   try {
     await API.auth.googleSignIn()
+
     dispatch(setErrorGoogleSignIn(null))
     dispatch(setError(null))
   } catch (error) {
@@ -114,6 +121,73 @@ const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const uploadImage = (image: File) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setImageUpload(image))
+    dispatch(setImageUploadLoading(true))
+    await API.auth.uploadImage(image)
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setImageUploadLoading(false))
+  }
+}
+
+const getProfile = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setProfileLoading(true))
+
+    const response = await API.auth.profile()
+
+    console.log(response.data)
+
+    // @ts-ignore
+    const role = response.data?.data?.role
+
+    dispatch(setRole(role as string))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setProfileLoading(false))
+  }
+}
+
+const getJobSeeker = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setUserDataInfoLoading(true))
+
+    const response = await API.auth.getJobSeeker()
+
+    dispatch(setUserDataInfo(response?.data?.data))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setUserDataInfoLoading(false))
+  }
+}
+
+const getOrganization = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setUserDataInfoLoading(true))
+
+    const response = await API.auth.Organization()
+
+    dispatch(setUserDataInfo(response?.data?.data))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setUserDataInfoLoading(false))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
@@ -123,4 +197,8 @@ export default {
   register,
   clearError,
   changeLanguage,
+  uploadImage,
+  getProfile,
+  getJobSeeker,
+  getOrganization,
 }

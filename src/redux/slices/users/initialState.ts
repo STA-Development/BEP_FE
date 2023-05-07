@@ -12,5 +12,11 @@ export const getInitialState = (): IUserProps => ({
     language: 'en',
     isLanguageChangeLoading: false,
     errorGoogleSignIn: '',
+    image: null,
+    isImageUploadLoading: false,
+    role: '',
+    isProfileLoading: false,
+    isUserDataInfoLoading: false,
+    userDataInfo: null,
   },
 })

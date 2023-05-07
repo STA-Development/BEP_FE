@@ -1,4 +1,4 @@
-import { IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
+import { IProfileProps, IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -28,6 +28,24 @@ const reducers = createReducer({
   },
   setLanguageChangeLoading(state, action: IAction<boolean>) {
     state.user.isLanguageChangeLoading = action.payload
+  },
+  setImageUpload(state, action: IAction<null | File>) {
+    state.user.image = action.payload
+  },
+  setImageUploadLoading(state, action: IAction<boolean>) {
+    state.user.isImageUploadLoading = action.payload
+  },
+  setRole(state, action: IAction<string>) {
+    state.user.role = action.payload
+  },
+  setProfileLoading(state, action: IAction<boolean>) {
+    state.user.isProfileLoading = action.payload
+  },
+  setUserDataInfoLoading(state, action: IAction<boolean>) {
+    state.user.isUserDataInfoLoading = action.payload
+  },
+  setUserDataInfo(state, action: IAction<IProfileProps | null>) {
+    state.user.userDataInfo = action.payload
   },
 })
 
