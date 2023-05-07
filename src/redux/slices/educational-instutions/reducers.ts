@@ -30,6 +30,9 @@ const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
   setFilters(state, action: IAction<{ page: number; filters: IFilters[] }>) {
     state.filters = action.payload
   },
+  setIndividualInstitutesLoadingState(state, action: IAction<boolean>) {
+    state.isIndividualEduInstitutesLoading = action.payload
+  },
   setTotalItems(state, action: IAction<number>) {
     state.edInstitute.totalItems = action.payload
   },
