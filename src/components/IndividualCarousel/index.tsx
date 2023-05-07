@@ -4,27 +4,29 @@ export interface Images {
   id: number
   src: string
 }
-interface CarouselProps {
-  images: Images[]
-}
 
-export const IndividualCarousel: React.FC<CarouselProps> = ({ images }) => {
+export const IndividualCarousel = ({ images }: { images?: Images[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const imagesRef = useRef<HTMLDivElement>(null)
 
   const handlePrevClick = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1)
-    } else {
-      setCurrentIndex(images.length - 1)
+    if (images?.length) {
+      if (currentIndex > 0) {
+        setCurrentIndex(currentIndex - 1)
+      } else {
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        setCurrentIndex(!Number.isNaN(images?.length) ? images?.length - 1 : 1)
+      }
     }
   }
 
   const handleNextClick = () => {
-    if (currentIndex < images.length - 1) {
-      setCurrentIndex(currentIndex + 1)
-    } else {
-      setCurrentIndex(0)
+    if (images?.length) {
+      if (currentIndex + 1 < images?.length) {
+        setCurrentIndex(currentIndex + 1)
+      } else {
+        setCurrentIndex(0)
+      }
     }
   }
 
@@ -38,25 +40,32 @@ export const IndividualCarousel: React.FC<CarouselProps> = ({ images }) => {
         className="relative h-96 overflow-hidden rounded-lg"
         ref={imagesRef}
       >
-        {images.map((image, index) => (
-          <div
-            className={`flex duration-700 ease-in-out ${
-              index === currentIndex ? 'active' : 'hidden'
-            }`}
-            data-carousel-item
-            key={image.id}
-          >
-            <img
-              src={image.src}
-              className="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
-              alt={`Slide ${index + 1}`}
-            />
-          </div>
-        ))}
+        {images?.length ? (
+          images?.map((image, index) => (
+            <div
+              className={`flex duration-700 ease-in-out ${
+                index === currentIndex ? 'active' : 'hidden'
+              }`}
+              data-carousel-item
+              key={image.id}
+            >
+              <img
+                src={image.src}
+                className="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
+                alt={`Slide ${index + 1}`}
+              />
+            </div>
+          ))
+        ) : (
+          <img
+            src="/image1.jpg"
+            alt="Default Institute"
+          />
+        )}
       </div>
 
       <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 space-x-3">
-        {images.map((image, index) => (
+        {images?.map((image, index) => (
           <button
             type="button"
             key={image.id}

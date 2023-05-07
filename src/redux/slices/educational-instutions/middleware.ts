@@ -15,6 +15,7 @@ const {
   setError,
   setIndividualEducationalInstitute,
   setFilters,
+  setIndividualInstitutesLoadingState,
   setEducationalInstituteListLoading,
   setProvinces,
 } = slice.actions
@@ -62,13 +63,16 @@ const setEIFilters =
 
 const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: AppDispatch) => {
   try {
+    dispatch(setIndividualInstitutesLoadingState(true))
+
     const response = await API.educationalInstitutes.getIndividualEducationalInstitutes(id)
 
     dispatch(setIndividualEducationalInstitute(response.data.data))
-
     dispatch(setError(null))
   } catch (error) {
     /* empty */
+  } finally {
+    dispatch(setIndividualInstitutesLoadingState(false))
   }
 }
 
