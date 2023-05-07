@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { LanguageSelector, User } from '@components/Header'
@@ -24,23 +24,6 @@ export const Header = () => {
   ]
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
-  const { role } = useAppSelector(usersSelector.user)
-
-  useEffect(() => {
-    dispatch(usersMiddleware.isAuthenticated())
-  }, [])
-
-  useEffect(() => {
-    if (role) {
-      dispatch(usersMiddleware.getUser())
-    }
-  }, [role])
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(usersMiddleware.getProfile())
-    }
-  }, [isAuthenticated])
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())

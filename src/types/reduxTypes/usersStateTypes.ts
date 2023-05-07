@@ -4,6 +4,7 @@ export interface IUserProps {
   isSignUpLoading: boolean
   isLogOutLoading: boolean
   isAuthenticated: boolean
+  isRoleSelectSuccessful: boolean
   isResetPasswordLoading: boolean
   error: string | null
   isRoleSelectLoading: boolean
@@ -33,4 +34,5 @@ export enum Roles {
   Admin = 'Admin',
   Partner = 'Partner',
   Institute = 'Institute',
+  NOROLE = 'NOROLE',
 }
