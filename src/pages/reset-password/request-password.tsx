@@ -6,7 +6,8 @@ import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
 const RequestPassword = ({ children }: { children: JSX.Element }) => {
-  const { error, isResetPasswordLoading } = useAppSelector(usersSelector.user)
+  const error = useAppSelector(usersSelector.error)
+  const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
   const [t] = useTranslation()
 
   return (

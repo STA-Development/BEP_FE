@@ -20,7 +20,7 @@ const ResetPasswordForm = {
 }
 
 export const ResetPassword = () => {
-  const { selectedIndex } = useAppSelector(usersSelector.user)
+  const selectedIndex = useAppSelector(usersSelector.selectedIndex)
 
   const methods = useForm({
     defaultValues: ResetPasswordForm,

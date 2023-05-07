@@ -22,11 +22,25 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
   ]
-  const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
+  const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
+  const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
+  const { role } = useAppSelector(usersSelector.user)
 
   useEffect(() => {
     dispatch(usersMiddleware.isAuthenticated())
   }, [])
+
+  useEffect(() => {
+    if (role) {
+      dispatch(usersMiddleware.getUser())
+    }
+  }, [role])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(usersMiddleware.getProfile())
+    }
+  }, [isAuthenticated])
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())

@@ -1,3 +1,4 @@
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
 import {
@@ -6,7 +7,7 @@ import {
   ISignInParams,
   ISignUpParams,
 } from '@axios/authentication/authManagerTypes'
-import { AppDispatch } from '@redux/store'
+import store, { AppDispatch } from '@redux/store'
 import i18n from 'i18next'
 
 import ViewSlice from '../views/slice'
@@ -21,10 +22,12 @@ const {
   setError,
   setSelectedIndex,
   setIsResetPasswordLoading,
+  setUser,
   setLanguage,
   setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
+  setIsRoleSelectLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -41,7 +44,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
 
-    dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
+    dispatch(setRedirectionState({ path: '/after-registration-popup', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
     dispatch(setError(null))
   } catch (error) {
@@ -68,6 +71,20 @@ const logOut = () => async (dispatch: AppDispatch) => {
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setIsAuthenticated(false))
     dispatch(setError(null))
+    dispatch(
+      setUser({
+        fullName: '',
+        email: '',
+        uuid: '',
+        name: '',
+        address: '',
+        phone: '',
+        employeeQuantity: 0,
+        organizationType: '',
+        imageURL: '',
+        role: null,
+      })
+    )
   } catch (error) {
     dispatch(setError((error as IError).response?.data.status.message))
   } finally {
@@ -170,15 +187,59 @@ const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const selectRole = (role: keyof typeof Roles) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setIsRoleSelectLoading(true))
+    await API.auth.selectRole(role)
+
+    dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsRoleSelectLoading(false))
+  }
+}
+
+const getUser = () => async (dispatch: AppDispatch) => {
+  try {
+    console.log(store.getState().users.user.role)
+
+    if (store.getState().users.user.role === Roles.JobSeeker) {
+      const response = await API.jobSeeker.getJobSeeker()
+
+      dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
+    } else if (store.getState().users.user.role === Roles.Organization) {
+      const response = await API.organization.getOrganization()
+
+      dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
+    }
+  } catch (err) {
+    dispatch(setError((err as IError).response?.data.status.message))
+  }
+}
+
+const getProfile = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.auth.getProfile()
+
+    dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
+  } catch (err) {
+    dispatch(setError((err as IError).response?.data.status.message))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
   logOut,
   googleSignIn,
   isAuthenticated,
+  getUser,
+  getProfile,
   forgotPassword,
   verifyOtp,
   register,
+  selectRole,
   resetPassword,
   clearError,
   changeLanguage,

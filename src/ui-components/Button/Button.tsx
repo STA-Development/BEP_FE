@@ -5,13 +5,14 @@ import clsxMerge from '@lib/clsxm'
 
 const ButtonVariant = ['contained', 'outlined', 'flat', 'text'] as const
 const ButtonColor = ['primary', 'secondary', 'gray'] as const
-const ButtonSize = ['xs', 'sm', 'md', 'bs', 'lg', 'fl', 'hg', 'app'] as const
+const ButtonSize = ['xs', 'sm', 'md', 'bs', 'lg', 'fl', 'hg', 'app', 'role'] as const
 const ButtonRadius = ['all', 'r', 'l'] as const
 
 export type ButtonProps = {
   isLoading?: boolean
   variant?: (typeof ButtonVariant)[number]
   color?: (typeof ButtonColor)[number]
+  active?: boolean
   size?: (typeof ButtonSize)[number]
   radius?: (typeof ButtonRadius)[number]
   LeftIcon?: ComponentType<IconProps>
@@ -23,6 +24,7 @@ export const Button: FC<ButtonProps> = ({
   className,
   disabled,
   isLoading,
+  active,
   variant = 'contained',
   color = 'primary',
   size = 'sm',
@@ -54,7 +56,10 @@ export const Button: FC<ButtonProps> = ({
         'hover:border-primary-light hover:bg-primary-light',
         color === 'primary' && 'border-primary bg-primary text-secondary',
         color === 'secondary' && 'border-secondary bg-secondary text-primary hover:text-secondary',
-        color === 'gray' && 'border-gray-thin bg-gray-thin bg-gray-thin text-primary',
+        color === 'gray' && [
+          'border-gray-thin bg-gray-thin text-primary hover:bg-secondary',
+          active && 'border-primary-light bg-secondary',
+        ],
       ],
       variant === 'outlined' && [
         'hover:border-primary-light hover:bg-primary-light',
@@ -81,6 +86,7 @@ export const Button: FC<ButtonProps> = ({
       size === 'fl' && 'w-full p-2.5',
       size === 'hg' && 'w-full p-10',
       size === 'app' && 'h-[191px] w-[224px]',
+      size === 'role' && 'h-[191px] w-[340px] flex-col',
     ],
     className
   )

@@ -1,3 +1,5 @@
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+
 export interface ISignInResponse {
   accessToken: string
   refreshToken: string
@@ -37,6 +39,7 @@ export interface IError {
 export interface ISignUpParams {
   password: string
   email: string
+  name: string
 }
 
 export interface IRegisterData {
@@ -45,4 +48,10 @@ export interface IRegisterData {
   password: string
   passwordConfirmation: string
   remember: boolean
+}
+
+export interface IProfile {
+  uuid: string
+  role: keyof typeof Roles
+  imageURL: string
 }

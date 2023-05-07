@@ -1,20 +1,28 @@
-import { IJobSeekerProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import {
+  IJobSeekerApplicationProps,
+  IJobSeekerProps,
+} from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
 const baseURL = '/users'
 
 const axiosInstance = Axios()
-const applicationsManager = {
+const jobSeekerManager = {
   axiosInstance,
-  jobSeeker(data: IJobSeekerProps) {
-    return axiosInstance.post<IJobSeekerProps, IAxiosResponse<IJobSeekerProps>>(
-      `${baseURL}/v1/job-seeker/application`,
-      {
-        ...data,
-      }
+  createApplication(data: IJobSeekerApplicationProps) {
+    return axiosInstance.post<
+      IJobSeekerApplicationProps,
+      IAxiosResponse<IJobSeekerApplicationProps>
+    >(`${baseURL}/v1/job-seeker/application`, {
+      ...data,
+    })
+  },
+  getJobSeeker() {
+    return axiosInstance.get<IJobSeekerProps, IAxiosResponse<IJobSeekerProps>>(
+      `${baseURL}/v1/job-seeker`
     )
   },
 }
 
-export default applicationsManager
+export default jobSeekerManager
