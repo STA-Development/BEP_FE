@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { IJobSeekerProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IJobSeekerApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { AreaOfSpecialization } from '@components/AreaOfSpecialization'
 import { Container } from '@components/Container'
 import { FilTheFormJobReview } from '@components/FilTheFormJobReview'
@@ -51,7 +51,7 @@ const FillTheForm = () => {
 
   const { handleSubmit, reset } = methods
 
-  const onSubmit = (data: IJobSeekerProps) => {
+  const onSubmit = (data: IJobSeekerApplicationProps) => {
     const areaSpecialization = {
       ...data,
       isActive: true,

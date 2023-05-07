@@ -12,15 +12,15 @@ import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Checkbox from '@uiComponents/FormFields/CheckBox'
 import TextField from '@uiComponents/FormFields/TextField'
+import { loginValidationSchema } from '@validation/auth/login'
 import Link from 'next/link'
-
-import { loginValidationSchema } from '../../validation/auth/login'
 
 export const Login = () => {
   const [t] = useTranslation()
 
-  const { isSignInLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
-
+  const isSignInLoading = useAppSelector(usersSelector.isSignInLoading)
+  const error = useAppSelector(usersSelector.error)
+  const errorGoogleSignIn = useAppSelector(usersSelector.errorGoogleSignIn)
   const onSubmit = (data: ISignInParams) => {
     dispatch(usersMiddleware.login(data))
   }

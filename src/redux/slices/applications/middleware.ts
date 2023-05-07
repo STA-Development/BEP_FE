@@ -1,4 +1,4 @@
-import { IJobSeekerProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IJobSeekerApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
@@ -7,10 +7,10 @@ import slice from './slice'
 
 const { setJobSeekerLoading, setError, setJobSeekerSubmitSuccess } = slice.actions
 
-const jobSeeker = (params: IJobSeekerProps) => async (dispatch: AppDispatch) => {
+const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setJobSeekerLoading(true))
-    await API.applications.jobSeeker(params)
+    await API.jobSeeker.createApplication(params)
 
     dispatch(setJobSeekerSubmitSuccess(true))
   } catch (error) {

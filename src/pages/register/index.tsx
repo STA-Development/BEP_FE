@@ -12,13 +12,14 @@ import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Checkbox from '@uiComponents/FormFields/CheckBox'
 import TextField from '@uiComponents/FormFields/TextField'
-
-import { registerValidationSchema } from '../../validation/auth/register'
+import { registerValidationSchema } from '@validation/auth/register'
 
 export const Register = () => {
   const [t] = useTranslation()
 
-  const { isSignUpLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
+  const isSignUpLoading = useAppSelector(usersSelector.isSignUpLoading)
+  const error = useAppSelector(usersSelector.error)
+  const errorGoogleSignIn = useAppSelector(usersSelector.errorGoogleSignIn)
 
   const methods = useForm({
     defaultValues: {
@@ -38,6 +39,7 @@ export const Register = () => {
   const onSubmit = (data: IRegisterData) => {
     dispatch(
       usersMiddleware.register({
+        name: data.name,
         email: data.email,
         password: data.password,
       })

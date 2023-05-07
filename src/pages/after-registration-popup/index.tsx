@@ -1,60 +1,71 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Container } from '@components/Container'
-import { ClipBoard } from '@components/Icons/ClipBoard'
-import { Employer } from '@components/Icons/Employer'
-import { Internee } from '@components/Icons/Internee'
-import { SuitCase } from '@components/Icons/SuitCase'
+import { JobIcon } from '@components/Icons'
+import { JobSeekerIcon } from '@components/Icons/JobSeekerIcon'
+import { Translation } from '@constants/translations'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
+import { useTranslation } from 'next-i18next'
 
-const afterRegistrationPopUp = () => (
-  <div className="flex w-full justify-center">
-    <Container className="w-3/4 rounded-md py-24 ">
-      <div className="flex flex-col border-2">
-        <div className="flex w-full flex-wrap border-2 pb-8 xl:justify-center">
-          <div className="bg-gray-transparent mx-4 my-4 flex w-11/12 flex-col items-center justify-center rounded-md text-primary xl:w-[460px]">
-            <p>Please select your role:</p>
-          </div>
-          <div className="mx-4 my-4 flex w-11/12 flex-col items-end justify-center rounded-md bg-transparent text-primary xl:w-[460px]" />
+const AfterRegistration = () => {
+  const [t] = useTranslation()
+  const [role, setRole] = useState<keyof typeof Roles | null>(null)
+  const isRoleSelectLoading = useAppSelector(usersSelector.isRoleSelectLoading)
 
-          <div className="flex w-full flex-row flex-wrap justify-center">
-            <div className="mx-4 my-4 flex h-60 w-11/12 flex-col items-center justify-center rounded-md border-2 bg-gray-thin text-primary hover:border-[#326789] xl:w-[460px] ">
-              <div className="flex h-[55px] w-[55px] items-center justify-center ">
-                <SuitCase className="h-full w-full" />
-              </div>
-              <p className="py-2">Employee</p>
-            </div>
-            <div className="mx-4 my-4 flex h-60 w-11/12 flex-col items-center justify-center rounded-md border-2 bg-gray-thin text-primary hover:border-[#326789] xl:w-[460px]">
-              <div className="flex h-[55px] w-[55px] items-center justify-center">
-                <ClipBoard className="h-full w-full" />
-              </div>
-              <p className="py-2">Internee</p>
-            </div>
-            <div className="mx-4 my-4 flex h-60 w-11/12 flex-col items-center justify-center rounded-md border-2 bg-gray-thin text-primary hover:border-[#326789] xl:w-[460px]">
-              <div className="flex h-[55px] w-[55px] items-center justify-center">
-                <Employer className="h-full w-full" />
-              </div>
-              <p className="py-2">Employer</p>
-            </div>
-            <div className="mx-4 my-4 flex h-60 w-11/12 flex-col items-center justify-center rounded-md border-2 bg-gray-thin text-primary hover:border-[#326789] xl:w-[460px]">
-              <div className="flex h-[55px] w-[55px] items-center justify-center">
-                <Internee className="h-full w-full" />
-              </div>
-              <p className="py-2">Internee</p>
-            </div>
-          </div>
-          <div className="bg-gray-transparent mx-4 my-4 flex w-11/12 flex-col items-center justify-center rounded-md text-primary xl:w-[460px]" />
-          <div className="mx-4 my-4 flex w-11/12 flex-col items-end justify-center rounded-md bg-transparent text-primary xl:w-[460px]">
+  const selectRole = () => {
+    if (role) {
+      dispatch(usersMiddleware.selectRole(role))
+    }
+  }
+
+  return (
+    <Container className="py-30">
+      <div className="flex flex-col items-center">
+        <div className="border-black-thin flex flex-col rounded border-2 p-5 xl:p-10">
+          <h3 className="mb-5 text-lg">Please select your role:</h3>
+          <div className="flex w-full flex-col space-y-3 xl:flex-row xl:justify-between xl:space-x-4 xl:space-y-0">
             <Button
-              size="bs"
-              className="w-1/2"
+              variant="contained"
+              color="gray"
+              size="role"
+              active={role === Roles.JobSeeker}
+              onClick={() => setRole(Roles.JobSeeker)}
             >
-              Next
+              <div className="mb-5 w-auto">
+                <JobSeekerIcon />
+              </div>
+              {t(Translation.PAGE_AFTER_REGISTRATION_ACTIONS_ROLE_JOBSEEKER)}
+            </Button>
+            <Button
+              variant="contained"
+              color="gray"
+              size="role"
+              active={role === Roles.Organization}
+              onClick={() => setRole(Roles.Organization)}
+            >
+              <div className="mb-5 w-auto">
+                <JobIcon />
+              </div>
+              {t(Translation.PAGE_AFTER_REGISTRATION_ACTIONS_ROLE_ORGANIZATION)}
             </Button>
           </div>
         </div>
+        <div className="mt-10 flex w-full xl:w-1/4">
+          <Button
+            size="fl"
+            color={role ? 'primary' : 'gray'}
+            disabled={!role}
+            isLoading={isRoleSelectLoading}
+            onClick={selectRole}
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </Container>
-  </div>
-)
+  )
+}
 
-export default afterRegistrationPopUp
+export default AfterRegistration

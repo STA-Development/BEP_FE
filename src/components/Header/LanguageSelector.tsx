@@ -42,7 +42,7 @@ const languageList = [
 export const LanguageSelector = () => {
   const [t] = useTranslation()
   const [selectedLanguage, setSelectedLanguage] = useState<ISelectedLanguageProps>()
-  const { language } = useAppSelector(usersSelector.user)
+  const language = useAppSelector(usersSelector.selectedLanguage)
 
   const onSetLanguage = (value: string) => {
     dispatch(usersMiddleware.changeLanguage(value))
