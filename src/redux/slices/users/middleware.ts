@@ -44,7 +44,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
 
-    dispatch(setRedirectionState({ path: '/after-registration-popup', params: '', apply: true }))
+    dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
     dispatch(setError(null))
   } catch (error) {
@@ -82,7 +82,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
         employeeQuantity: 0,
         organizationType: '',
         imageURL: '',
-        role: null,
+        role: Roles.NOROLE,
       })
     )
   } catch (error) {
@@ -191,6 +191,7 @@ const selectRole = (role: keyof typeof Roles) => async (dispatch: AppDispatch) =
   try {
     dispatch(setIsRoleSelectLoading(true))
     await API.auth.selectRole(role)
+    dispatch(setUser({ ...store.getState().users.user, role }))
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
   } catch (error) {

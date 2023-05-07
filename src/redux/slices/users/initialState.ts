@@ -1,9 +1,10 @@
-import { IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
+import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
 
 export const getInitialState = (): IUserProps => ({
   isSignInLoading: false,
   isSignUpLoading: false,
   isLogOutLoading: false,
+  isRoleSelectSuccessful: false,
   isResetPasswordLoading: false,
   error: null,
   isAuthenticated: false,
@@ -23,6 +24,6 @@ export const getInitialState = (): IUserProps => ({
     employeeQuantity: 0,
     organizationType: '',
     imageURL: '',
-    role: null,
+    role: Roles.NOROLE,
   },
 })

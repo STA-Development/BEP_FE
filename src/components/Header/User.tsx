@@ -7,8 +7,8 @@ import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 
 const links = [
-  { href: '/settings', label: 'Add Application' },
-  { href: '/settings', label: 'Edit Profile' },
+  { href: '/profile/applications', label: 'Add Application' },
+  { href: '/profile/settings', label: 'Edit Profile' },
 ]
 
 export interface IHeaderUserProps {
@@ -39,7 +39,6 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
         <Menu.Items className="absolute right-0 z-10 mt-2 w-[355px] origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="p-5">
             <div className="mb-5 flex items-center">
-              <div className="mr-5 h-[80px] w-[80px] rounded-full bg-gray-light" />
               <div>
                 <p className="mb-2.5 text-lg text-black">{name}</p>
                 <p className="text-base text-black-light">{email}</p>
