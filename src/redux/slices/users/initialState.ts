@@ -5,6 +5,7 @@ export const getInitialState = (): IUserProps => ({
   isSignUpLoading: false,
   isLogOutLoading: false,
   isRoleSelectSuccessful: false,
+  isJobSeekerUpdateLoading: false,
   isResetPasswordLoading: false,
   error: null,
   isAuthenticated: false,

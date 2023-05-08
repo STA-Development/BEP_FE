@@ -1,5 +1,6 @@
 import {
   IJobSeekerApplicationProps,
+  IJobSeekerProfileProps,
   IJobSeekerProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Axios } from '@axios/axiosInstance'
@@ -22,6 +23,9 @@ const jobSeekerManager = {
     return axiosInstance.get<IJobSeekerProps, IAxiosResponse<IJobSeekerProps>>(
       `${baseURL}/v1/job-seeker`
     )
+  },
+  updateJobSeekerProfile(data: IJobSeekerProfileProps) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/job-seeker`, data)
   },
 }
 

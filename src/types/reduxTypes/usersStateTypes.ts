@@ -5,6 +5,7 @@ export interface IUserProps {
   isLogOutLoading: boolean
   isAuthenticated: boolean
   isRoleSelectSuccessful: boolean
+  isJobSeekerUpdateLoading: boolean
   isResetPasswordLoading: boolean
   error: string | null
   isRoleSelectLoading: boolean
