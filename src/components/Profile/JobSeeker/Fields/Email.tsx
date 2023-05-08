@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { IJobSeekerProfileForm, resetValues } from '@components/Profile/JobSeeker/helper'
 import { Translation } from '@constants/translations'
+import { useAppSelector } from '@redux/hooks'
+import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import TextField from '@uiComponents/FormFields/TextField'
 import { useTranslation } from 'next-i18next'
@@ -12,8 +14,10 @@ export const Email = () => {
   const { control, getValues, reset } = useFormContext()
   const { field } = useController({ name: fieldName, control })
   const { value } = field
+  const isUpdateLoading = useAppSelector(usersSelector.isJobSeekerUpdateLoading)
 
-  const onActiveChange = () => {
+  const onActiveChange = (event: MouseEvent<HTMLElement>) => {
+    event.preventDefault()
     reset({
       ...resetValues(getValues() as IJobSeekerProfileForm),
       email: { ...getValues().email, active: !value.active },
@@ -35,7 +39,6 @@ export const Email = () => {
           <TextField
             type="text"
             fieldName={`${fieldName}.value`}
-            className="w-full rounded border border-gray-light px-5 py-2.5 text-base text-black outline-0"
           />
         ) : (
           <div className="h-[50px] w-full rounded border border-gray-light px-5 py-2.5 outline-0">
@@ -57,6 +60,7 @@ export const Email = () => {
           <Button
             variant="outlined"
             size="fl"
+            isLoading={isUpdateLoading}
             type="submit"
           >
             Save

@@ -8,6 +8,7 @@ import {
   ISignInParams,
   ISignUpParams,
 } from '@axios/authentication/authManagerTypes'
+import { usersMiddleware } from '@redux/slices/users/index'
 import store, { AppDispatch } from '@redux/store'
 import i18n from 'i18next'
 
@@ -235,6 +236,7 @@ const updateJobSeekerProfile =
       dispatch(setIsJobSeekerUpdateLoading(true))
 
       await API.jobSeeker.updateJobSeekerProfile(params)
+      dispatch(usersMiddleware.getUser())
     } catch (error) {
       dispatch(setError((error as IError).response?.data.status.message))
     } finally {

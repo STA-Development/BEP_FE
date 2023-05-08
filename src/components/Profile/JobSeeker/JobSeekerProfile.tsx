@@ -27,17 +27,9 @@ export const JobSeekerProfile = () => {
   })
 
   const onSubmit = (data: IJobSeekerProfileForm) => {
-    const field = Object.keys(data).find(
-      (key) =>
-        // TODO: fix this
-        // @ts-ignore
-        data?.[key]?.active
-    )
+    const field = Object.entries(data).find((e) => e[1].active)
+    const params = { keyValuePair: { key: field?.[0], value: field?.[1].value } }
 
-    // @ts-ignore
-    const params = { key: field, value: data[field].value }
-
-    console.log(params)
     dispatch(usersMiddleware.updateJobSeekerProfile(params as IJobSeekerProfileProps))
   }
 

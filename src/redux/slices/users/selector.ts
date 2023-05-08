@@ -35,6 +35,7 @@ export default {
   isLogOutLoading,
   isResetPasswordLoading,
   error,
+  isJobSeekerUpdateLoading,
   isAuthenticated,
   language,
   isLanguageChangeLoading,
