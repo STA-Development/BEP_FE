@@ -1,5 +1,6 @@
-import { IProfileProps } from '@allTypes/reduxTypes/usersStateTypes'
+import { IkeyValuePairProps, IProfileProps } from '@allTypes/reduxTypes/usersStateTypes'
 import {
+  IProfileDataProps,
   ISignInParams,
   ISignInResponse,
   ISignUpParams,
@@ -8,18 +9,6 @@ import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
 const baseURL = '/users'
-
-interface IProfileDataProps {
-  data: {
-    imageURL: string
-    role: string
-    uuid: string
-  }
-  status: {
-    code: string
-    message: string | null
-  }
-}
 
 const axiosInstance = Axios()
 const authManager = {
@@ -62,6 +51,22 @@ const authManager = {
   Organization() {
     return axiosInstance.get<IProfileProps, IAxiosResponse<IProfileProps>>(
       `${baseURL}/v1/organization`
+    )
+  },
+  jobSeekerChangeInfo(keyValuePair: IkeyValuePairProps) {
+    return axiosInstance.patch<IkeyValuePairProps, IAxiosResponse<IkeyValuePairProps>>(
+      `${baseURL}/v1/job-seeker`,
+      {
+        keyValuePair,
+      }
+    )
+  },
+  organizationChangeInfo(keyValuePair: IkeyValuePairProps) {
+    return axiosInstance.patch<IkeyValuePairProps, IAxiosResponse<IkeyValuePairProps>>(
+      `${baseURL}/v1/organization`,
+      {
+        keyValuePair,
+      }
     )
   },
 }

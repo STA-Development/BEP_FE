@@ -18,5 +18,6 @@ export const getInitialState = (): IUserProps => ({
     isProfileLoading: false,
     isUserDataInfoLoading: false,
     userDataInfo: null,
+    isChangeUserInfoSuccess: false,
   },
 })

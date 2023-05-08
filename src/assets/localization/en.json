@@ -150,6 +150,7 @@
   "page.profile.menu.settings.form.password.actions": "Change password",
   "page.profile.menu.settings.form.phone": "Phone Number",
   "page.profile.menu.settings.form.phone.actions": "Change phone",
+  "page.profile.menu.settings.form.save": "Save",
   "page.register.google.signup": "Sign up with Google",
   "page.register.input.actions.create.account": "Create Account",
   "page.register.input.checkbox": "Remember me",

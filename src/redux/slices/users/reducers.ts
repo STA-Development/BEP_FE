@@ -47,6 +47,9 @@ const reducers = createReducer({
   setUserDataInfo(state, action: IAction<IProfileProps | null>) {
     state.user.userDataInfo = action.payload
   },
+  setChangeUserInfoSuccess(state, action: IAction<boolean>) {
+    state.user.isChangeUserInfoSuccess = action.payload
+  },
 })
 
 export default reducers

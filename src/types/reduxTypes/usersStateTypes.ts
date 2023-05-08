@@ -19,6 +19,7 @@ export interface IUser {
   isProfileLoading: boolean
   isUserDataInfoLoading: boolean
   userDataInfo: IProfileProps | null
+  isChangeUserInfoSuccess: boolean
 }
 
 export interface IProfileProps {
@@ -29,4 +30,13 @@ export interface IProfileProps {
   lastName?: string
   phone?: string
   name?: string
+}
+
+export interface IkeyValuePair {
+  keyValuePair: IkeyValuePairProps
+}
+
+export interface IkeyValuePairProps {
+  key?: string
+  value?: string
 }

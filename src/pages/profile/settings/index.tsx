@@ -12,8 +12,14 @@ import Image from 'next/image'
 export const Settings = () => {
   const [t] = useTranslation()
 
-  const { isImageUploadLoading, isProfileLoading, isUserDataInfoLoading, userDataInfo, role } =
-    useAppSelector(usersSelector.user)
+  const {
+    isImageUploadLoading,
+    isProfileLoading,
+    isUserDataInfoLoading,
+    userDataInfo,
+    role,
+    isChangeUserInfoSuccess,
+  } = useAppSelector(usersSelector.user)
 
   const loading =
     isImageUploadLoading || isProfileLoading || isUserDataInfoLoading || !userDataInfo || !role
@@ -44,7 +50,7 @@ export const Settings = () => {
     } else if (role === 'Organization') {
       dispatch(usersMiddleware.getOrganization())
     }
-  }, [role, isImageUploadLoading])
+  }, [role, isImageUploadLoading, isChangeUserInfoSuccess])
 
   return (
     <div className="grid divide-y divide-gray-thin">

@@ -1,30 +1,48 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { IkeyValuePairProps } from '@allTypes/reduxTypes/usersStateTypes'
 import { FildsTable } from '@components/ProfileSettingsUserInfoForm/FildsTable'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useAppSelector } from '@redux/hooks'
-import { usersSelector } from '@redux/slices/users'
-import { loginValidationSchema } from '@validation/auth/login'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
+import { userInfoValidationSchema } from '@validation/auth/userInfo'
 
 export const ProfileSettingsUserInfoForm = () => {
   const [t] = useTranslation()
 
   const [showParams, setShowParams] = useState<string>('')
 
-  const { userDataInfo } = useAppSelector(usersSelector.user)
+  const { userDataInfo, isChangeUserInfoSuccess, role } = useAppSelector(usersSelector.user)
 
   const methods = useForm({
     mode: 'onSubmit',
-    resolver: yupResolver(loginValidationSchema),
+    resolver: yupResolver(userInfoValidationSchema),
   })
 
   const { handleSubmit, reset } = methods
 
-  const onSubmit = () => {
-    reset()
+  const onSubmit = (data: IkeyValuePairProps) => {
+    const keyValuePair: IkeyValuePairProps = {
+      key: Object.keys(data).toString(),
+      value: Object.values(data).toString(),
+    }
+
+    if (keyValuePair?.key && keyValuePair?.value) {
+      if (role === 'JobSeeker') {
+        dispatch(usersMiddleware.jobSeekerChangeInfo(keyValuePair))
+      } else if (role === 'Organization') {
+        dispatch(usersMiddleware.organizationChangeInfo(keyValuePair))
+      }
+    }
   }
+
+  useEffect(() => {
+    reset()
+    setShowParams('')
+    dispatch(usersMiddleware.resetChangeUserInfoSuccess())
+  }, [isChangeUserInfoSuccess, reset])
 
   return (
     <FormProvider {...methods}>

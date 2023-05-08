@@ -1,3 +1,4 @@
+import { IkeyValuePairProps } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
 import { IError, ISignInParams, ISignUpParams } from '@axios/authentication/authManagerTypes'
@@ -23,6 +24,7 @@ const {
   setProfileLoading,
   setUserDataInfoLoading,
   setUserDataInfo,
+  setChangeUserInfoSuccess,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -141,12 +143,7 @@ const getProfile = () => async (dispatch: AppDispatch) => {
 
     const response = await API.auth.profile()
 
-    console.log(response.data)
-
-    // @ts-ignore
-    const role = response.data?.data?.role
-
-    dispatch(setRole(role as string))
+    dispatch(setRole(response?.data?.data?.role as string))
 
     dispatch(setError(null))
   } catch (error) {
@@ -188,6 +185,42 @@ const getOrganization = () => async (dispatch: AppDispatch) => {
   }
 }
 
+const jobSeekerChangeInfo = (keyValuePair: IkeyValuePairProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setUserDataInfoLoading(true))
+
+    API.auth.jobSeekerChangeInfo(keyValuePair)
+
+    dispatch(setChangeUserInfoSuccess(true))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setUserDataInfoLoading(false))
+  }
+}
+
+const organizationChangeInfo =
+  (keyValuePair: IkeyValuePairProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setUserDataInfoLoading(true))
+
+      API.auth.organizationChangeInfo(keyValuePair)
+
+      dispatch(setChangeUserInfoSuccess(true))
+
+      dispatch(setError(null))
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data.status.message))
+    } finally {
+      dispatch(setUserDataInfoLoading(false))
+    }
+  }
+const resetChangeUserInfoSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeUserInfoSuccess(false))
+}
+
 export default {
   setRedirectionState,
   login,
@@ -201,4 +234,7 @@ export default {
   getProfile,
   getJobSeeker,
   getOrganization,
+  jobSeekerChangeInfo,
+  resetChangeUserInfoSuccess,
+  organizationChangeInfo,
 }

@@ -31,3 +31,9 @@ export interface IRegisterData {
   passwordConfirmation: string
   remember: boolean
 }
+
+export interface IProfileDataProps {
+  imageURL: string | null
+  role: string | null
+  uuid: string | null
+}
