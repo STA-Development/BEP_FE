@@ -6,6 +6,10 @@ const selector = (state: RootState) => state.users
 export const user = createSelector([selector], (state) => state.user)
 export const isSignInLoading = createSelector([selector], (state) => state.isSignInLoading)
 export const isSignUpLoading = createSelector([selector], (state) => state.isSignUpLoading)
+export const isJobSeekerUpdateLoading = createSelector(
+  [selector],
+  (state) => state.isJobSeekerUpdateLoading
+)
 export const isLogOutLoading = createSelector([selector], (state) => state.isLogOutLoading)
 export const isResetPasswordLoading = createSelector(
   [selector],

@@ -1,3 +1,4 @@
+import { IJobSeekerProfileProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -24,6 +25,7 @@ const {
   setIsResetPasswordLoading,
   setUser,
   setLanguage,
+  setIsJobSeekerUpdateLoading,
   setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
@@ -203,8 +205,6 @@ const selectRole = (role: keyof typeof Roles) => async (dispatch: AppDispatch) =
 
 const getUser = () => async (dispatch: AppDispatch) => {
   try {
-    console.log(store.getState().users.user.role)
-
     if (store.getState().users.user.role === Roles.JobSeeker) {
       const response = await API.jobSeeker.getJobSeeker()
 
@@ -229,12 +229,26 @@ const getProfile = () => async (dispatch: AppDispatch) => {
   }
 }
 
+const updateJobSeekerProfile =
+  (params: IJobSeekerProfileProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setIsJobSeekerUpdateLoading(true))
+
+      await API.jobSeeker.updateJobSeekerProfile(params)
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data.status.message))
+    } finally {
+      dispatch(setIsJobSeekerUpdateLoading(false))
+    }
+  }
+
 export default {
   setRedirectionState,
   login,
   logOut,
   googleSignIn,
   isAuthenticated,
+  updateJobSeekerProfile,
   getUser,
   getProfile,
   forgotPassword,
