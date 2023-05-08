@@ -121,14 +121,16 @@ export const Header = () => {
                       </Link>
                     ))}
                   </div>
-                  <Button
-                    size="lg"
-                    disabled={isLogOutLoading}
-                    onClick={handleLogOut}
-                    LeftIcon={LogOutIcon}
-                  >
-                    {t(Translation.NAVBAR_LOGOUT)}
-                  </Button>
+                  <Disclosure.Button className="w-full">
+                    <Button
+                      size="lg"
+                      disabled={isLogOutLoading}
+                      onClick={handleLogOut}
+                      LeftIcon={LogOutIcon}
+                    >
+                      {t(Translation.NAVBAR_LOGOUT)}
+                    </Button>
+                  </Disclosure.Button>
                 </div>
               )}
             </Disclosure.Panel>
