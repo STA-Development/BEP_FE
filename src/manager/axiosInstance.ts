@@ -1,3 +1,4 @@
+import { ErrorMessages } from '@axios/axiosTypes'
 import { devToolsDefaultConfig } from '@constants/defaultConfigs'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
@@ -35,7 +36,10 @@ class RequestManager {
     axiosInstance.interceptors.response.use(
       async (res: AxiosResponse) => res,
       (error) => {
-        if (error.response.status === 403) {
+        if (
+          error.response.status === 403 &&
+          error.message === ErrorMessages.AccessTokenExpiryErrorMessage
+        ) {
           const refreshToken = localStorage.getItem('refreshToken')
 
           if (refreshToken) {
