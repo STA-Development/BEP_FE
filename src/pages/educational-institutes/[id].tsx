@@ -12,11 +12,14 @@ import { Loading } from '@uiComponents/Loading'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
+import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
+
 import {
   educationalInstitutesMiddleware,
   educationalInstitutesSelector,
 } from '../../redux/slices/educational-instutions'
 
+const { NEXT_PUBLIC_MAP_BASE_KEY } = getEnvironmentVariables()
 const EducationalInstitutePage = () => {
   const router = useRouter()
   const { id } = router.query
@@ -106,7 +109,7 @@ const EducationalInstitutePage = () => {
               </div>
               <div className="flex w-full flex-col flex-wrap py-2">
                 <Maps
-                  mapURL="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam"
+                  mapURL={`https://www.google.com/maps/embed/v1/place?q=${individualEduInstitutes?.address}&key=${NEXT_PUBLIC_MAP_BASE_KEY}`}
                   height={500}
                 />
                 <div className="flex w-full flex-row py-4 xl:w-1/3">
@@ -114,7 +117,9 @@ const EducationalInstitutePage = () => {
                     size="lg"
                     variant="outlined"
                   >
-                    <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam">
+                    <a
+                      href={`https://www.google.com/maps/place/${individualEduInstitutes.address}`}
+                    >
                       Open Google Maps
                     </a>
                   </Button>
