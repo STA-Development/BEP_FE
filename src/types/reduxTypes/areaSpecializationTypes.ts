@@ -6,7 +6,12 @@ export interface IApplications {
   isJobSeekerLoading: boolean
   error: null | string
 
+  isApplicationLoading: boolean
   isJobSeekerSubmitSuccess: boolean
+  applicationsList: null | IApplicationsListProps[]
+  individualApplication: null | IIndividualApplication
+  isOrganizationLoading: boolean
+  isOrganizationSubmitSuccess: boolean
 }
 
 export interface IJobSeekerApplicationProps {
@@ -17,9 +22,17 @@ export interface IJobSeekerApplicationProps {
   schedule: string
   workplace: string
   expectedSalary: string
-  isActive?: boolean
-  postedAt?: string
-  status?: string
+}
+
+export interface IOrganizationApplicationProps {
+  uuid?: string
+  type?: string
+  area?: string
+  educationLevel?: string
+  experience?: string
+  schedule?: string
+  workplace?: string
+  expectedSalary?: string
 }
 
 export interface IJobSeekerProps {
@@ -46,4 +59,26 @@ export interface IOrganizationProps {
   employeeQuantity: number
   organizationType: string
   address: string
+}
+
+export interface IApplicationsListProps {
+  isActive: boolean
+  percentCompleted: number
+  postedAt: string
+  status: string
+  uuid: string
+}
+
+export interface IIndividualApplication {
+  uuid?: string
+  type: string
+  area: string
+  educationLevel: string
+  experience: string
+  schedule: string
+  workplace: string
+  expectedSalary: string
+  isActive?: boolean
+  postedAt?: string
+  status?: string
 }

@@ -3,23 +3,24 @@ import { useController, useFormContext } from 'react-hook-form'
 import { Listbox, Transition } from '@headlessui/react'
 
 export interface Item {
-  id: number
-  name: string
+  id?: number
+  name?: string
 }
 
 interface SelectProps {
   items: Item[]
   fieldName: string
+  individualValue?: string | null
 }
 
-export const Select = ({ items, fieldName }: SelectProps) => {
+export const Select = ({ items, fieldName, individualValue }: SelectProps) => {
   const { control } = useFormContext()
   const { field } = useController({ name: fieldName, control })
 
   return (
     <div>
       <Listbox
-        defaultValue={items[0].name}
+        defaultValue={individualValue ?? items[0].name}
         {...field}
       >
         <div className="relative mt-1">
