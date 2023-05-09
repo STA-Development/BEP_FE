@@ -16,6 +16,7 @@ export interface InputType {
   required?: boolean
   value?: string
   onChange?: (value: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void
+  className?: string
 }
 
 export interface InputTypeCheckbox {
@@ -37,6 +38,7 @@ export const Input = React.forwardRef(
       required = false,
       value,
       onChange,
+      className,
     }: InputType,
     ref: LegacyRef<HTMLInputElement>
   ) => {
@@ -52,7 +54,7 @@ export const Input = React.forwardRef(
         error
           ? 'border-red placeholder:text-red'
           : [
-              color === 'primary' && 'border-primary placeholder:text-black',
+              color === 'primary' && 'focus:border-primary placeholder:text-black',
               color === 'secondary' && 'border-gray-thin placeholder:text-black',
             ],
       ],
@@ -93,7 +95,7 @@ export const Input = React.forwardRef(
                 placeholder={placeholder}
                 value={value}
                 id={id}
-                className={style}
+                className={className ?? style}
                 onChange={onChange}
                 onKeyDown={(e) =>
                   (e.keyCode === 69 || e.keyCode === 189 || e.keyCode === 190) &&

@@ -9,15 +9,25 @@ export interface ITextFieldProps {
   rows?: number
   label?: string
   id?: string
+  className?: string
 }
 
-const TextField: FC<ITextFieldProps> = ({ fieldName, type, placeholder, rows, label, id }) => {
+const TextField: FC<ITextFieldProps> = ({
+  fieldName,
+  type,
+  placeholder,
+  rows,
+  label,
+  id,
+  className,
+}) => {
   const { field, fieldState } = useController({ name: fieldName })
 
   return (
     <Input
       {...field}
       placeholder={placeholder}
+      className={className}
       label={label}
       id={id}
       type={type}
