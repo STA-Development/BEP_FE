@@ -35,6 +35,9 @@ const reducers = createReducer({
   setIsResetPasswordLoading(state, action: IAction<boolean>) {
     state.isResetPasswordLoading = action.payload
   },
+  setIsJobSeekerUpdateLoading(state, action: IAction<boolean>) {
+    state.isJobSeekerUpdateLoading = action.payload
+  },
   setUser(state, action: IAction<IUser>) {
     state.user = action.payload
   },
