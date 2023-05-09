@@ -1,50 +1,135 @@
-import React from 'react'
-import IndividualPage1 from '@components/IndividualPage1'
+import React, { useEffect } from 'react'
+import { LocationIcon } from '@components/Icons'
+import { MailIcon } from '@components/Icons/MailIcon'
+import { PhoneIcon } from '@components/Icons/PhoneIcon'
+import { IndividualCarousel } from '@components/IndividualCarousel'
+import { Maps } from '@components/Maps'
+import { PageHeader } from '@components/PageHeader'
+import { Translation } from '@constants/translations'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { Button } from '@uiComponents/Button'
+import { Loading } from '@uiComponents/Loading'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
+import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
+
+import {
+  educationalInstitutesMiddleware,
+  educationalInstitutesSelector,
+} from '../../redux/slices/educational-instutions'
+
+const { NEXT_PUBLIC_MAP_BASE_KEY } = getEnvironmentVariables()
 const EducationalInstitutePage = () => {
   const router = useRouter()
   const { id } = router.query
+  const [t] = useTranslation()
+  const individualEduInstitutes = useAppSelector(
+    educationalInstitutesSelector.individualEduInstitute
+  )
+  const isLoading = useAppSelector(educationalInstitutesSelector.isIndividualEduInstituteLoading)
 
-  if (typeof id === 'undefined') {
-    // Handle the case where the id is undefined
-    return <div>Id is undefined</div>
-  }
+  useEffect(() => {
+    if (id) {
+      dispatch(educationalInstitutesMiddleware.getIndividualEducationalInstitutesById(id as string))
+    }
+  }, [id])
 
-  const idString = Array.isArray(id) ? id[0] : id // Convert id to a string
+  const images = individualEduInstitutes?.imageURLs?.map((image, index) => ({
+    src: image,
+    id: index,
+  }))
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="mt-4 flex w-3/4 flex-col items-center justify-center">
-        <IndividualPage1
-          id={idString}
-          description="Lorem ipsum dolor sit amet consectetur. Placerat etiam aliquam aliquam non elit tempor
-        facilisis id. Id nam mauris amet volutpat. Mauris faucibus morbi dignissim elit. Purus
-        pharetra accumsan suspendisse pellentesque fringilla euismod ut. Blandit lorem vitae urna
-        quis tincidunt aenean ornare magna vulputate. Risus justo consectetur sem cursus dolor urna
-        dictumst urna leo. Ac ac convallis amet consectetur tincidunt porta est sit. Eget non
-        faucibus ultrices gravida risus pulvinar scelerisque augue. Aliquam mauris vitae nullam id
-        et purus enim. Ac interdum tellus aliquam nisl. Sed habitant porttitor lectus rhoncus urna
-        ac. Ante at nunc diam pulvinar id nibh sagittis. Quisque vitae in ultricies senectus egestas
-        porta. Diam elit venenatis purus sed aliquam. Rutrum integer risus amet volutpat pharetra
-        id. Lorem orci eu morbi elementum in. Amet consequat nunc non pharetra diam turpis.
-        Adipiscing porta arcu amet molestie nunc venenatis. Auctor dignissim et nibh sit sed
-        malesuada. Etiam vel eleifend ornare nec urna. At nunc volutpat velit ornare sapien feugiat
-        consequat. Condimentum interdum vitae augue rhoncus lectus hac ut. Vitae duis arcu
-        suspendisse sociis nam maecenas nunc. Felis sed nunc eget ultrices. Eu ante sit consequat
-        nunc eu. Metus sapien lectus massa faucibus amet morbi nunc. Sapien fames mauris non
-        praesent blandit nisi. Tristique dictum enim eu pharetra. Natoque et et euismod egestas
-        hendrerit amet scelerisque. Nisl ultrices ante est tellus. Odio tortor etiam nunc massa.
-        Mattis sollicitudin consectetur parturient et sagittis in leo. Condimentum nam sollicitudin
-        et sapien auctor aliquet. Praesent ullamcorper non quis massa. Diam a turpis aenean diam
-        morbi erat. Eget est sapien malesuada dignissim. Donec magna amet neque est molestie
-        adipiscing faucibus commodo id. Elementum integer vitae sed sollicitudin fringilla felis.
-        Condimentum est enim consectetur pulvinar condimentum sapien lorem integer. Enim euismod
-        purus amet morbi malesuada adipiscing morbi tellus. Vel tempor condimentum massa ac quis.
-        Vulputate dignissim nisi nisi nunc vitae. Non pretium nec orci imperdiet et ultrices a
-        volutpat. Lacus tristique donec sem eget ullamcorper sed. Ullamcorper ultricies semper
-        vestibulum nibh est et. Enim ligula ipsum amet."
-        />
+        <div className="flex w-full flex-col items-center justify-center">
+          <div className="mb-8 flex w-full flex-row">
+            <PageHeader
+              title={`Institute of ${individualEduInstitutes?.province ?? ''}`}
+              paths={[
+                'Home',
+                'Educational Institutes',
+                `Institute of ${individualEduInstitutes?.province ?? ''}`,
+              ]}
+            />
+          </div>
+          {individualEduInstitutes && !isLoading ? (
+            <>
+              <div className="flex w-full flex-col xl:flex-row">
+                <div className="flex h-80 w-full items-center justify-center overflow-hidden bg-white xl:h-auto xl:w-1/2">
+                  <IndividualCarousel images={images} />
+                </div>
+                <div className="flex w-full flex-col flex-wrap items-start xl:w-1/2 xl:items-center">
+                  <div className="flex w-full flex-col flex-wrap xl:w-3/4">
+                    <p className="w-full py-2 pt-8 text-lg">{individualEduInstitutes?.name}</p>
+                    <p className="hidden w-full text-sm xl:flex">
+                      {individualEduInstitutes?.subtitle}
+                    </p>
+                    <p className="flex w-full text-sm xl:hidden">
+                      Lorem ipsum dolor sit amet consectetur.
+                    </p>
+                  </div>
+                  <div className="flex w-full flex-row py-4 xl:hidden">
+                    <Button size="lg">Send Email</Button>
+                  </div>
+                  <div className="flex w-full flex-col flex-wrap py-4 xl:w-3/4 xl:flex-row">
+                    <div className="flex w-full flex-col flex-wrap xl:w-1/2">
+                      <span className="w-full py-2 text-lg font-medium xl:text-sm">
+                        {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_INDIVIDUAL_INSTITUTE_CONTACTS)}
+                      </span>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <PhoneIcon />{' '}
+                        <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.phone}</p>
+                      </div>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <MailIcon />{' '}
+                        <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.email}</p>
+                      </div>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <LocationIcon />{' '}
+                        <p className="px-2 text-lg xl:text-sm">
+                          {individualEduInstitutes?.address}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-16 flex w-full flex-col flex-wrap">
+                <p className="w-full py-4 text-lg font-normal">Description: </p>
+                <p className="w-full text-[14px]">{individualEduInstitutes?.description}</p>
+              </div>
+              <div className="flex w-full flex-col py-8">
+                <p className="w-full py-2 text-lg">Where to find us:</p>
+                <div className="flex w-full flex-row py-2">
+                  <LocationIcon />
+                  <p className="px-2">{individualEduInstitutes?.address}</p>
+                </div>
+              </div>
+              <div className="flex w-full flex-col flex-wrap py-2">
+                <Maps
+                  mapURL={`https://www.google.com/maps/embed/v1/place?q=${individualEduInstitutes?.address}&key=${NEXT_PUBLIC_MAP_BASE_KEY}`}
+                  height={500}
+                />
+                <div className="flex w-full flex-row py-4 xl:w-1/3">
+                  <Button
+                    size="lg"
+                    variant="outlined"
+                  >
+                    <a
+                      href={`https://www.google.com/maps/place/${individualEduInstitutes.address}`}
+                    >
+                      Open Google Maps
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <Loading />
+          )}
+        </div>
       </div>
     </div>
   )

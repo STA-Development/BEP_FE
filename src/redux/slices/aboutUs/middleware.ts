@@ -6,7 +6,7 @@ import slice from './slice'
 
 const { setAboutLoading, setError, setAboutList } = slice.actions
 
-const fetchAboutUsList = () => async (dispatch: AppDispatch) => {
+const getAboutUsList = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(setAboutLoading(true))
 
@@ -23,5 +23,5 @@ const fetchAboutUsList = () => async (dispatch: AppDispatch) => {
 }
 
 export default {
-  fetchAboutUsList,
+  getAboutUsList,
 }

@@ -1,20 +1,25 @@
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { IRegisterData } from '@axios/authentication/authManagerTypes'
 import { Container } from '@components/Container'
 import { OnDivider } from '@components/Divider'
 import { GoogleIcon } from '@components/Icons/GoogleIcon'
+import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Checkbox from '@uiComponents/FormFields/CheckBox'
 import TextField from '@uiComponents/FormFields/TextField'
-
-import { registerValidationSchema } from '../../validation/auth/register'
+import { registerValidationSchema } from '@validation/auth/register'
 
 export const Register = () => {
-  const { isSignUpLoading, error, errorGoogleSignIn } = useAppSelector(usersSelector.user)
+  const [t] = useTranslation()
+
+  const isSignUpLoading = useAppSelector(usersSelector.isSignUpLoading)
+  const error = useAppSelector(usersSelector.error)
+  const errorGoogleSignIn = useAppSelector(usersSelector.errorGoogleSignIn)
 
   const methods = useForm({
     defaultValues: {
@@ -34,6 +39,7 @@ export const Register = () => {
   const onSubmit = (data: IRegisterData) => {
     dispatch(
       usersMiddleware.register({
+        name: data.name,
         email: data.email,
         password: data.password,
       })
@@ -52,7 +58,7 @@ export const Register = () => {
             onSubmit={handleSubmit(onSubmit)}
             className="w-full text-center"
           >
-            <h1 className="mb-5 text-xl">Create an account</h1>
+            <h1 className="mb-5 text-xl">{t(Translation.PAGE_REGISTER_TITLE)}</h1>
             <Button
               variant="outlined"
               size="fl"
@@ -62,13 +68,13 @@ export const Register = () => {
               <div className="mr-5">
                 <GoogleIcon className="group-hover:fill-white" />
               </div>
-              <div>Sign up with Google</div>
+              <div>{t(Translation.PAGE_REGISTER_GOOGLE_SIGNUP)}</div>
             </Button>
             <OnDivider />
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="name"
-                placeholder="Full Name"
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_FULL_NAME) as string}
               />
             </div>
             <div className="mb-5 w-full text-left">
@@ -80,30 +86,31 @@ export const Register = () => {
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="password"
-                placeholder="Password"
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_PASSWORD) as string}
                 type="password"
               />
             </div>
             <div className="mb-5 w-full text-left">
               <TextField
                 fieldName="passwordConfirmation"
-                placeholder="Confirm Password"
+                placeholder={t(Translation.PAGE_REGISTER_INPUT_PASSWORD_CONFIRM) as string}
                 type="password"
               />
             </div>
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label="Remember me"
+                label={t(Translation.PAGE_REGISTER_INPUT_CHECKBOX) as string}
                 id="remember-me"
               />
             </div>
             <Button
+              isLoading={isSignUpLoading}
               disabled={isSignUpLoading}
               size="fl"
               type="submit"
             >
-              Create Account
+              {t(Translation.PAGE_REGISTER_INPUT_ACTIONS_CREATE_ACCOUNT)}
             </Button>
             <div className="w-full">
               {error || errorGoogleSignIn ? (

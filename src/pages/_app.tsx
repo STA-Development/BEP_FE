@@ -7,6 +7,7 @@ import Layout, { Layouts } from '@layouts/index'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
+import { Loading } from '@uiComponents/Loading'
 import { NextComponentType, NextPageContext } from 'next'
 import { Roboto } from 'next/font/google'
 import Head from 'next/head'
@@ -30,6 +31,7 @@ interface IAppProps {
 
 const App = ({ Component, pageProps }: IAppProps) => {
   const HierarchicalLayout = Layouts[Component.Layout]
+  const [initialRenderComplete, setInitialRenderComplete] = React.useState(false)
 
   useEffect(() => {
     const data = window.localStorage.getItem('language')
@@ -38,6 +40,18 @@ const App = ({ Component, pageProps }: IAppProps) => {
       dispatch(usersMiddleware.changeLanguage(data))
     }
   }, [])
+
+  useEffect(() => {
+    setInitialRenderComplete(true)
+  }, [])
+
+  if (!initialRenderComplete) {
+    return (
+      <div className="flex h-[100vh] content-center items-center">
+        <Loading />
+      </div>
+    )
+  }
 
   return (
     <>

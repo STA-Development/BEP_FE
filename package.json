@@ -26,6 +26,7 @@
     "@storybook/addon-essentials": "7.0.7",
     "@storybook/addon-interactions": "7.0.7",
     "@storybook/addon-links": "7.0.7",
+    "@neojp/tailwindcss-line-clamp-utilities": "^1.0.1",
     "@storybook/blocks": "7.0.7",
     "@storybook/nextjs": "7.0.7",
     "@storybook/react": "7.0.7",
@@ -34,7 +35,7 @@
     "clsx": "^1.2.1",
     "eslint": "8.39.0",
     "i18next": "^22.4.15",
-    "next": "13.3.1",
+    "next": "13.3.3",
     "next-i18next": "^13.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -75,6 +76,6 @@
     "style-loader": "^3.3.2",
     "tailwindcss": "^3.3.1",
     "tsconfig-paths-webpack-plugin": "^4.0.1",
-    "typescript": "5.0.4"
+    "typescript": "4.9.5"
   }
 }

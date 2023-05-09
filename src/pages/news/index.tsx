@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { INewsResponse } from '@axios/news/newsManagerTypes'
 import { Container } from '@components/Container/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
+import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { newsMiddleware, newsSelector } from '@redux/slices/news'
 import { viewsMiddleware } from '@redux/slices/views'
@@ -13,6 +15,8 @@ import Image from 'next/image'
 const PAGE_BOTTOM = 600
 
 const NewsList = () => {
+  const [t] = useTranslation()
+
   const isNewsListLoading = useAppSelector(newsSelector.isNewsListLoading)
   const [page, setPage] = useState<number>(1)
   const { newsList, pageSize, totalItems } = useAppSelector(newsSelector.news)
@@ -30,6 +34,10 @@ const NewsList = () => {
   useEffect(() => {
     dispatch(newsMiddleware.getNewsList(page))
   }, [page])
+
+  useEffect(() => {
+    dispatch(newsMiddleware.clearNewsList())
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -54,9 +62,9 @@ const NewsList = () => {
   return (
     <Container>
       <PageHeader
-        title="News"
+        title={t(Translation.PAGE_NEWS_MAIN_TITLE)}
         paths={['Home', 'News']}
-        description="The Latest News From our Foundation"
+        description={t(Translation.PAGE_NEWS_MAIN_DESCRIPTION) as string}
       />
       {isNewsListLoading && !newsList?.length ? (
         <Loading />
@@ -75,7 +83,7 @@ const NewsList = () => {
                 RightIcon={RightIcon}
                 onClick={() => redirectToIndividualNews(news.uuid)}
               >
-                Read More
+                {t(Translation.PAGE_NEWS_ACTIONS_READ_MORE)}
               </Button>
               <p className="mt-4 text-black-light">{news.postedAt}</p>
             </div>

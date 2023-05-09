@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { LanguageSelector, User } from '@components/Header'
@@ -22,11 +22,8 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
   ]
-  const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
-
-  useEffect(() => {
-    dispatch(usersMiddleware.isAuthenticated())
-  }, [])
+  const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
+  const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
@@ -41,7 +38,7 @@ export const Header = () => {
       <Disclosure as="nav">
         {({ open }) => (
           <>
-            <div className="absolute h-[120px] w-full bg-[url('/vawe1.svg')] bg-cover bg-center bg-no-repeat" />
+            <div className="absolute h-[120px] w-full bg-[url('/wave1.svg')] bg-cover bg-center bg-no-repeat" />
             <Container>
               <div className="relative flex h-23 items-center justify-between">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
@@ -84,7 +81,7 @@ export const Header = () => {
                                 color="primary"
                                 onClick={handleClearError}
                               >
-                                Login
+                                {t(Translation.NAVBAR_LOGIN)}
                               </Button>
                             </Link>
                           </div>
@@ -95,7 +92,7 @@ export const Header = () => {
                                 variant="outlined"
                                 onClick={handleClearError}
                               >
-                                Register
+                                {t(Translation.NAVBAR_REGISTER)}
                               </Button>
                             </Link>
                           </div>
@@ -124,7 +121,7 @@ export const Header = () => {
                 onClick={handleLogOut}
                 LeftIcon={LogOutIcon}
               >
-                Log Out
+                {t(Translation.NAVBAR_LOGOUT)}
               </Button>
             </Disclosure.Panel>
           </>

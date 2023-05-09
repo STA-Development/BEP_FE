@@ -1,4 +1,4 @@
-import { IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
+import { IUser, IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -6,28 +6,43 @@ const createReducer = <T extends SliceCaseReducers<IUserProps>>(reducer: T) => (
 
 const reducers = createReducer({
   setError(state, action: IAction<string | null>) {
-    state.user.error = action.payload
+    state.error = action.payload
   },
   setErrorGoogleSignIn(state, action: IAction<string | null>) {
-    state.user.errorGoogleSignIn = action.payload
+    state.errorGoogleSignIn = action.payload
   },
   setSignUpLoading(state, action: IAction<boolean>) {
-    state.user.isSignUpLoading = action.payload
+    state.isSignUpLoading = action.payload
   },
   setLogoutLoading(state, action: IAction<boolean>) {
-    state.user.isLogOutLoading = action.payload
+    state.isLogOutLoading = action.payload
   },
   setIsAuthenticated(state, action: IAction<boolean>) {
-    state.user.isAuthenticated = action.payload
+    state.isAuthenticated = action.payload
   },
   setSignInLoading(state, action: IAction<boolean>) {
-    state.user.isSignInLoading = action.payload
+    state.isSignInLoading = action.payload
   },
   setLanguage(state, action: IAction<string>) {
-    state.user.language = action.payload
+    state.language = action.payload
   },
   setLanguageChangeLoading(state, action: IAction<boolean>) {
-    state.user.isLanguageChangeLoading = action.payload
+    state.isLanguageChangeLoading = action.payload
+  },
+  setSelectedIndex(state, action: IAction<number>) {
+    state.selectedIndex = action.payload
+  },
+  setIsResetPasswordLoading(state, action: IAction<boolean>) {
+    state.isResetPasswordLoading = action.payload
+  },
+  setUser(state, action: IAction<IUser>) {
+    state.user = action.payload
+  },
+  setOtp(state, action: IAction<number | null>) {
+    state.otp = action.payload
+  },
+  setIsRoleSelectLoading(state, action: IAction<boolean>) {
+    state.isRoleSelectLoading = action.payload
   },
 })
 

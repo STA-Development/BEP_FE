@@ -3,7 +3,7 @@ import { Container } from '@components/Container'
 
 const ContentColor = ['primary', 'secondary', 'wave'] as const
 
-export interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
+interface IIntroductionProps extends ComponentPropsWithoutRef<'div'> {
   wave?: boolean
   img?: ReactNode
   title: string
@@ -23,13 +23,17 @@ export const Introduction = ({
 }: IIntroductionProps) => (
   <>
     {wave ? (
-      <div className="h-[213px] w-full bg-[url('/vawe.svg')] bg-cover bg-center bg-no-repeat" />
+      <div className="h-[213px] w-full bg-[url('/wave.svg')] bg-cover bg-center bg-no-repeat" />
     ) : null}
     <Container
       color={color}
       className={className}
     >
-      <div className={`flex flex-col gap-0 py-20 xl:flex-row xl:gap-20 ${wave && 'xl:pt-0'}`}>
+      <div
+        className={`flex flex-col gap-0 py-20 xl:flex-row xl:justify-between xl:gap-20 ${
+          wave ? 'xl:pt-0' : ''
+        }`}
+      >
         <div className="col-span-2">
           <h2 className="mb-2.5 text-xl font-medium xl:mb-5 xl:text-2xl">{title}</h2>
           <p className="mb-10 text-base text-black-light">{desc}</p>
