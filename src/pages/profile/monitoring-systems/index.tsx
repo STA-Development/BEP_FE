@@ -3,8 +3,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
-import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
 const tabs = [
   {
@@ -87,7 +87,7 @@ const MonitoringSystems = () => {
               <div className="my-10 inline-block xl:flex xl:w-full xl:flex-row">
                 <div className="flex flex-row gap-5">
                   <div className="w-[124px]">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="years"
                       items={years}
                       placeholder={
@@ -96,7 +96,7 @@ const MonitoringSystems = () => {
                     />
                   </div>
                   <div className="w-[124px]">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="years"
                       items={years}
                       placeholder={
@@ -105,7 +105,7 @@ const MonitoringSystems = () => {
                     />
                   </div>
                   <div className="w-[124px]">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="years"
                       items={years}
                       placeholder={
