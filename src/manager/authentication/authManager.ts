@@ -11,6 +11,8 @@ import {
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
+import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
+
 const baseURL = '/users'
 
 const axiosInstance = Axios()
@@ -44,7 +46,9 @@ const authManager = {
     )
   },
   googleSignIn() {
-    return window.open(`http://localhost:2002/users/v1/auth/google`)
+    const { NEXT_PUBLIC_BASE_URL } = getEnvironmentVariables()
+
+    return window.open(`${NEXT_PUBLIC_BASE_URL}users/v1/auth/google`)
   },
   selectRole(role: keyof typeof Roles) {
     return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/user`, { role })
