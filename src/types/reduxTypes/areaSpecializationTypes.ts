@@ -31,6 +31,15 @@ export interface IJobSeekerProps {
   email: string
 }
 
+export interface IJobSeekerProfileProps {
+  keyValuePair: IKeyValuePair
+}
+
+export interface IKeyValuePair {
+  key: string
+  value: string
+}
+
 export interface IOrganizationProps {
   uuid: string
   name: string
