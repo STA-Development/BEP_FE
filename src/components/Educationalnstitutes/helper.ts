@@ -1,4 +1,4 @@
-import { Item } from '@uiComponents/Select'
+import { ISelectItem } from '@uiComponents/Select'
 
 export const EducationalInstitutionTypes = ['University', 'College', 'Workshop']
 export const filterDefaultValues = {
@@ -6,6 +6,6 @@ export const filterDefaultValues = {
   province: { name: '', id: 1 },
 }
 export interface IFilterValues {
-  type: Item
-  province: Item
+  type: ISelectItem
+  province: ISelectItem
 }

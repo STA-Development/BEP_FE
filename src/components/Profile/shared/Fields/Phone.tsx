@@ -1,6 +1,14 @@
 import React, { MouseEvent } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { IJobSeekerProfileForm, resetValues } from '@components/Profile/JobSeeker/helper'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import {
+  IJobSeekerProfileForm,
+  resetValues as resetJobSeeker,
+} from '@components/Profile/JobSeeker/helper'
+import {
+  IOrganizationProfileForm,
+  resetValues as resetOrganization,
+} from '@components/Profile/Organization/helper'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -8,19 +16,22 @@ import { Button } from '@uiComponents/Button'
 import TextField from '@uiComponents/FormFields/TextField'
 import { useTranslation } from 'next-i18next'
 
-export const Email = () => {
+export const Phone = () => {
   const [t] = useTranslation()
-  const fieldName = 'email'
+  const fieldName = 'phone'
   const { control, getValues, reset } = useFormContext()
   const { field } = useController({ name: fieldName, control })
   const { value } = field
-  const isUpdateLoading = useAppSelector(usersSelector.isJobSeekerUpdateLoading)
+  const isUpdateLoading = useAppSelector(usersSelector.isUpdateProfileLoading)
+  const { role } = useAppSelector(usersSelector.user)
 
   const onActiveChange = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()
     reset({
-      ...resetValues(getValues() as IJobSeekerProfileForm),
-      email: { ...getValues().email, active: !value.active },
+      ...(role === Roles.JobSeeker
+        ? resetJobSeeker(getValues() as IJobSeekerProfileForm)
+        : resetOrganization(getValues() as IOrganizationProfileForm)),
+      phone: { ...getValues().phone, active: !value.active },
     })
   }
 
@@ -31,7 +42,7 @@ export const Email = () => {
           htmlFor=""
           className="text-sm text-black-light"
         >
-          {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL)}
+          {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE)}
         </label>
       </td>
       <td className="block p-0 xl:table-cell xl:py-10 xl:pr-10">
@@ -54,14 +65,14 @@ export const Email = () => {
             type="button"
             onClick={onActiveChange}
           >
-            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_EMAIL_ACTIONS)}
+            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE_ACTIONS)}
           </Button>
         ) : (
           <Button
             variant="outlined"
             size="fl"
-            isLoading={isUpdateLoading}
             type="submit"
+            isLoading={isUpdateLoading}
           >
             Save
           </Button>

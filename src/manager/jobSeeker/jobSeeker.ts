@@ -2,9 +2,9 @@ import {
   IApplicationsListProps,
   IIndividualApplication,
   IJobSeekerApplicationProps,
-  IJobSeekerProfileProps,
   IJobSeekerProps,
   IOrganizationApplicationProps,
+  IProfileUpdateProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
@@ -55,7 +55,7 @@ const jobSeekerManager = {
     })
   },
 
-  updateJobSeekerProfile(data: IJobSeekerProfileProps) {
+  updateJobSeekerProfile(data: IProfileUpdateProps) {
     return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/job-seeker`, data)
   },
 
@@ -93,6 +93,9 @@ const jobSeekerManager = {
     return axiosInstance.delete<string, IAxiosResponse<string>>(
       `${baseURL}/v1/organization/application/${uuid}`
     )
+  },
+  updateOrganizationProfile(data: IProfileUpdateProps) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/organization`, data)
   },
 }
 
