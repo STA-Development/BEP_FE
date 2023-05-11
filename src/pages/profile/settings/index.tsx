@@ -1,7 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { LocationIcon, UserIcon } from '@components/Icons'
 import { JobSeekerProfile } from '@components/Profile/JobSeeker/JobSeekerProfile'
+import { OrganizationProfile } from '@components/Profile/Organization/OrganizationProfile'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -9,7 +11,7 @@ import { Button } from '@uiComponents/Button'
 
 export const Settings = () => {
   const [t] = useTranslation()
-  const { name, address } = useAppSelector(usersSelector.user)
+  const { name, address, role } = useAppSelector(usersSelector.user)
 
   return (
     <div className="grid divide-y divide-gray-thin">
@@ -30,7 +32,8 @@ export const Settings = () => {
           </Button>
         </div>
       </div>
-      <JobSeekerProfile />
+      {role === Roles.JobSeeker ? <JobSeekerProfile /> : null}
+      {role === Roles.Organization ? <OrganizationProfile /> : null}
     </div>
   )
 }

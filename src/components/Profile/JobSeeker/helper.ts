@@ -3,6 +3,7 @@ export interface IJobSeekerProfile {
   email: string
   phone: string
   password: string
+  address: string
 }
 
 export interface IJobSeekerProfileForm {
@@ -19,6 +20,10 @@ export interface IJobSeekerProfileForm {
     active: boolean
   }
   password: {
+    value: string
+    active: boolean
+  }
+  address: {
     value: string
     active: boolean
   }
@@ -41,6 +46,10 @@ export const defaultValues = (values: IJobSeekerProfile) => ({
     value: values.password,
     active: false,
   },
+  address: {
+    value: values.address,
+    active: false,
+  },
 })
 
 export const resetValues = (values: IJobSeekerProfileForm) => ({
@@ -58,6 +67,10 @@ export const resetValues = (values: IJobSeekerProfileForm) => ({
   },
   password: {
     value: values.password.value,
+    active: false,
+  },
+  address: {
+    value: values.address.value,
     active: false,
   },
 })

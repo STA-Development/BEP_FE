@@ -43,7 +43,7 @@ const Events = () => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 
-      if (page < Math.round(pageCount) && eventsList.length === page * pageSize) {
+      if (page < Math.ceil(pageCount)) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
