@@ -36,7 +36,6 @@ const defaultValues = {
 
 const FillTheForm = () => {
   const [t] = useTranslation()
-
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const router = useRouter()
@@ -70,15 +69,17 @@ const FillTheForm = () => {
     }
   }, [isJobSeekerSubmitSuccess, reset, router])
 
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <Container className="mb-30 mt-15 pb-20">
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
           LeftIcon={LeftIcon}
-          onClick={() => {
-            setSelectedIndex((prev) => prev - 1)
-          }}
+          onClick={handleGoBack}
         >
           {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
         </Button>
