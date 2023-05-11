@@ -9,7 +9,8 @@ import { Button } from '@uiComponents/Button'
 const VerifyOtp = ({ children }: { children: JSX.Element }) => {
   const [t] = useTranslation()
 
-  const { error, isResetPasswordLoading } = useAppSelector(usersSelector.user)
+  const error = useAppSelector(usersSelector.error)
+  const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
 
   return (
     <div className="w-full max-w-[480px]">

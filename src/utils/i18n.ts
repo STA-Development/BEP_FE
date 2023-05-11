@@ -6,7 +6,7 @@ import translationArm from '@assets/localization/arm.json'
 import translation from '@assets/localization/en.json'
 import translationRu from '@assets/localization/ru.json'
 
-const selectedLanguage = store.getState().users.user.language
+const selectedLanguage = store.getState().users.language
 const localizationResources = {
   en: {
     translation,

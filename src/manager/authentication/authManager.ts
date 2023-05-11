@@ -1,5 +1,7 @@
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import {
   IForgotPasswordResponse,
+  IProfile,
   IResetPasswordParams,
   ISignInParams,
   ISignInResponse,
@@ -43,6 +45,12 @@ const authManager = {
   },
   googleSignIn() {
     return window.open(`http://localhost:2002/users/v1/auth/google`)
+  },
+  selectRole(role: keyof typeof Roles) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/user`, { role })
+  },
+  getProfile() {
+    return axiosInstance.get<IProfile, IAxiosResponse<IProfile>>(`${baseURL}/v1/auth/profile`)
   },
 }
 

@@ -8,7 +8,7 @@ import {
   schedule,
   type,
   workplace,
-} from '@constants/filTheForm'
+} from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import { Select } from '@uiComponents/Select'

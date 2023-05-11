@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { IJobSeekerProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IJobSeekerApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { AreaOfSpecialization } from '@components/AreaOfSpecialization'
 import { Container } from '@components/Container'
 import { FilTheFormJobReview } from '@components/FilTheFormJobReview'
@@ -14,7 +14,7 @@ import {
   schedule,
   type,
   workplace,
-} from '@constants/filTheForm'
+} from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -36,7 +36,6 @@ const defaultValues = {
 
 const FillTheForm = () => {
   const [t] = useTranslation()
-
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const router = useRouter()
@@ -51,7 +50,7 @@ const FillTheForm = () => {
 
   const { handleSubmit, reset } = methods
 
-  const onSubmit = (data: IJobSeekerProps) => {
+  const onSubmit = (data: IJobSeekerApplicationProps) => {
     const areaSpecialization = {
       ...data,
       isActive: true,
@@ -70,15 +69,17 @@ const FillTheForm = () => {
     }
   }, [isJobSeekerSubmitSuccess, reset, router])
 
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <Container className="mb-30 mt-15 pb-20">
       <div className="mb-10 flex justify-between">
         <Button
           variant="text"
           LeftIcon={LeftIcon}
-          onClick={() => {
-            setSelectedIndex((prev) => prev - 1)
-          }}
+          onClick={handleGoBack}
         >
           {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
         </Button>

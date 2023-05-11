@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { LanguageSelector, User } from '@components/Header'
@@ -22,11 +22,8 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
   ]
-  const { isAuthenticated, isLogOutLoading } = useAppSelector(usersSelector.user)
-
-  useEffect(() => {
-    dispatch(usersMiddleware.isAuthenticated())
-  }, [])
+  const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
+  const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
@@ -38,7 +35,10 @@ export const Header = () => {
 
   return (
     <div className="sticky top-0 z-40">
-      <Disclosure as="nav">
+      <Disclosure
+        as="nav"
+        className="bg-white"
+      >
         {({ open }) => (
           <>
             <div className="absolute h-[120px] w-full bg-[url('/wave1.svg')] bg-cover bg-center bg-no-repeat" />
@@ -107,25 +107,32 @@ export const Header = () => {
               </div>
             </Container>
             <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 xl:hidden">
-              <div className="mb-[120px] space-y-5">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className="block text-base font-medium text-black"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-              <Button
-                size="lg"
-                disabled={isLogOutLoading}
-                onClick={handleLogOut}
-                LeftIcon={LogOutIcon}
-              >
-                {t(Translation.NAVBAR_LOGOUT)}
-              </Button>
+              {({ close }) => (
+                <div>
+                  <div className="mb-[120px] space-y-5">
+                    {navigation.map((item) => (
+                      <Link
+                        onClick={() => close()}
+                        key={item.name}
+                        href={item.href}
+                        className="block text-base font-medium text-black"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                  <Disclosure.Button className="w-full">
+                    <Button
+                      size="lg"
+                      disabled={isLogOutLoading}
+                      onClick={handleLogOut}
+                      LeftIcon={LogOutIcon}
+                    >
+                      {t(Translation.NAVBAR_LOGOUT)}
+                    </Button>
+                  </Disclosure.Button>
+                </div>
+              )}
             </Disclosure.Panel>
           </>
         )}

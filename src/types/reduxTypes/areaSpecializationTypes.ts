@@ -9,7 +9,7 @@ export interface IApplications {
   isJobSeekerSubmitSuccess: boolean
 }
 
-export interface IJobSeekerProps {
+export interface IJobSeekerApplicationProps {
   type: string
   area: string
   educationLevel: string
@@ -20,4 +20,30 @@ export interface IJobSeekerProps {
   isActive?: boolean
   postedAt?: string
   status?: string
+}
+
+export interface IJobSeekerProps {
+  uuid: string
+  name: string
+  address: string
+  phone: string
+  imageURL: string
+  email: string
+}
+
+export interface IJobSeekerProfileProps {
+  keyValuePair: IKeyValuePair
+}
+
+export interface IKeyValuePair {
+  key: string
+  value: string
+}
+
+export interface IOrganizationProps {
+  uuid: string
+  name: string
+  employeeQuantity: number
+  organizationType: string
+  address: string
 }
