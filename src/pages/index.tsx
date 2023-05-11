@@ -22,7 +22,6 @@ import { newsMiddleware } from '@redux/slices/news'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 const data1 = [
   { id: 1, number: '43', text: 'Lorem ipsum dolor sit amet consectetur' },
@@ -32,13 +31,6 @@ const data1 = [
 
 const Home = () => {
   const [t] = useTranslation()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (router.query) {
-      localStorage.setItem('accessToken', router.query.accessToken as string)
-    }
-  }, [router])
 
   const helps = [
     { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },

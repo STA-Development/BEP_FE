@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LocationIcon, UserIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
+import { useRouter } from 'next/router'
 
 export const Settings = () => {
   const [t] = useTranslation()
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query) {
+      localStorage.setItem('accessToken', router.query.accessToken as string)
+    }
+  }, [router])
 
   const form = [
     {
