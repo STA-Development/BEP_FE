@@ -36,7 +36,6 @@ const defaultValues = {
 
 const FillTheForm = () => {
   const [t] = useTranslation()
-
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
 
   const router = useRouter()
