@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import { LocationIcon } from '@components/Icons'
+import { Clock } from '@components/Icons/Clock'
 import { MailIcon } from '@components/Icons/MailIcon'
+import { PeopleQueue } from '@components/Icons/PeopleQueue'
+import { PersonAccount } from '@components/Icons/PersonAccount'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
+import { SuitCase } from '@components/Icons/SuitCase'
 import { IndividualCarousel } from '@components/IndividualCarousel'
 import { Maps } from '@components/Maps'
 import { PageHeader } from '@components/PageHeader'
@@ -12,11 +16,14 @@ import { Loading } from '@uiComponents/Loading'
 import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
+import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
+
 import {
   educationalInstitutesMiddleware,
   educationalInstitutesSelector,
 } from '../../redux/slices/educational-instutions'
 
+const { NEXT_PUBLIC_MAP_BASE_KEY } = getEnvironmentVariables()
 const EducationalInstitutePage = () => {
   const router = useRouter()
   const { id } = router.query
@@ -73,8 +80,42 @@ const EducationalInstitutePage = () => {
                   <div className="flex w-full flex-col flex-wrap py-4 xl:w-3/4 xl:flex-row">
                     <div className="flex w-full flex-col flex-wrap xl:w-1/2">
                       <span className="w-full py-2 text-lg font-medium xl:text-sm">
+                        {t(
+                          Translation.PAGE_EDUCATIONAL_INSTITUTES_INDIVIDUAL_INSTITUTE_INFO_REQUIREMENTS
+                        )}
+                      </span>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <PersonAccount />{' '}
+                        <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.rector}</p>
+                      </div>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <PeopleQueue />{' '}
+                        <p className="px-2 text-lg xl:text-sm">
+                          {individualEduInstitutes?.studentQuantity}
+                        </p>
+                      </div>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <SuitCase />{' '}
+                        <p className="px-2 text-lg xl:text-sm">
+                          {individualEduInstitutes?.lecturerQuantity}
+                        </p>
+                      </div>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <Clock />{' '}
+                        <p className="px-2 text-lg xl:text-sm">
+                          {individualEduInstitutes?.startTime}-{individualEduInstitutes?.endTime}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex w-full flex-col flex-wrap xl:w-1/2">
+                      <span className="w-full py-2 text-lg font-medium xl:text-sm">
                         {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_INDIVIDUAL_INSTITUTE_CONTACTS)}
                       </span>
+                      <div className="flex w-full flex-row items-center py-2">
+                        <PhoneIcon />{' '}
+                        <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.phone}</p>
+                      </div>
                       <div className="flex w-full flex-row items-center py-2">
                         <PhoneIcon />{' '}
                         <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.phone}</p>
@@ -106,7 +147,7 @@ const EducationalInstitutePage = () => {
               </div>
               <div className="flex w-full flex-col flex-wrap py-2">
                 <Maps
-                  mapURL="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam"
+                  mapURL={`https://www.google.com/maps/embed/v1/place?q=${individualEduInstitutes?.address}&key=${NEXT_PUBLIC_MAP_BASE_KEY}`}
                   height={500}
                 />
                 <div className="flex w-full flex-row py-4 xl:w-1/3">
@@ -114,7 +155,9 @@ const EducationalInstitutePage = () => {
                     size="lg"
                     variant="outlined"
                   >
-                    <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3047.9665400549616!2d44.520139515500986!3d40.1875580793924!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406abce08fcfdca5%3A0x9a08bbe9e33d7868!2s29%20Abovyan%20poxoc%2C%20Yerevan!5e0!3m2!1sru!2sam!4v1681153295985!5m2!1sru!2sam">
+                    <a
+                      href={`https://www.google.com/maps/place/${individualEduInstitutes.address}`}
+                    >
                       Open Google Maps
                     </a>
                   </Button>
