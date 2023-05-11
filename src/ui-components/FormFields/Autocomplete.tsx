@@ -1,6 +1,6 @@
 import React from 'react'
 import { useController } from 'react-hook-form'
-import { Autocomplete, Item } from '@uiComponents/Autocomplete'
+import { Autocomplete, IAutoCompleteItem } from '@uiComponents/Autocomplete'
 
 export interface IAutocompleteProps<T> {
   fieldName: string
@@ -11,7 +11,7 @@ export interface IAutocompleteProps<T> {
   onChange?: (value: T) => void
 }
 
-const AutocompleteField = <T extends Item>({
+const AutocompleteField = <T extends IAutoCompleteItem>({
   fieldName,
   items,
   placeholder,

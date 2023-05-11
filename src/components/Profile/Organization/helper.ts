@@ -1,4 +1,4 @@
-import { Item } from '@uiComponents/Autocomplete'
+import { IAutoCompleteItem } from '@uiComponents/Autocomplete'
 
 export interface IOrganizationProfile {
   name: string
@@ -52,7 +52,7 @@ export interface IOrganizationProfileForm {
     active: boolean
   }
   organizationType: {
-    value: Item
+    value: IAutoCompleteItem
     active: boolean
   }
 }

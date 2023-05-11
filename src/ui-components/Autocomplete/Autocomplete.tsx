@@ -3,7 +3,7 @@ import { ChevronIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
 import clsxMerge from '@lib/clsxm'
 
-export interface Item {
+export interface IAutoCompleteItem {
   id: string
   name: string
 }
@@ -17,7 +17,7 @@ interface AutocompleteProps<T> {
   onValueChange?: (value: T) => void
 }
 
-export const Autocomplete = <T extends Item>({
+export const Autocomplete = <T extends IAutoCompleteItem>({
   items,
   placeholder,
   classes,
@@ -61,7 +61,7 @@ export const Autocomplete = <T extends Item>({
               className={`${
                 open ? 'rounded-t' : 'rounded'
               } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${style} ${inputClasses}`}
-              displayValue={(item: Item) => item?.name}
+              displayValue={(item: IAutoCompleteItem) => item?.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
             />
