@@ -3,8 +3,8 @@ import { useController, useFormContext } from 'react-hook-form'
 import { Listbox, Transition } from '@headlessui/react'
 
 export interface ISelectItem {
-  id?: number
-  name?: string
+  id: number
+  name: string
 }
 
 interface SelectProps {
