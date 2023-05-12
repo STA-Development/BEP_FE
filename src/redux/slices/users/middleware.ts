@@ -1,3 +1,4 @@
+import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -7,6 +8,7 @@ import {
   ISignInParams,
   ISignUpParams,
 } from '@axios/authentication/authManagerTypes'
+import { usersMiddleware } from '@redux/slices/users/index'
 import store, { AppDispatch } from '@redux/store'
 import i18n from 'i18next'
 
@@ -24,6 +26,7 @@ const {
   setIsResetPasswordLoading,
   setUser,
   setLanguage,
+  setisUpdateProfileLoading,
   setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
@@ -81,7 +84,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
         address: '',
         phone: '',
         employeeQuantity: 0,
-        organizationType: '',
+        organizationType: null,
         imageURL: '',
         role: Roles.NOROLE,
       })
@@ -250,14 +253,43 @@ const updateAvatarLoading = (isLoading: boolean) => async (dispatch: AppDispatch
   dispatch(setIsUserAvatarLoading(isLoading))
 }
 
+const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(true))
+
+    await API.jobSeeker.updateJobSeekerProfile(params)
+    dispatch(usersMiddleware.getUser())
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
+const updateOrganizationProfile =
+  (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setisUpdateProfileLoading(true))
+
+      await API.jobSeeker.updateOrganizationProfile(params)
+      dispatch(usersMiddleware.getUser())
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data.status.message))
+    } finally {
+      dispatch(setisUpdateProfileLoading(false))
+    }
+  }
+
 export default {
   setRedirectionState,
   login,
   logOut,
   googleSignIn,
   isAuthenticated,
+  updateJobSeekerProfile,
   getUser,
   getProfile,
+  updateOrganizationProfile,
   forgotPassword,
   verifyOtp,
   register,

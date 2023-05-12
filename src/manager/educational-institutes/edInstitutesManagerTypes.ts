@@ -20,6 +20,11 @@ export interface IIndividualEducationalInstituteResponse {
   email: string
   province: string
   type: string
+  rector: string
+  lecturerQuantity: string
+  studentQuantity: string
+  startTime: string
+  endTime: string
 }
 
 export interface IEducationalInstitutesParams {

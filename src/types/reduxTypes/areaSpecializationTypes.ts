@@ -1,3 +1,5 @@
+import { OrganizationType } from '@components/Profile/Organization/helper'
+
 export interface IApplicationsProps {
   applications: IApplications
 }
@@ -31,10 +33,19 @@ export interface IJobSeekerProps {
   email: string
 }
 
+export interface IProfileUpdateProps {
+  keyValuePair: IKeyValuePair
+}
+
+export interface IKeyValuePair {
+  key: string
+  value: string
+}
+
 export interface IOrganizationProps {
   uuid: string
   name: string
   employeeQuantity: number
-  organizationType: string
+  organizationType: keyof typeof OrganizationType
   address: string
 }

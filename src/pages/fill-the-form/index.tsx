@@ -5,8 +5,9 @@ import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
-import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
+import { useRouter } from 'next/router'
 
 interface Person {
   id: string
@@ -23,6 +24,7 @@ const people: Person[] = [
 
 const FillTheForm = () => {
   const [t] = useTranslation()
+  const router = useRouter()
 
   const [selectedIndex, setSelectedIndex] = useState(0)
 
@@ -32,6 +34,10 @@ const FillTheForm = () => {
 
   const methods = useForm()
 
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <Container className="mb-30 mt-15">
       <FormProvider {...methods}>
@@ -40,9 +46,7 @@ const FillTheForm = () => {
             <Button
               variant="text"
               LeftIcon={LeftIcon}
-              onClick={() => {
-                setSelectedIndex((prev) => prev - 1)
-              }}
+              onClick={handleGoBack}
             >
               {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
             </Button>
@@ -65,21 +69,21 @@ const FillTheForm = () => {
                   </div>
 
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_UNIVERSITY) as string}
                     />
                   </div>
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_DEGREE) as string}
                     />
                   </div>
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_FACULTY) as string}
@@ -100,7 +104,7 @@ const FillTheForm = () => {
                   </div>
 
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_COUNTRY) as string}

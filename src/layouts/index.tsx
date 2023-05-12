@@ -18,13 +18,18 @@ export const Layouts = {
 const LayoutContent = ({ children }: PropsWithChildren) => {
   const router = useRouter()
 
-  const { isAuthenticated } = store.getState().users
-  const { role } = store.getState().users.user
-  const [isGetProfileComplete, setIsGetProfileComplete] = useState<boolean | null>(null)
+  const [isGetProfileComplete, setIsGetProfileComplete] = useState<boolean | null>(false)
+  const [role, setRole] = useState<keyof typeof Roles | null>(Roles.NOROLE)
   const select = (state: { users: IUserProps }) => state.users.user.role !== Roles.NOROLE
+  const [checkIfAuthComplete, setCheckIfAuthComplete] = useState<boolean | null>(null)
 
   const listener = () => {
     const ifGetProfileComplete = select(store.getState())
+    const { isAuthenticated: isAuth } = store.getState().users
+    const { role: userRole } = store.getState().users.user
+
+    setCheckIfAuthComplete(isAuth)
+    setRole(userRole)
 
     setIsGetProfileComplete(ifGetProfileComplete)
   }
@@ -37,9 +42,6 @@ const LayoutContent = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (role) {
-      setIsGetProfileComplete(
-        isGetProfileComplete ? store.getState().users.user.role === Roles.NOROLE : false
-      )
       dispatch(usersMiddleware.getUser())
     } else {
       setIsGetProfileComplete(true)
@@ -47,21 +49,21 @@ const LayoutContent = ({ children }: PropsWithChildren) => {
   }, [role, isGetProfileComplete])
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (checkIfAuthComplete && !isGetProfileComplete) {
       dispatch(usersMiddleware.getProfile())
     }
-  }, [isAuthenticated, role])
+  }, [checkIfAuthComplete, isGetProfileComplete, role])
 
   useEffect(() => {
     if (
       isGetProfileComplete &&
-      isAuthenticated &&
+      checkIfAuthComplete &&
       !role &&
       router.pathname !== '/after-registration'
     ) {
       router.push('/after-registration')
     }
-  }, [router, isGetProfileComplete, isAuthenticated, role])
+  }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 
   if (router.pathname.includes('/after-registration')) {
     return <AuthLayout>{children}</AuthLayout>

@@ -6,6 +6,10 @@ const selector = (state: RootState) => state.users
 export const user = createSelector([selector], (state) => state.user)
 export const isSignInLoading = createSelector([selector], (state) => state.isSignInLoading)
 export const isSignUpLoading = createSelector([selector], (state) => state.isSignUpLoading)
+export const isUpdateProfileLoading = createSelector(
+  [selector],
+  (state) => state.isUpdateProfileLoading
+)
 export const isLogOutLoading = createSelector([selector], (state) => state.isLogOutLoading)
 export const isUserAvatarLoading = createSelector([selector], (state) => state.isUserAvatarLoading)
 export const isResetPasswordLoading = createSelector(
@@ -33,6 +37,7 @@ export default {
   isLogOutLoading,
   isResetPasswordLoading,
   error,
+  isUpdateProfileLoading,
   isAuthenticated,
   language,
   isLanguageChangeLoading,
