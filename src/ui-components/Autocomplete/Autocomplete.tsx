@@ -1,29 +1,31 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import { useController } from 'react-hook-form'
 import { ChevronIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
+import clsxMerge from '@lib/clsxm'
 
-interface Item {
+export interface IAutoCompleteItem {
   id: string
   name: string
 }
 
 interface AutocompleteProps<T> {
   items: T[]
-  placeholder: string
+  placeholder?: string
   classes?: string
   inputClasses?: string
-  fieldName: string
+  error?: string | null
+  onValueChange?: (value: T) => void
 }
 
-export const Autocomplete = <T extends Item>({
+export const Autocomplete = <T extends IAutoCompleteItem>({
   items,
   placeholder,
   classes,
   inputClasses,
-  fieldName,
+  error,
+  onValueChange,
+  ...rest
 }: AutocompleteProps<T>) => {
-  const { field } = useController({ name: fieldName })
   const [query, setQuery] = useState('')
 
   const filteredItems = useMemo(
@@ -39,16 +41,27 @@ export const Autocomplete = <T extends Item>({
     [items, query]
   )
 
+  const style = clsxMerge(
+    'rounded',
+    'px-5',
+    'py-2.5',
+    'outline-0',
+    'placeholder:text-black-light',
+    'w-full',
+    'border-2',
+    [error ? 'border-red placeholder:text-red' : 'focus:border-primary placeholder:text-black']
+  )
+
   return (
-    <Combobox {...field}>
+    <Combobox {...rest}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
           <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'
-              } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${inputClasses}`}
-              displayValue={(item: Item) => item.name}
+              } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${style} ${inputClasses}`}
+              displayValue={(item: IAutoCompleteItem) => item?.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
             />
@@ -81,6 +94,7 @@ export const Autocomplete = <T extends Item>({
               )}
             </Combobox.Options>
           </Transition>
+          {error ? <p className="mt-2.5 text-xs text-red">{error}</p> : null}
         </div>
       )}
     </Combobox>

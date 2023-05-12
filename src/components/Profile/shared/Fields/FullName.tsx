@@ -1,6 +1,14 @@
 import React, { MouseEvent } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { IJobSeekerProfileForm, resetValues } from '@components/Profile/JobSeeker/helper'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import {
+  IJobSeekerProfileForm,
+  resetValues as resetJobSeeker,
+} from '@components/Profile/JobSeeker/helper'
+import {
+  IOrganizationProfileForm,
+  resetValues as resetOrganization,
+} from '@components/Profile/Organization/helper'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -14,12 +22,15 @@ export const FullName = () => {
   const { control, getValues, reset } = useFormContext()
   const { field } = useController({ name: fieldName, control })
   const { value } = field
-  const isUpdateLoading = useAppSelector(usersSelector.isJobSeekerUpdateLoading)
+  const isUpdateLoading = useAppSelector(usersSelector.isUpdateProfileLoading)
+  const { role } = useAppSelector(usersSelector.user)
 
   const onActiveChange = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()
     reset({
-      ...resetValues(getValues() as IJobSeekerProfileForm),
+      ...(role === Roles.JobSeeker
+        ? resetJobSeeker(getValues() as IJobSeekerProfileForm)
+        : resetOrganization(getValues() as IOrganizationProfileForm)),
       name: { ...getValues().name, active: !value.active },
     })
   }

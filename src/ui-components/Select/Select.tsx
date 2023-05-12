@@ -2,13 +2,13 @@ import React, { Fragment } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { Listbox, Transition } from '@headlessui/react'
 
-export interface Item {
+export interface ISelectItem {
   id?: number
   name?: string
 }
 
 interface SelectProps {
-  items: Item[]
+  items: ISelectItem[]
   fieldName: string
   individualValue?: string | null
 }
@@ -34,7 +34,7 @@ export const Select = ({ items, fieldName, individualValue }: SelectProps) => {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="sm:text-sm absolute z-40 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              {items.map((item: Item) => (
+              {items.map((item: ISelectItem) => (
                 <Listbox.Option
                   key={item.id}
                   value={item.name}

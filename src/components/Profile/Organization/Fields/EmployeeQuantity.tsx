@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
-import { IJobSeekerProfileForm, resetValues } from '@components/Profile/JobSeeker/helper'
+import { IOrganizationProfileForm, resetValues } from '@components/Profile/Organization/helper'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -8,19 +8,19 @@ import { Button } from '@uiComponents/Button'
 import TextField from '@uiComponents/FormFields/TextField'
 import { useTranslation } from 'next-i18next'
 
-export const Phone = () => {
+export const EmployeeQuantity = () => {
   const [t] = useTranslation()
-  const fieldName = 'phone'
+  const fieldName = 'employeeQuantity'
   const { control, getValues, reset } = useFormContext()
   const { field } = useController({ name: fieldName, control })
   const { value } = field
-  const isUpdateLoading = useAppSelector(usersSelector.isJobSeekerUpdateLoading)
+  const isUpdateLoading = useAppSelector(usersSelector.isUpdateProfileLoading)
 
   const onActiveChange = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault()
     reset({
-      ...resetValues(getValues() as IJobSeekerProfileForm),
-      phone: { ...getValues().phone, active: !value.active },
+      ...resetValues(getValues() as IOrganizationProfileForm),
+      employeeQuantity: { ...getValues('employeeQuantity'), active: !value.active },
     })
   }
 
@@ -31,7 +31,7 @@ export const Phone = () => {
           htmlFor=""
           className="text-sm text-black-light"
         >
-          {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE)}
+          {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_QUANTITY_ACTIONS)}
         </label>
       </td>
       <td className="block p-0 xl:table-cell xl:py-10 xl:pr-10">
@@ -54,7 +54,7 @@ export const Phone = () => {
             type="button"
             onClick={onActiveChange}
           >
-            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_PHONE_ACTIONS)}
+            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_QUANTITY_ACTIONS)}
           </Button>
         ) : (
           <Button
