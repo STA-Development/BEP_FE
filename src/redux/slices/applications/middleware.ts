@@ -95,7 +95,7 @@ const upDateJobSeekerIndividualApplication =
       dispatch(setOrganizationLoading(true))
       await API.jobSeeker.upDateJobSeekerIndividualApplication(params)
 
-      dispatch(setOrganizationSubmitSuccess(true))
+      dispatch(setJobSeekerSubmitSuccess(true))
     } catch (error) {
       dispatch(setError((error as IError).response?.data?.status.message))
     } finally {
@@ -141,7 +141,7 @@ const upDateOrganizationIndividualApplication =
       dispatch(setOrganizationLoading(true))
       await API.jobSeeker.updateOrganizationIndividualApplication(params)
 
-      dispatch(setOrganizationSubmitSuccess(true))
+      dispatch(setJobSeekerSubmitSuccess(true))
     } catch (error) {
       dispatch(setError((error as IError).response?.data?.status.message))
     } finally {

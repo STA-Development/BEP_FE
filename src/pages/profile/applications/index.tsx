@@ -33,7 +33,7 @@ export const Applications = () => {
   const redirectToIndividualApplication = (id: string) => {
     dispatch(
       viewsMiddleware.setRedirectionState({
-        path: `/profile/applications/${id}`,
+        path: `/fill-the-form/${id}`,
         params: '',
         apply: true,
       })

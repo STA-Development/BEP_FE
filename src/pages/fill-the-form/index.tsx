@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { IJobSeekerApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IOrganizationApplicationForm } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { AreaOfSpecialization } from '@components/AreaOfSpecialization'
 import { Container } from '@components/Container'
@@ -26,28 +26,33 @@ import { Button } from '@uiComponents/Button'
 import { jobSeekerValidationSchema } from '@validation/jobSeeker/jobSeeker'
 import { useRouter } from 'next/router'
 
-const defaultValues = {
-  type: type[0]?.name,
-  area: area[0]?.name,
-  educationLevel: educationLevel[0]?.name,
-  experience: experience[0]?.name,
-  schedule: schedule[0]?.name,
-  workplace: workplace[0]?.name,
-  expectedSalary: expectedSalary[0]?.name,
-}
-
 const FillTheForm = () => {
   const [t] = useTranslation()
 
+  const router = useRouter()
+  const path = router.query?.path as string
+
+  const defaultValues = useMemo(
+    () => ({
+      type: path ? type.find((item) => item.name === path) : type[0],
+      area: area[0],
+      educationLevel: educationLevel[0],
+      experience: experience[0],
+      schedule: schedule[0],
+      workplace: workplace[0],
+      expectedSalary: expectedSalary[0],
+    }),
+    [path]
+  )
+
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const { role } = useAppSelector(usersSelector.user)
-  const router = useRouter()
 
   const { isJobSeekerSubmitSuccess, isOrganizationSubmitSuccess } = useAppSelector(
     applicationsSelector.applications
   )
 
-  const methods = useForm({
+  const methods = useForm<IOrganizationApplicationForm>({
     defaultValues,
     mode: 'onChange',
     resolver: yupResolver(jobSeekerValidationSchema),
@@ -55,9 +60,15 @@ const FillTheForm = () => {
 
   const { handleSubmit, reset } = methods
 
-  const onSubmit = (data: IJobSeekerApplicationProps) => {
+  const onSubmit = (data: IOrganizationApplicationForm) => {
     const areaSpecialization = {
-      ...data,
+      type: data?.type?.name,
+      area: data?.area?.name,
+      educationLevel: data?.educationLevel?.name,
+      experience: data?.experience?.name,
+      schedule: data?.schedule?.name,
+      workplace: data?.workplace?.name,
+      expectedSalary: data?.expectedSalary?.name,
     }
 
     if (role === Roles.JobSeeker) {
@@ -65,20 +76,20 @@ const FillTheForm = () => {
     } else if (role === Roles.Organization) {
       dispatch(applicationsMiddleware.organization(areaSpecialization))
     }
-
-    router.push('/profile/applications')
   }
 
   useEffect(() => {
-    if (isJobSeekerSubmitSuccess && role === Roles.JobSeeker) {
-      dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
-    }
+    if (isJobSeekerSubmitSuccess) {
+      if (role === Roles.JobSeeker) {
+        dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
+      } else if (isOrganizationSubmitSuccess && role === Roles.Organization) {
+        dispatch(applicationsMiddleware.resetOrganizationSubmitSuccess())
+      }
 
-    if (isOrganizationSubmitSuccess && role === Roles.Organization) {
-      dispatch(applicationsMiddleware.resetOrganizationSubmitSuccess())
+      router.push('/profile/applications')
+      reset(defaultValues)
     }
-
-    reset(defaultValues)
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isJobSeekerSubmitSuccess, reset, isOrganizationSubmitSuccess, role])
 
   return (

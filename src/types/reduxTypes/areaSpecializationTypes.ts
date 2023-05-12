@@ -1,4 +1,5 @@
 import { OrganizationType } from '@components/Profile/Organization/helper'
+import { IAutoCompleteItem } from '@uiComponents/Autocomplete'
 
 export interface IApplicationsProps {
   applications: IApplications
@@ -24,6 +25,16 @@ export interface IJobSeekerApplicationProps {
   schedule: string
   workplace: string
   expectedSalary: string
+}
+
+export interface IOrganizationApplicationForm {
+  type: IAutoCompleteItem
+  area: IAutoCompleteItem
+  educationLevel: IAutoCompleteItem
+  experience: IAutoCompleteItem
+  schedule: IAutoCompleteItem
+  workplace: IAutoCompleteItem
+  expectedSalary: IAutoCompleteItem
 }
 
 export interface IOrganizationApplicationProps {

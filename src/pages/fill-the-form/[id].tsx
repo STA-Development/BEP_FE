@@ -1,12 +1,21 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { IOrganizationApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IOrganizationApplicationForm } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { AreaOfSpecialization } from '@components/AreaOfSpecialization'
 import { Container } from '@components/Container'
 import { FilTheFormJobReview } from '@components/FilTheFormJobReview'
 import { LeftIcon } from '@components/Icons/LeftIcon'
+import { type } from '@constants/applications'
+import {
+  area,
+  educationLevel,
+  expectedSalary,
+  experience,
+  schedule,
+  workplace,
+} from '@constants/filTheForm'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -31,18 +40,22 @@ const IndividualApplication = () => {
 
   const defaultValues = useMemo(
     () => ({
-      type: individualApplication?.type,
-      area: individualApplication?.area,
-      educationLevel: individualApplication?.educationLevel,
-      experience: individualApplication?.experience,
-      schedule: individualApplication?.schedule,
-      workplace: individualApplication?.workplace,
-      expectedSalary: individualApplication?.expectedSalary,
+      type: type.find((item) => item.name === individualApplication?.type),
+      area: area.find((item) => item.name === individualApplication?.area),
+      educationLevel: educationLevel.find(
+        (item) => item.name === individualApplication?.educationLevel
+      ),
+      experience: experience.find((item) => item.name === individualApplication?.experience),
+      schedule: schedule.find((item) => item.name === individualApplication?.schedule),
+      workplace: workplace.find((item) => item.name === individualApplication?.workplace),
+      expectedSalary: expectedSalary.find(
+        (item) => item.name === individualApplication?.expectedSalary
+      ),
     }),
     [individualApplication]
   )
 
-  const methods = useForm({
+  const methods = useForm<IOrganizationApplicationForm>({
     defaultValues,
     mode: 'onChange',
     resolver: yupResolver(jobSeekerValidationSchema),
@@ -50,9 +63,16 @@ const IndividualApplication = () => {
 
   const { handleSubmit, reset } = methods
 
-  const onSubmit = (data: IOrganizationApplicationProps) => {
+  const onSubmit = (data: IOrganizationApplicationForm) => {
     const areaSpecialization = {
       ...data,
+      type: data?.type?.name,
+      area: data?.area?.name,
+      educationLevel: data?.educationLevel?.name,
+      experience: data?.experience?.name,
+      schedule: data?.schedule?.name,
+      workplace: data?.workplace?.name,
+      expectedSalary: data?.expectedSalary?.name,
       uuid: individualApplication?.uuid,
     }
 
@@ -61,25 +81,32 @@ const IndividualApplication = () => {
     } else if (role === Roles.Organization) {
       dispatch(applicationsMiddleware.upDateOrganizationIndividualApplication(areaSpecialization))
     }
-
-    router.push('/profile/applications')
   }
 
   useEffect(() => {
-    if (isJobSeekerSubmitSuccess && role === Roles.JobSeeker) {
-      dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
-    } else {
-      dispatch(applicationsMiddleware.resetOrganizationSubmitSuccess())
+    if (isJobSeekerSubmitSuccess) {
+      if (role === Roles.JobSeeker) {
+        dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
+      } else {
+        dispatch(applicationsMiddleware.resetOrganizationSubmitSuccess())
+      }
+
+      router.push('/profile/applications')
+      reset(defaultValues)
     }
 
-    reset(defaultValues)
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultValues, isJobSeekerSubmitSuccess, reset, role])
 
   useEffect(() => {
-    if (role === Roles.JobSeeker) {
-      dispatch(applicationsMiddleware.getJobSeekerIndividualApplication(applicationId as string))
-    } else if (role === Roles.Organization) {
-      dispatch(applicationsMiddleware.getOrganizationIndividualApplication(applicationId as string))
+    if (applicationId) {
+      if (role === Roles.JobSeeker) {
+        dispatch(applicationsMiddleware.getJobSeekerIndividualApplication(applicationId as string))
+      } else if (role === Roles.Organization) {
+        dispatch(
+          applicationsMiddleware.getOrganizationIndividualApplication(applicationId as string)
+        )
+      }
     }
   }, [applicationId, role])
 
