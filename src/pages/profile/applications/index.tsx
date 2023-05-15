@@ -76,7 +76,7 @@ export const Applications = () => {
                   Date:<span className="ml-5 font-medium text-primary">{item.postedAt}</span>
                 </p>
                 <p className="mr-10 text-base text-black-light">
-                  Lorem:
+                  Completed:
                   <span className="ml-5 font-medium text-primary">{item.percentCompleted}%</span>
                 </p>
               </div>
