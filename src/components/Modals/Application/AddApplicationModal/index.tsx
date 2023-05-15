@@ -21,7 +21,7 @@ export const AddApplicationModal = () => {
 
   const routeFileTheForm = (path: string) => {
     router.push({
-      pathname: '//fill-the-form',
+      pathname: '/fill-the-form',
       query: { path },
     })
     onClose()

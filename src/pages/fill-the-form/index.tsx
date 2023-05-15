@@ -79,10 +79,10 @@ const FillTheForm = () => {
   }
 
   useEffect(() => {
-    if (isJobSeekerSubmitSuccess) {
+    if (isJobSeekerSubmitSuccess || isOrganizationSubmitSuccess) {
       if (role === Roles.JobSeeker) {
         dispatch(applicationsMiddleware.resetJobSeekerSubmitSuccess())
-      } else if (isOrganizationSubmitSuccess && role === Roles.Organization) {
+      } else if (role === Roles.Organization) {
         dispatch(applicationsMiddleware.resetOrganizationSubmitSuccess())
       }
 

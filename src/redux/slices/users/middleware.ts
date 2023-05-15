@@ -239,9 +239,7 @@ const uploadAvatar = (data: FormData) => async (dispatch: AppDispatch) => {
   dispatch(setIsUserAvatarLoading(true))
 
   try {
-    const response = await API.auth.uploadAvatar(data)
-
-    console.log(response)
+    await API.auth.uploadAvatar(data)
   } catch (err) {
     dispatch(setError((err as IError).response?.data.status.message))
   } finally {
