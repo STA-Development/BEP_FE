@@ -11,7 +11,7 @@ import {
 } from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
-import { Select } from '@uiComponents/Select'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
 interface IAreaOfSpecialization {
   setSelectedIndex: (prev: (prev: number) => number) => void
@@ -27,43 +27,43 @@ export const AreaOfSpecialization = ({ setSelectedIndex }: IAreaOfSpecialization
   return (
     <div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={type}
           fieldName="type"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={area}
           fieldName="area"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={educationLevel}
           fieldName="educationLevel"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={experience}
           fieldName="experience"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={schedule}
           fieldName="schedule"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={workplace}
           fieldName="workplace"
         />
       </div>
       <div className="mb-5 w-full">
-        <Select
+        <AutocompleteField
           items={expectedSalary}
           fieldName="expectedSalary"
         />

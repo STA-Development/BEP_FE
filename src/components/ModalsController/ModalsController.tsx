@@ -2,7 +2,10 @@ import React from 'react'
 import { ModalName } from '@allTypes/modals'
 import { IOpenedModal } from '@allTypes/reduxTypes/viewsStateTypes'
 import { AddApplicationModal } from '@components/Modals/Application/AddApplicationModal'
-import { DeleteApplicationModal } from '@components/Modals/Application/DeleteApplicationModal'
+import {
+  DeleteApplicationModal,
+  IDeleteApplication,
+} from '@components/Modals/Application/DeleteApplicationModal'
 import { useAppSelector } from '@redux/hooks'
 import { viewsSelector } from '@redux/slices/views'
 
@@ -10,8 +13,11 @@ import { viewsSelector } from '@redux/slices/views'
 const getAddApplicationModal = (modal: IOpenedModal<null>) => (
   <AddApplicationModal key={modal.name} />
 )
-const getDeleteApplicationModal = (modal: IOpenedModal<null>) => (
-  <DeleteApplicationModal key={modal.name} />
+const getDeleteApplicationModal = (modal: IOpenedModal<IDeleteApplication>) => (
+  <DeleteApplicationModal
+    key={modal.name}
+    {...modal.props}
+  />
 )
 
 export const ModalsController = () => {

@@ -33,8 +33,8 @@ export interface IEducationalInstitutesParams {
 }
 
 export interface IFilters {
-  key: string
-  value: string
+  key?: string
+  value?: string
 }
 
 export interface IProvinces {

@@ -53,7 +53,7 @@ const getProvince = () => async (dispatch: AppDispatch) => {
 }
 
 const setEIFilters =
-  (filters: { page: number; filters: IFilters[] }) => async (dispatch: AppDispatch) => {
+  (filters: { page?: number; filters?: IFilters[] }) => async (dispatch: AppDispatch) => {
     try {
       dispatch(setFilters(filters))
     } catch (error) {

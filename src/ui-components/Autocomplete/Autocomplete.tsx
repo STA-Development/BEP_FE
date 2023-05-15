@@ -4,7 +4,7 @@ import { Combobox, Transition } from '@headlessui/react'
 import clsxMerge from '@lib/clsxm'
 
 export interface IAutoCompleteItem {
-  id: string
+  id: string | number
   name: string
 }
 
