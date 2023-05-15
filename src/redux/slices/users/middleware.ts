@@ -31,6 +31,7 @@ const {
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
   setIsRoleSelectLoading,
+  setIsUserAvatarLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -221,13 +222,35 @@ const getUser = () => async (dispatch: AppDispatch) => {
 }
 
 const getProfile = () => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
+
   try {
     const response = await API.auth.getProfile()
 
     dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
   } catch (err) {
     dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
   }
+}
+
+const uploadAvatar = (data: FormData) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
+
+  try {
+    const response = await API.auth.uploadAvatar(data)
+
+    console.log(response)
+  } catch (err) {
+    dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
+  }
+}
+
+const updateAvatarLoading = (isLoading: boolean) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(isLoading))
 }
 
 const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
@@ -274,4 +297,6 @@ export default {
   resetPassword,
   clearError,
   changeLanguage,
+  uploadAvatar,
+  updateAvatarLoading,
 }

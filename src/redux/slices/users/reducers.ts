@@ -47,6 +47,9 @@ const reducers = createReducer({
   setIsRoleSelectLoading(state, action: IAction<boolean>) {
     state.isRoleSelectLoading = action.payload
   },
+  setIsUserAvatarLoading(state, action: IAction<boolean>) {
+    state.isUserAvatarLoading = action.payload
+  },
 })
 
 export default reducers

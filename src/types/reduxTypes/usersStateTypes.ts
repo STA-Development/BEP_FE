@@ -4,6 +4,7 @@ export interface IUserProps {
   user: IUser
   isSignInLoading: boolean
   isSignUpLoading: boolean
+  isUserAvatarLoading: boolean
   isLogOutLoading: boolean
   isAuthenticated: boolean
   isRoleSelectSuccessful: boolean

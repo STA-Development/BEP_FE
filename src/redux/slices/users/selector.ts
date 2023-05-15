@@ -11,6 +11,7 @@ export const isUpdateProfileLoading = createSelector(
   (state) => state.isUpdateProfileLoading
 )
 export const isLogOutLoading = createSelector([selector], (state) => state.isLogOutLoading)
+export const isUserAvatarLoading = createSelector([selector], (state) => state.isUserAvatarLoading)
 export const isResetPasswordLoading = createSelector(
   [selector],
   (state) => state.isResetPasswordLoading
@@ -27,6 +28,7 @@ export const selectedIndex = createSelector([selector], (state) => state.selecte
 export const otp = createSelector([selector], (state) => state.otp)
 export const selectedLanguage = createSelector([selector], (state) => state.language)
 export const isRoleSelectLoading = createSelector([selector], (state) => state.isRoleSelectLoading)
+export const userAvatar = createSelector([selector], (state) => state.user.imageURL)
 
 export default {
   user,
@@ -44,4 +46,6 @@ export default {
   otp,
   selectedLanguage,
   isRoleSelectLoading,
+  isUserAvatarLoading,
+  userAvatar,
 }
