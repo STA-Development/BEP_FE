@@ -13,8 +13,8 @@ import {
   educationalInstitutesMiddleware,
   educationalInstitutesSelector,
 } from '@redux/slices/educational-instutions'
-import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
 const Filters = () => {
   const [t] = useTranslation()
@@ -63,18 +63,18 @@ const Filters = () => {
             </p>
           </div>
           <div className="xl:border">
-            <Autocomplete
+            <AutocompleteField
               items={filterTypes}
               fieldName="type"
-              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TYPE)}
+              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TYPE) as string}
               inputClasses="border-none pl-0 xl:px-5"
             />
           </div>
           <div className="xl:border">
-            <Autocomplete
+            <AutocompleteField
               fieldName="province"
               items={filterProvinces}
-              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_PROVINCE)}
+              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_PROVINCE) as string}
               inputClasses="border-none pl-0 xl:pl-5 text-black"
             />
           </div>

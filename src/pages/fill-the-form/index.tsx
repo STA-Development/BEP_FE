@@ -5,8 +5,8 @@ import { Container } from '@components/Container'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
-import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 import { useRouter } from 'next/router'
 
 interface Person {
@@ -69,21 +69,21 @@ const FillTheForm = () => {
                   </div>
 
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_UNIVERSITY) as string}
                     />
                   </div>
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_DEGREE) as string}
                     />
                   </div>
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_FACULTY) as string}
@@ -104,7 +104,7 @@ const FillTheForm = () => {
                   </div>
 
                   <div className="mb-5 w-full">
-                    <Autocomplete
+                    <AutocompleteField
                       fieldName="people"
                       items={people}
                       placeholder={t(Translation.PAGE_FILL_THE_FORM_INPUT_COUNTRY) as string}

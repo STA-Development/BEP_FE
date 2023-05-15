@@ -1,4 +1,4 @@
-import { IJobSeekerProfileProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -26,7 +26,7 @@ const {
   setIsResetPasswordLoading,
   setUser,
   setLanguage,
-  setIsJobSeekerUpdateLoading,
+  setisUpdateProfileLoading,
   setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
@@ -83,7 +83,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
         address: '',
         phone: '',
         employeeQuantity: 0,
-        organizationType: '',
+        organizationType: null,
         imageURL: '',
         role: Roles.NOROLE,
       })
@@ -230,17 +230,30 @@ const getProfile = () => async (dispatch: AppDispatch) => {
   }
 }
 
-const updateJobSeekerProfile =
-  (params: IJobSeekerProfileProps) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(setIsJobSeekerUpdateLoading(true))
+const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(true))
 
-      await API.jobSeeker.updateJobSeekerProfile(params)
+    await API.jobSeeker.updateJobSeekerProfile(params)
+    dispatch(usersMiddleware.getUser())
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
+const updateOrganizationProfile =
+  (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setisUpdateProfileLoading(true))
+
+      await API.jobSeeker.updateOrganizationProfile(params)
       dispatch(usersMiddleware.getUser())
     } catch (error) {
       dispatch(setError((error as IError).response?.data.status.message))
     } finally {
-      dispatch(setIsJobSeekerUpdateLoading(false))
+      dispatch(setisUpdateProfileLoading(false))
     }
   }
 
@@ -253,6 +266,7 @@ export default {
   updateJobSeekerProfile,
   getUser,
   getProfile,
+  updateOrganizationProfile,
   forgotPassword,
   verifyOtp,
   register,

@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { EmployeeQuantity } from '@components/Profile/Organization/Fields/EmployeeQuantity'
+import { OrganizationType } from '@components/Profile/Organization/Fields/OrganizationType'
 import {
   defaultValues,
-  IJobSeekerProfile,
-  IJobSeekerProfileForm,
-} from '@components/Profile/JobSeeker/helper'
+  IOrganizationProfile,
+  IOrganizationProfileForm,
+} from '@components/Profile/Organization/helper'
 import { Address } from '@components/Profile/shared/Fields/Address'
 import { Email } from '@components/Profile/shared/Fields/Email'
 import { FullName } from '@components/Profile/shared/Fields/FullName'
@@ -13,25 +15,37 @@ import { Phone } from '@components/Profile/shared/Fields/Phone'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
-import { jobSeekerValidationSchema } from '@validation/profile/jobSeeker'
+import { organizationValidationSchema } from '@validation/profile/organization'
 
-export const JobSeekerProfile = () => {
-  const { name, email, phone, address } = useAppSelector(usersSelector.user)
-  const values = useMemo<IJobSeekerProfile>(
-    () => ({ name, email, phone, password: '********', address }),
-    [name, email, phone, address]
+export const OrganizationProfile = () => {
+  const { name, email, phone, organizationType, employeeQuantity, address } = useAppSelector(
+    usersSelector.user
   )
-  const methods = useForm({
+  const values = useMemo<IOrganizationProfile>(
+    () => ({
+      name,
+      email,
+      phone,
+      password: '********',
+      organizationType,
+      employeeQuantity,
+      address,
+    }),
+    [name, email, phone, organizationType, employeeQuantity, address]
+  )
+  const methods = useForm<IOrganizationProfileForm>({
     defaultValues: defaultValues(values),
     mode: 'onSubmit',
-    resolver: yupResolver(jobSeekerValidationSchema),
+    resolver: yupResolver(organizationValidationSchema),
   })
 
-  const onSubmit = (data: IJobSeekerProfileForm) => {
+  const onSubmit = (data: IOrganizationProfileForm) => {
     const field = Object.entries(data).find((e) => e[1].active)
-    const params = { keyValuePair: { key: field?.[0], value: field?.[1].value } }
+    const params = {
+      keyValuePair: { key: field?.[0], value: field?.[1].value?.name ?? field?.[1].value },
+    }
 
-    dispatch(usersMiddleware.updateJobSeekerProfile(params as IProfileUpdateProps))
+    dispatch(usersMiddleware.updateOrganizationProfile(params as IProfileUpdateProps))
   }
 
   useEffect(() => {
@@ -52,6 +66,8 @@ export const JobSeekerProfile = () => {
           <Email />
           <Phone />
           <Address />
+          <EmployeeQuantity />
+          <OrganizationType />
         </table>
       </form>
     </FormProvider>
