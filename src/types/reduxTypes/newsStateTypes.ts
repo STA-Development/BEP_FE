@@ -12,4 +12,11 @@ export interface INews {
   isNewsListLoading?: boolean
   pageSize: number
   totalItems: number
+  isCreateNewsSubmitSuccess: boolean
+}
+
+export interface ICreateNewsProps {
+  header: string
+  paragraph: string
+  imageUrl: FileList | File | null
 }

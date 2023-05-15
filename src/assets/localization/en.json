@@ -1,6 +1,9 @@
 {
   "about.us.page.desc": "Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis.",
   "about.us.page.title": "Who are we?",
+  "create.news.header": "Header is required",
+  "create.news.image": "Image is required",
+  "create.news.paragraph": "Paragraph is required",
   "footer.contacts": "Contacts",
   "footer.contacts.address.office": "office",
   "footer.contacts.address.ra": "RA",

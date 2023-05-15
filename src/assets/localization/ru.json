@@ -46,5 +46,8 @@
   "page.fill.the.form.job.two.workplace": "Job Details:",
   "page.fill.the.form.job.two.details.button": "Change",
   "page.fill.the.form.job.submit": "Submit",
-  "page.fill.the.form.job.tabs": "Tab"
+  "page.fill.the.form.job.tabs": "Tab",
+  "create.news.header": "Վերնագիրն անհրաժեշտ է",
+  "create.news.paragraph": "Պարբերությունը պարտադիր է",
+  "create.news.image": "Պատկերը պարտադիր է"
 }

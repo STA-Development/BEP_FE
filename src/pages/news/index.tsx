@@ -65,6 +65,7 @@ const NewsList = () => {
         title={t(Translation.PAGE_NEWS_MAIN_TITLE)}
         paths={['Home', 'News']}
         description={t(Translation.PAGE_NEWS_MAIN_DESCRIPTION) as string}
+        route="/news/create-news"
       />
       {isNewsListLoading && !newsList?.length ? (
         <Loading />

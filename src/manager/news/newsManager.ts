@@ -1,3 +1,4 @@
+import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 import { IIndividualNewsResponse, INewsParams, INewsResponse } from '@axios/news/newsManagerTypes'
@@ -18,6 +19,19 @@ const newsManager = {
   getIndividualNews(id: string) {
     return axiosInstance.get<IIndividualNewsResponse, IAxiosResponse<IIndividualNewsResponse>>(
       `/core/v1/${baseURL}/${id}`
+    )
+  },
+  createNews(formData: ICreateNewsProps) {
+    return axiosInstance.post<ICreateNewsProps, IAxiosResponse<ICreateNewsProps>>(
+      `/core/v1/${baseURL}`,
+      {
+        ...formData,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
     )
   },
 }

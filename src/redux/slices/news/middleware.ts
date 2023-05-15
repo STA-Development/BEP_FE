@@ -1,3 +1,4 @@
+import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import store, { AppDispatch } from '@redux/store'
@@ -12,6 +13,7 @@ const {
   setTotalItems,
   setPageSize,
   setNewsList,
+  setCreateNewsSubmitSuccess,
 } = slice.actions
 
 const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
@@ -56,14 +58,32 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const createNews = (formData: ICreateNewsProps) => async (dispatch: AppDispatch) => {
+  try {
+    await API.news.createNews(formData)
+
+    dispatch(setCreateNewsSubmitSuccess(true))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status?.message))
+  }
+}
+
 const clearNewsList = () => async (dispatch: AppDispatch) => {
   dispatch(setNewsList([]))
   dispatch(setPageSize(0))
   dispatch(setTotalItems(0))
 }
 
+const resetCreateNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setCreateNewsSubmitSuccess(false))
+}
+
 export default {
   getNewsList,
   clearNewsList,
   getIndividualNewsById,
+  createNews,
+  resetCreateNewsSubmitSuccess,
 }

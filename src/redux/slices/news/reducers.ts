@@ -28,6 +28,9 @@ const reducers = createReducer({
   setTotalItems(state, action: IAction<number>) {
     state.news.totalItems = action.payload
   },
+  setCreateNewsSubmitSuccess(state, action: IAction<boolean>) {
+    state.news.isCreateNewsSubmitSuccess = action.payload
+  },
 })
 
 export default reducers

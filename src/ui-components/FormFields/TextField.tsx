@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, RefObject } from 'react'
 import { useController } from 'react-hook-form'
-import { Input } from '@uiComponents/Input'
+import { ImageInput, Input } from '@uiComponents/Input'
 
 export interface ITextFieldProps {
   fieldName: string
@@ -10,6 +10,8 @@ export interface ITextFieldProps {
   label?: string
   id?: string
   className?: string
+  inputRef?: RefObject<HTMLInputElement>
+  handleFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const TextField: FC<ITextFieldProps> = ({
@@ -20,20 +22,38 @@ const TextField: FC<ITextFieldProps> = ({
   label,
   id,
   className,
+  inputRef,
+  handleFileChange,
 }) => {
   const { field, fieldState } = useController({ name: fieldName })
 
   return (
-    <Input
-      {...field}
-      placeholder={placeholder}
-      className={className}
-      label={label}
-      id={id}
-      type={type}
-      rows={rows}
-      error={fieldState.error ? fieldState.error.message : null}
-    />
+    <div>
+      {type === 'file' ? (
+        <ImageInput
+          {...field}
+          inputRef={inputRef}
+          type="file"
+          onChange={(event) => {
+            if (handleFileChange) {
+              handleFileChange(event)
+              field.onChange(event.target.files && event.target.files?.[0])
+            }
+          }}
+        />
+      ) : (
+        <Input
+          {...field}
+          placeholder={placeholder}
+          className={className}
+          label={label}
+          id={id}
+          type={type}
+          rows={rows}
+          error={fieldState.error ? fieldState.error.message : null}
+        />
+      )}
+    </div>
   )
 }
 

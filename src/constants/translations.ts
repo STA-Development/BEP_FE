@@ -3,6 +3,9 @@
 export enum Translation {
   ABOUT_US_PAGE_DESC = 'about.us.page.desc',
   ABOUT_US_PAGE_TITLE = 'about.us.page.title',
+  CREATE_NEWS_HEADER = 'create.news.header',
+  CREATE_NEWS_IMAGE = 'create.news.image',
+  CREATE_NEWS_PARAGRAPH = 'create.news.paragraph',
   FOOTER_CONTACTS = 'footer.contacts',
   FOOTER_CONTACTS_ADDRESS_OFFICE = 'footer.contacts.address.office',
   FOOTER_CONTACTS_ADDRESS_RA = 'footer.contacts.address.ra',

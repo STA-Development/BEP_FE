@@ -7,6 +7,7 @@ export const getInitialState = (): INewsProps => ({
     isNewsListLoading: false,
     pageSize: 0,
     totalItems: 0,
+    isCreateNewsSubmitSuccess: false,
   },
   individualNews: null,
   isIndividualNewsLoading: false,

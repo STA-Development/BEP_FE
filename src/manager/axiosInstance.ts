@@ -17,14 +17,21 @@ class RequestManager {
     axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
       const requestConfig = config
 
-      const idToken = localStorage.getItem('accessToken')
+      const token = localStorage.getItem('accessToken')
 
-      // Put all headers here
-      requestConfig.headers.set({
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${idToken}`,
-      })
+      if (config.headers['Content-Type'] === 'multipart/form-data') {
+        requestConfig.headers.set({
+          'Content-Type': 'multipart/form-data',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        })
+      } else {
+        requestConfig.headers.set({
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        })
+      }
 
       return requestConfig
     })
