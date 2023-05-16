@@ -35,15 +35,12 @@ export const Header = () => {
 
   return (
     <div className="sticky top-0 z-40">
-      <Disclosure
-        as="nav"
-        className="bg-white"
-      >
+      <Disclosure as="nav">
         {({ open }) => (
           <>
             <div className="absolute h-[120px] w-full bg-[url('/wave1.svg')] bg-cover bg-center bg-no-repeat" />
-            <Container>
-              <div className="relative flex h-23 items-center justify-between">
+            <Container className={open ? 'bg-white' : ''}>
+              <div className="relative flex h-[91px] items-center justify-between pt-5">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-primary xl:hidden">
                     <span className="sr-only">Open main menu</span>
@@ -106,7 +103,7 @@ export const Header = () => {
                 </div>
               </div>
             </Container>
-            <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 xl:hidden">
+            <Disclosure.Panel className="h-[calc(100vh-92px)] bg-white px-5 py-10 xl:hidden">
               {({ close }) => (
                 <div>
                   <div className="mb-[120px] space-y-5">
@@ -121,16 +118,18 @@ export const Header = () => {
                       </Link>
                     ))}
                   </div>
-                  <Disclosure.Button className="w-full">
-                    <Button
-                      size="lg"
-                      disabled={isLogOutLoading}
-                      onClick={handleLogOut}
-                      LeftIcon={LogOutIcon}
-                    >
-                      {t(Translation.NAVBAR_LOGOUT)}
-                    </Button>
-                  </Disclosure.Button>
+                  {isAuthenticated ? (
+                    <Disclosure.Button className="w-full">
+                      <Button
+                        size="lg"
+                        disabled={isLogOutLoading}
+                        onClick={handleLogOut}
+                        LeftIcon={LogOutIcon}
+                      >
+                        {t(Translation.NAVBAR_LOGOUT)}
+                      </Button>
+                    </Disclosure.Button>
+                  ) : null}
                 </div>
               )}
             </Disclosure.Panel>
