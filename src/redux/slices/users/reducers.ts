@@ -35,8 +35,8 @@ const reducers = createReducer({
   setIsResetPasswordLoading(state, action: IAction<boolean>) {
     state.isResetPasswordLoading = action.payload
   },
-  setIsJobSeekerUpdateLoading(state, action: IAction<boolean>) {
-    state.isJobSeekerUpdateLoading = action.payload
+  setisUpdateProfileLoading(state, action: IAction<boolean>) {
+    state.isUpdateProfileLoading = action.payload
   },
   setUser(state, action: IAction<IUser>) {
     state.user = action.payload
@@ -46,6 +46,9 @@ const reducers = createReducer({
   },
   setIsRoleSelectLoading(state, action: IAction<boolean>) {
     state.isRoleSelectLoading = action.payload
+  },
+  setIsUserAvatarLoading(state, action: IAction<boolean>) {
+    state.isUserAvatarLoading = action.payload
   },
 })
 

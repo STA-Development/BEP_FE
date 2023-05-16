@@ -62,6 +62,13 @@ const authManager = {
   getProfile() {
     return axiosInstance.get<IProfile, IAxiosResponse<IProfile>>(`${baseURL}/v1/auth/profile`)
   },
+  uploadAvatar(data: FormData) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/user/image`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
 }
 
 export default authManager

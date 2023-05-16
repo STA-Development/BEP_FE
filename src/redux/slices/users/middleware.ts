@@ -1,4 +1,4 @@
-import { IJobSeekerProfileProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -26,11 +26,12 @@ const {
   setIsResetPasswordLoading,
   setUser,
   setLanguage,
-  setIsJobSeekerUpdateLoading,
+  setisUpdateProfileLoading,
   setOtp,
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
   setIsRoleSelectLoading,
+  setIsUserAvatarLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -96,7 +97,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
         address: '',
         phone: '',
         employeeQuantity: 0,
-        organizationType: '',
+        organizationType: null,
         imageURL: '',
         role: Roles.NOROLE,
       })
@@ -234,26 +235,59 @@ const getUser = () => async (dispatch: AppDispatch) => {
 }
 
 const getProfile = () => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
+
   try {
     const response = await API.auth.getProfile()
 
     dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
   } catch (err) {
     dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
   }
 }
 
-const updateJobSeekerProfile =
-  (params: IJobSeekerProfileProps) => async (dispatch: AppDispatch) => {
-    try {
-      dispatch(setIsJobSeekerUpdateLoading(true))
+const uploadAvatar = (data: FormData) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
 
-      await API.jobSeeker.updateJobSeekerProfile(params)
+  try {
+    await API.auth.uploadAvatar(data)
+  } catch (err) {
+    dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
+  }
+}
+
+const updateAvatarLoading = (isLoading: boolean) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(isLoading))
+}
+
+const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(true))
+
+    await API.jobSeeker.updateJobSeekerProfile(params)
+    dispatch(usersMiddleware.getUser())
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data.status.message))
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
+const updateOrganizationProfile =
+  (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setisUpdateProfileLoading(true))
+
+      await API.jobSeeker.updateOrganizationProfile(params)
       dispatch(usersMiddleware.getUser())
     } catch (error) {
       dispatch(setError((error as IError).response?.data.status.message))
     } finally {
-      dispatch(setIsJobSeekerUpdateLoading(false))
+      dispatch(setisUpdateProfileLoading(false))
     }
   }
 
@@ -266,6 +300,7 @@ export default {
   updateJobSeekerProfile,
   getUser,
   getProfile,
+  updateOrganizationProfile,
   forgotPassword,
   verifyOtp,
   register,
@@ -273,5 +308,7 @@ export default {
   resetPassword,
   clearError,
   changeLanguage,
+  uploadAvatar,
+  updateAvatarLoading,
   getAccessTokenWithRefreshToken,
 }

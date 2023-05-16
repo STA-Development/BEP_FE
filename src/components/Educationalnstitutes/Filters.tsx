@@ -13,8 +13,8 @@ import {
   educationalInstitutesMiddleware,
   educationalInstitutesSelector,
 } from '@redux/slices/educational-instutions'
-import { Autocomplete } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
 const Filters = () => {
   const [t] = useTranslation()
@@ -56,25 +56,25 @@ const Filters = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="inline-grid w-full grid-cols-1 content-center xl:grid-cols-4">
-          <div className="rounded-l-[10px] py-2.5 text-start text-base xl:border">
+        <div className="flex w-full flex-col items-center xl:flex-row">
+          <div className="min-w-[270px] rounded-l-[10px] py-2.5 text-start text-base xl:border">
             <p className="flex justify-start xl:px-5">
               {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TITLE)}
             </p>
           </div>
-          <div className="xl:border">
-            <Autocomplete
+          <div className="min-w-[270px] xl:border">
+            <AutocompleteField
               items={filterTypes}
               fieldName="type"
-              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TYPE)}
+              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TYPE) as string}
               inputClasses="border-none pl-0 xl:px-5"
             />
           </div>
-          <div className="xl:border">
-            <Autocomplete
+          <div className="min-w-[270px] xl:border">
+            <AutocompleteField
               fieldName="province"
               items={filterProvinces}
-              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_PROVINCE)}
+              placeholder={t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_PROVINCE) as string}
               inputClasses="border-none pl-0 xl:pl-5 text-black"
             />
           </div>

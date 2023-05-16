@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { Container } from '@components/Container'
 import Header from '@components/EducationalInstitutesHeader'
 import { LocationIcon } from '@components/Icons'
 import { MailIcon } from '@components/Icons/MailIcon'
@@ -64,16 +65,13 @@ const SearchPage = () => {
   }, [edInstitutesList, filters, filters.page, pageSize, totalItems])
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <Container>
       <Header />
       {isEducationalInstitutesLoading && !edInstitutesList?.length ? (
         <Loading />
       ) : (
         edInstitutesList.map((institute: IEdInstitutesResponse) => (
-          <div
-            className="my-8 flex w-3/4 flex-col flex-wrap items-center justify-center
-       overflow-hidden border-2 border-[#EAF0F3] hover:border-[#326789] xl:flex-row"
-          >
+          <div className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row">
             <div className="flex h-80 w-full flex-row items-center justify-center xl:w-1/3 ">
               <div className="flex h-full w-5/6 items-center justify-center rounded-md xl:w-3/4">
                 <Image
@@ -103,21 +101,21 @@ const SearchPage = () => {
             <div className="hidden w-full flex-col flex-wrap items-center py-16 text-center xl:flex xl:w-1/3">
               <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">
                 <PhoneIcon />
-                {institute.phone}
+                <p className="pl-2.5">{institute.phone}</p>
               </div>
               <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">
                 <MailIcon />
-                <p>{institute.email}</p>
+                <p className="pl-2.5">{institute.email}</p>
               </div>
               <div className="flex w-full items-center justify-start pt-3 text-sm font-normal">
                 <LocationIcon />
-                {institute.address}
+                <p className="pl-2.5">{institute.address}</p>
               </div>
             </div>
           </div>
         ))
       )}
-    </div>
+    </Container>
   )
 }
 

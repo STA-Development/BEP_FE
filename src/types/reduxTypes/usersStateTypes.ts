@@ -1,11 +1,14 @@
+import { OrganizationType } from '@components/Profile/Organization/helper'
+
 export interface IUserProps {
   user: IUser
   isSignInLoading: boolean
   isSignUpLoading: boolean
+  isUserAvatarLoading: boolean
   isLogOutLoading: boolean
   isAuthenticated: boolean
   isRoleSelectSuccessful: boolean
-  isJobSeekerUpdateLoading: boolean
+  isUpdateProfileLoading: boolean
   isResetPasswordLoading: boolean
   error: string | null
   isRoleSelectLoading: boolean
@@ -26,7 +29,7 @@ export interface IUser {
   imageURL: string
   email: string
   employeeQuantity: number
-  organizationType: string
+  organizationType: keyof typeof OrganizationType | null
 }
 
 export enum Roles {

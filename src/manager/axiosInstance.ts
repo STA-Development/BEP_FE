@@ -23,9 +23,13 @@ class RequestManager {
 
       const idToken = localStorage.getItem('accessToken')
 
-      // Put all headers here
+      if (!requestConfig.headers.has('Content-Type')) {
+        requestConfig.headers.set({
+          'Content-Type': 'application/json',
+        })
+      }
+
       requestConfig.headers.set({
-        'Content-Type': 'application/json',
         Accept: 'application/json',
         Authorization: `Bearer ${idToken}`,
       })
