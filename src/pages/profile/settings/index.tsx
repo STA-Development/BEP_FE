@@ -36,7 +36,7 @@ export const Settings = () => {
         <div className="relative h-[227px] w-[227px] rounded bg-gray-thin">
           {avatarImage || userAvatar ? (
             <Image
-              className="order-last m-0 p-0"
+              className="order-last m-0 rounded object-cover p-0"
               src={userAvatar ? URL.createObjectURL(userAvatar) : avatarImage}
               loader={() => avatarImage ?? ''}
               alt="picture"

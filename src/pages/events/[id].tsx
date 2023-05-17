@@ -35,9 +35,9 @@ const IndividualEventPage = () => {
         <Loading />
       ) : (
         <div className="pt-5 xl:pt-10">
-          <div className="justify-between xl:flex">
+          <div className="justify-between xl:flex ">
             <Image
-              className="order-last xl:mb-20 xl:ml-30"
+              className="order-last min-h-[300px] object-cover xl:mb-20 xl:ml-30"
               src={singleEvent?.imageURL as string}
               loader={() => singleEvent?.imageURL ?? ''}
               width={500}

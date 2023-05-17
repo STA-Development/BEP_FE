@@ -39,6 +39,10 @@ const SearchPage = () => {
   }
 
   useEffect(() => {
+    dispatch(educationalInstitutesMiddleware.clearInstitutesList())
+  }, [])
+
+  useEffect(() => {
     dispatch(educationalInstitutesMiddleware.getEducationalInstitutes(filters))
   }, [filters])
 
