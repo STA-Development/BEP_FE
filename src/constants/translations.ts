@@ -3,6 +3,7 @@
 export enum Translation {
   ABOUT_US_PAGE_DESC = 'about.us.page.desc',
   ABOUT_US_PAGE_TITLE = 'about.us.page.title',
+  FOOTER_CONTACT_US = 'footer.contact.us',
   FOOTER_CONTACTS = 'footer.contacts',
   FOOTER_CONTACTS_ADDRESS_OFFICE = 'footer.contacts.address.office',
   FOOTER_CONTACTS_ADDRESS_RA = 'footer.contacts.address.ra',
@@ -36,6 +37,7 @@ export enum Translation {
   NAVBAR_LANGUAGE = 'navbar.language',
   NAVBAR_LOGIN = 'navbar.login',
   NAVBAR_LOGOUT = 'navbar.logout',
+  NAVBAR_MONITORING_SYSTEMS = 'navbar.monitoring.systems',
   NAVBAR_REGISTER = 'navbar.register',
   PAGE_ABOUT_US_DESCRIPTION = 'page.about.us.description',
   PAGE_ABOUT_US_TITLE = 'page.about.us.title',
