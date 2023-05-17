@@ -59,6 +59,7 @@ export const Applications = () => {
     }
   }, [role])
 
+  // TODO: add clone and deactivate
   return (
     <div>
       {loading ? (
@@ -82,12 +83,6 @@ export const Applications = () => {
               </div>
               <div className="flex justify-between">
                 <div className="flex gap-10">
-                  <Button
-                    size="bs"
-                    variant="outlined"
-                  >
-                    {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DEACTIVATE)}
-                  </Button>
                   <Button
                     size="bs"
                     variant="contained"
