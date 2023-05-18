@@ -47,7 +47,6 @@ export interface IRegisterData {
   email: string
   password: string
   passwordConfirmation: string
-  remember: boolean
 }
 
 export interface IProfile {
