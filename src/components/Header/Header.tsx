@@ -20,7 +20,11 @@ export const Header = () => {
       href: '/educational-institutes',
       current: false,
     },
-    { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
+    {
+      name: t(Translation.NAVBAR_MONITORING_SYSTEMS),
+      href: '/profile/monitoring-systems',
+      current: false,
+    },
   ]
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
