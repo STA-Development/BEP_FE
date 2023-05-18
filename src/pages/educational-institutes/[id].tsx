@@ -117,10 +117,6 @@ const EducationalInstitutePage = () => {
                         <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.phone}</p>
                       </div>
                       <div className="flex w-full flex-row items-center py-2">
-                        <PhoneIcon />{' '}
-                        <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.phone}</p>
-                      </div>
-                      <div className="flex w-full flex-row items-center py-2">
                         <MailIcon />{' '}
                         <p className="px-2 text-lg xl:text-sm">{individualEduInstitutes?.email}</p>
                       </div>

@@ -7,8 +7,8 @@ export const LocationIcon: FC<IconProps> = ({ fill = 'fill-black-light', classNa
 
   return (
     <svg
-      width="20"
-      height="20"
+      width="30"
+      height="30"
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
