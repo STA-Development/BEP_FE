@@ -11,9 +11,16 @@ export interface IPageHeaderProps {
   title: string
   description?: string
   route?: string
+  buttonTitle?: string
 }
 
-export const PageHeader = ({ title, description, route, paths = [] }: IPageHeaderProps) => {
+export const PageHeader = ({
+  title,
+  description,
+  route,
+  paths = [],
+  buttonTitle,
+}: IPageHeaderProps) => {
   const { role } = useAppSelector(usersSelector.user)
 
   const router = useRouter()
@@ -33,7 +40,7 @@ export const PageHeader = ({ title, description, route, paths = [] }: IPageHeade
                   variant="outlined"
                   onClick={() => router.push(`${route}`)}
                 >
-                  Add News
+                  {buttonTitle}
                 </Button>
               </div>
             ) : (

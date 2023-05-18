@@ -19,7 +19,7 @@ const reducers = createReducer({
     state.news.isNewsListLoading = action.payload
   },
   setIndividualNewsLoading(state, action: IAction<boolean>) {
-    state.isIndividualNewsLoading = action.payload
+    state.news.isIndividualNewsLoading = action.payload
   },
   setPageSize(state, action: IAction<number>) {
     state.news.pageSize = action.payload
@@ -30,6 +30,9 @@ const reducers = createReducer({
   },
   setCreateNewsSubmitSuccess(state, action: IAction<boolean>) {
     state.news.isCreateNewsSubmitSuccess = action.payload
+  },
+  setChangeNewsSubmitSuccess(state, action: IAction<boolean>) {
+    state.news.isChangeNewsSubmitSuccess = action.payload
   },
 })
 

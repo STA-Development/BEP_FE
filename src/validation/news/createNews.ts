@@ -15,3 +15,17 @@ export const createNewsValidationSchema = object().shape({
     })
     .required('Image is required'),
 })
+
+export const changeNewsValidationSchema = object({
+  header: string().required(),
+  paragraph: string().required(),
+  imageUrl: mixed()
+    .test('required', 'You need to provide a file', (file) => {
+      if (file) {
+        return true
+      }
+
+      return false
+    })
+    .required(),
+})

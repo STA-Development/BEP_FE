@@ -17,6 +17,7 @@ export interface InputType {
   value?: string
   onChange?: (value: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void
   className?: string
+  defaultValue?: string
 }
 
 export interface InputTypeCheckbox {
@@ -28,7 +29,6 @@ export interface InputTypeCheckbox {
 export interface IImageInputProps {
   inputRef?: LegacyRef<HTMLInputElement>
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-
   type: string
 
   error?: string | null
@@ -48,6 +48,7 @@ export const Input = React.forwardRef(
       value,
       onChange,
       className,
+      defaultValue,
     }: InputType,
     ref: LegacyRef<HTMLInputElement>
   ) => {
@@ -90,6 +91,7 @@ export const Input = React.forwardRef(
               <textarea
                 id={id}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 value={value}
                 className={style}
                 rows={rows}
@@ -102,6 +104,7 @@ export const Input = React.forwardRef(
               <input
                 type={inputType ? 'text' : type}
                 placeholder={placeholder}
+                defaultValue={defaultValue}
                 value={value}
                 id={id}
                 className={className ?? style}

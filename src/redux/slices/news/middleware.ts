@@ -1,4 +1,4 @@
-import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
+import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import store, { AppDispatch } from '@redux/store'
@@ -14,6 +14,7 @@ const {
   setPageSize,
   setNewsList,
   setCreateNewsSubmitSuccess,
+  setChangeNewsSubmitSuccess,
 } = slice.actions
 
 const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
@@ -70,6 +71,18 @@ const createNews = (formData: ICreateNewsProps) => async (dispatch: AppDispatch)
   }
 }
 
+const changeNews = (formData: IChangeNewsFormProps) => async (dispatch: AppDispatch) => {
+  try {
+    await API.news.changeNews(formData)
+
+    dispatch(setChangeNewsSubmitSuccess(true))
+
+    dispatch(setError(null))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status?.message))
+  }
+}
+
 const clearNewsList = () => async (dispatch: AppDispatch) => {
   dispatch(setNewsList([]))
   dispatch(setPageSize(0))
@@ -80,10 +93,16 @@ const resetCreateNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setCreateNewsSubmitSuccess(false))
 }
 
+const resetChangeNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeNewsSubmitSuccess(false))
+}
+
 export default {
   getNewsList,
   clearNewsList,
   getIndividualNewsById,
   createNews,
+  changeNews,
   resetCreateNewsSubmitSuccess,
+  resetChangeNewsSubmitSuccess,
 }

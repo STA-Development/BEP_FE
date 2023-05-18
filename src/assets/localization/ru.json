@@ -49,5 +49,11 @@
   "page.fill.the.form.job.tabs": "Tab",
   "create.news.header": "Վերնագիրն անհրաժեշտ է",
   "create.news.paragraph": "Պարբերությունը պարտադիր է",
-  "create.news.image": "Պատկերը պարտադիր է"
+  "create.news.image": "Պատկերը պարտադիր է",
+  "page.news.add.news": "Add News",
+  "page.news.change.news": "Change News",
+  "page.news.upload.image": "Upload Image",
+  "page.news.header": "Header",
+  "page.news.paragraph": "Paragraph",
+  "page.news.submit": "Submit"
 }

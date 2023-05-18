@@ -1,4 +1,4 @@
-import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
+import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 import { IIndividualNewsResponse, INewsParams, INewsResponse } from '@axios/news/newsManagerTypes'
@@ -26,6 +26,19 @@ const newsManager = {
       `/core/v1/${baseURL}`,
       {
         ...formData,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
+  },
+  changeNews(formData: IChangeNewsFormProps) {
+    return axiosInstance.patch<IChangeNewsFormProps, IAxiosResponse<IChangeNewsFormProps>>(
+      `/core/v1/${baseURL}/${formData.uuid}`,
+      {
+        ...formData.payload,
       },
       {
         headers: {
