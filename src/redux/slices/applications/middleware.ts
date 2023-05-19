@@ -1,4 +1,5 @@
 import {
+  IDeactivateApplicationProps,
   IJobSeekerApplicationProps,
   IOrganizationApplicationProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
@@ -17,6 +18,7 @@ const {
   setIndividualApplication,
   setOrganizationLoading,
   setOrganizationSubmitSuccess,
+  setChangeIsActiveSuccess,
 } = slice.actions
 
 const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDispatch) => {
@@ -169,6 +171,60 @@ const resetOrganizationSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setJobSeekerSubmitSuccess(false))
 }
 
+const getJobSeekerApplicationsPdf = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.jobSeeker.getJobSeekerApplicationsPdf()
+
+    const blobPart: BlobPart = response?.data
+
+    const blob = await new Blob([blobPart], { type: 'application/pdf' })
+
+    const downloadUrl = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+
+    link.href = downloadUrl
+    link.download = 'file.pdf'
+    document.body.appendChild(link)
+    link.click()
+
+    if (link.parentNode) {
+      link?.parentNode?.removeChild(link)
+    }
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  }
+}
+
+const upDateJobSeekerApplicationIsActive =
+  (params: IDeactivateApplicationProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setChangeIsActiveSuccess(true))
+
+      await API.jobSeeker.upDateJobSeekerApplicationIsActive(params)
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data?.status.message))
+    } finally {
+      dispatch(setApplicationsLoading(false))
+    }
+  }
+
+const upDateOrganizationApplicationIsActive =
+  (params: IDeactivateApplicationProps) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setChangeIsActiveSuccess(true))
+
+      await API.jobSeeker.upDateOrganizationApplicationIsActive(params)
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data?.status.message))
+    } finally {
+      dispatch(setApplicationsLoading(false))
+    }
+  }
+
+const resetChangeIsActiveSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeIsActiveSuccess(false))
+}
+
 export default {
   jobSeeker,
   resetJobSeekerSubmitSuccess,
@@ -182,4 +238,8 @@ export default {
   deleteOrganizationApplication,
   upDateOrganizationIndividualApplication,
   upDateJobSeekerIndividualApplication,
+  getJobSeekerApplicationsPdf,
+  upDateJobSeekerApplicationIsActive,
+  upDateOrganizationApplicationIsActive,
+  resetChangeIsActiveSuccess,
 }

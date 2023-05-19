@@ -35,6 +35,12 @@ const reducers = createReducer({
   setIndividualApplication(state, action: IAction<null | IIndividualApplication>) {
     state.applications.individualApplication = action.payload
   },
+  setApplicationsPdf(state, action: IAction<null | File>) {
+    state.applications.applicationsPdf = action.payload
+  },
+  setChangeIsActiveSuccess(state, action: IAction<boolean>) {
+    state.applications.isChangeIsActiveSuccess = action.payload
+  },
 })
 
 export default reducers

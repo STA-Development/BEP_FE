@@ -15,6 +15,8 @@ export interface IApplications {
   individualApplication: null | IIndividualApplication
   isOrganizationLoading: boolean
   isOrganizationSubmitSuccess: boolean
+  applicationsPdf: null | File
+  isChangeIsActiveSuccess: boolean
 }
 
 export interface IJobSeekerApplicationProps {
@@ -94,4 +96,9 @@ export interface IIndividualApplication {
   isActive?: boolean
   postedAt?: string
   status?: string
+}
+
+export interface IDeactivateApplicationProps {
+  uuid: string
+  isActive: boolean
 }

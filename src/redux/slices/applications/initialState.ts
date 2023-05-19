@@ -10,5 +10,7 @@ export const getInitialState = (): IApplicationsProps => ({
     individualApplication: null,
     isOrganizationLoading: false,
     isOrganizationSubmitSuccess: false,
+    applicationsPdf: null,
+    isChangeIsActiveSuccess: false,
   },
 })

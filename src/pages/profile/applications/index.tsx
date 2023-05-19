@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
+import { IDeactivateApplicationProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import { ApplicationListHeader } from '@components/ApplicationListHeader'
 import { AddIcon, DeleteIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -15,11 +17,11 @@ export const Applications = () => {
   const [t] = useTranslation()
   const { role } = useAppSelector(usersSelector.user)
 
-  const { applicationsList, isApplicationLoading } = useAppSelector(
+  const { applicationsList, isApplicationLoading, isChangeIsActiveSuccess } = useAppSelector(
     applicationsSelector.applications
   )
 
-  const loading = !role || isApplicationLoading || !applicationsList
+  const loading = !role || isApplicationLoading || !applicationsList || isChangeIsActiveSuccess
 
   const onOpenAddApplicationModal = useCallback(() => {
     dispatch(
@@ -51,13 +53,23 @@ export const Applications = () => {
     )
   }, [])
 
+  const deactivateApplication = (params: IDeactivateApplicationProps) => {
+    if (role === Roles.JobSeeker) {
+      dispatch(applicationsMiddleware.upDateJobSeekerApplicationIsActive(params))
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.upDateOrganizationApplicationIsActive(params))
+    }
+  }
+
   useEffect(() => {
     if (role === Roles.JobSeeker) {
       dispatch(applicationsMiddleware.getJobSeekerApplication())
     } else if (role === Roles.Organization) {
       dispatch(applicationsMiddleware.getOrganizationApplication())
     }
-  }, [role])
+
+    dispatch(applicationsMiddleware.resetChangeIsActiveSuccess())
+  }, [role, isChangeIsActiveSuccess])
 
   // TODO: add clone and deactivate
   return (
@@ -67,8 +79,12 @@ export const Applications = () => {
       ) : (
         <div>
           {applicationsList?.map((item) => (
-            <div className="mb-10 rounded border border-gray-light p-10">
-              <h2 className="mb-5 text-lg">Application for work:</h2>
+            <div
+              className={`${
+                !item.isActive && 'bg-gray-light'
+              } mb-5 rounded border border-gray-light p-10`}
+            >
+              <ApplicationListHeader />
               <div className="mb-10 flex">
                 <p className="mr-10 text-base text-black-light">
                   Status:<span className="ml-5 font-medium text-primary">{item.status}</span>
@@ -89,6 +105,16 @@ export const Applications = () => {
                     onClick={() => redirectToIndividualApplication(item.uuid)}
                   >
                     {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_EDIT)}
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() =>
+                      deactivateApplication({ uuid: item.uuid, isActive: !item.isActive })
+                    }
+                  >
+                    {!item.isActive
+                      ? t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_ACTIVATE)
+                      : t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DEACTIVATE)}
                   </Button>
                 </div>
                 <Button
