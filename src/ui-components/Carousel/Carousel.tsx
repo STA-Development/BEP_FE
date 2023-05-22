@@ -49,19 +49,19 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
   return (
     <div>
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">{title}</h2>
+        <h2 className="mb-10 text-xl font-semibold xl:text-2xl">{title}</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
             onClick={movePrev}
-            className="group h-16 rounded-full border-0"
+            className="group h-16 rounded-full border border-gray-thin"
           >
             <ChevronIcon className="rotate-180 transform group-hover:fill-secondary" />
           </Button>
           <Button
             color="secondary"
             onClick={moveNext}
-            className="group h-16 rounded-full border-0"
+            className="group h-16 rounded-full border border-gray-thin"
           >
             <ChevronIcon className="transform group-hover:fill-secondary" />
           </Button>

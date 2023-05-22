@@ -35,7 +35,7 @@ export const EventsCarousel = () => {
 
   return (
     <Container
-      color="secondary"
+      color="wave"
       className="pb-30 pt-10 xl:pt-10"
     >
       <Carousel

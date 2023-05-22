@@ -23,7 +23,10 @@ const ContactUs = () => {
             {t(Translation.PAGE_CONTACT_US_MAP_TITLE)}
           </h3>
           <div className="mb-5 flex items-center">
-            <LocationIcon />
+            <LocationIcon
+              width={24}
+              height={24}
+            />
             <p className="ml-2.5 text-sm text-black-light xl:ml-4">
               {t(Translation.PAGE_CONTACT_US_ADDRESS)}
             </p>
