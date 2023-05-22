@@ -46,5 +46,11 @@
   "page.fill.the.form.job.two.workplace": "Workplace:",
   "page.fill.the.form.job.two.details.button": "Change",
   "page.fill.the.form.job.submit": "Submit",
-  "page.fill.the.form.job.tabs": "Tab"
+  "page.fill.the.form.job.tabs": "Tab",
+  "page.about.us.add.team.member": "Ավելացնել թիմի անդամ",
+  "page.about.us.add.team.member.header": "Վերնագիր",
+  "page.about.us.add.team.member.paragraph": "պարբերություն",
+  "page.about.us.add.team.member.description": "Նկարագրություն",
+  "page.about.us.add.team.member.upload.image": "Վերբեռնել պատկերը",
+  "page.about.us.add.team.member.submit": "Ներկայացնել"
 }

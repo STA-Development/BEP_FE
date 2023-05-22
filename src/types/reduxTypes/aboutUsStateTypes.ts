@@ -6,6 +6,7 @@ export interface IAboutUs {
   isAboutUsLoading: boolean
   aboutUsList: IAboutUsListProps[]
   error: null | string | Error
+  isTeamMemberSubmitSuccess: boolean
 }
 
 export interface IAboutUsListProps {
@@ -14,4 +15,11 @@ export interface IAboutUsListProps {
   paragraph: string
   imageURL: string
   imageDescription: string
+}
+
+export interface ICreateTeamMember {
+  header: string
+  paragraph: string
+  imageDescription: string
+  imageURL: FileList | File | null
 }

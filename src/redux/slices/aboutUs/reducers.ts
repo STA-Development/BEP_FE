@@ -16,6 +16,9 @@ const reducers = createReducer({
   setAboutList(state, action: IAction<IAboutUsListProps[]>) {
     state.aboutUs.aboutUsList = action.payload
   },
+  setCreateTeamMemberSubmitSuccess(state, action: IAction<boolean>) {
+    state.aboutUs.isTeamMemberSubmitSuccess = action.payload
+  },
 })
 
 export default reducers
