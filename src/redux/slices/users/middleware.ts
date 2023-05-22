@@ -47,6 +47,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     const response = await API.auth.signIn(params)
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
+    localStorage.setItem('refreshToken', response.data.data.refreshToken)
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
@@ -57,6 +58,18 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     dispatch(setSignInLoading(false))
   }
 }
+
+const getAccessTokenWithRefreshToken =
+  ({ refreshToken }: { refreshToken: string }) =>
+  async () => {
+    try {
+      const response = await API.auth.getAccessToken(refreshToken)
+
+      localStorage.setItem('accessToken', response.data.data.accessToken)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 const isAuthenticated = () => async (dispatch: AppDispatch) => {
   try {
@@ -297,4 +310,5 @@ export default {
   changeLanguage,
   uploadAvatar,
   updateAvatarLoading,
+  getAccessTokenWithRefreshToken,
 }
