@@ -1,4 +1,8 @@
-import { IApplicationsProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import {
+  IApplicationsListProps,
+  IApplicationsProps,
+  IIndividualApplication,
+} from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -15,6 +19,21 @@ const reducers = createReducer({
   },
   setJobSeekerSubmitSuccess(state, action: IAction<boolean>) {
     state.applications.isJobSeekerSubmitSuccess = action.payload
+  },
+  setOrganizationLoading(state, action: IAction<boolean>) {
+    state.applications.isOrganizationLoading = action.payload
+  },
+  setOrganizationSubmitSuccess(state, action: IAction<boolean>) {
+    state.applications.isOrganizationSubmitSuccess = action.payload
+  },
+  setApplicationsList(state, action: IAction<IApplicationsListProps[] | null>) {
+    state.applications.applicationsList = action.payload
+  },
+  setApplicationsLoading(state, action: IAction<boolean>) {
+    state.applications.isApplicationLoading = action.payload
+  },
+  setIndividualApplication(state, action: IAction<null | IIndividualApplication>) {
+    state.applications.individualApplication = action.payload
   },
 })
 

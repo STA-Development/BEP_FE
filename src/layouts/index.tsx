@@ -18,8 +18,8 @@ export const Layouts = {
 const LayoutContent = ({ children }: PropsWithChildren) => {
   const router = useRouter()
 
-  const [isGetProfileComplete, setIsGetProfileComplete] = useState<boolean | null>(null)
-  const [role, setRole] = useState<keyof typeof Roles | null>(null)
+  const [isGetProfileComplete, setIsGetProfileComplete] = useState<boolean | null>(false)
+  const [role, setRole] = useState<keyof typeof Roles | null>(Roles.NOROLE)
   const select = (state: { users: IUserProps }) => state.users.user.role !== Roles.NOROLE
   const [checkIfAuthComplete, setCheckIfAuthComplete] = useState<boolean | null>(null)
 
@@ -42,9 +42,6 @@ const LayoutContent = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (role) {
-      setIsGetProfileComplete(
-        isGetProfileComplete ? store.getState().users.user.role === Roles.NOROLE : false
-      )
       dispatch(usersMiddleware.getUser())
     } else {
       setIsGetProfileComplete(true)

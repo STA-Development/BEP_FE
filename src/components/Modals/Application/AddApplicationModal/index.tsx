@@ -8,13 +8,24 @@ import { Dialog } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
+import { useRouter } from 'next/router'
 
 export const AddApplicationModal = () => {
   const [t] = useTranslation()
 
+  const router = useRouter()
+
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.AddApplicationModal))
   }, [])
+
+  const routeFileTheForm = (path: string) => {
+    router.push({
+      pathname: '/fill-the-form',
+      query: { path },
+    })
+    onClose()
+  }
 
   return (
     <Modal onClose={onClose}>
@@ -37,7 +48,7 @@ export const AddApplicationModal = () => {
           color="gray"
           size="app"
           className="flex-col"
-          onClick={onClose}
+          onClick={() => routeFileTheForm('Job')}
         >
           <div className="mb-5 w-auto">
             <JobIcon />
@@ -49,7 +60,7 @@ export const AddApplicationModal = () => {
           color="gray"
           size="app"
           className="flex-col"
-          onClick={onClose}
+          onClick={() => routeFileTheForm('Practice')}
         >
           <div className="mb-5 w-auto">
             <JobIcon />

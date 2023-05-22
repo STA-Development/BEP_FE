@@ -46,6 +46,7 @@ export const Footer = () => {
           <div className="order-2 mb-10 space-y-5 divide-primary border-b border-gray-thin pb-10 xl:order-1 xl:m-0 xl:divide-y xl:border-none xl:p-0">
             <p className="text-base font-medium">{t(Translation.FOOTER_CONTACTS)}</p>
             <ul className="text-primary-thin space-y-2.5 pt-0 text-sm xl:pt-5">
+              <Link href="/contact-us">{t(Translation.FOOTER_CONTACT_US)}</Link>
               {contacts.map((item) => (
                 <li key={item}>{item}</li>
               ))}

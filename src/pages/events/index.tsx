@@ -43,7 +43,7 @@ const Events = () => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 
-      if (page < Math.round(pageCount) && eventsList.length === page * pageSize) {
+      if (page < Math.ceil(pageCount)) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
@@ -97,7 +97,7 @@ const Events = () => {
                   <h2 className="mt-5 text-xl text-black xl:mt-0 xl:text-2xl">{item.postedAt}</h2>
                   <p className="mt-2.5 text-lg text-black">{item.header}</p>
                   <p className="text-base text-black-light xl:mt-2.5">{item.paragraph}</p>
-                  {!item.hasLongParagraph ? (
+                  {item.hasLongParagraph ? (
                     <div className="py-7.5">
                       <Button
                         variant="text"

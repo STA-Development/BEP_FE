@@ -24,4 +24,8 @@ export interface IPagination {
   totalItems: number
 }
 
+export enum ErrorMessages {
+  AccessTokenExpiryErrorMessage = 'access token expired',
+}
+
 interface IPaginatedData<T> extends IData<T>, IPagination {}

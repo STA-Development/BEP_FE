@@ -1,3 +1,6 @@
+import { OrganizationType } from '@components/Profile/Organization/helper'
+import { IAutoCompleteItem } from '@uiComponents/Autocomplete'
+
 export interface IApplicationsProps {
   applications: IApplications
 }
@@ -6,7 +9,12 @@ export interface IApplications {
   isJobSeekerLoading: boolean
   error: null | string
 
+  isApplicationLoading: boolean
   isJobSeekerSubmitSuccess: boolean
+  applicationsList: null | IApplicationsListProps[]
+  individualApplication: null | IIndividualApplication
+  isOrganizationLoading: boolean
+  isOrganizationSubmitSuccess: boolean
 }
 
 export interface IJobSeekerApplicationProps {
@@ -17,9 +25,27 @@ export interface IJobSeekerApplicationProps {
   schedule: string
   workplace: string
   expectedSalary: string
-  isActive?: boolean
-  postedAt?: string
-  status?: string
+}
+
+export interface IOrganizationApplicationForm {
+  type: IAutoCompleteItem
+  area: IAutoCompleteItem
+  educationLevel: IAutoCompleteItem
+  experience: IAutoCompleteItem
+  schedule: IAutoCompleteItem
+  workplace: IAutoCompleteItem
+  expectedSalary: IAutoCompleteItem
+}
+
+export interface IOrganizationApplicationProps {
+  uuid?: string
+  type?: string
+  area?: string
+  educationLevel?: string
+  experience?: string
+  schedule?: string
+  workplace?: string
+  expectedSalary?: string
 }
 
 export interface IJobSeekerProps {
@@ -31,7 +57,7 @@ export interface IJobSeekerProps {
   email: string
 }
 
-export interface IJobSeekerProfileProps {
+export interface IProfileUpdateProps {
   keyValuePair: IKeyValuePair
 }
 
@@ -44,6 +70,28 @@ export interface IOrganizationProps {
   uuid: string
   name: string
   employeeQuantity: number
-  organizationType: string
+  organizationType: keyof typeof OrganizationType
   address: string
+}
+
+export interface IApplicationsListProps {
+  isActive: boolean
+  percentCompleted: number
+  postedAt: string
+  status: string
+  uuid: string
+}
+
+export interface IIndividualApplication {
+  uuid?: string
+  type: string
+  area: string
+  educationLevel: string
+  experience: string
+  schedule: string
+  workplace: string
+  expectedSalary: string
+  isActive?: boolean
+  postedAt?: string
+  status?: string
 }
