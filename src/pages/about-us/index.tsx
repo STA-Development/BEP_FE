@@ -16,14 +16,14 @@ import Image from 'next/image'
 const AboutUs = () => {
   const [showPersonForm, setShowPersonForm] = useState<boolean>(false)
 
-  const { aboutUsList, isTeamMemberSubmitSuccess } = useAppSelector(aboutUsSelector.aboutUs)
+  const { aboutUsList, isTeamMemberSubmitSuccess, isAboutUsLoading } = useAppSelector(
+    aboutUsSelector.aboutUs
+  )
   const { role } = useAppSelector(usersSelector.user)
 
-  const [t] = useTranslation()
+  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess
 
-  const addTeamPerson = () => {
-    setShowPersonForm(true)
-  }
+  const [t] = useTranslation()
 
   useEffect(() => {
     dispatch(aboutUsMiddleware.getAboutUsList())
@@ -31,8 +31,8 @@ const AboutUs = () => {
 
   useEffect(() => {
     if (isTeamMemberSubmitSuccess) {
-      dispatch(aboutUsMiddleware.getAboutUsList())
       dispatch(aboutUsMiddleware.resetCreateTeamMemberSubmitSuccess())
+      setShowPersonForm(false)
     }
   }, [isTeamMemberSubmitSuccess])
 
@@ -61,11 +61,19 @@ const AboutUs = () => {
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
         {role === Roles.Admin ? (
           <div className="mb-10 flex w-full justify-end">
-            <Button onClick={addTeamPerson}>{t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER)}</Button>
+            {showPersonForm ? (
+              <Button onClick={() => setShowPersonForm(false)}>
+                {t(Translation.PAGE_ABOUT_US_CLOSE_FORM)}
+              </Button>
+            ) : (
+              <Button onClick={() => setShowPersonForm(true)}>
+                {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER)}
+              </Button>
+            )}
           </div>
         ) : null}
         {showPersonForm ? <AboutUsAddMember /> : null}
-        {isTeamMemberSubmitSuccess ? (
+        {loading ? (
           <Loading />
         ) : (
           <div>

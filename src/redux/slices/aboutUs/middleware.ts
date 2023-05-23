@@ -25,11 +25,11 @@ const getAboutUsList = () => async (dispatch: AppDispatch) => {
 
 const createTeamMember = (formData: ICreateTeamMember) => async (dispatch: AppDispatch) => {
   try {
-    API.aboutUs.createTeamMember(formData)
-
     dispatch(setCreateTeamMemberSubmitSuccess(true))
 
-    dispatch(setError(null))
+    await API.aboutUs.createTeamMember(formData)
+
+    await dispatch(getAboutUsList())
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status?.message))
   }
