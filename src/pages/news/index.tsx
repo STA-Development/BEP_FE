@@ -67,7 +67,7 @@ const NewsList = () => {
     const onScroll = () => {
       const pageCount = totalItems / pageSize
 
-      if (page < Math.ceil(pageCount)) {
+      if (page < Math.ceil(pageCount) && newsList?.length === page * pageSize) {
         const { scrollTop } = document.documentElement
         const { scrollHeight } = document.documentElement
         const { clientHeight } = document.documentElement
