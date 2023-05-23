@@ -34,6 +34,9 @@ const reducers = createReducer({
   setChangeNewsSubmitSuccess(state, action: IAction<boolean>) {
     state.news.isChangeNewsSubmitSuccess = action.payload
   },
+  setDeleteNewsLoading(state, action: IAction<boolean>) {
+    state.news.isDeleteNewsLoading = action.payload
+  },
 })
 
 export default reducers

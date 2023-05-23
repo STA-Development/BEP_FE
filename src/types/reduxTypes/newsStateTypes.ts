@@ -14,6 +14,7 @@ export interface INews {
   isCreateNewsSubmitSuccess: boolean
   isChangeNewsSubmitSuccess: boolean
   isIndividualNewsLoading: boolean
+  isDeleteNewsLoading: boolean
 }
 
 export interface ICreateNewsProps {

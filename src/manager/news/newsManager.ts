@@ -47,6 +47,10 @@ const newsManager = {
       }
     )
   },
+
+  deleteIndividualNews(uuid: string) {
+    return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${uuid}`)
+  },
 }
 
 export default newsManager

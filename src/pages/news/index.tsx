@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ModalName } from '@allTypes/modals'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { INewsResponse } from '@axios/news/newsManagerTypes'
 import { Container } from '@components/Container/Container'
@@ -22,7 +23,7 @@ const NewsList = () => {
 
   const isNewsListLoading = useAppSelector(newsSelector.isNewsListLoading)
   const [page, setPage] = useState<number>(1)
-  const { newsList, pageSize, totalItems } = useAppSelector(newsSelector.news)
+  const { newsList, pageSize, totalItems, isDeleteNewsLoading } = useAppSelector(newsSelector.news)
   const { role } = useAppSelector(usersSelector.user)
 
   const router = useRouter()
@@ -35,6 +36,17 @@ const NewsList = () => {
       })
     )
   }
+
+  const onDeleteIndividualNewsModal = useCallback((id: string) => {
+    dispatch(
+      viewsMiddleware.openModal({
+        name: ModalName.DeleteIndividualNewsModal,
+        props: {
+          id,
+        },
+      })
+    )
+  }, [])
 
   const changeNews = (path: string) => {
     router.push({
@@ -80,7 +92,7 @@ const NewsList = () => {
         route="/news/create-news"
         buttonTitle={t(Translation.PAGE_NEWS_ADD_NEWS) as string}
       />
-      {isNewsListLoading && !newsList?.length ? (
+      {(isNewsListLoading && !newsList?.length) || isDeleteNewsLoading ? (
         <Loading />
       ) : (
         <div className="space-y-6">
@@ -91,6 +103,9 @@ const NewsList = () => {
             >
               {role === Roles.Admin ? (
                 <div className="mb-5 flex w-full justify-end">
+                  <Button onClick={() => onDeleteIndividualNewsModal(news.uuid)}>
+                    Delete News
+                  </Button>
                   <Button
                     variant="text"
                     onClick={() => changeNews(news.uuid)}

@@ -15,6 +15,7 @@ const {
   setNewsList,
   setCreateNewsSubmitSuccess,
   setChangeNewsSubmitSuccess,
+  setDeleteNewsLoading,
 } = slice.actions
 
 const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
@@ -97,6 +98,29 @@ const resetChangeNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setChangeNewsSubmitSuccess(false))
 }
 
+const deleteIndividualNews = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setDeleteNewsLoading(true))
+
+    await API.news.deleteIndividualNews(uuid)
+
+    const reqBody = {
+      page: 1,
+    }
+    const response = await API.news.getNews(reqBody)
+
+    const responseData = response.data
+
+    dispatch(setNewsList([...responseData.data]))
+    dispatch(setTotalItems(responseData.totalItems))
+    dispatch(setPageSize(responseData.pageSize))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setDeleteNewsLoading(false))
+  }
+}
+
 export default {
   getNewsList,
   clearNewsList,
@@ -105,4 +129,5 @@ export default {
   changeNews,
   resetCreateNewsSubmitSuccess,
   resetChangeNewsSubmitSuccess,
+  deleteIndividualNews,
 }
