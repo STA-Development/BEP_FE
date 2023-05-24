@@ -16,7 +16,7 @@ export const Modal = ({ children, onClose }: IDialogProps) => (
       aria-hidden="true"
     />
     <div className="fixed inset-0 mt-40 flex items-start justify-center p-4">
-      <Dialog.Panel className="min-w-[552px] rounded bg-white p-10">{children}</Dialog.Panel>
+      <Dialog.Panel className="w-full max-w-[552px] rounded bg-white p-10">{children}</Dialog.Panel>
     </div>
   </Dialog>
 )

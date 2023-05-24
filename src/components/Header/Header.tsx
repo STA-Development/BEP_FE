@@ -1,8 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
-import { LanguageSelector, ResponseNavigation, User } from '@components/Header'
-import { BarsIcon, CloseIcon } from '@components/Icons'
+import { LanguageSelector, User } from '@components/Header'
+import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -25,9 +25,11 @@ export const Header = () => {
       href: '/profile/monitoring-systems',
       current: false,
     },
+    { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
 
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
+  const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
@@ -64,11 +66,15 @@ export const Header = () => {
                     </Link>
                   </div>
                   <div className="ml-18 hidden w-full items-center space-x-15 rounded border-2 border-gray-thin bg-secondary px-10 xl:flex">
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="py-5 text-base font-medium text-primary hover:underline"
+                        className={`child ${
+                          index === navigation.length - 1
+                            ? 'hidden'
+                            : 'py-5 text-base font-medium text-primary hover:underline'
+                        }`}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
@@ -110,13 +116,35 @@ export const Header = () => {
                 </div>
               </div>
             </Container>
-
-            <ResponseNavigation
-              navigation={navigation}
-              isAuthenticated={isAuthenticated}
-              handleLogOut={handleLogOut}
-              handleClearError={handleClearError}
-            />
+            <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 xl:hidden">
+              {({ close }) => (
+                <div>
+                  <div className="mb-[120px] space-y-5">
+                    {navigation.map((item) => (
+                      <Link
+                        onClick={() => close()}
+                        key={item.name}
+                        href={item.href}
+                        className="block text-base font-medium text-black"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                    <LanguageSelector />
+                  </div>
+                  <Disclosure.Button className="w-full">
+                    <Button
+                      size="lg"
+                      disabled={isLogOutLoading}
+                      onClick={handleLogOut}
+                      LeftIcon={LogOutIcon}
+                    >
+                      {t(Translation.NAVBAR_LOGOUT)}
+                    </Button>
+                  </Disclosure.Button>
+                </div>
+              )}
+            </Disclosure.Panel>
           </>
         )}
       </Disclosure>

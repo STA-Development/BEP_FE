@@ -7,6 +7,7 @@ import {
   IChangeNewsFormProps,
 } from '@allTypes/reduxTypes/newsStateTypes'
 import { Container } from '@components/Container'
+import { LeftIcon } from '@components/Icons'
 import { NewsImage } from '@components/NewsImage'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
@@ -102,6 +103,15 @@ const ChangeNews = () => {
         description={t(Translation.PAGE_NEWS_INDIVIDUAL_DESCRIPTION) as string}
         paths={['Home', 'News']}
       />
+      <div className="mt-5">
+        <Button
+          variant="text"
+          LeftIcon={LeftIcon}
+          onClick={() => router.back()}
+        >
+          {t(Translation.GO_BACK)}
+        </Button>
+      </div>
       {!individualNews ? (
         <Loading />
       ) : (
@@ -113,9 +123,7 @@ const ChangeNews = () => {
             >
               <div className="mb-10 flex w-full flex-col justify-between xl:flex-row-reverse">
                 <div className="space-y-4">
-                  <div>
-                    <NewsImage image={imageLoaded ?? (individualNews?.imageURL as string)} />
-                  </div>
+                  <NewsImage image={imageLoaded ?? (individualNews?.imageURL as string)} />
                   <div className="flex w-full justify-center">
                     <FileField
                       fieldName="imageUrl"
@@ -135,17 +143,17 @@ const ChangeNews = () => {
                 </div>
 
                 <div className="mt-10 space-y-4 xl:mt-0 xl:w-[40%]">
-                  <div className="w-full space-y-2">
-                    <p>{t(Translation.PAGE_NEWS_HEADER)}</p>
-                    <TextField fieldName="header" />
-                  </div>
-                  <div className="w-full space-y-2">
-                    <p>{t(Translation.PAGE_NEWS_PARAGRAPH)}</p>
-                    <TextField
-                      fieldName="paragraph"
-                      rows={7}
-                    />
-                  </div>
+                  <TextField
+                    fieldName="header"
+                    label={t(Translation.PAGE_NEWS_HEADER) as string}
+                    id={t(Translation.PAGE_NEWS_HEADER) as string}
+                  />
+                  <TextField
+                    fieldName="paragraph"
+                    label={t(Translation.PAGE_NEWS_PARAGRAPH) as string}
+                    id={t(Translation.PAGE_NEWS_PARAGRAPH) as string}
+                    rows={7}
+                  />
                 </div>
               </div>
               <div className="flex items-center justify-center">

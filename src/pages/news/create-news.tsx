@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import { Container } from '@components/Container'
+import { LeftIcon } from '@components/Icons'
 import { NewsImage } from '@components/NewsImage'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
@@ -67,6 +68,15 @@ const CreateNews = () => {
         description={t(Translation.PAGE_NEWS_INDIVIDUAL_DESCRIPTION) as string}
         paths={['Home', 'News']}
       />
+      <div className="mt-5">
+        <Button
+          variant="text"
+          LeftIcon={LeftIcon}
+          onClick={() => router.back()}
+        >
+          {t(Translation.GO_BACK)}
+        </Button>
+      </div>
       <div className="mt-10 flex flex-row-reverse justify-between">
         <FormProvider {...methods}>
           <form
@@ -95,19 +105,18 @@ const CreateNews = () => {
                   </Button>
                 </div>
               </div>
-
               <div className="mt-10 space-y-4 xl:mt-0 xl:w-[40%]">
-                <div className="w-full space-y-2">
-                  <p>{t(Translation.PAGE_NEWS_HEADER)}</p>
-                  <TextField fieldName="header" />
-                </div>
-                <div className="w-full space-y-2">
-                  <p>{t(Translation.PAGE_NEWS_PARAGRAPH)}</p>
-                  <TextField
-                    fieldName="paragraph"
-                    rows={7}
-                  />
-                </div>
+                <TextField
+                  fieldName="header"
+                  label={t(Translation.PAGE_NEWS_HEADER) as string}
+                  id={t(Translation.PAGE_NEWS_HEADER) as string}
+                />
+                <TextField
+                  fieldName="paragraph"
+                  rows={7}
+                  label={t(Translation.PAGE_NEWS_PARAGRAPH) as string}
+                  id={t(Translation.PAGE_NEWS_PARAGRAPH) as string}
+                />
               </div>
             </div>
             <div className="flex items-center justify-center">

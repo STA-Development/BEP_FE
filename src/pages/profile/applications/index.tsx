@@ -69,7 +69,7 @@ export const Applications = () => {
           {applicationsList?.map((item) => (
             <div className="mb-10 rounded border border-gray-light p-10">
               <h2 className="mb-5 text-lg">Application for work:</h2>
-              <div className="mb-10 flex">
+              <div className="mb-10 flex flex-wrap">
                 <p className="mr-10 text-base text-black-light">
                   Status:<span className="ml-5 font-medium text-primary">{item.status}</span>
                 </p>

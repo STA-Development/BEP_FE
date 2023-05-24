@@ -4,6 +4,7 @@
   "navbar.educational.institutes": "Ուսումնական հաստատություններ",
   "navbar.contact.us": "Կապ մեզ հետ",
   "navbar.language": "Լեզու",
+  "navbar.monitoring.systems": "Մոնիտորինգի համակարգեր",
   "footer.copyright": "Copyright © 2023 with all rights reserved",
   "help.tel.problem": "Ասա մեզ քո խնդրի մասին.",
   "help.text": "Փորձեք աջակցել ձեր բացատրությանը սքրինշոթով, դրանով մենք կարող ենք ավելի արագ լուծել ձեր խնդիրը:",
@@ -46,7 +47,6 @@
   "page.fill.the.form.job.two.workplace": "Workplace:",
   "page.fill.the.form.job.two.details.button": "Change",
   "page.fill.the.form.job.submit": "Submit",
-  "page.fill.the.form.job.tabs": "Tab",
   "create.news.header": "Header is required",
   "create.news.paragraph": "Paragraph is required",
   "create.news.image": "Image is required",
@@ -55,5 +55,8 @@
   "page.news.upload.image": "Վերբեռնել պատկերը",
   "page.news.header": "Վերնագիր",
   "page.news.paragraph": "Պարբերություն",
-  "page.news.submit": "Ներկայացնել"
+  "page.news.submit": "Ներկայացնել",
+  "page.fill.the.form.job.tabs": "Tab",
+  "navbar.profile": "Profile",
+  "go.back": "Վերադառնալ"
 }
