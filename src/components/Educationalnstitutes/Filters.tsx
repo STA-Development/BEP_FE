@@ -56,13 +56,13 @@ const Filters = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="inline-grid w-full grid-cols-1 content-center xl:grid-cols-4">
-          <div className="rounded-l-[10px] py-2.5 text-start text-base xl:border">
+        <div className="flex w-full flex-col items-center xl:flex-row">
+          <div className="min-w-[270px] rounded-l-[10px] py-2.5 text-start text-base xl:border">
             <p className="flex justify-start xl:px-5">
               {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TITLE)}
             </p>
           </div>
-          <div className="xl:border">
+          <div className="min-w-[270px] xl:border">
             <AutocompleteField
               items={filterTypes}
               fieldName="type"
@@ -70,7 +70,7 @@ const Filters = () => {
               inputClasses="border-none pl-0 xl:px-5"
             />
           </div>
-          <div className="xl:border">
+          <div className="min-w-[270px] xl:border">
             <AutocompleteField
               fieldName="province"
               items={filterProvinces}
