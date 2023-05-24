@@ -65,7 +65,7 @@ export const LanguageSelector = () => {
     >
       {({ open }) => (
         <>
-          <Menu.Button className="inline-flex w-full items-center py-2 text-base font-medium text-primary">
+          <Menu.Button className="inline-flex w-full items-center py-2 text-base font-medium text-black xl:text-base xl:font-medium xl:text-primary">
             {t(Translation.NAVBAR_LANGUAGE)}:
             <span className="ml-5">{selectedLanguage && <selectedLanguage.icon />}</span>
             <div className="ml-2.5">
@@ -87,7 +87,7 @@ export const LanguageSelector = () => {
                       LeftIcon={item.icon}
                       onClick={() => onSetLanguage(item.value)}
                     >
-                      <p className="ml-2.5">{item.language}</p>
+                      <p className="ml-2.5 ">{item.language}</p>
                     </Button>
                   </Menu.Item>
                 ))}

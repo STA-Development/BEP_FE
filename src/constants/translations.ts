@@ -38,6 +38,7 @@ export enum Translation {
   NAVBAR_LOGIN = 'navbar.login',
   NAVBAR_LOGOUT = 'navbar.logout',
   NAVBAR_MONITORING_SYSTEMS = 'navbar.monitoring.systems',
+  NAVBAR_PROFILE = 'navbar.profile',
   NAVBAR_REGISTER = 'navbar.register',
   PAGE_ABOUT_US_ADD_TEAM_MEMBER = 'page.about.us.add.team.member',
   PAGE_ABOUT_US_ADD_TEAM_MEMBER_DESCRIPTION = 'page.about.us.add.team.member.description',

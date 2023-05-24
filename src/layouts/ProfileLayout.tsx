@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import {
@@ -7,6 +7,7 @@ import {
   MonitoringSystemsIcon,
   SettingsIcon,
 } from '@components/Icons'
+import { FilterIcon } from '@components/Icons/FilterIcon'
 import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Translation } from '@constants/translations'
 import { dispatch } from '@redux/hooks'
@@ -56,6 +57,12 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const menuItem = Object.keys(menu).find((item) => menu[String(item)].href === pathname)
   const label = menuItem ? menu?.[String(menuItem)]?.label : ''
 
+  const [active, setActive] = useState(true)
+
+  const openFilter = () => {
+    setActive(!active)
+  }
+
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
   }
@@ -64,8 +71,22 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
     <Container>
       <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
         <aside>
-          <h1 className="mb-5 text-xl font-medium xl:font-normal">{label}</h1>
-          <div className="hidden xl:block">
+          <h1 className="text-xl font-medium xl:mb-5 xl:font-normal">{label}</h1>
+          <div className="mb-5 xl:hidden">
+            <Button
+              variant="text"
+              onClick={openFilter}
+              LeftIcon={FilterIcon}
+              className="pl-0"
+            >
+              <p>{`${
+                !active
+                  ? t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_OPEN)
+                  : t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_CLOSE)
+              }`}</p>
+            </Button>
+          </div>
+          <div className={`xl:block ${active ? `flex` : `hidden`}`}>
             <ul className="mb-10">
               {Object.values(menu).map((item) => (
                 <li
@@ -82,13 +103,15 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
                 </li>
               ))}
             </ul>
-            <Button
-              onClick={handleLogOut}
-              size="bs"
-              LeftIcon={LogOutIcon}
-            >
-              {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
-            </Button>
+            <div className="hidden xl:block">
+              <Button
+                onClick={handleLogOut}
+                size="bs"
+                LeftIcon={LogOutIcon}
+              >
+                {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
+              </Button>
+            </div>
           </div>
         </aside>
         <main className="col-span-4 xl:pl-10">{children}</main>
