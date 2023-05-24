@@ -29,6 +29,8 @@ const createTeamMember = (formData: ICreateTeamMember) => async (dispatch: AppDi
 
     await API.aboutUs.createTeamMember(formData)
 
+    dispatch(getAboutUsList())
+
     await dispatch(getAboutUsList())
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status?.message))

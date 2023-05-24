@@ -4,13 +4,13 @@ export const createAboutUsValidationSchema = object().shape({
   header: string().required('header is requier'),
   paragraph: string().required('paragraph is requier'),
   imageDescription: string().required('paragraph is requier'),
-  imageURL: mixed()
-    .test('required', 'You need to provide a file', (file) => {
-      if (file) {
-        return true
+  imageURL: mixed<File>()
+    .required('Image is required')
+    .test('fileType', 'Only image files are allowed', (file: File) => {
+      if (file && !['image/jpeg', 'image/png', 'image/jpg']) {
+        return false
       }
 
-      return false
-    })
-    .required('Image is required'),
+      return file && ['image/jpeg', 'image/png', 'image/jpg'].includes(file.type)
+    }),
 })

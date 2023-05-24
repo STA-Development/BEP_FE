@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import AboutUsAddMember from '@components/AboutUsAddMember/AboutUsAddMember'
+import AboutUsMember from '@components/AboutUs/AddMember/AboutUsMember'
 import { Container } from '@components/Container'
 import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
@@ -29,13 +29,6 @@ const AboutUs = () => {
     dispatch(aboutUsMiddleware.getAboutUsList())
   }, [])
 
-  useEffect(() => {
-    if (isTeamMemberSubmitSuccess) {
-      dispatch(aboutUsMiddleware.resetCreateTeamMemberSubmitSuccess())
-      setShowPersonForm(false)
-    }
-  }, [isTeamMemberSubmitSuccess])
-
   return (
     <>
       <Introduction
@@ -62,17 +55,23 @@ const AboutUs = () => {
         {role === Roles.Admin ? (
           <div className="mb-10 flex w-full justify-end">
             {showPersonForm ? (
-              <Button onClick={() => setShowPersonForm(false)}>
+              <Button
+                size="bs"
+                onClick={() => setShowPersonForm(false)}
+              >
                 {t(Translation.PAGE_ABOUT_US_CLOSE_FORM)}
               </Button>
             ) : (
-              <Button onClick={() => setShowPersonForm(true)}>
+              <Button
+                size="bs"
+                onClick={() => setShowPersonForm(true)}
+              >
                 {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER)}
               </Button>
             )}
           </div>
         ) : null}
-        {showPersonForm ? <AboutUsAddMember /> : null}
+        {showPersonForm ? <AboutUsMember setShowPersonForm={setShowPersonForm} /> : null}
         {loading ? (
           <Loading />
         ) : (

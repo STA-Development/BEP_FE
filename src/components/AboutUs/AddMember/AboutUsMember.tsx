@@ -1,18 +1,22 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { dispatch } from '@redux/hooks'
-import { aboutUsMiddleware } from '@redux/slices/aboutUs'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
 import { Button } from '@uiComponents/Button'
 import FileField from '@uiComponents/FileField/FileField'
 import TextField from '@uiComponents/FormFields/TextField'
 import { createAboutUsValidationSchema } from '@validation/aboutUs/aboutUs'
 import Image from 'next/image'
 
-import { useImageUpload } from '../../hooks/ImageUpload'
+import { useImageUpload } from '../../../hooks/ImageUpload'
+
+export interface IAboutUsMemberProps {
+  setShowPersonForm: (value: boolean) => void
+}
 
 const defaultValues = {
   header: '',
@@ -20,8 +24,10 @@ const defaultValues = {
   imageDescription: '',
   imageURL: null,
 }
-const AboutUsAddMember = () => {
+const AboutUsMember = ({ setShowPersonForm }: IAboutUsMemberProps) => {
   const { imageLoaded, handleFileChange } = useImageUpload()
+
+  const { isTeamMemberSubmitSuccess } = useAppSelector(aboutUsSelector.aboutUs)
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -39,11 +45,20 @@ const AboutUsAddMember = () => {
     mode: 'onChange',
   })
 
-  const { handleSubmit } = methods
+  const { handleSubmit, reset } = methods
 
   const onSubmit = (data: ICreateTeamMember) => {
     dispatch(aboutUsMiddleware.createTeamMember(data))
   }
+
+  useEffect(() => {
+    if (isTeamMemberSubmitSuccess) {
+      dispatch(aboutUsMiddleware.resetCreateTeamMemberSubmitSuccess())
+      setShowPersonForm(false)
+      reset(defaultValues)
+    }
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTeamMemberSubmitSuccess])
 
   return (
     <div>
@@ -62,42 +77,56 @@ const AboutUsAddMember = () => {
                     width={500}
                     height={680}
                     alt="picture"
+                    className="h-[345px] w-[500px]"
                   />
                 ) : null}
               </div>
-              <div className="flex w-full justify-center">
+              <div
+                className={`${
+                  imageLoaded !== undefined ? 'flex flex-col-reverse' : 'flex w-full justify-center'
+                }`}
+              >
                 <FileField
                   fieldName="imageURL"
                   inputRef={inputRef}
                   type="file"
                   handleFileChange={handleFileChange}
                 />
-                <Button
-                  size="bs"
-                  variant="outlined"
-                  type="button"
-                  onClick={handleClick}
-                >
-                  {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_UPLOAD_IMAGE)}
-                </Button>
+                <div className="flex w-full items-center justify-center">
+                  <Button
+                    size="bs"
+                    variant="outlined"
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_UPLOAD_IMAGE)}
+                  </Button>
+                </div>
               </div>
             </div>
 
             <div className="mt-10 space-y-4 xl:mt-0 xl:w-[40%]">
               <div className="w-full space-y-2">
-                <p>{t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_HEADER)}</p>
-                <TextField fieldName="header" />
+                <TextField
+                  fieldName="header"
+                  label={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_HEADER) as string}
+                  id={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_HEADER) as string}
+                />
               </div>
               <div className="w-full space-y-2">
-                <p>{t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_PARAGRAPH)}</p>
                 <TextField
+                  label={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_PARAGRAPH) as string}
+                  id={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_PARAGRAPH) as string}
                   fieldName="paragraph"
                   rows={7}
                 />
               </div>
               <div>
-                <p>{t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_DESCRIPTION)}</p>
-                <TextField fieldName="imageDescription" />
+                <TextField
+                  fieldName="imageDescription"
+                  label={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_DESCRIPTION) as string}
+                  id={t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_DESCRIPTION) as string}
+                />
               </div>
             </div>
           </div>
@@ -115,4 +144,4 @@ const AboutUsAddMember = () => {
   )
 }
 
-export default AboutUsAddMember
+export default AboutUsMember

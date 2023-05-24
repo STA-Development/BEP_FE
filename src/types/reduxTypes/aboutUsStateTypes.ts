@@ -21,5 +21,5 @@ export interface ICreateTeamMember {
   header: string
   paragraph: string
   imageDescription: string
-  imageURL: FileList | File | null
+  imageURL: File | null
 }
