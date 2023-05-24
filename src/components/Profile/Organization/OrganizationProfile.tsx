@@ -21,6 +21,7 @@ export const OrganizationProfile = () => {
   const { name, email, phone, organizationType, employeeQuantity, address } = useAppSelector(
     usersSelector.user
   )
+
   const values = useMemo<IOrganizationProfile>(
     () => ({
       name,

@@ -7,16 +7,15 @@ import slice from './slice'
 
 const {
   setError,
-  setHelpSubmittingLoading,
   setHelpSubmitSuccess,
-  setIsContactUsSubmittingLoading,
+  setHelpSubmitLoading,
   setContactUsSubmitSuccess,
+  setContactUsSubmitLoading,
 } = slice.actions
 
 const sendHelpData = (helpData: IHelpDataProps) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setHelpSubmittingLoading(true))
-
+    dispatch(setHelpSubmitLoading(true))
     await API.support.sendHelpData(helpData)
 
     dispatch(setHelpSubmitSuccess(true))
@@ -25,7 +24,7 @@ const sendHelpData = (helpData: IHelpDataProps) => async (dispatch: AppDispatch)
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setHelpSubmittingLoading(false))
+    dispatch(setHelpSubmitLoading(false))
   }
 }
 
@@ -35,7 +34,7 @@ const resetHelpSubmitDataSuccess = () => (dispatch: AppDispatch) => {
 
 const sendContactUsData = (contactUsData: IContactUsProps) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setIsContactUsSubmittingLoading(true))
+    dispatch(setContactUsSubmitLoading(true))
 
     await API.support.sendContactUsData(contactUsData)
 
@@ -45,7 +44,7 @@ const sendContactUsData = (contactUsData: IContactUsProps) => async (dispatch: A
   } catch (error) {
     dispatch(setError((error as IError).response.data?.status?.message))
   } finally {
-    dispatch(setIsContactUsSubmittingLoading(false))
+    dispatch(setContactUsSubmitLoading(false))
   }
 }
 
