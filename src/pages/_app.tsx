@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
-import LayoutController from '@layouts/LayoutController'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
@@ -14,6 +13,8 @@ import { Roboto } from 'next/font/google'
 import Head from 'next/head'
 
 import '@utils/i18n'
+
+import Middleware from '../Middleware'
 
 import '@styles/globals.css'
 
@@ -84,7 +85,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
       <main>
         <Provider store={store}>
           <RedirectionHandler />
-          <LayoutController>
+          <Middleware>
             <Layout>
               {HierarchicalLayout ? (
                 <HierarchicalLayout>
@@ -94,7 +95,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
                 <Component {...pageProps} />
               )}
             </Layout>
-          </LayoutController>
+          </Middleware>
           <ModalsController />
         </Provider>
       </main>

@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import { routerIsLogged, routerIsNotLogged } from '@constants/router'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
@@ -7,7 +8,7 @@ import { useRouter } from 'next/router'
 
 import { isAuthenticated } from '@utils/authUtils'
 
-const LayoutController = ({ children }: { children: ReactElement }) => {
+const Middleware = ({ children }: { children: ReactElement }) => {
   const router = useRouter()
 
   const [isGetProfileComplete, setIsGetProfileComplete] = useState<boolean | null>(false)
@@ -58,7 +59,13 @@ const LayoutController = ({ children }: { children: ReactElement }) => {
   }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 
   useEffect(() => {
-    if (!isAuthenticated() && router.pathname.includes('/profile')) {
+    if (!isAuthenticated() && routerIsNotLogged.includes(router.pathname)) {
+      router.push('/')
+    }
+  }, [router])
+
+  useEffect(() => {
+    if (isAuthenticated() && routerIsLogged.includes(router.pathname)) {
       router.push('/')
     }
   }, [router])
@@ -66,4 +73,4 @@ const LayoutController = ({ children }: { children: ReactElement }) => {
   return children
 }
 
-export default LayoutController
+export default Middleware
