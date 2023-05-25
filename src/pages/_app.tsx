@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
+import LayoutController from '@layouts/LayoutController'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
@@ -83,15 +84,17 @@ const App = ({ Component, pageProps }: IAppProps) => {
       <main>
         <Provider store={store}>
           <RedirectionHandler />
-          <Layout>
-            {HierarchicalLayout ? (
-              <HierarchicalLayout>
+          <LayoutController>
+            <Layout>
+              {HierarchicalLayout ? (
+                <HierarchicalLayout>
+                  <Component {...pageProps} />
+                </HierarchicalLayout>
+              ) : (
                 <Component {...pageProps} />
-              </HierarchicalLayout>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </Layout>
+              )}
+            </Layout>
+          </LayoutController>
           <ModalsController />
         </Provider>
       </main>
