@@ -50,11 +50,25 @@ const authManager = {
 
     return window.open(`${NEXT_PUBLIC_BASE_URL}users/v1/auth/google`)
   },
+
+  getAccessToken(refreshToken: string) {
+    return axiosInstance.post<ISignInResponse, IAxiosResponse<ISignInResponse>>(
+      `${baseURL}/v1/auth/refresh-token`,
+      { refreshToken, remember: true }
+    )
+  },
   selectRole(role: keyof typeof Roles) {
     return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/auth/user`, { role })
   },
   getProfile() {
     return axiosInstance.get<IProfile, IAxiosResponse<IProfile>>(`${baseURL}/v1/auth/profile`)
+  },
+  uploadAvatar(data: FormData) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(`${baseURL}/v1/user/image`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
   },
 }
 

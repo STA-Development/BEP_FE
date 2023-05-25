@@ -10,16 +10,17 @@ export interface ISelectItem {
 interface SelectProps {
   items: ISelectItem[]
   fieldName: string
+  individualValue?: string | null
 }
 
-export const Select = ({ items, fieldName }: SelectProps) => {
+export const Select = ({ items, fieldName, individualValue }: SelectProps) => {
   const { control } = useFormContext()
   const { field } = useController({ name: fieldName, control })
 
   return (
     <div>
       <Listbox
-        defaultValue={items[0].name}
+        defaultValue={individualValue ?? items[0].name}
         {...field}
       >
         <div className="relative mt-1">

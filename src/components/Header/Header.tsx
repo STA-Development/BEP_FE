@@ -20,7 +20,12 @@ export const Header = () => {
       href: '/educational-institutes',
       current: false,
     },
-    { name: t(Translation.NAVBAR_CONTACT_US), href: '/contact-us', current: false },
+    {
+      name: t(Translation.NAVBAR_MONITORING_SYSTEMS),
+      href: '/profile/monitoring-systems',
+      current: false,
+    },
+    { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
@@ -60,11 +65,15 @@ export const Header = () => {
                     </Link>
                   </div>
                   <div className="ml-18 hidden w-full items-center space-x-15 rounded border-2 border-gray-thin bg-secondary px-10 xl:flex">
-                    {navigation.map((item) => (
+                    {navigation.map((item, index) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="py-5 text-base font-medium text-primary hover:underline"
+                        className={`child ${
+                          index === navigation.length - 1
+                            ? 'hidden'
+                            : 'py-5 text-base font-medium text-primary hover:underline'
+                        }`}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
@@ -120,6 +129,7 @@ export const Header = () => {
                         {item.name}
                       </Link>
                     ))}
+                    <LanguageSelector />
                   </div>
                   <Disclosure.Button className="w-full">
                     <Button

@@ -1,20 +1,39 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { CloseIcon } from '@components/Icons'
 import { Modal } from '@components/Modals'
 import { Translation } from '@constants/translations'
 import { Dialog } from '@headlessui/react'
-import { dispatch } from '@redux/hooks'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { applicationsMiddleware } from '@redux/slices/applications'
+import { usersSelector } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 
-export const DeleteApplicationModal = () => {
+export interface IDeleteApplication {
+  id: string
+}
+
+export const DeleteApplicationModal = ({ id }: IDeleteApplication) => {
   const [t] = useTranslation()
+
+  const { role } = useAppSelector(usersSelector.user)
 
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.DeleteApplicationModal))
   }, [])
+
+  const onDelete = () => {
+    if (role === Roles.JobSeeker) {
+      dispatch(applicationsMiddleware.deleteJobSeekerApplication(id))
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.deleteOrganizationApplication(id))
+    }
+
+    dispatch(viewsMiddleware.closeModal(ModalName.DeleteApplicationModal))
+  }
 
   return (
     <Modal onClose={onClose}>
@@ -35,7 +54,7 @@ export const DeleteApplicationModal = () => {
       <div className="flex gap-10">
         <Button
           size="fl"
-          onClick={onClose}
+          onClick={onDelete}
         >
           {t(Translation.MODAL_DELETE_APPLICATION_ACTIONS_DELETE)}
         </Button>

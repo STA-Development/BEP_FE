@@ -33,37 +33,37 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_TYPE)}
                 </p>
-                <p className="ml-2.5 text-base">{values.type}</p>
+                <p className="ml-2.5 text-base">{values.type.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_AREA)}
                 </p>
-                <p className="ml-2.5 text-base">{values.area}</p>
+                <p className="ml-2.5 text-base">{values.area.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_SALARY)}
                 </p>
-                <p className="ml-2.5 text-base">{values.expectedSalary}</p>
+                <p className="ml-2.5 text-base">{values.expectedSalary.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_EXPERIENCE)}
                 </p>
-                <p className="ml-2.5 text-base">{values.experience}</p>
+                <p className="ml-2.5 text-base">{values.experience.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_SCHEDULE)}
                 </p>
-                <p className="ml-2.5 text-base">{values.schedule}</p>
+                <p className="ml-2.5 text-base">{values.schedule.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_WORKPLACE)}
                 </p>
-                <p className="ml-2.5 text-base">{values.workplace}</p>
+                <p className="ml-2.5 text-base">{values.workplace.name}</p>
               </div>
             </div>
             <Button

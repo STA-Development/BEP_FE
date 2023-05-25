@@ -10,7 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
-import Checkbox from '@uiComponents/FormFields/CheckBox'
 import TextField from '@uiComponents/FormFields/TextField'
 import { registerValidationSchema } from '@validation/auth/register'
 
@@ -27,7 +26,6 @@ export const Register = () => {
       email: '',
       password: '',
       passwordConfirmation: '',
-      remember: false,
     },
     mode: 'onSubmit',
     reValidateMode: 'onChange',
@@ -97,13 +95,7 @@ export const Register = () => {
                 type="password"
               />
             </div>
-            <div className="mb-5 w-full">
-              <Checkbox
-                fieldName="remember"
-                label={t(Translation.PAGE_REGISTER_INPUT_CHECKBOX) as string}
-                id="remember-me"
-              />
-            </div>
+
             <Button
               isLoading={isSignUpLoading}
               disabled={isSignUpLoading}

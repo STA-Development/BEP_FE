@@ -31,6 +31,7 @@ const {
   setLanguageChangeLoading,
   setErrorGoogleSignIn,
   setIsRoleSelectLoading,
+  setIsUserAvatarLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -46,6 +47,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     const response = await API.auth.signIn(params)
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
+    localStorage.setItem('refreshToken', response.data.data.refreshToken)
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
@@ -56,6 +58,18 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     dispatch(setSignInLoading(false))
   }
 }
+
+const getAccessTokenWithRefreshToken =
+  ({ refreshToken }: { refreshToken: string }) =>
+  async () => {
+    try {
+      const response = await API.auth.getAccessToken(refreshToken)
+
+      localStorage.setItem('accessToken', response.data.data.accessToken)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
 const isAuthenticated = () => async (dispatch: AppDispatch) => {
   try {
@@ -221,13 +235,33 @@ const getUser = () => async (dispatch: AppDispatch) => {
 }
 
 const getProfile = () => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
+
   try {
     const response = await API.auth.getProfile()
 
     dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
   } catch (err) {
     dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
   }
+}
+
+const uploadAvatar = (data: FormData) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(true))
+
+  try {
+    await API.auth.uploadAvatar(data)
+  } catch (err) {
+    dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserAvatarLoading(false))
+  }
+}
+
+const updateAvatarLoading = (isLoading: boolean) => async (dispatch: AppDispatch) => {
+  dispatch(setIsUserAvatarLoading(isLoading))
 }
 
 const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch: AppDispatch) => {
@@ -274,4 +308,7 @@ export default {
   resetPassword,
   clearError,
   changeLanguage,
+  uploadAvatar,
+  updateAvatarLoading,
+  getAccessTokenWithRefreshToken,
 }
