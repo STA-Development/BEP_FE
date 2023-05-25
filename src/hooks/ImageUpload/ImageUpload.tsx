@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export const useImageUpload = () => {
-  const [imageLoaded, setImageLoaded] = useState<string>()
+  const [imageLoaded, setImageLoaded] = useState<string | null>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileObj = event.target.files && event.target.files[0]

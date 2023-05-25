@@ -88,9 +88,9 @@ const AboutUs = () => {
                   <Image
                     src={member.imageURL}
                     loader={() => member.imageURL ?? ''}
-                    width={350}
-                    height={400}
-                    className="max-h-[450px] max-w-[450px] xl:mb-5"
+                    width={450}
+                    height={450}
+                    className="max-h-[450px] max-w-[450px] object-contain xl:mb-5"
                     alt="picture"
                   />
                   <p className="hidden text-base italic text-black-light group-odd:text-right xl:block xl:text-left">

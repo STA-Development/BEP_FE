@@ -75,15 +75,17 @@ const AboutUsMember = ({ setShowPersonForm }: IAboutUsMemberProps) => {
                     src={imageLoaded}
                     loader={() => imageLoaded}
                     width={500}
-                    height={680}
+                    height={345}
                     alt="picture"
-                    className="h-[345px] w-[500px]"
+                    className="h-[345px] w-[500px] object-contain"
                   />
                 ) : null}
               </div>
               <div
                 className={`${
-                  imageLoaded !== undefined ? 'flex flex-col-reverse' : 'flex w-full justify-center'
+                  !imageLoaded
+                    ? 'flex flex-col-reverse text-blue-500'
+                    : 'flex w-full justify-center'
                 }`}
               >
                 <FileField

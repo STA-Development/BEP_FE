@@ -1,6 +1,7 @@
 import { ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
+import { aboutUsMiddleware } from '@redux/slices/aboutUs/index'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -29,9 +30,7 @@ const createTeamMember = (formData: ICreateTeamMember) => async (dispatch: AppDi
 
     await API.aboutUs.createTeamMember(formData)
 
-    dispatch(getAboutUsList())
-
-    await dispatch(getAboutUsList())
+    dispatch(aboutUsMiddleware.getAboutUsList())
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status?.message))
   }

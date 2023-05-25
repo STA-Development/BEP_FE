@@ -17,7 +17,7 @@ const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange 
   const { field, fieldState } = useController({ name: fieldName })
 
   return (
-    <div className={`${fieldState.error && 'text-blue'}`}>
+    <div>
       <ImageInput
         {...field}
         inputRef={inputRef}
