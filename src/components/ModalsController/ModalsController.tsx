@@ -1,6 +1,7 @@
 import React from 'react'
 import { ModalName } from '@allTypes/modals'
 import { IOpenedModal } from '@allTypes/reduxTypes/viewsStateTypes'
+import { DeleteTeamMember } from '@components/Modals/AboutUs/DeleteTeamMember'
 import { AddApplicationModal } from '@components/Modals/Application/AddApplicationModal'
 import {
   DeleteApplicationModal,
@@ -19,6 +20,12 @@ const getDeleteApplicationModal = (modal: IOpenedModal<IDeleteApplication>) => (
     {...modal.props}
   />
 )
+const getDeleteTeamMember = (modal: IOpenedModal<IDeleteApplication>) => (
+  <DeleteTeamMember
+    key={modal.name}
+    {...modal.props}
+  />
+)
 
 export const ModalsController = () => {
   const modals = useAppSelector(viewsSelector.modals)
@@ -32,6 +39,8 @@ export const ModalsController = () => {
             return getAddApplicationModal(modal)
           case ModalName.DeleteApplicationModal:
             return getDeleteApplicationModal(modal)
+          case ModalName.DeleteTeamMember:
+            return getDeleteTeamMember(modal)
           default:
             return null
         }
