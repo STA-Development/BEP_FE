@@ -10,5 +10,9 @@ export const getInitialState = (): IApplicationsProps => ({
     individualApplication: null,
     isOrganizationLoading: false,
     isOrganizationSubmitSuccess: false,
+    isJobSeekerApplicationDeleteLoading: false,
+    isOrganizationApplicationDeleteLoading: false,
+    isOrganizationApplicationLoading: false,
+    isJobSeekerApplicationLoading: false,
   },
 })

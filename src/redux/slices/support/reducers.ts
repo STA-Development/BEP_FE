@@ -8,17 +8,18 @@ const reducers = createReducer({
   setError(state, action: IAction<null | Error | string>) {
     state.support.help.error = action.payload
   },
-  setHelpSubmittingLoading(state, action: IAction<boolean>) {
-    state.support.help.isHelpDataSublittingLoading = action.payload
-  },
   setHelpSubmitSuccess(state, action: IAction<boolean>) {
-    state.support.help.isHelpDataSubmittedSuccess = action.payload
+    state.support.help.isHelpDataSubmitSuccess = action.payload
   },
-  setIsContactUsSubmittingLoading(state, action: IAction<boolean>) {
-    state.support.contactUs.isContactUsSubmittingLoading = action.payload
+  setHelpSubmitLoading(state, action: IAction<boolean>) {
+    state.support.help.isHelpDataSubmitLoading = action.payload
+  },
+
+  setContactUsSubmitLoading(state, action: IAction<boolean>) {
+    state.support.contactUs.isContactUsDataSubmitLoading = action.payload
   },
   setContactUsSubmitSuccess(state, action: IAction<boolean>) {
-    state.support.contactUs.isContactUsDataSubmittedSuccess = action.payload
+    state.support.contactUs.isContactUsDataSubmitSuccess = action.payload
   },
 })
 

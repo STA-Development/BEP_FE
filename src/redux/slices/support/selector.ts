@@ -4,20 +4,33 @@ import { createSelector } from '@reduxjs/toolkit'
 const selector = (state: RootState) => state.support
 
 export const help = createSelector([selector], (state) => state.support.help)
-export const isHelpDataSubmittedSuccess = createSelector(
+export const isHelpDataSubmitSuccess = createSelector(
   [selector],
-  (state) => state.support.help.isHelpDataSubmittedSuccess
+  (state) => state.support.help.isHelpDataSubmitSuccess
 )
+
+export const isHelpDataSubmitLoading = createSelector(
+  [selector],
+  (state) => state.support.help.isHelpDataSubmitLoading
+)
+
 export const contactUs = createSelector([selector], (state) => state.support.contactUs)
 
-export const isContactUsDataSubmittedSuccess = createSelector(
+export const isContactUsDataSubmitSuccess = createSelector(
   [selector],
-  (state) => state.support.contactUs.isContactUsDataSubmittedSuccess
+  (state) => state.support.contactUs.isContactUsDataSubmitSuccess
+)
+
+export const isContactUsSubmitLoading = createSelector(
+  [selector],
+  (state) => state.support.contactUs.isContactUsDataSubmitLoading
 )
 
 export default {
   help,
-  isHelpDataSubmittedSuccess,
+  isHelpDataSubmitSuccess,
+  isHelpDataSubmitLoading,
   contactUs,
-  isContactUsDataSubmittedSuccess,
+  isContactUsDataSubmitSuccess,
+  isContactUsSubmitLoading,
 }

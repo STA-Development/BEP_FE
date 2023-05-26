@@ -59,9 +59,11 @@ class RequestManager {
                 })}`,
               },
             }))
+          } else {
+            dispatch(
+              viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
+            )
           }
-        } else {
-          dispatch(viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true }))
         }
       }
     )

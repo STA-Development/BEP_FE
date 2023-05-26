@@ -23,6 +23,7 @@ import { dispatch, useAppSelector } from '@redux/hooks'
 import { applicationsMiddleware, applicationsSelector } from '@redux/slices/applications'
 import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
+import { Loading } from '@uiComponents/Loading'
 import { jobSeekerValidationSchema } from '@validation/jobSeeker/jobSeeker'
 import { useRouter } from 'next/router'
 
@@ -33,9 +34,12 @@ const IndividualApplication = () => {
   const router = useRouter()
   const applicationId = router.query.id
 
-  const { isJobSeekerSubmitSuccess, individualApplication } = useAppSelector(
-    applicationsSelector.applications
-  )
+  const {
+    isJobSeekerSubmitSuccess,
+    individualApplication,
+    isOrganizationApplicationLoading,
+    isJobSeekerApplicationLoading,
+  } = useAppSelector(applicationsSelector.applications)
   const { role } = useAppSelector(usersSelector.user)
 
   const defaultValues = useMemo(
@@ -120,35 +124,41 @@ const IndividualApplication = () => {
 
   return (
     <Container className="mb-30 mt-15 pb-20">
-      <div className="mb-10 flex justify-between">
-        <Button
-          variant="text"
-          LeftIcon={LeftIcon}
-          onClick={handleGoBack}
-        >
-          {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
-        </Button>
-      </div>
-      <div className="mx-auto flex w-full max-w-[380px] flex-col items-center">
-        <Tab.Group
-          selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}
-        >
-          <Tab.List className="hidden">
-            <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 1</Tab>
-            <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 2</Tab>
-          </Tab.List>
-          <Tab.Panels>
-            <FormProvider {...methods}>
-              <form onSubmit={handleSubmit(onSubmit)}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-10 flex justify-between">
+            <Button
+              variant="text"
+              LeftIcon={LeftIcon}
+              onClick={handleGoBack}
+            >
+              {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
+            </Button>
+          </div>
+          <div className="mx-auto flex w-full max-w-[380px] flex-col items-center">
+            <Tab.Group
+              selectedIndex={selectedIndex}
+              onChange={setSelectedIndex}
+            >
+              <Tab.List className="hidden">
+                <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 1</Tab>
+                <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 2</Tab>
+              </Tab.List>
+              <Tab.Panels>
                 <Tab.Panel>
                   <div className="mb-5 flex justify-between text-xl">
                     <p>{t(Translation.PAGE_FILL_THE_FORM_JOB_ONE_TITLE)}</p>
                     <p className="text-primary">1/2</p>
                   </div>
-                  <div>
-                    <AreaOfSpecialization setSelectedIndex={setSelectedIndex} />
-                  </div>
+                  {!individualApplication ||
+                  isOrganizationApplicationLoading ||
+                  isJobSeekerApplicationLoading ? (
+                    <Loading />
+                  ) : (
+                    <div>
+                      <AreaOfSpecialization setSelectedIndex={setSelectedIndex} />
+                    </div>
+                  )}
                 </Tab.Panel>
                 <Tab.Panel>
                   <div className="mb-5 flex justify-between text-xl">
@@ -159,11 +169,11 @@ const IndividualApplication = () => {
                     <FilTheFormJobReview setSelectedIndex={setSelectedIndex} />
                   </div>
                 </Tab.Panel>
-              </form>
-            </FormProvider>
-          </Tab.Panels>
-        </Tab.Group>
-      </div>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>
+        </form>
+      </FormProvider>
     </Container>
   )
 }

@@ -12,6 +12,10 @@ export const isUpdateProfileLoading = createSelector(
 )
 export const isLogOutLoading = createSelector([selector], (state) => state.isLogOutLoading)
 export const isUserAvatarLoading = createSelector([selector], (state) => state.isUserAvatarLoading)
+export const isUserDetailsLoading = createSelector(
+  [selector],
+  (state) => state.isUserDetailsLoading
+)
 export const isResetPasswordLoading = createSelector(
   [selector],
   (state) => state.isResetPasswordLoading
@@ -47,5 +51,6 @@ export default {
   selectedLanguage,
   isRoleSelectLoading,
   isUserAvatarLoading,
+  isUserDetailsLoading,
   userAvatar,
 }
