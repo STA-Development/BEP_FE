@@ -12,11 +12,11 @@ const aboutUsManager = {
       `/core/v1/${baseURL}`
     )
   },
-  createTeamMember(params: ICreateTeamMember) {
+  createTeamMember(data: ICreateTeamMember) {
     return axiosInstance.post<ICreateTeamMember, IAxiosResponse<ICreateTeamMember>>(
       `/core/v1/${baseURL}`,
       {
-        ...params,
+        ...data,
       },
       {
         headers: {
