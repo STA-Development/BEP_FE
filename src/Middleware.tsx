@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { routerIsLogged, routerIsNotLogged } from '@constants/router'
+import { privateRoutes, publicRoutes } from '@constants/router'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
@@ -59,13 +59,13 @@ const Middleware = ({ children }: { children: ReactElement }) => {
   }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 
   useEffect(() => {
-    if (!isAuthenticated() && routerIsNotLogged.includes(router.pathname)) {
+    if (!isAuthenticated() && publicRoutes.includes(router.pathname)) {
       router.push('/')
     }
   }, [router])
 
   useEffect(() => {
-    if (isAuthenticated() && routerIsLogged.includes(router.pathname)) {
+    if (isAuthenticated() && privateRoutes.includes(router.pathname)) {
       router.push('/')
     }
   }, [router])

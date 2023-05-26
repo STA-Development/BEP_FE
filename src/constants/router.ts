@@ -1,3 +1,3 @@
-export const routerIsNotLogged = ['/profile/settings', '/profile/applications', '/fill-the-form']
+export const publicRoutes = ['/profile/settings', '/profile/applications', '/fill-the-form']
 
-export const routerIsLogged = ['/login', '/register', '/reset-password']
+export const privateRoutes = ['/login', '/register', '/reset-password']
