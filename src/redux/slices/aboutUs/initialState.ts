@@ -5,5 +5,6 @@ export const getInitialState = (): IAboutUsProps => ({
     isAboutUsLoading: false,
     aboutUsList: [],
     error: null,
+    isTeamMemberSubmitSuccess: false,
   },
 })

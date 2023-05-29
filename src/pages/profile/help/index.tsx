@@ -17,7 +17,9 @@ const defaultValues = {
 
 export const Help = () => {
   const [t] = useTranslation()
-  const isHelpDataSubmittedSuccess = useAppSelector(supportSelector.isHelpDataSubmittedSuccess)
+
+  const isHelpDataSubmitSuccess = useAppSelector(supportSelector.isHelpDataSubmitSuccess)
+  const isHelpDataSubmitLoading = useAppSelector(supportSelector.isHelpDataSubmitLoading)
 
   const methods = useForm({
     defaultValues,
@@ -36,11 +38,11 @@ export const Help = () => {
   }
 
   useEffect(() => {
-    if (isHelpDataSubmittedSuccess) {
+    if (isHelpDataSubmitSuccess) {
       reset({ ...defaultValues })
       dispatch(supportMiddleware.resetHelpSubmitDataSuccess())
     }
-  }, [isHelpDataSubmittedSuccess, reset])
+  }, [isHelpDataSubmitSuccess, reset])
 
   return (
     <div className="grid gap-4 rounded bg-gray-thin p-5 xl:p-10">
@@ -66,6 +68,8 @@ export const Help = () => {
           </div>
           <div className="w-full">
             <Button
+              isLoading={isHelpDataSubmitLoading}
+              disabled={isHelpDataSubmitLoading}
               size="fl"
               type="submit"
             >

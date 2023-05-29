@@ -16,6 +16,7 @@ export const getInitialState = (): IUserProps => ({
   otp: null,
   isRoleSelectLoading: false,
   isUserAvatarLoading: false,
+  isUserDetailsLoading: false,
   user: {
     fullName: '',
     email: '',

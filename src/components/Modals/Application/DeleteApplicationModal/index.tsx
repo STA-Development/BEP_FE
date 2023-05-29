@@ -7,7 +7,7 @@ import { Modal } from '@components/Modals'
 import { Translation } from '@constants/translations'
 import { Dialog } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
-import { applicationsMiddleware } from '@redux/slices/applications'
+import { applicationsMiddleware, applicationsSelector } from '@redux/slices/applications'
 import { usersSelector } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
@@ -21,6 +21,9 @@ export const DeleteApplicationModal = ({ id }: IDeleteApplication) => {
 
   const { role } = useAppSelector(usersSelector.user)
 
+  const { isJobSeekerApplicationDeleteLoading, isOrganizationApplicationDeleteLoading } =
+    useAppSelector(applicationsSelector.applications)
+
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.DeleteApplicationModal))
   }, [])
@@ -31,8 +34,6 @@ export const DeleteApplicationModal = ({ id }: IDeleteApplication) => {
     } else if (role === Roles.Organization) {
       dispatch(applicationsMiddleware.deleteOrganizationApplication(id))
     }
-
-    dispatch(viewsMiddleware.closeModal(ModalName.DeleteApplicationModal))
   }
 
   return (
@@ -53,6 +54,8 @@ export const DeleteApplicationModal = ({ id }: IDeleteApplication) => {
 
       <div className="flex gap-10">
         <Button
+          disabled={isJobSeekerApplicationDeleteLoading || isOrganizationApplicationDeleteLoading}
+          isLoading={isJobSeekerApplicationDeleteLoading || isOrganizationApplicationDeleteLoading}
           size="fl"
           onClick={onDelete}
         >

@@ -16,6 +16,8 @@ export const Settings = () => {
   const [userAvatar, setUserAvatar] = React.useState<Blob | null>(null)
   const avatarImage = useAppSelector(usersSelector.userAvatar)
   const isUserAvatarLoading = useAppSelector(usersSelector.isUserAvatarLoading)
+  const isUserDetailsLoading = useAppSelector(usersSelector.isUserDetailsLoading)
+
   const { name, address, role } = useAppSelector(usersSelector.user)
 
   const router = useRouter()
@@ -57,32 +59,40 @@ export const Settings = () => {
             </div>
           ) : null}
         </div>
-        <div className="text-center xl:pl-10 xl:text-left">
-          <h2 className="mb-2.5 mt-5 text-lg xl:mt-0">{name}</h2>
-          <p className="mb-5 flex justify-center text-base text-black-light xl:mb-10 xl:justify-start">
-            <LocationIcon className="mr-2.5" />
-            {address}
-          </p>
-
-          <label
-            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-            htmlFor="file_input"
-          >
-            <span className="group flex w-full cursor-pointer select-none items-center justify-center overflow-clip rounded border-2 border-primary bg-secondary px-20 py-2.5 align-middle text-base font-medium text-primary transition-none duration-200 ease-in-out hover:border-primary-light hover:bg-primary-light hover:text-secondary focus:outline-none focus:outline-0 disabled:cursor-not-allowed xl:w-auto">
-              <UserIcon className="mr-2.5" />
-              {t(Translation.PAGE_PROFILE_MENU_SETTINGS_ACTIONS_UPLOAD_AVATAR)}
-            </span>
-            <input
-              className="hidden"
-              id="file_input"
-              type="file"
-              onChange={handleAvatarUpload}
-            />
-          </label>
-        </div>
+        {isUserDetailsLoading || !address ? (
+          <Loading />
+        ) : (
+          <div className="text-center xl:pl-10 xl:text-left">
+            <h2 className="mb-2.5 mt-5 text-lg xl:mt-0">{name}</h2>
+            <p className="mb-5 flex justify-center text-base text-black-light xl:mb-10 xl:justify-start">
+              <LocationIcon className="mr-2.5" />
+              {address}
+            </p>
+            <label
+              className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+              htmlFor="file_input"
+            >
+              <span className="group flex w-full cursor-pointer select-none items-center justify-center overflow-clip rounded border-2 border-primary bg-secondary px-20 py-2.5 align-middle text-base font-medium text-primary transition-none duration-200 ease-in-out hover:border-primary-light hover:bg-primary-light hover:text-secondary focus:outline-none focus:outline-0 disabled:cursor-not-allowed xl:w-auto">
+                <UserIcon className="mr-2.5" />
+                {t(Translation.PAGE_PROFILE_MENU_SETTINGS_ACTIONS_UPLOAD_AVATAR)}
+              </span>
+              <input
+                className="hidden"
+                id="file_input"
+                type="file"
+                onChange={handleAvatarUpload}
+              />
+            </label>
+          </div>
+        )}
       </div>
-      {role === Roles.JobSeeker ? <JobSeekerProfile /> : null}
-      {role === Roles.Organization ? <OrganizationProfile /> : null}
+      {isUserDetailsLoading ? (
+        <div className="mt-5">
+          <Loading />
+        </div>
+      ) : null}
+      {!isUserDetailsLoading && role === Roles.JobSeeker ? <JobSeekerProfile /> : null}
+      {!isUserDetailsLoading && role === Roles.Organization ? <OrganizationProfile /> : null}
     </div>
   )
 }
