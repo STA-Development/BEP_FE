@@ -5,6 +5,8 @@ import { usersMiddleware } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
+import { isAuthenticated } from '@utils/authUtils'
+
 const getServerUrl = () => devToolsDefaultConfig?.server
 
 class RequestManager {
@@ -59,7 +61,7 @@ class RequestManager {
                 })}`,
               },
             }))
-          } else {
+          } else if (!isAuthenticated()) {
             dispatch(
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )
