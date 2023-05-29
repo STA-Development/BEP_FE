@@ -6,9 +6,10 @@ import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
 const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
+  const [t] = useTranslation()
+
   const error = useAppSelector(usersSelector.error)
   const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
-  const [t] = useTranslation()
 
   return (
     <div className="w-full max-w-[480px]">

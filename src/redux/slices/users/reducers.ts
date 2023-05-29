@@ -50,6 +50,9 @@ const reducers = createReducer({
   setIsUserAvatarLoading(state, action: IAction<boolean>) {
     state.isUserAvatarLoading = action.payload
   },
+  setIsUserDetailsLoading(state, action: IAction<boolean>) {
+    state.isUserDetailsLoading = action.payload
+  },
 })
 
 export default reducers

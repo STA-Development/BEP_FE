@@ -2,6 +2,8 @@ import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Translation } from '@constants/translations'
+import { useAppSelector } from '@redux/hooks'
+import { applicationsSelector } from '@redux/slices/applications'
 import { Button } from '@uiComponents/Button'
 
 interface IFilTheFormJobReviewProps {
@@ -12,6 +14,9 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
   const [t] = useTranslation()
 
   const { getValues } = useFormContext()
+
+  const isOrganizationLoading = useAppSelector(applicationsSelector.isOrganizationLoading)
+  const isJobSeekerLoading = useAppSelector(applicationsSelector.isJobSeekerLoading)
 
   const values = getValues()
   const changeJobDetails = () => {
@@ -79,6 +84,8 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
       </div>
       <div className="mt-10 flex w-full w-full max-w-[320px] justify-center">
         <Button
+          disabled={isOrganizationLoading || isJobSeekerLoading}
+          isLoading={isOrganizationLoading || isJobSeekerLoading}
           size="fl"
           type="submit"
         >

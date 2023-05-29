@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AboutUsList } from '@components/AboutUsList'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import { AboutUsList } from '@components/AboutUs/AboutUsList'
+import AboutUsMember from '@components/AboutUs/AddMember/AboutUsMember'
+import { ChangeMemberInfo } from '@components/AboutUs/ChangeMemberInfo'
+import { AboutUsMenu } from '@components/AboutUsMenu'
 import { Container } from '@components/Container'
 import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
+import { usersSelector } from '@redux/slices/users'
+import { Button } from '@uiComponents/Button'
+import { Loading } from '@uiComponents/Loading'
 
 const AboutUs = () => {
+  const [showPersonForm, setShowPersonForm] = useState<boolean>(false)
+
+  const { aboutUsList, isTeamMemberSubmitSuccess, isAboutUsLoading } = useAppSelector(
+    aboutUsSelector.aboutUs
+  )
+  const { role } = useAppSelector(usersSelector.user)
+
+  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess
+
   const [t] = useTranslation()
   const [changeMember, setChangeMember] = useState<string | null>(null)
-  const { aboutUsList } = useAppSelector(aboutUsSelector.aboutUs)
 
   useEffect(() => {
     dispatch(aboutUsMiddleware.getAboutUsList())
@@ -40,18 +55,49 @@ const AboutUs = () => {
 
       <Container className="pt-30">
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
-        {aboutUsList.map((member) => (
-          <div>
-            {changeMember === member.uuid ? (
-              <div>Form</div>
+        {role === Roles.Admin ? (
+          <div className="mb-10 flex w-full justify-end">
+            {showPersonForm ? (
+              <Button
+                size="bs"
+                onClick={() => setShowPersonForm(false)}
+              >
+                {t(Translation.PAGE_ABOUT_US_CLOSE_FORM)}
+              </Button>
             ) : (
-              <AboutUsList
-                setChangeMember={setChangeMember}
-                member={member}
-              />
+              <Button
+                size="bs"
+                onClick={() => setShowPersonForm(true)}
+              >
+                {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER)}
+              </Button>
             )}
           </div>
-        ))}
+        ) : null}
+        {showPersonForm ? <AboutUsMember setShowPersonForm={setShowPersonForm} /> : null}
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="group mb-30 flex w-full flex-col xl:px-30">
+            {aboutUsList?.map((member) => (
+              <div>
+                {role === Roles.Admin ? (
+                  <div className="mb-5 flex w-full items-end justify-end">
+                    <AboutUsMenu
+                      setChangeMember={setChangeMember}
+                      uuid={member.uuid}
+                    />
+                  </div>
+                ) : null}
+                {changeMember === member.uuid ? (
+                  <ChangeMemberInfo changeMember={changeMember} />
+                ) : (
+                  <AboutUsList member={member} />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </Container>
     </>
   )

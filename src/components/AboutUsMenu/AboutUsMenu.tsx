@@ -25,12 +25,14 @@ export const AboutUsMenu = ({ setChangeMember, uuid }: IAboutUsMemberMenu) => {
   return (
     <Menu
       as="div"
-      className="relative"
+      className="relative z-10"
     >
       {() => (
         <>
-          <Menu.Button className="inline-flex w-full items-center py-2 text-base font-medium text-black xl:text-base xl:font-medium xl:text-primary">
-            <span className="ml-5">...</span>
+          <Menu.Button className="flex w-full items-end justify-end py-2 text-base font-medium text-black xl:text-base xl:font-medium xl:text-primary">
+            <div className="flex w-full items-end">
+              <span>...</span>
+            </div>
           </Menu.Button>
           <Menu.Items
             className="absolute left-0 mt-3 w-44 divide-y divide-gray-thin rounded-b
