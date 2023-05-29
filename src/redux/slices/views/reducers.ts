@@ -32,6 +32,12 @@ const reducers = createReducer({
   updateToastNotificationState<P>(state: ViewsProps, action: IAction<IOpenedAlert<P>>) {
     state.toastNotificationPopUp = action.payload ? action.payload : { open: false, props: {} }
   },
+  setError(state: ViewsProps, action: IAction<string>) {
+    state.error.error = action.payload
+  },
+  resetError(state: ViewsProps, action: IAction<null>) {
+    state.error.error = action.payload
+  },
 })
 
 export default reducers

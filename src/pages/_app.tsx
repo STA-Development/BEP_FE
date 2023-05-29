@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
+import ErrorMessagePopup from '@components/ErrorMessagePopup/ErrorMessagePopup'
 import { ModalsController } from '@components/ModalsController/ModalsController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
@@ -83,6 +84,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
       <main>
         <Provider store={store}>
           <RedirectionHandler />
+          <ErrorMessagePopup />
           <Layout>
             {HierarchicalLayout ? (
               <HierarchicalLayout>

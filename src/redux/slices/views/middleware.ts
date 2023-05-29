@@ -12,6 +12,8 @@ const {
   removeModalFromList,
   updateToastNotificationState,
   removeAllModalsFromList,
+  setError,
+  resetError,
 } = slice.actions
 
 const setRedirectionState = (value: RedirectionProps) => (dispatch: AppDispatch) => {
@@ -46,6 +48,14 @@ const setToastNotificationPopUpState =
     dispatch(updateToastNotificationState(value))
   }
 
+const setErrorMessage = (value: string) => (dispatch: AppDispatch) => {
+  dispatch(setError(value))
+}
+
+const resetErrorMessage = () => (dispatch: AppDispatch) => {
+  dispatch(resetError(null))
+}
+
 export default {
   setRedirectionState,
   activateMenuItem,
@@ -54,4 +64,6 @@ export default {
   closeModal,
   setToastNotificationPopUpState,
   closeAllModals,
+  setErrorMessage,
+  resetErrorMessage,
 }

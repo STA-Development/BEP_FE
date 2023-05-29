@@ -6,6 +6,7 @@ import {
   DeleteApplicationModal,
   IDeleteApplication,
 } from '@components/Modals/Application/DeleteApplicationModal'
+import { Error, IErrorModalProps } from '@components/Modals/Error'
 import { useAppSelector } from '@redux/hooks'
 import { viewsSelector } from '@redux/slices/views'
 
@@ -15,6 +16,12 @@ const getAddApplicationModal = (modal: IOpenedModal<null>) => (
 )
 const getDeleteApplicationModal = (modal: IOpenedModal<IDeleteApplication>) => (
   <DeleteApplicationModal
+    key={modal.name}
+    {...modal.props}
+  />
+)
+const getErrorMessage = (modal: IOpenedModal<IErrorModalProps>) => (
+  <Error
     key={modal.name}
     {...modal.props}
   />
@@ -32,6 +39,8 @@ export const ModalsController = () => {
             return getAddApplicationModal(modal)
           case ModalName.DeleteApplicationModal:
             return getDeleteApplicationModal(modal)
+          case ModalName.getErrorMessage:
+            return getErrorMessage(modal)
           default:
             return null
         }

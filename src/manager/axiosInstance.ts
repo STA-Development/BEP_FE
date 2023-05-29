@@ -64,6 +64,8 @@ class RequestManager {
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )
           }
+        } else {
+          dispatch(viewsMiddleware.setErrorMessage(error.response.data.status.message))
         }
       }
     )

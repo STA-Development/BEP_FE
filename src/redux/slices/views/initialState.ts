@@ -15,4 +15,7 @@ export const getInitialState = (): ViewsProps => ({
     open: false,
     props: {},
   },
+  error: {
+    error: null,
+  },
 })
