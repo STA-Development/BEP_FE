@@ -34,6 +34,8 @@ export const DeleteApplicationModal = ({ id }: IDeleteApplication) => {
     } else if (role === Roles.Organization) {
       dispatch(applicationsMiddleware.deleteOrganizationApplication(id))
     }
+
+    onClose()
   }
 
   return (
