@@ -21,6 +21,7 @@ export const JobSeekerProfile = () => {
     () => ({ name, email, phone, password: '********', address }),
     [name, email, phone, address]
   )
+
   const methods = useForm({
     defaultValues: defaultValues(values),
     mode: 'onSubmit',

@@ -99,8 +99,8 @@ const jobSeekerManager = {
     return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/organization`, data)
   },
 
-  getJobSeekerApplicationsPdf() {
-    return axiosInstance.get<BlobPart>(`${baseURL}/v1/job-seeker/pdf`, {
+  getJobSeekerApplicationsPdf(uuid: string) {
+    return axiosInstance.get<BlobPart>(`${baseURL}/v1/job-seeker/pdf/${uuid}`, {
       headers: {
         'Content-Type': 'application/pdf',
       },

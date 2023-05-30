@@ -15,6 +15,10 @@ export interface IApplications {
   individualApplication: null | IIndividualApplication
   isOrganizationLoading: boolean
   isOrganizationSubmitSuccess: boolean
+  isJobSeekerApplicationDeleteLoading: boolean
+  isOrganizationApplicationDeleteLoading: boolean
+  isOrganizationApplicationLoading: boolean
+  isJobSeekerApplicationLoading: boolean
   applicationsPdf: null | File
   isChangeIsActiveSuccess: boolean
 }

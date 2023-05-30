@@ -20,6 +20,18 @@ const reducers = createReducer({
   setJobSeekerSubmitSuccess(state, action: IAction<boolean>) {
     state.applications.isJobSeekerSubmitSuccess = action.payload
   },
+  setJobSeekerApplicationDeleteLoading(state, action: IAction<boolean>) {
+    state.applications.isJobSeekerApplicationDeleteLoading = action.payload
+  },
+  setJobSeekerApplicationLoading(state, action: IAction<boolean>) {
+    state.applications.isJobSeekerApplicationLoading = action.payload
+  },
+  setOrganizationApplicationDeleteLoading(state, action: IAction<boolean>) {
+    state.applications.isOrganizationApplicationDeleteLoading = action.payload
+  },
+  setOrganizationApplicationLoading(state, action: IAction<boolean>) {
+    state.applications.isOrganizationApplicationLoading = action.payload
+  },
   setOrganizationLoading(state, action: IAction<boolean>) {
     state.applications.isOrganizationLoading = action.payload
   },

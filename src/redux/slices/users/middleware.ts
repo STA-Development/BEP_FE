@@ -32,6 +32,7 @@ const {
   setErrorGoogleSignIn,
   setIsRoleSelectLoading,
   setIsUserAvatarLoading,
+  setIsUserDetailsLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -220,6 +221,8 @@ const selectRole = (role: keyof typeof Roles) => async (dispatch: AppDispatch) =
 
 const getUser = () => async (dispatch: AppDispatch) => {
   try {
+    dispatch(setIsUserDetailsLoading(true))
+
     if (store.getState().users.user.role === Roles.JobSeeker) {
       const response = await API.jobSeeker.getJobSeeker()
 
@@ -231,6 +234,8 @@ const getUser = () => async (dispatch: AppDispatch) => {
     }
   } catch (err) {
     dispatch(setError((err as IError).response?.data.status.message))
+  } finally {
+    dispatch(setIsUserDetailsLoading(false))
   }
 }
 

@@ -92,31 +92,33 @@ const FillTheForm = () => {
     //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isJobSeekerSubmitSuccess, reset, isOrganizationSubmitSuccess, role])
 
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <Container className="mb-30 mt-15 pb-20">
-      <div className="mb-10 flex justify-between">
-        <Button
-          variant="text"
-          LeftIcon={LeftIcon}
-          onClick={() => {
-            setSelectedIndex((prev) => prev - 1)
-          }}
-        >
-          {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
-        </Button>
-      </div>
-      <div className="mx-auto flex w-full max-w-[380px] flex-col items-center">
-        <Tab.Group
-          selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}
-        >
-          <Tab.List className="hidden">
-            <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 1</Tab>
-            <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 2</Tab>
-          </Tab.List>
-          <Tab.Panels>
-            <FormProvider {...methods}>
-              <form onSubmit={handleSubmit(onSubmit)}>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-10 flex justify-between">
+            <Button
+              variant="text"
+              LeftIcon={LeftIcon}
+              onClick={handleGoBack}
+            >
+              {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
+            </Button>
+          </div>
+          <div className="mx-auto flex w-full max-w-[380px] flex-col items-center">
+            <Tab.Group
+              selectedIndex={selectedIndex}
+              onChange={setSelectedIndex}
+            >
+              <Tab.List className="hidden">
+                <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 1</Tab>
+                <Tab>{t(Translation.PAGE_FILL_THE_FORM_JOB_TABS)} 2</Tab>
+              </Tab.List>
+              <Tab.Panels>
                 <Tab.Panel>
                   <div className="mb-5 flex justify-between text-xl">
                     <p>{t(Translation.PAGE_FILL_THE_FORM_JOB_ONE_TITLE)}</p>
@@ -135,11 +137,11 @@ const FillTheForm = () => {
                     <FilTheFormJobReview setSelectedIndex={setSelectedIndex} />
                   </div>
                 </Tab.Panel>
-              </form>
-            </FormProvider>
-          </Tab.Panels>
-        </Tab.Group>
-      </div>
+              </Tab.Panels>
+            </Tab.Group>
+          </div>
+        </form>
+      </FormProvider>
     </Container>
   )
 }

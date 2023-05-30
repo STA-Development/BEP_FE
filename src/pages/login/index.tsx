@@ -45,7 +45,7 @@ export const Login = () => {
     <Container className="pt-10">
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mx-auto flex w-[380px] flex-col items-center">
+          <div className="mx-auto flex w-full max-w-[380px] flex-col items-center">
             <h1 className="mb-5 text-xl">{t(Translation.PAGE_LOGIN_TITLE)}</h1>
             <Button
               variant="outlined"

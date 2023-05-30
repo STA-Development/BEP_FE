@@ -7,11 +7,15 @@ import { applicationsMiddleware } from '@redux/slices/applications'
 import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
-export const ApplicationListHeader = () => {
+interface IApplicationListHeaderProps {
+  uuid?: string
+}
+
+export const ApplicationListHeader = ({ uuid }: IApplicationListHeaderProps) => {
   const { role } = useAppSelector(usersSelector.user)
   const [t] = useTranslation()
   const onFileDownload = () => {
-    dispatch(applicationsMiddleware.getJobSeekerApplicationsPdf())
+    dispatch(applicationsMiddleware.getJobSeekerApplicationsPdf(uuid as string))
   }
 
   return (

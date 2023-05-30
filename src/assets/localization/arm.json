@@ -49,5 +49,13 @@
   "page.fill.the.form.job.tabs": "Tab",
   "page.profile.menu.applications.actions.deactivate": "Ապաակտիվացնել հավելվածը",
   "page.profile.menu.applications.actions.activate": "Ակտիվացնել հավելվածը",
-  "page.profile.menu.applications.download.pdf": "Բեռնել PDF"
+  "page.profile.menu.applications.download.pdf": "Բեռնել PDF",
+  "page.about.us.add.team.member": "Ավելացնել թիմի անդամ",
+  "page.about.us.add.team.member.header": "Վերնագիր",
+  "page.about.us.add.team.member.paragraph": "պարբերություն",
+  "page.about.us.add.team.member.description": "Նկարագրություն",
+  "page.about.us.add.team.member.upload.image": "Վերբեռնել պատկերը",
+  "page.about.us.add.team.member.submit": "Ներկայացնել",
+  "page.about.us.close.form": "փակել",
+  "navbar.profile": "Profile"
 }

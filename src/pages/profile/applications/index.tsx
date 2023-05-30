@@ -84,8 +84,8 @@ export const Applications = () => {
                 !item.isActive && 'bg-gray-light'
               } mb-5 rounded border border-gray-light p-10`}
             >
-              <ApplicationListHeader />
-              <div className="mb-10 flex">
+              <ApplicationListHeader uuid={item?.uuid} />
+              <div className="mb-10 flex flex-wrap">
                 <p className="mr-10 text-base text-black-light">
                   Status:<span className="ml-5 font-medium text-primary">{item.status}</span>
                 </p>

@@ -25,6 +25,14 @@ export interface InputTypeCheckbox {
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
+export interface IImageInputProps {
+  inputRef?: LegacyRef<HTMLInputElement>
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  type: string
+
+  error?: string | null
+}
+
 export const Input = React.forwardRef(
   (
     {
@@ -145,4 +153,18 @@ export const InputCheckbox = React.forwardRef(
       </div>
     )
   }
+)
+
+export const ImageInput = React.forwardRef(
+  ({ inputRef, onChange, type, error }: IImageInputProps) => (
+    <div className="flex items-center">
+      <input
+        className="hidden"
+        type={type}
+        ref={inputRef}
+        onChange={onChange}
+      />
+      {error ? <p className="mt-2.5 text-xs text-red">{error}</p> : null}
+    </div>
+  )
 )

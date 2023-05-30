@@ -1,3 +1,4 @@
+import { ModalName } from '@allTypes/modals'
 import {
   IDeactivateApplicationProps,
   IJobSeekerApplicationProps,
@@ -5,6 +6,7 @@ import {
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
+import { viewsMiddleware } from '@redux/slices/views'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -19,6 +21,10 @@ const {
   setOrganizationLoading,
   setOrganizationSubmitSuccess,
   setChangeIsActiveSuccess,
+  setOrganizationApplicationDeleteLoading,
+  setJobSeekerApplicationDeleteLoading,
+  setOrganizationApplicationLoading,
+  setJobSeekerApplicationLoading,
 } = slice.actions
 
 const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDispatch) => {
@@ -63,7 +69,7 @@ const getJobSeekerApplication = () => async (dispatch: AppDispatch) => {
 
 const deleteJobSeekerApplication = (uuid: string) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setApplicationsLoading(true))
+    dispatch(setJobSeekerApplicationDeleteLoading(true))
 
     await API.jobSeeker.deleteJobSeekerApplication(uuid)
 
@@ -73,13 +79,13 @@ const deleteJobSeekerApplication = (uuid: string) => async (dispatch: AppDispatc
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setApplicationsLoading(false))
+    dispatch(setJobSeekerApplicationDeleteLoading(false))
   }
 }
 
 const getJobSeekerIndividualApplication = (uuid: string) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setApplicationsLoading(true))
+    dispatch(setJobSeekerApplicationLoading(true))
 
     const response = await API.jobSeeker.getJobSeekerIndividualApplication(uuid)
 
@@ -87,7 +93,7 @@ const getJobSeekerIndividualApplication = (uuid: string) => async (dispatch: App
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setApplicationsLoading(false))
+    dispatch(setJobSeekerApplicationLoading(false))
   }
 }
 
@@ -125,7 +131,7 @@ const getOrganizationApplication = () => async (dispatch: AppDispatch) => {
 
 const getOrganizationIndividualApplication = (uuid: string) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setApplicationsLoading(true))
+    dispatch(setOrganizationApplicationLoading(true))
 
     const response = await API.jobSeeker.getOrganizationIndividualApplication(uuid)
 
@@ -133,7 +139,7 @@ const getOrganizationIndividualApplication = (uuid: string) => async (dispatch: 
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setApplicationsLoading(false))
+    dispatch(setOrganizationApplicationLoading(false))
   }
 }
 
@@ -153,17 +159,16 @@ const upDateOrganizationIndividualApplication =
 
 const deleteOrganizationApplication = (uuid: string) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setApplicationsLoading(true))
+    dispatch(setOrganizationApplicationDeleteLoading(true))
 
     await API.jobSeeker.deleteOrganizationApplication(uuid)
+    dispatch(viewsMiddleware.closeModal(ModalName.DeleteApplicationModal))
 
-    const response = await API.jobSeeker.getOrganizationApplication()
-
-    dispatch(setApplicationsList(response?.data?.data))
+    dispatch(getOrganizationApplication())
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {
-    dispatch(setApplicationsLoading(false))
+    dispatch(setOrganizationApplicationDeleteLoading(false))
   }
 }
 
@@ -171,9 +176,9 @@ const resetOrganizationSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setJobSeekerSubmitSuccess(false))
 }
 
-const getJobSeekerApplicationsPdf = () => async (dispatch: AppDispatch) => {
+const getJobSeekerApplicationsPdf = (uuid: string) => async (dispatch: AppDispatch) => {
   try {
-    const response = await API.jobSeeker.getJobSeekerApplicationsPdf()
+    const response = await API.jobSeeker.getJobSeekerApplicationsPdf(uuid)
 
     const blobPart: BlobPart = response?.data
 
