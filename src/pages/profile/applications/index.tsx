@@ -20,9 +20,12 @@ export const Applications = () => {
   const [t] = useTranslation()
   const { role } = useAppSelector(usersSelector.user)
 
-  const { applicationsList, isApplicationLoading, isChangeIsActiveSuccess } = useAppSelector(
-    applicationsSelector.applications
-  )
+  const {
+    applicationsList,
+    isApplicationLoading,
+    isChangeIsActiveSuccess,
+    isCloneApplicationSuccess,
+  } = useAppSelector(applicationsSelector.applications)
 
   const loading = !role || isApplicationLoading || !applicationsList || isChangeIsActiveSuccess
 
@@ -53,6 +56,14 @@ export const Applications = () => {
     }
   }
 
+  const cloneApplication = (uuid: string) => {
+    if (role === Roles.JobSeeker) {
+      dispatch(applicationsMiddleware.cloneJobSeekerApplication(uuid))
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.cloneOrganizationApplication(uuid))
+    }
+  }
+
   useEffect(() => {
     if (role === Roles.JobSeeker) {
       dispatch(applicationsMiddleware.getJobSeekerApplication())
@@ -60,8 +71,9 @@ export const Applications = () => {
       dispatch(applicationsMiddleware.getOrganizationApplication())
     }
 
+    dispatch(applicationsMiddleware.resetCloneSubmitSuccess())
     dispatch(applicationsMiddleware.resetChangeIsActiveSuccess())
-  }, [role, isChangeIsActiveSuccess])
+  }, [role, isChangeIsActiveSuccess, isCloneApplicationSuccess])
 
   // TODO: add clone and deactivate
   return (
@@ -104,9 +116,7 @@ export const Applications = () => {
                 <Button
                   variant="outlined"
                   LeftIcon={CloneIcon}
-                  onClick={() =>
-                    deactivateApplication({ uuid: item.uuid, isActive: !item.isActive })
-                  }
+                  onClick={() => cloneApplication(item.uuid)}
                 >
                   Clone Application
                 </Button>

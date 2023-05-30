@@ -21,6 +21,7 @@ export interface IApplications {
   isJobSeekerApplicationLoading: boolean
   applicationsPdf: null | File
   isChangeIsActiveSuccess: boolean
+  isCloneApplicationSuccess: boolean
 }
 
 export interface IJobSeekerApplicationProps {

@@ -123,6 +123,16 @@ const jobSeekerManager = {
       }
     )
   },
+  cloneJobSeekerApplication(uuid: string) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/job-seeker/application/clone/${uuid}`
+    )
+  },
+  cloneOrganizationApplication(uuid: string) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/organization/application/clone/${uuid}`
+    )
+  },
 }
 
 export default jobSeekerManager

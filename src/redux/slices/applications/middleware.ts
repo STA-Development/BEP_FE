@@ -25,6 +25,7 @@ const {
   setJobSeekerApplicationDeleteLoading,
   setOrganizationApplicationLoading,
   setJobSeekerApplicationLoading,
+  setCloneSubmitSuccess,
 } = slice.actions
 
 const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDispatch) => {
@@ -110,10 +111,6 @@ const upDateJobSeekerIndividualApplication =
       dispatch(setOrganizationLoading(false))
     }
   }
-
-const resetJobSeekerSubmitSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setJobSeekerSubmitSuccess(false))
-}
 
 const getOrganizationApplication = () => async (dispatch: AppDispatch) => {
   try {
@@ -226,8 +223,39 @@ const upDateOrganizationApplicationIsActive =
     }
   }
 
+const cloneJobSeekerApplication = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setCloneSubmitSuccess(true))
+
+    await API.jobSeeker.cloneJobSeekerApplication(uuid)
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setApplicationsLoading(false))
+  }
+}
+const cloneOrganizationApplication = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setCloneSubmitSuccess(true))
+
+    await API.jobSeeker.cloneOrganizationApplication(uuid)
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setApplicationsLoading(false))
+  }
+}
+
+const resetJobSeekerSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setJobSeekerSubmitSuccess(false))
+}
+
 const resetChangeIsActiveSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setChangeIsActiveSuccess(false))
+}
+
+const resetCloneSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setCloneSubmitSuccess(false))
 }
 
 export default {
@@ -247,4 +275,7 @@ export default {
   upDateJobSeekerApplicationIsActive,
   upDateOrganizationApplicationIsActive,
   resetChangeIsActiveSuccess,
+  cloneJobSeekerApplication,
+  cloneOrganizationApplication,
+  resetCloneSubmitSuccess,
 }

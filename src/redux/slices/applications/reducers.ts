@@ -53,6 +53,9 @@ const reducers = createReducer({
   setChangeIsActiveSuccess(state, action: IAction<boolean>) {
     state.applications.isChangeIsActiveSuccess = action.payload
   },
+  setCloneSubmitSuccess(state, action: IAction<boolean>) {
+    state.applications.isCloneApplicationSuccess = action.payload
+  },
 })
 
 export default reducers
