@@ -69,54 +69,52 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Container>
-      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin">
-        <div className="flex flex-wrap justify-center ">
-          <aside className="mr-10">
-            <h1 className="text-xl font-medium xl:mb-5 xl:font-normal">{label}</h1>
-            <div className="mb-5 xl:hidden">
+      <div className="mb-30 mt-5 flex flex-wrap justify-center divide-gray-thin xl:mt-10 xl:grid xl:grid-cols-5 xl:gap-10 xl:divide-x">
+        <aside className="mr-10">
+          <h1 className="text-xl font-medium xl:mb-5 xl:font-normal">{label}</h1>
+          <div className="mb-5 xl:hidden">
+            <Button
+              variant="text"
+              onClick={openFilter}
+              LeftIcon={FilterIcon}
+              className="pl-0"
+            >
+              <p>{`${
+                !active
+                  ? t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_OPEN)
+                  : t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_CLOSE)
+              }`}</p>
+            </Button>
+          </div>
+          <div className={`xl:block ${active ? `flex` : `hidden`}`}>
+            <ul className="mb-10">
+              {Object.values(menu).map((item) => (
+                <li
+                  key={item.label}
+                  className="mb-5 text-base font-medium text-primary"
+                >
+                  <Link
+                    href={item.href}
+                    className="flex items-center"
+                  >
+                    <span className="mr-2.5">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden xl:block">
               <Button
-                variant="text"
-                onClick={openFilter}
-                LeftIcon={FilterIcon}
-                className="pl-0"
+                onClick={handleLogOut}
+                size="fl"
+                LeftIcon={LogOutIcon}
               >
-                <p>{`${
-                  !active
-                    ? t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_OPEN)
-                    : t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_CLOSE)
-                }`}</p>
+                {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
               </Button>
             </div>
-            <div className={`xl:block ${active ? `flex` : `hidden`}`}>
-              <ul className="mb-10">
-                {Object.values(menu).map((item) => (
-                  <li
-                    key={item.label}
-                    className="mb-5 text-base font-medium text-primary"
-                  >
-                    <Link
-                      href={item.href}
-                      className="flex items-center"
-                    >
-                      <span className="mr-2.5">{item.icon}</span>
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="hidden xl:block">
-                <Button
-                  onClick={handleLogOut}
-                  size="bs"
-                  LeftIcon={LogOutIcon}
-                >
-                  {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
-                </Button>
-              </div>
-            </div>
-          </aside>
-          <main className="col-span-4 xl:pl-10">{children}</main>
-        </div>
+          </div>
+        </aside>
+        <main className="col-span-4 xl:pl-10">{children}</main>
       </div>
     </Container>
   )
