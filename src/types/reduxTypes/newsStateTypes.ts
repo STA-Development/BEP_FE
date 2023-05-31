@@ -1,8 +1,8 @@
-import { INewsResponse } from '@axios/news/newsManagerTypes'
+import { IIndividualNewsResponse, INewsResponse } from '@axios/news/newsManagerTypes'
 
 export interface INewsProps {
   news: INews
-  individualNews: INewsResponse | null
+  individualNews: IIndividualNewsResponse | null
 }
 
 export interface INews {
@@ -23,19 +23,19 @@ export interface ICreateNewsProps {
   imageUrl: FileList | File | null
 }
 
+export interface IFormData {
+  header: string
+  paragraph: string
+  imageURL: string | File
+}
+
 export interface IChangeNewsForm {
   header?: string
   paragraph?: string
-  imageUrl?: string
+  imageURL?: string | File
 }
 
 export interface IChangeNewsFormProps {
   payload: IChangeNewsForm
   uuid: string
-}
-
-export interface FormData {
-  header?: string
-  paragraph?: string
-  imageUrl?: string
 }

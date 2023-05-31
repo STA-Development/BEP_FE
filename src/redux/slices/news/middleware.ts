@@ -1,4 +1,4 @@
-import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
+import { IChangeNewsFormProps, IFormData } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import store, { AppDispatch } from '@redux/store'
@@ -60,7 +60,7 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
-const createNews = (formData: ICreateNewsProps) => async (dispatch: AppDispatch) => {
+const createNews = (formData: IFormData) => async (dispatch: AppDispatch) => {
   try {
     await API.news.createNews(formData)
 

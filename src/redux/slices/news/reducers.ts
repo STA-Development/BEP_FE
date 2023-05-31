@@ -1,5 +1,5 @@
 import { INewsProps } from '@allTypes/reduxTypes/newsStateTypes'
-import { INewsResponse } from '@axios/news/newsManagerTypes'
+import { IIndividualNewsResponse, INewsResponse } from '@axios/news/newsManagerTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 
@@ -12,7 +12,7 @@ const reducers = createReducer({
   setNewsList(state, action: IAction<INewsResponse[]>) {
     state.news.newsList = action.payload
   },
-  setIndividualNews(state, action: IAction<INewsResponse>) {
+  setIndividualNews(state, action: IAction<IIndividualNewsResponse>) {
     state.individualNews = action.payload
   },
   setNewsListLoading(state, action: IAction<boolean>) {

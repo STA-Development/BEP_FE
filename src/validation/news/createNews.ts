@@ -5,7 +5,7 @@ import { mixed, object, string } from 'yup'
 export const createNewsValidationSchema = object().shape({
   header: string().required(i18next.t(Translation.CREATE_NEWS_HEADER) as string),
   paragraph: string().required(i18next.t(Translation.CREATE_NEWS_PARAGRAPH) as string),
-  imageUrl: mixed()
+  imageURL: mixed()
     .test('required', 'You need to provide a file', (file) => {
       if (file) {
         return true
@@ -14,18 +14,4 @@ export const createNewsValidationSchema = object().shape({
       return false
     })
     .required('Image is required'),
-})
-
-export const changeNewsValidationSchema = object({
-  header: string().required(),
-  paragraph: string().required(),
-  imageUrl: mixed()
-    .test('required', 'You need to provide a file', (file) => {
-      if (file) {
-        return true
-      }
-
-      return false
-    })
-    .required(),
 })
