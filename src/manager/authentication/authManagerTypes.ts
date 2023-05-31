@@ -23,6 +23,7 @@ export interface IResetPasswordParams {
 
 export interface ISignInParams {
   email: string
+  remember: boolean
   password: string
 }
 

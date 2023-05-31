@@ -5,8 +5,6 @@ import { usersMiddleware } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
-import { isAuthenticated } from '@utils/authUtils'
-
 const getServerUrl = () => devToolsDefaultConfig?.server
 
 class RequestManager {
@@ -44,7 +42,7 @@ class RequestManager {
       (error) => {
         if (
           error.response.status === 403 &&
-          error.message === ErrorMessages.AccessTokenExpiryErrorMessage
+          error?.response?.data?.status?.message === ErrorMessages.AccessTokenExpiryErrorMessage
         ) {
           const refreshToken = localStorage.getItem('refreshToken')
 
@@ -53,15 +51,25 @@ class RequestManager {
 
             const originalRequest = error.config
 
-            axiosInstance.request(originalRequest).then(() => ({
-              headers: {
-                ...originalRequest.headers,
-                Authorization: `Bearer ${usersMiddleware.getAccessTokenWithRefreshToken({
-                  refreshToken,
-                })}`,
-              },
-            }))
-          } else if (!isAuthenticated()) {
+            try {
+              axiosInstance.request(originalRequest).then(() => ({
+                headers: {
+                  ...originalRequest.headers,
+                  Authorization: `Bearer ${usersMiddleware.getAccessTokenWithRefreshToken({
+                    refreshToken,
+                  })}`,
+                },
+              }))
+            } catch (err) {
+              localStorage.removeItem('refreshToken')
+              localStorage.removeItem('accessToken')
+              dispatch(
+                viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
+              )
+            }
+          } else {
+            localStorage.removeItem('refreshToken')
+            localStorage.removeItem('accessToken')
             dispatch(
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )

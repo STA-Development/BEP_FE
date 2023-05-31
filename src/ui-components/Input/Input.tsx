@@ -62,7 +62,7 @@ export const Input = React.forwardRef(
         error
           ? 'border-red placeholder:text-red'
           : [
-              color === 'primary' && 'focus:border-primary placeholder:text-black',
+              color === 'primary' && 'focus:border-primary placeholder:text-black-light',
               color === 'secondary' && 'border-gray-thin placeholder:text-black',
             ],
       ],

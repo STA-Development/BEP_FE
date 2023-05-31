@@ -50,7 +50,7 @@ export const Settings = () => {
             </div>
           ) : null}
         </div>
-        {isUserDetailsLoading || !address ? (
+        {isUserDetailsLoading ? (
           <Loading />
         ) : (
           <div className="text-center xl:pl-10 xl:text-left">
