@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { IChangeNewsFormProps, IFormData } from '@allTypes/reduxTypes/newsStateTypes'
 import { INewsResponse } from '@axios/news/newsManagerTypes'
+import { SharedCRU } from '@components/Admin/Common'
 import { Container } from '@components/Container'
-import { CustomHookForm } from '@components/HookForm'
 import { LeftIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
@@ -31,9 +31,9 @@ const ChangeNews = () => {
 
   const defaultValues = useMemo(
     () => ({
-      header: individualNews?.header,
-      paragraph: individualNews?.paragraph,
-      imageURL: individualNews?.imageURL,
+      header: individualNews?.header ?? '',
+      paragraph: individualNews?.paragraph ?? '',
+      imageURL: individualNews?.imageURL ?? '',
     }),
     [individualNews]
   )
@@ -43,17 +43,17 @@ const ChangeNews = () => {
     mode: 'onChange',
   })
 
-  const { reset } = methods
+  const { reset, handleSubmit } = methods
   const onSubmit = (data: IFormData) => {
     const payload: MyObject = {}
 
     Object.keys(data).forEach((key: string) => {
       if (
         individualNews &&
-        individualNews[key as keyof INewsResponse] !== data[key as keyof IFormData] &&
-        data[key as keyof IFormData] !== undefined
+        typeof data[key as keyof IFormData] !== undefined &&
+        individualNews[key as keyof INewsResponse] !== data[key as keyof IFormData]
       ) {
-        payload[key as keyof MyObject] = data[key as keyof IFormData]
+        payload[key as keyof IFormData] = data[key as keyof IFormData]
       }
     })
 
@@ -104,11 +104,14 @@ const ChangeNews = () => {
         <Loading />
       ) : (
         <div className="mt-10 flex flex-row-reverse justify-between">
-          <CustomHookForm
-            onSubmit={onSubmit}
-            individualNews={individualNews}
-            methods={methods as UseFormReturn<IFormData>}
-          />
+          <FormProvider {...methods}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full"
+            >
+              <SharedCRU individualNews={individualNews} />
+            </form>
+          </FormProvider>
         </div>
       )}
     </Container>

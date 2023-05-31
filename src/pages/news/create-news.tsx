@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import { useForm, UseFormReturn } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { IFormData } from '@allTypes/reduxTypes/newsStateTypes'
+import { ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
+import { SharedCRU } from '@components/Admin/Common'
 import { Container } from '@components/Container'
-import { CustomHookForm } from '@components/HookForm'
 import { LeftIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
@@ -17,7 +17,7 @@ import { useRouter } from 'next/router'
 const defaultValues = {
   header: '',
   paragraph: '',
-  imageURL: '',
+  imageURL: null,
 }
 
 const CreateNews = () => {
@@ -33,9 +33,9 @@ const CreateNews = () => {
     mode: 'onChange',
   })
 
-  const { reset } = methods
+  const { reset, handleSubmit } = methods
 
-  const onSubmit = (data: IFormData) => {
+  const onSubmit = (data: ICreateNewsProps) => {
     dispatch(newsMiddleware.createNews(data))
   }
 
@@ -64,10 +64,14 @@ const CreateNews = () => {
         </Button>
       </div>
       <div className="mt-10 flex flex-row-reverse justify-between">
-        <CustomHookForm
-          onSubmit={onSubmit}
-          methods={methods as UseFormReturn<IFormData>}
-        />
+        <FormProvider {...methods}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full"
+          >
+            <SharedCRU />
+          </form>
+        </FormProvider>
       </div>
     </Container>
   )

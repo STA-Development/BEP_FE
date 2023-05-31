@@ -20,7 +20,7 @@ export interface INews {
 export interface ICreateNewsProps {
   header: string
   paragraph: string
-  imageUrl: FileList | File | null
+  imageURL: FileList | File | null
 }
 
 export interface IFormData {
