@@ -149,12 +149,6 @@ export const ChangeMemberInfo = ({ changeMember }: IChangeMemberInfoProps) => {
                 >
                   {t(Translation.PAGE_ABOUT_US_ADD_TEAM_MEMBER_SUBMIT)}
                 </Button>
-                <Button
-                  variant="outlined"
-                  size="lg"
-                >
-                  Close
-                </Button>
               </div>
             </form>
           </FormProvider>

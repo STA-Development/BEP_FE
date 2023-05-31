@@ -83,10 +83,20 @@ const AboutUs = () => {
               <div>
                 {role === Roles.Admin ? (
                   <div className="mb-5 flex w-full items-end justify-end">
-                    <AboutUsMenu
-                      setChangeMember={setChangeMember}
-                      uuid={member.uuid}
-                    />
+                    {changeMember === member.uuid ? (
+                      <Button
+                        size="bs"
+                        variant="outlined"
+                        onClick={() => setChangeMember(null)}
+                      >
+                        {t(Translation.PAGE_ABOUT_US_CLOSE_FORM)}
+                      </Button>
+                    ) : (
+                      <AboutUsMenu
+                        setChangeMember={setChangeMember}
+                        uuid={member.uuid}
+                      />
+                    )}
                   </div>
                 ) : null}
                 {changeMember === member.uuid ? (

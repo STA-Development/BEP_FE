@@ -54,5 +54,7 @@
   "page.about.us.add.team.member.upload.image": "Upload Image",
   "page.about.us.add.team.member.submit": "Submit",
   "page.about.us.close.form": "close",
-  "navbar.profile": "Profile"
+  "navbar.profile": "Profile",
+  "page.about.us.team.member.menu.edit": "Edit",
+  "page.about.us.team.member.menu.delete": "Delete"
 }

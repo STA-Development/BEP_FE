@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
+import { Translation } from '@constants/translations'
 import { Menu } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { viewsMiddleware } from '@redux/slices/views'
@@ -11,6 +13,8 @@ interface IAboutUsMemberMenu {
 }
 
 export const AboutUsMenu = ({ setChangeMember, uuid }: IAboutUsMemberMenu) => {
+  const [t] = useTranslation()
+
   const onDeleteTeamMemberModal = useCallback(() => {
     dispatch(
       viewsMiddleware.openModal({
@@ -45,7 +49,7 @@ export const AboutUsMenu = ({ setChangeMember, uuid }: IAboutUsMemberMenu) => {
                   size="fl"
                   onClick={() => setChangeMember(uuid)}
                 >
-                  <p className="ml-2.5 ">Create</p>
+                  <p className="ml-2.5 ">{t(Translation.PAGE_ABOUT_US_TEAM_MEMBER_MENU_EDIT)}</p>
                 </Button>
               </Menu.Item>
               <Menu.Item>
@@ -54,7 +58,7 @@ export const AboutUsMenu = ({ setChangeMember, uuid }: IAboutUsMemberMenu) => {
                   size="fl"
                   onClick={onDeleteTeamMemberModal}
                 >
-                  <p className="ml-2.5 ">Delete</p>
+                  <p className="ml-2.5 ">{t(Translation.PAGE_ABOUT_US_TEAM_MEMBER_MENU_DELETE)}</p>
                 </Button>
               </Menu.Item>
             </div>
