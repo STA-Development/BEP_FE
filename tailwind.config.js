@@ -41,9 +41,6 @@ module.exports = {
         },
         red: {
           DEFAULT: '#FF6868',
-        },
-        error: {
-          DEFAULT: '#FF6868',
           light: '#FEE2E2',
           thin: '#991B1B',
         },

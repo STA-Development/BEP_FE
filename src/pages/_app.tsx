@@ -15,6 +15,8 @@ import Head from 'next/head'
 
 import '@utils/i18n'
 
+import Middleware from '../Middleware'
+
 import '@styles/globals.css'
 
 const roboto = Roboto({
@@ -85,15 +87,17 @@ const App = ({ Component, pageProps }: IAppProps) => {
         <Provider store={store}>
           <RedirectionHandler />
           <PopupController />
-          <Layout>
-            {HierarchicalLayout ? (
-              <HierarchicalLayout>
+          <Middleware>
+            <Layout>
+              {HierarchicalLayout ? (
+                <HierarchicalLayout>
+                  <Component {...pageProps} />
+                </HierarchicalLayout>
+              ) : (
                 <Component {...pageProps} />
-              </HierarchicalLayout>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </Layout>
+              )}
+            </Layout>
+          </Middleware>
           <ModalsController />
         </Provider>
       </main>
