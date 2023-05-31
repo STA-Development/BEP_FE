@@ -11,6 +11,8 @@ import {
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
+import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
+
 const baseURL = '/users'
 
 const axiosInstance = Axios()
@@ -44,10 +46,9 @@ const authManager = {
     )
   },
   googleSignIn() {
-    // TODO: use env variables for this call
-    return axiosInstance.get<null, IAxiosResponse<null>>(
-      `http://localhost:2002/users/v1/auth/google`
-    )
+    const { NEXT_PUBLIC_BASE_URL } = getEnvironmentVariables()
+
+    return window.open(`${NEXT_PUBLIC_BASE_URL}users/v1/auth/google`)
   },
 
   getAccessToken(refreshToken: string) {
