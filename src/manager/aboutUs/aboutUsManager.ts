@@ -30,6 +30,9 @@ const aboutUsManager = {
       `/core/v1/${baseURL}/${id}`
     )
   },
+  deleteTeamMember(id: string) {
+    return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${id}`)
+  },
 }
 
 export default aboutUsManager

@@ -63,9 +63,26 @@ const getIndividualMemberById = (id: string) => async (dispatch: AppDispatch) =>
   }
 }
 
+const deleteTeamMember = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setAboutLoading(true))
+
+    await API.aboutUs.deleteTeamMember(id)
+
+    const response = await API.aboutUs.getAboutUs()
+
+    dispatch(setAboutList(response.data.data))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setAboutLoading(false))
+  }
+}
+
 export default {
   getAboutUsList,
   createTeamMember,
   resetCreateTeamMemberSubmitSuccess,
   getIndividualMemberById,
+  deleteTeamMember,
 }

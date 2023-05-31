@@ -1,14 +1,12 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
-import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { CloseIcon } from '@components/Icons'
 import { Modal } from '@components/Modals'
 import { Translation } from '@constants/translations'
 import { Dialog } from '@headlessui/react'
-import { dispatch, useAppSelector } from '@redux/hooks'
-import { applicationsMiddleware } from '@redux/slices/applications'
-import { usersSelector } from '@redux/slices/users'
+import { dispatch } from '@redux/hooks'
+import { aboutUsMiddleware } from '@redux/slices/aboutUs'
 import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 
@@ -19,19 +17,12 @@ export interface IDeleteTeamMember {
 export const DeleteTeamMember = ({ id }: IDeleteTeamMember) => {
   const [t] = useTranslation()
 
-  const { role } = useAppSelector(usersSelector.user)
-
   const onClose = useCallback(() => {
     dispatch(viewsMiddleware.closeModal(ModalName.DeleteTeamMember))
   }, [])
 
   const onDelete = () => {
-    if (role === Roles.JobSeeker) {
-      dispatch(applicationsMiddleware.deleteJobSeekerApplication(id))
-    } else if (role === Roles.Organization) {
-      dispatch(applicationsMiddleware.deleteOrganizationApplication(id))
-    }
-
+    dispatch(aboutUsMiddleware.deleteTeamMember(id))
     dispatch(viewsMiddleware.closeModal(ModalName.DeleteTeamMember))
   }
 
