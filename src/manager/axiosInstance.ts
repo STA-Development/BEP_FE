@@ -65,7 +65,14 @@ class RequestManager {
             )
           }
         } else {
-          dispatch(viewsMiddleware.setErrorMessage(error.response.data.status.message))
+          dispatch(
+            viewsMiddleware.setToastNotificationPopUpState({
+              open: true,
+              props: {
+                error: error.response.data.status.message,
+              },
+            })
+          )
         }
       }
     )

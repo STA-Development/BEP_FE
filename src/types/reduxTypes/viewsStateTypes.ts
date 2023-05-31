@@ -7,7 +7,6 @@ export interface ViewsProps {
   // Temporary solution
   modals: IOpenedModal<any>[]
   toastNotificationPopUp: IOpenedAlert<any>
-  error: IErrorMessage
 }
 
 export interface RedirectionProps {
@@ -29,8 +28,4 @@ export interface IOpenedModal<P> {
 export interface IOpenedAlert<P> {
   open: boolean
   props: P
-}
-
-export interface IErrorMessage {
-  error: null | string
 }
