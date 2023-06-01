@@ -1,3 +1,4 @@
+import { ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import store, { AppDispatch } from '@redux/store'
@@ -53,6 +54,20 @@ const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const createEvent = (formData: ICreateEventParams) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setSingleEventLoading(true))
+
+    await API.events.createEvent(formData)
+
+    // dispatch(setSingleEventData(response.data.data))
+  } catch (error) {
+    dispatch(setError((error as IError).response?.data?.status.message))
+  } finally {
+    dispatch(setSingleEventLoading(false))
+  }
+}
+
 const clearEventsList = () => async (dispatch: AppDispatch) => {
   dispatch(setEventsList([]))
   dispatch(setPageSize(0))
@@ -62,5 +77,6 @@ const clearEventsList = () => async (dispatch: AppDispatch) => {
 export default {
   getEventsList,
   getSingleEvent,
+  createEvent,
   clearEventsList,
 }

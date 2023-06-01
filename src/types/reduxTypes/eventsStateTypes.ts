@@ -24,3 +24,10 @@ export interface IEventsListProps {
 export interface IEventsListParams {
   page: number
 }
+
+export interface ICreateEventParams {
+  header: string
+  paragraph: string
+  imageDescription: string
+  imageURL: File | null
+}
