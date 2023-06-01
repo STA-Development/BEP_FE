@@ -18,6 +18,7 @@ export enum Translation {
   FOOTER_PRIVACY_POLICY = 'footer.privacy.policy',
   FOOTER_SOCIAL_MEDIA_TITLE = 'footer.social.media.title',
   FOOTER_TERMS = 'footer.terms',
+  HEADER_NOTIFICATIONS = 'header.notifications',
   HOME_PAGE_CAROUSEL_READ_ALL_BUTTON = 'home.page.carousel.read.all.button',
   HOME_PAGE_EVENTS_CAROUSEL_SHOW_ALL_BUTTON = 'home.page.events.carousel.show.all.button ',
   HOME_PAGE_EVENTS_CAROUSEL_TITLE = 'home.page.events.carousel.title',

@@ -54,5 +54,6 @@
   "page.about.us.add.team.member.upload.image": "Վերբեռնել պատկերը",
   "page.about.us.add.team.member.submit": "Ներկայացնել",
   "page.about.us.close.form": "փակել",
-  "navbar.profile": "Profile"
+  "navbar.profile": "Profile",
+  "header.notifications": "Notifications:"
 }
