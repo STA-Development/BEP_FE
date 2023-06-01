@@ -6,12 +6,12 @@ export const createNewsValidationSchema = object().shape({
   header: string().required(i18next.t(Translation.CREATE_NEWS_HEADER) as string),
   paragraph: string().required(i18next.t(Translation.CREATE_NEWS_PARAGRAPH) as string),
   imageURL: mixed()
-    .test('required', 'You need to provide a file', (file) => {
+    .test('required', i18next.t(Translation.CREATE_NEWS_IMAGE) as string, (file) => {
       if (file) {
         return true
       }
 
       return false
     })
-    .required('Image is required'),
+    .required(i18next.t(Translation.CREATE_NEWS_IMAGE) as string),
 })
