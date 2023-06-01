@@ -14,7 +14,14 @@ export interface ITextFieldProps {
 }
 
 const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange }) => {
-  const { field } = useController({ name: fieldName })
+  const { field, fieldState } = useController({ name: fieldName })
+
+  const handelSetFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (handleFileChange) {
+      handleFileChange(event)
+      field.onChange(event.target.files && event.target.files?.[0])
+    }
+  }
 
   return (
     <div>
@@ -22,12 +29,8 @@ const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange 
         {...field}
         inputRef={inputRef}
         type="file"
-        onChange={(event) => {
-          if (handleFileChange) {
-            handleFileChange(event)
-            field.onChange(event.target.files && event.target.files?.[0])
-          }
-        }}
+        onChange={(event) => handelSetFile(event)}
+        error={fieldState.error ? fieldState.error.message : null}
       />
     </div>
   )

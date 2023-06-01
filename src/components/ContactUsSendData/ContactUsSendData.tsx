@@ -20,9 +20,8 @@ const defaultValues = {
 export const ContactUsSendData = () => {
   const [t] = useTranslation()
 
-  const isContactUsDataSubmittedSuccess = useAppSelector(
-    supportSelector.isContactUsDataSubmittedSuccess
-  )
+  const isContactUsDataSubmitSuccess = useAppSelector(supportSelector.isContactUsDataSubmitSuccess)
+  const isContactUsDataSubmitLoading = useAppSelector(supportSelector.isContactUsSubmitLoading)
 
   const methods = useForm({
     defaultValues,
@@ -44,10 +43,10 @@ export const ContactUsSendData = () => {
   }
 
   useEffect(() => {
-    if (isContactUsDataSubmittedSuccess) {
+    if (isContactUsDataSubmitSuccess) {
       reset({ ...defaultValues })
     }
-  }, [isContactUsDataSubmittedSuccess, reset])
+  }, [isContactUsDataSubmitSuccess, reset])
 
   return (
     <div className="xl:pr-20">
@@ -86,6 +85,8 @@ export const ContactUsSendData = () => {
             />
           </div>
           <Button
+            disabled={isContactUsDataSubmitLoading}
+            isLoading={isContactUsDataSubmitLoading}
             type="submit"
             size="fl"
           >
