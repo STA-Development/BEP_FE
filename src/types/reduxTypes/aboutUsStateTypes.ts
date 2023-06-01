@@ -5,7 +5,6 @@ export interface IAboutUsProps {
 export interface IAboutUs {
   isAboutUsLoading: boolean
   aboutUsList: IAboutUsListProps[]
-  error: null | string | Error
   isTeamMemberSubmitSuccess: boolean
 }
 

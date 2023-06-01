@@ -1,12 +1,11 @@
 import { ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import { aboutUsMiddleware } from '@redux/slices/aboutUs/index'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setAboutLoading, setError, setAboutList, setCreateTeamMemberSubmitSuccess } = slice.actions
+const { setAboutLoading, setAboutList, setCreateTeamMemberSubmitSuccess } = slice.actions
 
 const getAboutUsList = () => async (dispatch: AppDispatch) => {
   try {
@@ -18,7 +17,7 @@ const getAboutUsList = () => async (dispatch: AppDispatch) => {
 
     dispatch(setAboutList(responseData.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setAboutLoading(false))
   }
@@ -32,7 +31,7 @@ const createTeamMember = (formData: ICreateTeamMember) => async (dispatch: AppDi
 
     dispatch(aboutUsMiddleware.getAboutUsList())
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   }
 }
 

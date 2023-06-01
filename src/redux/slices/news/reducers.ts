@@ -6,9 +6,6 @@ import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 const createReducer = <T extends SliceCaseReducers<INewsProps>>(reducer: T) => ({ ...reducer })
 
 const reducers = createReducer({
-  setError(state, action: IAction<string | null>) {
-    state.news.error = action.payload
-  },
   setNewsList(state, action: IAction<INewsResponse[]>) {
     state.news.newsList = action.payload
   },

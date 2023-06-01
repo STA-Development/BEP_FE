@@ -17,8 +17,6 @@ export const Register = () => {
   const [t] = useTranslation()
 
   const isSignUpLoading = useAppSelector(usersSelector.isSignUpLoading)
-  const error = useAppSelector(usersSelector.error)
-  const errorGoogleSignIn = useAppSelector(usersSelector.errorGoogleSignIn)
 
   const methods = useForm({
     defaultValues: {
@@ -104,11 +102,7 @@ export const Register = () => {
             >
               {t(Translation.PAGE_REGISTER_INPUT_ACTIONS_CREATE_ACCOUNT)}
             </Button>
-            <div className="w-full">
-              {error || errorGoogleSignIn ? (
-                <p className="mt-2.5 text-red">{error ?? errorGoogleSignIn}</p>
-              ) : null}
-            </div>
+            <div className="w-full" />
           </form>
         </FormProvider>
       </div>

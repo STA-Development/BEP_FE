@@ -1,11 +1,9 @@
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
 const {
-  setError,
   setIndividualNews,
   setNewsListLoading,
   setIndividualNewsLoading,
@@ -31,10 +29,8 @@ const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
     dispatch(setNewsList([...newsList, ...responseData.data]))
     dispatch(setTotalItems(responseData.totalItems))
     dispatch(setPageSize(responseData.pageSize))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   } finally {
     dispatch(setNewsListLoading(false))
   }
@@ -47,10 +43,8 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
     const response = await API.news.getIndividualNews(id)
 
     dispatch(setIndividualNews(response.data.data))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   } finally {
     dispatch(setIndividualNewsLoading(false))
   }

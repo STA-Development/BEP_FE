@@ -4,7 +4,6 @@ import {
   IOrganizationApplicationProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import { viewsMiddleware } from '@redux/slices/views'
 import { AppDispatch } from '@redux/store'
 
@@ -12,7 +11,6 @@ import slice from './slice'
 
 const {
   setJobSeekerLoading,
-  setError,
   setJobSeekerSubmitSuccess,
   setApplicationsList,
   setApplicationsLoading,
@@ -32,7 +30,7 @@ const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDi
 
     dispatch(setJobSeekerSubmitSuccess(true))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setJobSeekerLoading(false))
   }
@@ -45,7 +43,7 @@ const organization = (params: IOrganizationApplicationProps) => async (dispatch:
 
     dispatch(setOrganizationSubmitSuccess(true))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setOrganizationLoading(false))
   }
@@ -59,7 +57,7 @@ const getJobSeekerApplication = () => async (dispatch: AppDispatch) => {
 
     dispatch(setApplicationsList(response?.data?.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setApplicationsLoading(false))
   }
@@ -75,7 +73,7 @@ const deleteJobSeekerApplication = (uuid: string) => async (dispatch: AppDispatc
 
     dispatch(setApplicationsList(response?.data?.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setJobSeekerApplicationDeleteLoading(false))
   }
@@ -89,7 +87,7 @@ const getJobSeekerIndividualApplication = (uuid: string) => async (dispatch: App
 
     dispatch(setIndividualApplication(response?.data?.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setJobSeekerApplicationLoading(false))
   }
@@ -103,7 +101,7 @@ const upDateJobSeekerIndividualApplication =
 
       dispatch(setJobSeekerSubmitSuccess(true))
     } catch (error) {
-      dispatch(setError((error as IError).response?.data?.status.message))
+      /* empty */
     } finally {
       dispatch(setOrganizationLoading(false))
     }
@@ -121,7 +119,7 @@ const getOrganizationApplication = () => async (dispatch: AppDispatch) => {
 
     dispatch(setApplicationsList(response?.data?.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setApplicationsLoading(false))
   }
@@ -135,7 +133,7 @@ const getOrganizationIndividualApplication = (uuid: string) => async (dispatch: 
 
     dispatch(setIndividualApplication(response?.data?.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setOrganizationApplicationLoading(false))
   }
@@ -149,7 +147,7 @@ const upDateOrganizationIndividualApplication =
 
       dispatch(setJobSeekerSubmitSuccess(true))
     } catch (error) {
-      dispatch(setError((error as IError).response?.data?.status.message))
+      /* empty */
     } finally {
       dispatch(setOrganizationLoading(false))
     }
@@ -164,7 +162,7 @@ const deleteOrganizationApplication = (uuid: string) => async (dispatch: AppDisp
 
     dispatch(getOrganizationApplication())
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setOrganizationApplicationDeleteLoading(false))
   }

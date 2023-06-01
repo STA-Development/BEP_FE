@@ -7,7 +7,6 @@ export interface IApplicationsProps {
 
 export interface IApplications {
   isJobSeekerLoading: boolean
-  error: null | string
 
   isApplicationLoading: boolean
   isJobSeekerSubmitSuccess: boolean

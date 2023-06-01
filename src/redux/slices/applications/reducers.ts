@@ -14,9 +14,6 @@ const reducers = createReducer({
   setJobSeekerLoading(state, action: IAction<boolean>) {
     state.applications.isJobSeekerLoading = action.payload
   },
-  setError(state, action: IAction<null | string>) {
-    state.applications.error = action.payload
-  },
   setJobSeekerSubmitSuccess(state, action: IAction<boolean>) {
     state.applications.isJobSeekerSubmitSuccess = action.payload
   },

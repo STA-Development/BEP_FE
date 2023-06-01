@@ -5,9 +5,6 @@ import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 const createReducer = <T extends SliceCaseReducers<ISupportProps>>(reducer: T) => ({ ...reducer })
 
 const reducers = createReducer({
-  setError(state, action: IAction<null | Error | string>) {
-    state.support.help.error = action.payload
-  },
   setHelpSubmitSuccess(state, action: IAction<boolean>) {
     state.support.help.isHelpDataSubmitSuccess = action.payload
   },
