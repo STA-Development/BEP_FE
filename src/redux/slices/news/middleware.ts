@@ -104,6 +104,8 @@ const deleteIndividualNews = (uuid: string) => async (dispatch: AppDispatch) => 
 
     await API.news.deleteIndividualNews(uuid)
 
+    dispatch(clearNewsList())
+
     const reqBody = {
       page: 1,
     }

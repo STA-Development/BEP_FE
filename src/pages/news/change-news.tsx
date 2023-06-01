@@ -50,7 +50,7 @@ const ChangeNews = () => {
     Object.keys(data).forEach((key: string) => {
       if (
         individualNews &&
-        typeof data[key as keyof IFormData] !== undefined &&
+        typeof data[key as keyof IFormData] &&
         individualNews[key as keyof INewsResponse] !== data[key as keyof IFormData]
       ) {
         payload[key as keyof IFormData] = data[key as keyof IFormData]
