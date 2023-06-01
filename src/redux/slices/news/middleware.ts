@@ -1,6 +1,7 @@
 import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
+import { newsMiddleware } from '@redux/slices/news/index'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -106,16 +107,7 @@ const deleteIndividualNews = (uuid: string) => async (dispatch: AppDispatch) => 
 
     dispatch(clearNewsList())
 
-    const reqBody = {
-      page: 1,
-    }
-    const response = await API.news.getNews(reqBody)
-
-    const responseData = response.data
-
-    dispatch(setNewsList([...responseData.data]))
-    dispatch(setTotalItems(responseData.totalItems))
-    dispatch(setPageSize(responseData.pageSize))
+    dispatch(newsMiddleware.getNewsList(1))
   } catch (error) {
     dispatch(setError((error as IError).response?.data?.status.message))
   } finally {

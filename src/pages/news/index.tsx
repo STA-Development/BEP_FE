@@ -37,6 +37,10 @@ const NewsList = () => {
     )
   }
 
+  useEffect(() => {
+    console.log(newsList)
+  }, [newsList])
+
   const onDeleteIndividualNewsModal = useCallback((id: string) => {
     dispatch(
       viewsMiddleware.openModal({
