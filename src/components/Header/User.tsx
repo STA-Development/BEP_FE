@@ -1,15 +1,12 @@
 import React, { Fragment } from 'react'
+import { useTranslation } from 'react-i18next'
 import { UserIcon } from '@components/Icons'
+import { Translation } from '@constants/translations'
 import { Menu, Transition } from '@headlessui/react'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
-
-const links = [
-  { href: '/profile/applications', label: 'Add Application' },
-  { href: '/profile/settings', label: 'Edit Profile' },
-]
 
 export interface IHeaderUserProps {
   handleLogOut: () => void
@@ -17,6 +14,13 @@ export interface IHeaderUserProps {
 
 export const User = ({ handleLogOut }: IHeaderUserProps) => {
   const { name, email } = useAppSelector(usersSelector.user)
+
+  const [t] = useTranslation()
+
+  const links = [
+    { href: '/profile/applications', label: t(Translation.NAVBAR_USER_MENU_ADD_APPLICATION) },
+    { href: '/profile/settings', label: t(Translation.NAVBAR_USER_MENU_EDIT_PROFILE) },
+  ]
 
   return (
     <Menu
@@ -26,7 +30,7 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
       {({ close }) => (
         <div>
           <Menu.Button className="flex h-[52px] w-[52px] items-center justify-center rounded-full bg-white focus:outline-none">
-            <span className="sr-only">Open user menu</span>
+            <span className="sr-only">{t(Translation.NAVBAR_USER_MENU)}</span>
             <UserIcon />
           </Menu.Button>
           <Transition
@@ -69,7 +73,7 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
                         onClick={handleLogOut}
                         variant="outlined"
                       >
-                        Log Out
+                        {t(Translation.NAVBAR_LOGOUT)}
                       </Button>
                     </li>
                   </Menu.Item>
