@@ -3,7 +3,6 @@ import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
 import {
-  IError,
   IResetPasswordParams,
   ISignInParams,
   ISignUpParams,
@@ -21,7 +20,6 @@ const {
   setIsAuthenticated,
   setLogoutLoading,
   setSignUpLoading,
-  setError,
   setSelectedIndex,
   setIsResetPasswordLoading,
   setUser,
@@ -29,7 +27,6 @@ const {
   setisUpdateProfileLoading,
   setOtp,
   setLanguageChangeLoading,
-  setErrorGoogleSignIn,
   setIsRoleSelectLoading,
   setIsUserAvatarLoading,
   setIsUserDetailsLoading,
@@ -52,9 +49,8 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setSignInLoading(false))
   }
@@ -68,7 +64,7 @@ const getAccessTokenWithRefreshToken =
 
       localStorage.setItem('accessToken', response.data.data.accessToken)
     } catch (err) {
-      console.log(err)
+      /* empty */
     }
   }
 
@@ -78,7 +74,7 @@ const isAuthenticated = () => async (dispatch: AppDispatch) => {
       dispatch(setIsAuthenticated(true))
     }
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   }
 }
 
@@ -88,7 +84,6 @@ const logOut = () => async (dispatch: AppDispatch) => {
     localStorage.removeItem('accessToken')
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setIsAuthenticated(false))
-    dispatch(setError(null))
     dispatch(
       setUser({
         fullName: '',
@@ -104,20 +99,17 @@ const logOut = () => async (dispatch: AppDispatch) => {
       })
     )
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setLogoutLoading(false))
   }
 }
 
-const googleSignIn = () => async (dispatch: AppDispatch) => {
+const googleSignIn = () => async () => {
   try {
     await API.auth.googleSignIn()
-    dispatch(setErrorGoogleSignIn(null))
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setErrorGoogleSignIn((error as IError).response?.data.status.message))
-    dispatch(setError(null))
+    /* empty */
   }
 }
 
@@ -128,9 +120,8 @@ const register = (params: ISignUpParams) => async (dispatch: AppDispatch) => {
     await API.auth.signUp(params)
 
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setSignUpLoading(false))
   }
@@ -144,9 +135,8 @@ const forgotPassword =
       await API.auth.forgotPassword(params)
 
       dispatch(setSelectedIndex(selectedIndex + 1))
-      dispatch(setError(null))
     } catch (error) {
-      dispatch(setError((error as IError).response?.data.status.message))
+      /* empty */
     } finally {
       dispatch(setIsResetPasswordLoading(false))
     }
@@ -160,10 +150,9 @@ const verifyOtp =
       const response = await API.auth.verifyOtp(params)
 
       localStorage.setItem('accessToken', response.data.data.verifyOtpToken)
-      dispatch(setError(null))
       dispatch(setSelectedIndex(selectedIndex + 1))
     } catch (error) {
-      dispatch(setError((error as IError).response?.data.status.message))
+      /* empty */
     } finally {
       dispatch(setIsResetPasswordLoading(false))
     }
@@ -173,18 +162,15 @@ const resetPassword = (params: IResetPasswordParams) => async (dispatch: AppDisp
   try {
     dispatch(setIsResetPasswordLoading(true))
     await API.auth.resetPassword(params)
-    dispatch(setError(null))
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setIsResetPasswordLoading(false))
   }
 }
 
 const clearError = () => async (dispatch: AppDispatch) => {
-  dispatch(setError(null))
-  dispatch(setErrorGoogleSignIn(null))
   dispatch(setSelectedIndex(0))
   dispatch(setOtp(null))
 }
@@ -196,10 +182,8 @@ const changeLanguage = (lng: string) => async (dispatch: AppDispatch) => {
 
     i18n.changeLanguage(lng)
     localStorage.setItem('language', lng)
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setLanguageChangeLoading(false))
   }
@@ -213,7 +197,7 @@ const selectRole = (role: keyof typeof Roles) => async (dispatch: AppDispatch) =
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setIsRoleSelectLoading(false))
   }
@@ -233,7 +217,7 @@ const getUser = () => async (dispatch: AppDispatch) => {
       dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
     }
   } catch (err) {
-    dispatch(setError((err as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setIsUserDetailsLoading(false))
   }
@@ -247,7 +231,7 @@ const getProfile = () => async (dispatch: AppDispatch) => {
 
     dispatch(setUser({ ...store.getState().users.user, ...response.data.data }))
   } catch (err) {
-    dispatch(setError((err as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setIsUserAvatarLoading(false))
   }
@@ -259,7 +243,7 @@ const uploadAvatar = (data: FormData) => async (dispatch: AppDispatch) => {
   try {
     await API.auth.uploadAvatar(data)
   } catch (err) {
-    dispatch(setError((err as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setIsUserAvatarLoading(false))
   }
@@ -276,7 +260,7 @@ const updateJobSeekerProfile = (params: IProfileUpdateProps) => async (dispatch:
     await API.jobSeeker.updateJobSeekerProfile(params)
     dispatch(usersMiddleware.getUser())
   } catch (error) {
-    dispatch(setError((error as IError).response?.data.status.message))
+    /* empty */
   } finally {
     dispatch(setisUpdateProfileLoading(false))
   }
@@ -290,7 +274,7 @@ const updateOrganizationProfile =
       await API.jobSeeker.updateOrganizationProfile(params)
       dispatch(usersMiddleware.getUser())
     } catch (error) {
-      dispatch(setError((error as IError).response?.data.status.message))
+      /* empty */
     } finally {
       dispatch(setisUpdateProfileLoading(false))
     }

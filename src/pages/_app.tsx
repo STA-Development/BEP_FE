@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
+import { PopupController } from '@components/PopupController/PopupController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
 import { dispatch } from '@redux/hooks'
@@ -85,6 +86,7 @@ const App = ({ Component, pageProps }: IAppProps) => {
       <main>
         <Provider store={store}>
           <RedirectionHandler />
+          <PopupController />
           <Middleware>
             <Layout>
               {HierarchicalLayout ? (

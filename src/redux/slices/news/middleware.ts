@@ -1,13 +1,11 @@
 import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import { newsMiddleware } from '@redux/slices/news/index'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
 const {
-  setError,
   setIndividualNews,
   setNewsListLoading,
   setIndividualNewsLoading,
@@ -36,10 +34,8 @@ const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
     dispatch(setNewsList([...newsList, ...responseData.data]))
     dispatch(setTotalItems(responseData.totalItems))
     dispatch(setPageSize(responseData.pageSize))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   } finally {
     dispatch(setNewsListLoading(false))
   }
@@ -52,10 +48,8 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
     const response = await API.news.getIndividualNews(id)
 
     dispatch(setIndividualNews(response.data.data))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   } finally {
     dispatch(setIndividualNewsLoading(false))
   }
@@ -66,10 +60,8 @@ const createNews = (formData: ICreateNewsProps) => async (dispatch: AppDispatch)
     await API.news.createNews(formData)
 
     dispatch(setCreateNewsSubmitSuccess(true))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   }
 }
 
@@ -78,10 +70,8 @@ const changeNews = (formData: IChangeNewsFormProps) => async (dispatch: AppDispa
     await API.news.changeNews(formData)
 
     dispatch(setChangeNewsSubmitSuccess(true))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status?.message))
+    /* empty */
   }
 }
 
@@ -109,7 +99,7 @@ const deleteIndividualNews = (uuid: string) => async (dispatch: AppDispatch) => 
 
     dispatch(newsMiddleware.getNewsList(1))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setDeleteNewsLoading(false))
   }
