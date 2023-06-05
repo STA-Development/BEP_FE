@@ -92,6 +92,10 @@ const FillTheForm = () => {
     //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isJobSeekerSubmitSuccess, reset, isOrganizationSubmitSuccess, role])
 
+  const handleGoBack = () => {
+    router.back()
+  }
+
   return (
     <Container className="mb-30 mt-15 pb-20">
       <FormProvider {...methods}>
@@ -100,9 +104,7 @@ const FillTheForm = () => {
             <Button
               variant="text"
               LeftIcon={LeftIcon}
-              onClick={() => {
-                setSelectedIndex((prev) => prev - 1)
-              }}
+              onClick={handleGoBack}
             >
               {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_GO_BACK)}
             </Button>

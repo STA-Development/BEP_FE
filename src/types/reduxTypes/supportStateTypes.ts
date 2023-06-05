@@ -8,13 +8,11 @@ export interface ISupportPropsList {
 }
 
 export interface IHelpPropsList {
-  error: null | Error | string
   isHelpDataSubmitSuccess: boolean
   isHelpDataSubmitLoading: boolean
 }
 
 export interface IContactUsPropsList {
-  error: null | Error | string
   isContactUsDataSubmitLoading: boolean
   isContactUsDataSubmitSuccess: boolean
 }

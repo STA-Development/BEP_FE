@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { ModalsController } from '@components/ModalsController/ModalsController'
+import { PopupController } from '@components/PopupController/PopupController'
 import RedirectionHandler from '@components/RedirectionHandler/RedirectionHandler'
 import Layout, { Layouts } from '@layouts/index'
 import { dispatch } from '@redux/hooks'
@@ -13,6 +14,8 @@ import { Roboto } from 'next/font/google'
 import Head from 'next/head'
 
 import '@utils/i18n'
+
+import Middleware from '../Middleware'
 
 import '@styles/globals.css'
 
@@ -83,15 +86,18 @@ const App = ({ Component, pageProps }: IAppProps) => {
       <main>
         <Provider store={store}>
           <RedirectionHandler />
-          <Layout>
-            {HierarchicalLayout ? (
-              <HierarchicalLayout>
+          <PopupController />
+          <Middleware>
+            <Layout>
+              {HierarchicalLayout ? (
+                <HierarchicalLayout>
+                  <Component {...pageProps} />
+                </HierarchicalLayout>
+              ) : (
                 <Component {...pageProps} />
-              </HierarchicalLayout>
-            ) : (
-              <Component {...pageProps} />
-            )}
-          </Layout>
+              )}
+            </Layout>
+          </Middleware>
           <ModalsController />
         </Provider>
       </main>

@@ -16,7 +16,7 @@ const educationalInstitutesManager = {
     return axiosInstance.post<
       EducationalInstitutesPageParam,
       IAxiosResponsePaginated<IEdInstitutesResponse[]>
-    >(`/core/v1/${baseURL}`, { ...params })
+    >(`/core/v1/${baseURL}/filters`, { ...params })
   },
   getIndividualEducationalInstitutes(id: string) {
     return axiosInstance.get<
