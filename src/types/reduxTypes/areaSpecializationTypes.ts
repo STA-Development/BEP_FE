@@ -18,6 +18,9 @@ export interface IApplications {
   isOrganizationApplicationDeleteLoading: boolean
   isOrganizationApplicationLoading: boolean
   isJobSeekerApplicationLoading: boolean
+  applicationsPdf: null | File
+  isChangeIsActiveSuccess: boolean
+  isCloneApplicationSuccess: boolean
 }
 
 export interface IJobSeekerApplicationProps {
@@ -97,4 +100,9 @@ export interface IIndividualApplication {
   isActive?: boolean
   postedAt?: string
   status?: string
+}
+
+export interface IDeactivateApplicationProps {
+  uuid: string
+  isActive: boolean
 }
