@@ -6,7 +6,6 @@ export interface IEventsProps {
 
 export interface IEventsList {
   isEventsLoading: boolean
-  error: string | null
   eventsList: IEventsListProps[]
   pageSize: number
   totalItems: number

@@ -7,7 +7,6 @@ export interface INewsProps {
 }
 
 export interface INews {
-  error?: string | null
   newsList: INewsResponse[]
   isNewsListLoading?: boolean
   pageSize: number

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
-import { LanguageSelector, User } from '@components/Header'
+import { LanguageSelector, NotificationList, User } from '@components/Header'
 import HeaderMobile from '@components/Header/HeaderMobile'
-import { BarsIcon, CloseIcon } from '@components/Icons'
+import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
@@ -29,6 +29,7 @@ export const Header = () => {
     { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
+  const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
@@ -80,7 +81,8 @@ export const Header = () => {
                       </Link>
                     ))}
                     <LanguageSelector />
-                    <div className="flex flex-1 items-center justify-end">
+                    <div className="ml-5 flex flex-1 items-center justify-around">
+                      <NotificationList />
                       {isAuthenticated ? (
                         <User handleLogOut={handleLogOut} />
                       ) : (
@@ -116,6 +118,36 @@ export const Header = () => {
               </div>
             </Container>
             <HeaderMobile navigation={navigation} />
+            <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 xl:hidden">
+              {({ close }) => (
+                <div>
+                  <div className="mb-[120px] space-y-5">
+                    {navigation.map((item) => (
+                      <Link
+                        onClick={() => close()}
+                        key={item.name}
+                        href={item.href}
+                        className="block text-base font-medium text-black"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                    <LanguageSelector />
+                    <NotificationList />
+                  </div>
+                  <Disclosure.Button className="w-full">
+                    <Button
+                      size="lg"
+                      disabled={isLogOutLoading}
+                      onClick={handleLogOut}
+                      LeftIcon={LogOutIcon}
+                    >
+                      {t(Translation.NAVBAR_LOGOUT)}
+                    </Button>
+                  </Disclosure.Button>
+                </div>
+              )}
+            </Disclosure.Panel>
           </>
         )}
       </Disclosure>

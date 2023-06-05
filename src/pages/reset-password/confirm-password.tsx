@@ -8,7 +8,6 @@ import { Button } from '@uiComponents/Button'
 const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
   const [t] = useTranslation()
 
-  const error = useAppSelector(usersSelector.error)
   const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
 
   return (
@@ -24,11 +23,6 @@ const ConfirmPassword = ({ children }: { children: JSX.Element[] }) => {
         >
           {t(Translation.PAGE_CONFIRM_PASSWORD_BUTTON)}
         </Button>
-        {error ? (
-          <div className="mt-2.5 w-full">
-            <p className="text-red">{error}</p>
-          </div>
-        ) : null}
       </div>
     </div>
   )

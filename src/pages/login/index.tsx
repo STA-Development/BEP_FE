@@ -19,8 +19,6 @@ export const Login = () => {
   const [t] = useTranslation()
 
   const isSignInLoading = useAppSelector(usersSelector.isSignInLoading)
-  const error = useAppSelector(usersSelector.error)
-  const errorGoogleSignIn = useAppSelector(usersSelector.errorGoogleSignIn)
   const onSubmit = (data: ISignInParams) => {
     dispatch(usersMiddleware.login(data))
   }
@@ -89,11 +87,6 @@ export const Login = () => {
             >
               {t(Translation.PAGE_LOGIN_BUTTON)}
             </Button>
-            {error || errorGoogleSignIn ? (
-              <div className="mt-2.5 w-full">
-                <p className="text-red">{error ?? errorGoogleSignIn}</p>
-              </div>
-            ) : null}
             <div className="mb-44 mt-7 w-full">
               <Link href="/reset-password">
                 <Button

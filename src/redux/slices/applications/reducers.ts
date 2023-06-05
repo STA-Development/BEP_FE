@@ -14,9 +14,6 @@ const reducers = createReducer({
   setJobSeekerLoading(state, action: IAction<boolean>) {
     state.applications.isJobSeekerLoading = action.payload
   },
-  setError(state, action: IAction<null | string>) {
-    state.applications.error = action.payload
-  },
   setJobSeekerSubmitSuccess(state, action: IAction<boolean>) {
     state.applications.isJobSeekerSubmitSuccess = action.payload
   },
@@ -46,6 +43,15 @@ const reducers = createReducer({
   },
   setIndividualApplication(state, action: IAction<null | IIndividualApplication>) {
     state.applications.individualApplication = action.payload
+  },
+  setApplicationsPdf(state, action: IAction<null | File>) {
+    state.applications.applicationsPdf = action.payload
+  },
+  setChangeIsActiveSuccess(state, action: IAction<boolean>) {
+    state.applications.isChangeIsActiveSuccess = action.payload
+  },
+  setCloneSubmitSuccess(state, action: IAction<boolean>) {
+    state.applications.isCloneApplicationSuccess = action.payload
   },
 })
 

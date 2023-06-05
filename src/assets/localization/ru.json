@@ -47,6 +47,9 @@
   "page.fill.the.form.job.two.details.button": "Change",
   "page.fill.the.form.job.submit": "Submit",
   "page.fill.the.form.job.tabs": "Tab",
+  "page.profile.menu.applications.actions.deactivate": "Деактивировать приложение",
+  "page.profile.menu.applications.actions.activate": "Активировать приложение",
+  "page.profile.menu.applications.download.pdf": "Скачать PDF",
   "page.about.us.add.team.member": "Add Team Member",
   "page.about.us.add.team.member.header": "Header",
   "page.about.us.add.team.member.paragraph": "Paragraph",
@@ -54,5 +57,6 @@
   "page.about.us.add.team.member.upload.image": "Upload Image",
   "page.about.us.add.team.member.submit": "Submit",
   "page.about.us.close.form": "close",
-  "navbar.profile": "Profile"
+  "navbar.profile": "Profile",
+  "header.notifications": "Notifications:"
 }

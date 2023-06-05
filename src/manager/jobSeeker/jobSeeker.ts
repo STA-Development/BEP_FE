@@ -1,5 +1,6 @@
 import {
   IApplicationsListProps,
+  IDeactivateApplicationProps,
   IIndividualApplication,
   IJobSeekerApplicationProps,
   IJobSeekerProps,
@@ -96,6 +97,41 @@ const jobSeekerManager = {
   },
   updateOrganizationProfile(data: IProfileUpdateProps) {
     return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/organization`, data)
+  },
+
+  getJobSeekerApplicationsPdf(uuid: string) {
+    return axiosInstance.get<BlobPart>(`${baseURL}/v1/job-seeker/pdf/${uuid}`, {
+      headers: {
+        'Content-Type': 'application/pdf',
+      },
+      responseType: 'blob',
+    })
+  },
+  upDateJobSeekerApplicationIsActive(params: IDeactivateApplicationProps) {
+    return axiosInstance.patch<boolean, IAxiosResponse<boolean>>(
+      `${baseURL}/v1/job-seeker/application/deactivate/${params.uuid}`,
+      {
+        isActive: params.isActive,
+      }
+    )
+  },
+  upDateOrganizationApplicationIsActive(params: IDeactivateApplicationProps) {
+    return axiosInstance.patch<boolean, IAxiosResponse<boolean>>(
+      `${baseURL}/v1/organization/application/deactivate/${params.uuid}`,
+      {
+        isActive: params.isActive,
+      }
+    )
+  },
+  cloneJobSeekerApplication(uuid: string) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/job-seeker/application/clone/${uuid}`
+    )
+  },
+  cloneOrganizationApplication(uuid: string) {
+    return axiosInstance.post<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/organization/application/clone/${uuid}`
+    )
   },
 }
 

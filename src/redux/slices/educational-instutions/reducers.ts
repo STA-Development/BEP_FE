@@ -36,9 +36,6 @@ const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
   setTotalItems(state, action: IAction<number>) {
     state.edInstitute.totalItems = action.payload
   },
-  setError(state, action: IAction<string | null>) {
-    state.edInstitute.error = action.payload
-  },
   setProvinces(state, action: IAction<string[]>) {
     state.provinces = action.payload
   },

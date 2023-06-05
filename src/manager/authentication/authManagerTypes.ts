@@ -26,16 +26,6 @@ export interface ISignInParams {
   password: string
 }
 
-export interface IError {
-  response: {
-    data: {
-      status: {
-        message: string
-      }
-    }
-  }
-}
-
 export interface ISignUpParams {
   password: string
   email: string
