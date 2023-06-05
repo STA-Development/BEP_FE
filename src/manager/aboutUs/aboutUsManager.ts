@@ -25,6 +25,14 @@ const aboutUsManager = {
       }
     )
   },
+  getIndividualMemberById(id: string) {
+    return axiosInstance.get<IAboutUsListProps, IAxiosResponse<IAboutUsListProps>>(
+      `/core/v1/${baseURL}/${id}`
+    )
+  },
+  deleteTeamMember(id: string) {
+    return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${id}`)
+  },
 }
 
 export default aboutUsManager

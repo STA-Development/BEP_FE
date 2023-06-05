@@ -27,6 +27,7 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
+
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
@@ -81,7 +82,9 @@ export const Header = () => {
                     ))}
                     <LanguageSelector />
                     <div className="ml-5 flex flex-1 items-center justify-around">
-                      <NotificationList />
+                      <div className="mr-5">
+                        <NotificationList />
+                      </div>
                       {isAuthenticated ? (
                         <User handleLogOut={handleLogOut} />
                       ) : (
