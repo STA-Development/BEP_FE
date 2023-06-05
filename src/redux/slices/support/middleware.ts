@@ -1,12 +1,10 @@
 import { IContactUsProps, IHelpDataProps } from '@allTypes/reduxTypes/supportStateTypes'
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
 const {
-  setError,
   setHelpSubmitSuccess,
   setHelpSubmitLoading,
   setContactUsSubmitSuccess,
@@ -19,10 +17,8 @@ const sendHelpData = (helpData: IHelpDataProps) => async (dispatch: AppDispatch)
     await API.support.sendHelpData(helpData)
 
     dispatch(setHelpSubmitSuccess(true))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setHelpSubmitLoading(false))
   }
@@ -39,10 +35,8 @@ const sendContactUsData = (contactUsData: IContactUsProps) => async (dispatch: A
     await API.support.sendContactUsData(contactUsData)
 
     dispatch(setContactUsSubmitSuccess(true))
-
-    dispatch(setError(null))
   } catch (error) {
-    dispatch(setError((error as IError).response.data?.status?.message))
+    /* empty */
   } finally {
     dispatch(setContactUsSubmitLoading(false))
   }

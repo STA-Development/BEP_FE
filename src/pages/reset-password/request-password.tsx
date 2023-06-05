@@ -6,7 +6,6 @@ import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 
 const RequestPassword = ({ children }: { children: JSX.Element }) => {
-  const error = useAppSelector(usersSelector.error)
   const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
   const [t] = useTranslation()
 
@@ -25,11 +24,6 @@ const RequestPassword = ({ children }: { children: JSX.Element }) => {
       >
         {t(Translation.PAGE_RESET_PASSWORD_BUTTON)}
       </Button>
-      {error ? (
-        <div className="mt-2.5 w-full">
-          <p className="text-red">{error}</p>
-        </div>
-      ) : null}
     </div>
   )
 }
