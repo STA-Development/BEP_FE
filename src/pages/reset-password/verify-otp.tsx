@@ -9,7 +9,6 @@ import { Button } from '@uiComponents/Button'
 const VerifyOtp = ({ children }: { children: JSX.Element }) => {
   const [t] = useTranslation()
 
-  const error = useAppSelector(usersSelector.error)
   const isResetPasswordLoading = useAppSelector(usersSelector.isResetPasswordLoading)
 
   return (
@@ -32,11 +31,6 @@ const VerifyOtp = ({ children }: { children: JSX.Element }) => {
       >
         {t(Translation.PAGE_VERIFY_OTP_BUTTON)}
       </Button>
-      {error ? (
-        <div className="mt-2.5 w-full">
-          <p className="text-red">{error}</p>
-        </div>
-      ) : null}
     </div>
   )
 }

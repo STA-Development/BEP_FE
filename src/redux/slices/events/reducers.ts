@@ -5,10 +5,6 @@ import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 const createReducer = <T extends SliceCaseReducers<IEventsProps>>(reducer: T) => ({ ...reducer })
 
 const reducers = createReducer({
-  setError(state, action: IAction<string>) {
-    state.events.error = action.payload
-  },
-
   setEventsLoading(state, action: IAction<boolean>) {
     state.events.isEventsLoading = action.payload
   },
@@ -31,6 +27,12 @@ const reducers = createReducer({
 
   setSingleEventData(state, action: IAction<IEventsListProps>) {
     state.singleEventData = action.payload
+  },
+  setCreateEventSubmitSuccess(state, action: IAction<boolean>) {
+    state.events.isCreateEventsSubmitSuccess = action.payload
+  },
+  setDeleteEventLoading(state, action: IAction<boolean>) {
+    state.events.isDeleteEventLoading = action.payload
   },
 })
 

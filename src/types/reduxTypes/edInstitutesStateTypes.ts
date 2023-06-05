@@ -13,7 +13,6 @@ export interface IEdInstitutesProps {
 }
 
 export interface IEdInstitutes {
-  error?: string | null
   edInstitutesList: IEdInstitutesResponse[]
   isEducationalInstitutesListLoading?: boolean
   pageSize: number

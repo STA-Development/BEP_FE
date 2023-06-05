@@ -1,18 +1,19 @@
 import { ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
+import { eventsMiddleware } from '@redux/slices/events/index'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
 const {
   setEventsLoading,
-  setError,
   setEventsList,
   setPageSize,
   setTotalItems,
   setSingleEventLoading,
   setSingleEventData,
+  setCreateEventSubmitSuccess,
+  setDeleteEventLoading,
 } = slice.actions
 
 const getEventsList = (page: number) => async (dispatch: AppDispatch) => {
@@ -34,7 +35,7 @@ const getEventsList = (page: number) => async (dispatch: AppDispatch) => {
     dispatch(setEventsLoading(false))
     dispatch(setTotalItems(responseData.totalItems))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setEventsLoading(false))
   }
@@ -48,7 +49,7 @@ const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
 
     dispatch(setSingleEventData(response.data.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setSingleEventLoading(false))
   }
@@ -56,15 +57,10 @@ const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
 
 const createEvent = (formData: ICreateEventParams) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setSingleEventLoading(true))
-
+    dispatch(setCreateEventSubmitSuccess(true))
     await API.events.createEvent(formData)
-
-    // dispatch(setSingleEventData(response.data.data))
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
-  } finally {
-    dispatch(setSingleEventLoading(false))
+    /* empty */
   }
 }
 
@@ -74,9 +70,31 @@ const clearEventsList = () => async (dispatch: AppDispatch) => {
   dispatch(setTotalItems(0))
 }
 
+const resetCreateEventsSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setCreateEventSubmitSuccess(false))
+}
+
+const deleteIndividualEvent = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setDeleteEventLoading(true))
+
+    await API.events.deleteIndividualEvent(uuid)
+
+    dispatch(clearEventsList())
+
+    dispatch(eventsMiddleware.getEventsList(1))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setDeleteEventLoading(true))
+  }
+}
+
 export default {
   getEventsList,
   getSingleEvent,
   createEvent,
   clearEventsList,
+  resetCreateEventsSubmitSuccess,
+  deleteIndividualEvent,
 }

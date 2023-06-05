@@ -16,9 +16,9 @@ export enum NewsType {
   college = 'College',
 }
 export interface IIndividualNewsResponse {
-  uuid: string
+  uuid?: string
   header: string
   paragraph: string
   imageURL: string
-  postedAt: string
+  postedAt?: string
 }

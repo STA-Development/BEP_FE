@@ -5,10 +5,6 @@ import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
 const createReducer = <T extends SliceCaseReducers<IAboutUsProps>>(reducer: T) => ({ ...reducer })
 
 const reducers = createReducer({
-  setError(state, action: IAction<null | string | Error>) {
-    state.aboutUs.error = action.payload
-  },
-
   setAboutLoading(state, action: IAction<boolean>) {
     state.aboutUs.isAboutUsLoading = action.payload
   },
@@ -18,6 +14,12 @@ const reducers = createReducer({
   },
   setCreateTeamMemberSubmitSuccess(state, action: IAction<boolean>) {
     state.aboutUs.isTeamMemberSubmitSuccess = action.payload
+  },
+  setIndividualMemberLoading(state, action: IAction<boolean>) {
+    state.aboutUs.isIndividualMemberLoading = action.payload
+  },
+  setIndividualMember(state, action: IAction<IAboutUsListProps>) {
+    state.aboutUs.individualMember = action.payload
   },
 })
 

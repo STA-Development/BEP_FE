@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
-import { LanguageSelector, User } from '@components/Header'
+import { LanguageSelector, NotificationList, User } from '@components/Header'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
@@ -27,6 +27,7 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
+
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
 
@@ -51,7 +52,7 @@ export const Header = () => {
               <div className="relative flex h-23 items-center justify-between">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-primary xl:hidden">
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">{t(Translation.NAVBAR_OPEN_MAIN_MENU)}</span>
                     {open ? <CloseIcon /> : <BarsIcon />}
                   </Disclosure.Button>
                 </div>
@@ -80,7 +81,10 @@ export const Header = () => {
                       </Link>
                     ))}
                     <LanguageSelector />
-                    <div className="flex flex-1 items-center justify-end">
+                    <div className="ml-5 flex flex-1 items-center justify-around">
+                      <div className="mr-5">
+                        <NotificationList />
+                      </div>
                       {isAuthenticated ? (
                         <User handleLogOut={handleLogOut} />
                       ) : (
@@ -130,6 +134,7 @@ export const Header = () => {
                       </Link>
                     ))}
                     <LanguageSelector />
+                    <NotificationList />
                   </div>
                   <Disclosure.Button className="w-full">
                     <Button

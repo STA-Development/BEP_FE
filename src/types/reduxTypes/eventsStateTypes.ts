@@ -6,10 +6,11 @@ export interface IEventsProps {
 
 export interface IEventsList {
   isEventsLoading: boolean
-  error: string | null
   eventsList: IEventsListProps[]
   pageSize: number
   totalItems: number
+  isCreateEventsSubmitSuccess: boolean
+  isDeleteEventLoading: boolean
 }
 
 export interface IEventsListProps {
@@ -28,6 +29,5 @@ export interface IEventsListParams {
 export interface ICreateEventParams {
   header: string
   paragraph: string
-  imageDescription: string
-  imageURL: File | null
+  imageURL: FileList | File | null
 }
