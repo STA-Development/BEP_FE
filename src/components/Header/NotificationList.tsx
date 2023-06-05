@@ -42,7 +42,7 @@ export const NotificationList = () => {
       className="relative"
     >
       <Menu.Button className="inline-flex w-full items-center py-2">
-        <p className="text-base font-medium text-black xl:hidden">
+        <p className="mr-2 text-base font-medium text-black xl:hidden">
           {t(Translation.HEADER_NOTIFICATIONS)}
         </p>
         <div className="relative">
