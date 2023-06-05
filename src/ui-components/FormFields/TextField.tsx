@@ -24,16 +24,18 @@ const TextField: FC<ITextFieldProps> = ({
   const { field, fieldState } = useController({ name: fieldName })
 
   return (
-    <Input
-      {...field}
-      placeholder={placeholder}
-      className={className}
-      label={label}
-      id={id}
-      type={type}
-      rows={rows}
-      error={fieldState.error ? fieldState.error.message : null}
-    />
+    <div>
+      <Input
+        {...field}
+        placeholder={placeholder}
+        className={className}
+        label={label}
+        id={id}
+        type={type}
+        rows={rows}
+        error={fieldState.error ? fieldState.error.message : null}
+      />
+    </div>
   )
 }
 

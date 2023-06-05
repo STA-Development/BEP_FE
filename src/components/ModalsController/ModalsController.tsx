@@ -7,6 +7,10 @@ import {
   DeleteApplicationModal,
   IDeleteApplication,
 } from '@components/Modals/Application/DeleteApplicationModal'
+import {
+  DeleteIndividualNewsModal,
+  IDeleteIndividualNews,
+} from '@components/Modals/News/DeleteIndividualNewsModal'
 import { useAppSelector } from '@redux/hooks'
 import { viewsSelector } from '@redux/slices/views'
 
@@ -27,6 +31,13 @@ const getDeleteTeamMember = (modal: IOpenedModal<IDeleteApplication>) => (
   />
 )
 
+const getDeleteIndividualNewsModal = (modal: IOpenedModal<IDeleteIndividualNews>) => (
+  <DeleteIndividualNewsModal
+    key={modal.name}
+    {...modal.props}
+  />
+)
+
 export const ModalsController = () => {
   const modals = useAppSelector(viewsSelector.modals)
 
@@ -41,6 +52,8 @@ export const ModalsController = () => {
             return getDeleteApplicationModal(modal)
           case ModalName.DeleteTeamMember:
             return getDeleteTeamMember(modal)
+          case ModalName.DeleteIndividualNewsModal:
+            return getDeleteIndividualNewsModal(modal)
           default:
             return null
         }

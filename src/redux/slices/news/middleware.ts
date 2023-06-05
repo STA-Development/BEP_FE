@@ -1,4 +1,6 @@
+import { IChangeNewsFormProps, ICreateNewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 import API from '@axios/API'
+import { newsMiddleware } from '@redux/slices/news/index'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -10,6 +12,9 @@ const {
   setTotalItems,
   setPageSize,
   setNewsList,
+  setCreateNewsSubmitSuccess,
+  setChangeNewsSubmitSuccess,
+  setDeleteNewsLoading,
 } = slice.actions
 
 const getNewsList = (page: number) => async (dispatch: AppDispatch) => {
@@ -50,14 +55,63 @@ const getIndividualNewsById = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const createNews = (formData: ICreateNewsProps) => async (dispatch: AppDispatch) => {
+  try {
+    await API.news.createNews(formData)
+
+    dispatch(setCreateNewsSubmitSuccess(true))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const changeNews = (formData: IChangeNewsFormProps) => async (dispatch: AppDispatch) => {
+  try {
+    await API.news.changeNews(formData)
+
+    dispatch(setChangeNewsSubmitSuccess(true))
+  } catch (error) {
+    /* empty */
+  }
+}
+
 const clearNewsList = () => async (dispatch: AppDispatch) => {
   dispatch(setNewsList([]))
   dispatch(setPageSize(0))
   dispatch(setTotalItems(0))
 }
 
+const resetCreateNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setCreateNewsSubmitSuccess(false))
+}
+
+const resetChangeNewsSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeNewsSubmitSuccess(false))
+}
+
+const deleteIndividualNews = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setDeleteNewsLoading(true))
+
+    await API.news.deleteIndividualNews(uuid)
+
+    dispatch(clearNewsList())
+
+    dispatch(newsMiddleware.getNewsList(1))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setDeleteNewsLoading(false))
+  }
+}
+
 export default {
   getNewsList,
   clearNewsList,
   getIndividualNewsById,
+  createNews,
+  changeNews,
+  resetCreateNewsSubmitSuccess,
+  resetChangeNewsSubmitSuccess,
+  deleteIndividualNews,
 }
