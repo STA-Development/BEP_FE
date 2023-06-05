@@ -49,6 +49,8 @@ export enum Translation {
   PAGE_ABOUT_US_ADD_TEAM_MEMBER_UPLOAD_IMAGE = 'page.about.us.add.team.member.upload.image',
   PAGE_ABOUT_US_CLOSE_FORM = 'page.about.us.close.form',
   PAGE_ABOUT_US_DESCRIPTION = 'page.about.us.description',
+  PAGE_ABOUT_US_TEAM_MEMBER_MENU_DELETE = 'page.about.us.team.member.menu.delete',
+  PAGE_ABOUT_US_TEAM_MEMBER_MENU_EDIT = 'page.about.us.team.member.menu.edit',
   PAGE_ABOUT_US_TITLE = 'page.about.us.title',
   PAGE_AFTER_REGISTRATION_ACTIONS_ROLE_JOBSEEKER = 'page.after.registration.actions.role.jobSeeker',
   PAGE_AFTER_REGISTRATION_ACTIONS_ROLE_ORGANIZATION = 'page.after.registration.actions.role.organization',
