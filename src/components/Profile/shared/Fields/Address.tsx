@@ -74,7 +74,7 @@ export const Address = () => {
             isLoading={isUpdateLoading}
             type="submit"
           >
-            Save
+            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_SAVE_BUTTON)}
           </Button>
         )}
       </td>

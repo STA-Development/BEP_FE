@@ -84,7 +84,7 @@ const Filters = () => {
               radius="r"
               type="submit"
             >
-              Search
+              {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_SEARCH)}
             </Button>
           </div>
           <div className="mt-5 xl:hidden">

@@ -43,12 +43,10 @@ const AboutUs = () => {
       <Container color="secondary">
         <div className="mx-auto max-w-[760px] py-10 text-center text-white">
           <h2 className="mb-5 text-xl font-medium text-primary xl:font-normal">
-            Lorem ipsum dolor sit amet consectetur.
+            {t(Translation.PAGE_ABOUT_US_DESCRIPTION_HEADER)}
           </h2>
           <p className="text-base text-black-light">
-            Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae.
-            Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus
-            sagittis diam nisl mattis. Orci aenean rutrum nisi facilisis.
+            {t(Translation.PAGE_ABOUT_US_DESCRIPTION_PARAGRAPH)}
           </p>
         </div>
       </Container>

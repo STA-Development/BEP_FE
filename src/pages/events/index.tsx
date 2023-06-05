@@ -106,14 +106,14 @@ const Events = () => {
                         className="hidden xl:flex"
                         onClick={() => handleShowMore(item.uuid)}
                       >
-                        Read more
+                        {t(Translation.PAGE_EVENTS_READ_MORE_BUTTON)}
                       </Button>
                       <Button
                         size="fl"
                         className="xl:hidden"
                         onClick={() => handleShowMore(item.uuid)}
                       >
-                        Read more
+                        {t(Translation.PAGE_EVENTS_READ_MORE_BUTTON)}
                       </Button>
                     </div>
                   ) : null}

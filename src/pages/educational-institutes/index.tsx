@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { Container } from '@components/Container'
 import Header from '@components/EducationalInstitutesHeader'
 import { LocationIcon } from '@components/Icons'
 import { MailIcon } from '@components/Icons/MailIcon'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
+import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { Button } from '@uiComponents/Button'
 import { Loading } from '@uiComponents/Loading'
@@ -27,6 +29,8 @@ const SearchPage = () => {
   const { edInstitutesList, pageSize, totalItems } = useAppSelector(
     educationalInstitutesSelector.educationalInstitutesData
   )
+
+  const [t] = useTranslation()
 
   const redirectToIndividualEducationalInstitute = (id: string) => {
     dispatch(
@@ -98,7 +102,7 @@ const SearchPage = () => {
                   size="lg"
                   onClick={() => redirectToIndividualEducationalInstitute(institute.uuid)}
                 >
-                  Details
+                  {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_ACTIONS_DETAILS)}
                 </Button>
               </div>
             </div>

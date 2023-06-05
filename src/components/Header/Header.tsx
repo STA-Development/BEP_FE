@@ -52,7 +52,7 @@ export const Header = () => {
               <div className="relative flex h-23 items-center justify-between">
                 <div className="absolute inset-y-0 right-0 flex items-center xl:hidden">
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md text-primary xl:hidden">
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">{t(Translation.NAVBAR_OPEN_MAIN_MENU)}</span>
                     {open ? <CloseIcon /> : <BarsIcon />}
                   </Disclosure.Button>
                 </div>
