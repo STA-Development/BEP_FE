@@ -1,5 +1,4 @@
 import API from '@axios/API'
-import { IError } from '@axios/authentication/authManagerTypes'
 import {
   IEducationalInstitutesParams,
   IFilters,
@@ -12,7 +11,6 @@ const {
   setTotalItems,
   setPageSize,
   setEducationalInstitutesList,
-  setError,
   setIndividualEducationalInstitute,
   setFilters,
   setIndividualInstitutesLoadingState,
@@ -32,9 +30,8 @@ const getEducationalInstitutes =
       dispatch(setEducationalInstitutesList([...edInstitutesList, ...responseData.data]))
       dispatch(setTotalItems(responseData.totalItems))
       dispatch(setPageSize(responseData.pageSize))
-      dispatch(setError(null))
     } catch (error) {
-      dispatch(setError((error as IError).response?.data?.status.message))
+      /* empty */
     } finally {
       dispatch(setEducationalInstituteListLoading(false))
     }
@@ -45,8 +42,6 @@ const getProvince = () => async (dispatch: AppDispatch) => {
     const response = await API.educationalInstitutes.getProvinces()
 
     dispatch(setProvinces(response.data.data))
-
-    dispatch(setError(null))
   } catch (error) {
     /* empty */
   }
@@ -68,7 +63,6 @@ const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: 
     const response = await API.educationalInstitutes.getIndividualEducationalInstitutes(id)
 
     dispatch(setIndividualEducationalInstitute(response.data.data))
-    dispatch(setError(null))
   } catch (error) {
     /* empty */
   } finally {

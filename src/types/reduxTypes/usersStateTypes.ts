@@ -11,9 +11,7 @@ export interface IUserProps {
   isRoleSelectSuccessful: boolean
   isUpdateProfileLoading: boolean
   isResetPasswordLoading: boolean
-  error: string | null
   isRoleSelectLoading: boolean
-  errorGoogleSignIn: string | null
   language: string
   selectedIndex: number
   isLanguageChangeLoading: boolean

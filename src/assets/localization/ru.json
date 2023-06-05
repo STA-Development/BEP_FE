@@ -47,6 +47,9 @@
   "page.fill.the.form.job.two.details.button": "Change",
   "page.fill.the.form.job.submit": "Submit",
   "page.fill.the.form.job.tabs": "Tab",
+  "page.profile.menu.applications.actions.deactivate": "Деактивировать приложение",
+  "page.profile.menu.applications.actions.activate": "Активировать приложение",
+  "page.profile.menu.applications.download.pdf": "Скачать PDF",
   "page.about.us.add.team.member": "Add Team Member",
   "page.about.us.add.team.member.header": "Header",
   "page.about.us.add.team.member.paragraph": "Paragraph",
@@ -54,7 +57,6 @@
   "page.about.us.add.team.member.upload.image": "Upload Image",
   "page.about.us.add.team.member.submit": "Submit",
   "page.about.us.close.form": "close",
-  "navbar.profile": "Profile",
   "page.about.us.description.header": "Lorem ipsum dolor sit amet consectetur.",
   "page.about.us.description.paragraph": "Lorem ipsum dolor sit amet consectetur. Non vel nisl iaculis faucibus ornare vitae. Lectus quam faucibus ultrices pellentesque vitae sem vestibulum potenti id. Enim tellus sagittis diam nisl mattis. Orci aenean rutrum nisi facilisis.",
   "page.after.registration.select.role": "Выберите свою роль:",
@@ -97,5 +99,7 @@
   "page.contact.us.validation.phone.matches": "Invalid phone number",
   "page.contact.us.validation.message": "Message number is required",
   "profile.organization.validation.phone": "Phone number is not valid",
-  "profile.job.seeker.validation.phone": "Phone number is not valid"
+  "profile.job.seeker.validation.phone": "Phone number is not valid",
+  "navbar.profile": "Profile",
+  "header.notifications": "Notifications:"
 }

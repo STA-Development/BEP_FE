@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
-import { LanguageSelector, User } from '@components/Header'
+import { LanguageSelector, NotificationList, User } from '@components/Header'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
@@ -80,7 +80,8 @@ export const Header = () => {
                       </Link>
                     ))}
                     <LanguageSelector />
-                    <div className="flex flex-1 items-center justify-end">
+                    <div className="ml-5 flex flex-1 items-center justify-around">
+                      <NotificationList />
                       {isAuthenticated ? (
                         <User handleLogOut={handleLogOut} />
                       ) : (
@@ -130,6 +131,7 @@ export const Header = () => {
                       </Link>
                     ))}
                     <LanguageSelector />
+                    <NotificationList />
                   </div>
                   <Disclosure.Button className="w-full">
                     <Button

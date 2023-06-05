@@ -2,7 +2,6 @@ import { INewsProps } from '@allTypes/reduxTypes/newsStateTypes'
 
 export const getInitialState = (): INewsProps => ({
   news: {
-    error: null,
     newsList: [],
     isNewsListLoading: false,
     pageSize: 0,
