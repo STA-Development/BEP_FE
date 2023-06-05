@@ -171,7 +171,7 @@ const resetOrganizationSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setJobSeekerSubmitSuccess(false))
 }
 
-const getJobSeekerApplicationsPdf = (uuid: string) => async (dispatch: AppDispatch) => {
+const getJobSeekerApplicationsPdf = (uuid: string) => async () => {
   try {
     const response = await API.jobSeeker.getJobSeekerApplicationsPdf(uuid)
 
@@ -191,7 +191,7 @@ const getJobSeekerApplicationsPdf = (uuid: string) => async (dispatch: AppDispat
       link?.parentNode?.removeChild(link)
     }
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   }
 }
 
@@ -202,7 +202,7 @@ const upDateJobSeekerApplicationIsActive =
 
       await API.jobSeeker.upDateJobSeekerApplicationIsActive(params)
     } catch (error) {
-      dispatch(setError((error as IError).response?.data?.status.message))
+      /* empty */
     } finally {
       dispatch(setApplicationsLoading(false))
     }
@@ -215,7 +215,7 @@ const upDateOrganizationApplicationIsActive =
 
       await API.jobSeeker.upDateOrganizationApplicationIsActive(params)
     } catch (error) {
-      dispatch(setError((error as IError).response?.data?.status.message))
+      /* empty */
     } finally {
       dispatch(setApplicationsLoading(false))
     }
@@ -227,7 +227,7 @@ const cloneJobSeekerApplication = (uuid: string) => async (dispatch: AppDispatch
 
     await API.jobSeeker.cloneJobSeekerApplication(uuid)
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setApplicationsLoading(false))
   }
@@ -238,7 +238,7 @@ const cloneOrganizationApplication = (uuid: string) => async (dispatch: AppDispa
 
     await API.jobSeeker.cloneOrganizationApplication(uuid)
   } catch (error) {
-    dispatch(setError((error as IError).response?.data?.status.message))
+    /* empty */
   } finally {
     dispatch(setApplicationsLoading(false))
   }

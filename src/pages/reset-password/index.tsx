@@ -9,8 +9,7 @@ import VerifyOtp from '@pages/reset-password/verify-otp'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import TextField from '@uiComponents/FormFields/TextField'
-
-import { resetPasswordValidationSchema } from '../../validation/auth/resetPassword'
+import { resetPasswordValidationSchema } from '@validation/auth/resetPassword'
 
 const ResetPasswordForm = {
   email: '',
