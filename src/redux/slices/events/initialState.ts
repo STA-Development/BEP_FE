@@ -8,6 +8,7 @@ export const getInitialState = (): IEventsProps => ({
     totalItems: 0,
     isCreateEventsSubmitSuccess: false,
     isDeleteEventLoading: false,
+    isChangeEventsSubmitSuccess: false,
   },
   isSingleEventLoading: false,
   singleEventData: null,

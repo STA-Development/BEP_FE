@@ -1,4 +1,4 @@
-import { ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
+import { IChangeEventFormProps, ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
 import API from '@axios/API'
 import { eventsMiddleware } from '@redux/slices/events/index'
 import store, { AppDispatch } from '@redux/store'
@@ -13,6 +13,7 @@ const {
   setSingleEventLoading,
   setSingleEventData,
   setCreateEventSubmitSuccess,
+  setChangeEventSubmitSuccess,
   setDeleteEventLoading,
 } = slice.actions
 
@@ -90,6 +91,20 @@ const deleteIndividualEvent = (uuid: string) => async (dispatch: AppDispatch) =>
   }
 }
 
+const changeEvent = (formData: IChangeEventFormProps) => async (dispatch: AppDispatch) => {
+  try {
+    await API.events.changeEvent(formData)
+
+    dispatch(setChangeEventSubmitSuccess(true))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const resetChangeEventSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeEventSubmitSuccess(false))
+}
+
 export default {
   getEventsList,
   getSingleEvent,
@@ -97,4 +112,6 @@ export default {
   clearEventsList,
   resetCreateEventsSubmitSuccess,
   deleteIndividualEvent,
+  changeEvent,
+  resetChangeEventSubmitSuccess,
 }

@@ -118,5 +118,6 @@
   "page.events.change.event": "Change Event",
   "page.events.actions.read.more": "Read More",
   "page.news.change.news": "Change News",
-  "page.news.delete.news": "Delete News"
+  "page.news.delete.news": "Delete News",
+  "page.events.delete.event": "Delete Event"
 }

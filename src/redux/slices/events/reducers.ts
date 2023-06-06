@@ -34,6 +34,9 @@ const reducers = createReducer({
   setDeleteEventLoading(state, action: IAction<boolean>) {
     state.events.isDeleteEventLoading = action.payload
   },
+  setChangeEventSubmitSuccess(state, action: IAction<boolean>) {
+    state.events.isChangeEventsSubmitSuccess = action.payload
+  },
 })
 
 export default reducers

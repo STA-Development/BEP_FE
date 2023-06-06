@@ -138,6 +138,7 @@ export enum Translation {
   PAGE_EVENTS_ACTIONS_READ_MORE = 'page.events.actions.read.more',
   PAGE_EVENTS_ADD_EVENT = 'page.events.add.event',
   PAGE_EVENTS_CHANGE_EVENT = 'page.events.change.event',
+  PAGE_EVENTS_DELETE_EVENT = 'page.events.delete.event',
   PAGE_EVENTS_INDIVIDUAL_DESCRIPTION = 'page.events.individual.description',
   PAGE_EVENTS_INDIVIDUAL_TITLE = 'page.events.individual.title',
   PAGE_EVENTS_MAIN_CREATE_BUTTON = 'page.events.main.create.button',

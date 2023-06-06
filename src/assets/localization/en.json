@@ -136,6 +136,7 @@
   "page.events.actions.read.more": "Read More",
   "page.events.add.event": "Add Event",
   "page.events.change.event": "Change Event",
+  "page.events.delete.event": "Delete Event",
   "page.events.individual.description": "Keep up with the following events",
   "page.events.individual.title": "Events",
   "page.events.main.create.button": "Create event",

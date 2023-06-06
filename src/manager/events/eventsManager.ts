@@ -1,4 +1,5 @@
 import {
+  IChangeEventFormProps,
   ICreateEventParams,
   IEventsListParams,
   IEventsListProps,
@@ -39,6 +40,19 @@ const eventsManager = {
   },
   deleteIndividualEvent(uuid: string) {
     return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${uuid}`)
+  },
+  changeEvent(formData: IChangeEventFormProps) {
+    return axiosInstance.patch<IChangeEventFormProps, IAxiosResponse<IChangeEventFormProps>>(
+      `/core/v1/${baseURL}/${formData.uuid}`,
+      {
+        ...formData.payload,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
   },
 }
 

@@ -11,6 +11,7 @@ export interface IEventsList {
   totalItems: number
   isCreateEventsSubmitSuccess: boolean
   isDeleteEventLoading: boolean
+  isChangeEventsSubmitSuccess: boolean
 }
 
 export interface IEventsListProps {
@@ -30,4 +31,23 @@ export interface ICreateEventParams {
   header: string
   paragraph: string
   imageURL: FileList | File | null
+}
+
+export interface IEventsResponse {
+  uuid: string
+  header: string
+  paragraph: string
+  imageURL: string
+  postedAt: string
+}
+
+export interface IChangeEventForm {
+  header?: string
+  paragraph?: string
+  imageURL?: string | File
+}
+
+export interface IChangeEventFormProps {
+  payload: IChangeEventForm
+  uuid: string
 }

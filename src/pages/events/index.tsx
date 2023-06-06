@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
 import { IEventsListProps } from '@allTypes/reduxTypes/eventsStateTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
+import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
 import { Container } from '@components/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
@@ -14,6 +15,7 @@ import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import { Loading } from '@uiComponents/Loading'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 const PAGE_BOTTOM = 600
 
@@ -24,6 +26,8 @@ const Events = () => {
   const { eventsList, pageSize, isEventsLoading, totalItems } = useAppSelector(
     eventsSelector.eventsData
   )
+
+  const router = useRouter()
 
   const handleShowMore = (id: string) => {
     dispatch(
@@ -45,6 +49,13 @@ const Events = () => {
       })
     )
   }, [])
+
+  const changeEvents = (path: string) => {
+    router.push({
+      pathname: '/events/change-event',
+      query: { path },
+    })
+  }
 
   useEffect(() => {
     dispatch(eventsMiddleware.getEventsList(page))
@@ -96,13 +107,16 @@ const Events = () => {
               >
                 {role === Roles.Admin ? (
                   <div className="mb-5 flex w-full justify-end">
-                    <Button onClick={() => onDeleteIndividualEventModal(item.uuid)}>
-                      Delete event
-                    </Button>
-                    <Button variant="text"> {t(Translation.PAGE_EVENTS_CHANGE_EVENT)}</Button>
+                    <DeleteChangeMenu
+                      onDeleteItem={onDeleteIndividualEventModal}
+                      changeAction={changeEvents}
+                      uuid={item.uuid}
+                      changeButtonTitle={t(Translation.PAGE_EVENTS_CHANGE_EVENT) as string}
+                      deleteButtonTitle={t(Translation.PAGE_EVENTS_DELETE_EVENT) as string}
+                    />
                   </div>
                 ) : null}
-                <div className="xl:center flex xl:flex-row xl:justify-between xl:gap-10">
+                <div className="xl:center flex flex-col xl:flex-row xl:justify-between xl:gap-10">
                   <div className="xl:flex-initial">
                     {item.imageURL ? (
                       <Image
