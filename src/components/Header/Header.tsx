@@ -82,11 +82,13 @@ export const Header = () => {
                     ))}
                     <LanguageSelector />
                     <div className="ml-5 flex flex-1 items-center justify-around">
-                      <div className="mr-5">
-                        <NotificationList />
-                      </div>
                       {isAuthenticated ? (
-                        <User handleLogOut={handleLogOut} />
+                        <div className="flex items-center">
+                          <div className="mr-5">
+                            <NotificationList />
+                          </div>
+                          <User handleLogOut={handleLogOut} />
+                        </div>
                       ) : (
                         <>
                           <div>
