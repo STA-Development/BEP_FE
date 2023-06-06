@@ -109,5 +109,7 @@
   "page.contact.us.validation.phone.matches": "Invalid phone number",
   "page.contact.us.validation.message": "Message number is required",
   "profile.organization.validation.phone": "Phone number is not valid",
-  "profile.job.seeker.validation.phone": "Phone number is not valid"
+  "profile.job.seeker.validation.phone": "Phone number is not valid",
+  "page.news.change.news": "Change News",
+  "page.news.delete.news": "Delete News"
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ModalName } from '@allTypes/modals'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { AboutUsList } from '@components/AboutUs/AboutUsList'
 import AboutUsMember from '@components/AboutUs/AddMember/AboutUsMember'
 import { ChangeMemberInfo } from '@components/AboutUs/ChangeMemberInfo'
-import { AboutUsMenu } from '@components/AboutUsMenu'
+import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
 import { Container } from '@components/Container'
 import { TeamIcon } from '@components/Icons'
 import { Introduction } from '@components/Introduction'
@@ -12,6 +13,7 @@ import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
 import { usersSelector } from '@redux/slices/users'
+import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 import { Loading } from '@uiComponents/Loading'
 
@@ -27,6 +29,17 @@ const AboutUs = () => {
 
   const [t] = useTranslation()
   const [changeMember, setChangeMember] = useState<string | null>(null)
+
+  const onDeleteTeamMemberModal = useCallback((uuid: string) => {
+    dispatch(
+      viewsMiddleware.openModal({
+        name: ModalName.DeleteTeamMember,
+        props: {
+          id: uuid,
+        },
+      })
+    )
+  }, [])
 
   useEffect(() => {
     dispatch(aboutUsMiddleware.getAboutUsList())
@@ -90,9 +103,16 @@ const AboutUs = () => {
                         {t(Translation.PAGE_ABOUT_US_CLOSE_FORM)}
                       </Button>
                     ) : (
-                      <AboutUsMenu
-                        setChangeMember={setChangeMember}
+                      <DeleteChangeMenu
+                        onDeleteItem={onDeleteTeamMemberModal}
+                        changeAction={setChangeMember}
                         uuid={member.uuid}
+                        deleteButtonTitle={
+                          t(Translation.PAGE_ABOUT_US_TEAM_MEMBER_MENU_DELETE) as string
+                        }
+                        changeButtonTitle={
+                          t(Translation.PAGE_ABOUT_US_TEAM_MEMBER_MENU_EDIT) as string
+                        }
                       />
                     )}
                   </div>
