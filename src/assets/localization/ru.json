@@ -118,12 +118,13 @@
   "modal.delete.news.actions.cancel": "Cancel",
   "modal.delete.news.actions.delete": "Delete",
   "modal.delete.news.description": "You will not be able to restore it",
-  "modal.delete.news.title": "Are you sure you want to delete this?",
   "modal.delete.events.title": "Are you sure you want to delete this?",
   "modal.delete.events.description": "You will not be able to restore it",
   "modal.delete.events.actions.delete": "Delete",
   "modal.delete.events.actions.cancel": "Cancel",
   "page.events.add.event": "Add Event",
   "page.events.change.event": "Change Event",
-  "page.events.actions.read.more": "Read More"
+  "page.events.actions.read.more": "Read More",
+  "modal.delete.news.title": "Are you sure you want to delete this?",
+  "page.news.delete.news": "Delete News"
 }

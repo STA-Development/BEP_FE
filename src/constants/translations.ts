@@ -213,6 +213,7 @@ export enum Translation {
   PAGE_NEWS_ACTIONS_READ_MORE = 'page.news.actions.read.more',
   PAGE_NEWS_ADD_NEWS = 'page.news.add.news',
   PAGE_NEWS_CHANGE_NEWS = 'page.news.change.news',
+  PAGE_NEWS_DELETE_NEWS = 'page.news.delete.news',
   PAGE_NEWS_HEADER = 'page.news.header',
   PAGE_NEWS_INDIVIDUAL_DESCRIPTION = 'page.news.individual.description',
   PAGE_NEWS_INDIVIDUAL_TITLE = 'page.news.individual.title',

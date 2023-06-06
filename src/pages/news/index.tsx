@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { INewsResponse } from '@axios/news/newsManagerTypes'
+import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
 import { Container } from '@components/Container/Container'
 import { RightIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
@@ -103,15 +104,13 @@ const NewsList = () => {
             >
               {role === Roles.Admin ? (
                 <div className="mb-5 flex w-full justify-end">
-                  <Button onClick={() => onDeleteIndividualNewsModal(news.uuid)}>
-                    Delete News
-                  </Button>
-                  <Button
-                    variant="text"
-                    onClick={() => changeNews(news.uuid)}
-                  >
-                    {t(Translation.PAGE_NEWS_CHANGE_NEWS)}
-                  </Button>
+                  <DeleteChangeMenu
+                    onDeleteItem={onDeleteIndividualNewsModal}
+                    changeAction={changeNews}
+                    uuid={news.uuid}
+                    changeButtonTitle={t(Translation.PAGE_NEWS_CHANGE_NEWS) as string}
+                    deleteButtonTitle={t(Translation.PAGE_NEWS_DELETE_NEWS) as string}
+                  />
                 </div>
               ) : null}
               <div className="grid grid-cols-1 justify-between xl:grid-cols-2">

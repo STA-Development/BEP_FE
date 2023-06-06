@@ -116,5 +116,7 @@
   "modal.delete.events.actions.cancel": "Cancel",
   "page.events.add.event": "Add Event",
   "page.events.change.event": "Change Event",
-  "page.events.actions.read.more": "Read More"
+  "page.events.actions.read.more": "Read More",
+  "page.news.change.news": "Change News",
+  "page.news.delete.news": "Delete News"
 }
