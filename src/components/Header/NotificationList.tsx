@@ -45,7 +45,7 @@ export const NotificationList = () => {
         <p className="mr-2 text-base font-medium text-black xl:hidden">
           {t(Translation.HEADER_NOTIFICATIONS)}
         </p>
-        <div className="relative">
+        <div className="relative hidden xl:flex">
           <NotificationIcon />
           <div className="absolute bottom-2.5 left-3 right-0 flex h-3 w-3 items-center justify-center rounded-full bg-red p-1 text-white">
             <span className="text-[10px]">2</span>
