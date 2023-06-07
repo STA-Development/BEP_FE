@@ -19,7 +19,9 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run:  pnpm install
+        run:  |
+          pnpm -v
+          pnpm install
 
       - name: Create env file
         run: |
