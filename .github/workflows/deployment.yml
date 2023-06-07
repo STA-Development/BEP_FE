@@ -25,6 +25,7 @@ jobs:
         run: |
           touch .env
           echo NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }} >> .env
+          pnpm -v
 
       - name: Build application
         run: pnpm build
