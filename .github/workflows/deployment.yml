@@ -22,15 +22,12 @@ jobs:
         with:
           version: 7.30.0
       - name: Install Dependencies
-        run: |
-          pnpm -v
-          pnpm install
+        run: pnpm install
 
       - name: Create env file
         run: |
           touch .env
           echo NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }} >> .env
-          pnpm -v
 
       - name: Build application
         run: pnpm build
