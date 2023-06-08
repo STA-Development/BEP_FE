@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import { useController } from 'react-hook-form'
 import { Input } from '@uiComponents/Input'
 
@@ -10,6 +10,7 @@ export interface ITextFieldProps {
   label?: string
   id?: string
   className?: string
+  onChange?: (value: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 const TextField: FC<ITextFieldProps> = ({
@@ -20,6 +21,7 @@ const TextField: FC<ITextFieldProps> = ({
   label,
   id,
   className,
+  onChange,
 }) => {
   const { field, fieldState } = useController({ name: fieldName })
 
@@ -32,6 +34,7 @@ const TextField: FC<ITextFieldProps> = ({
       id={id}
       type={type}
       rows={rows}
+      onChange={onChange ?? field.onChange}
       error={fieldState.error ? fieldState.error.message : null}
     />
   )

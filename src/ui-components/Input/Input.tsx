@@ -67,7 +67,8 @@ export const Input = React.forwardRef(
             ],
       ],
       [label && 'mt-2.5'],
-      [rows && 'resize-none']
+      [rows && 'resize-none'],
+      className
     )
 
     const [inputType, setInputType] = useState<boolean>(false)

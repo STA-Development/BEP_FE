@@ -41,3 +41,8 @@ export enum Roles {
   Institute = 'Institute',
   NOROLE = 'NOROLE',
 }
+
+export enum SexAtBirth {
+  Female = 'Female',
+  Male = 'Male',
+}

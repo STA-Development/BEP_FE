@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Container } from '@components/Container'
 import { Actions } from '@components/Monitoring/Form/actions'
@@ -9,24 +9,43 @@ import { dispatch, useAppSelector } from '@redux/hooks'
 import { monitoringMiddleware, monitoringSelector } from '@redux/slices/monitoring-systems'
 import { Loading } from '@uiComponents/Loading'
 import { monitoringValidationSchema } from '@validation/monitoring/monitoring'
+import { AnyObjectSchema } from 'yup'
 
 const MonitoringForm = () => {
   const [page, setPage] = useState<number>(1)
   const lastPage = 3
   const isMonitoringEnumsLoading = useAppSelector(monitoringSelector.isMonitoringEnumsLoading)
 
+  const [currentSchema, setCurrentSchema] = useState<AnyObjectSchema>(monitoringValidationSchema[0])
   const methods = useForm({
     mode: 'onChange',
-    resolver: yupResolver(monitoringValidationSchema[0]),
+    resolver: yupResolver<AnyObjectSchema>(currentSchema),
+    defaultValues: {
+      demandingProfessions: [{ value: '', count: null }],
+      targetProfession: [{ value: '', count: null }],
+      hasStudentsOrPractitioner: 'false',
+    },
   })
+  const { trigger } = methods
   const { handleSubmit } = methods
 
-  const onSubmit = (values: never) => {
-    console.log(values)
+  const triggerSchema = useCallback(
+    () => async () => {
+      await trigger([])
+    },
+    [trigger]
+  )
 
-    if (page !== lastPage) {
-      setPage(page + 1)
-    }
+  useEffect(() => {
+    triggerSchema()
+  }, [currentSchema, trigger, triggerSchema])
+
+  const onSubmit = async (values: never) => {
+    console.log(values)
+    // if (page !== lastPage) {
+    //   setPage(page + 1)
+    //   setCurrentSchema(monitoringValidationSchema[1])
+    // }
   }
 
   useEffect(() => {
@@ -46,6 +65,7 @@ const MonitoringForm = () => {
             <Actions
               page={page}
               setPage={setPage}
+              setCurrentSchema={setCurrentSchema}
               lastPage={lastPage}
             />
           </form>

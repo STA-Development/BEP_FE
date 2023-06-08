@@ -17,9 +17,12 @@ const isMonitoringEnumsLoading = createSelector(
   (state) => state.isMonitoringEnumsLoading
 )
 
+const ageRange = createSelector([selector], (state) => state.monitoringEnums?.ageRange)
+
 export default {
   monitoringEnums,
   organizationType,
   activityPeriod,
   isMonitoringEnumsLoading,
+  ageRange,
 }
