@@ -44,3 +44,51 @@ export interface IProvinces {
 export interface EducationalInstitutesPageParam {
   page: number
 }
+
+export interface ICreateEducationalInstituteFormDataProps {
+  address: string
+  description: string
+  email: string
+  endTime: string
+  lecturerQuantity: string
+  name: string
+  phone: string
+  province: string
+  rector: string
+  startTime: string
+  studentQuantity: string
+  subtitle: string
+  type: string
+  [keys: number]: File
+}
+
+export interface ICreateEducationalInstituteProps {
+  address: string
+  description: string
+  email: string
+  endTime: string
+  lecturerQuantity: string
+  name: string
+  phone: string
+  imageURL: ICreateEducationalInstituteImage[] | string[] | null
+  province: ICreateEducationalInstituteAutocompleteField
+  rector: string
+  startTime: string
+  studentQuantity: string
+  subtitle: string
+  type: ICreateEducationalInstituteAutocompleteField
+}
+
+export interface ICreateEducationalInstituteAutocompleteField {
+  id: number
+  name: string
+}
+
+export interface ICreateEducationalInstituteImage {
+  [kay: number]: File
+}
+
+export interface IChangeEducationalInstituteFormDataProps {
+  payload: ICreateEducationalInstituteFormDataProps
+  uuid: string
+}

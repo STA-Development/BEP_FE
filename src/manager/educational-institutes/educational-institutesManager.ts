@@ -2,6 +2,8 @@ import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 import {
   EducationalInstitutesPageParam,
+  IChangeEducationalInstituteFormDataProps,
+  ICreateEducationalInstituteFormDataProps,
   IEdInstitutesResponse,
   IIndividualEducationalInstituteResponse,
   IProvinces,
@@ -26,6 +28,43 @@ const educationalInstitutesManager = {
   },
   getProvinces() {
     return axiosInstance.get<IProvinces, IAxiosResponse<IProvinces>>(`/core/v1/${baseURL}/province`)
+  },
+  createEducationalInstitute(formData: ICreateEducationalInstituteFormDataProps) {
+    return axiosInstance.post<
+      ICreateEducationalInstituteFormDataProps,
+      IAxiosResponse<ICreateEducationalInstituteFormDataProps>
+    >(
+      `/core/v1/${baseURL}`,
+      {
+        ...formData,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
+  },
+
+  deleteEducationalInstitute(uuid: string) {
+    return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${uuid}`)
+  },
+
+  changeEducationalInstitute(formData: IChangeEducationalInstituteFormDataProps) {
+    return axiosInstance.patch<
+      IChangeEducationalInstituteFormDataProps,
+      IAxiosResponse<IChangeEducationalInstituteFormDataProps>
+    >(
+      `/core/v1/${baseURL}/${formData.uuid}`,
+      {
+        ...formData,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
   },
 }
 

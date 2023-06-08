@@ -32,6 +32,7 @@ export interface IImageInputProps {
   type: string
 
   error?: string | null
+  multiple?: boolean
 }
 
 export const Input = React.forwardRef(
@@ -160,12 +161,13 @@ export const InputCheckbox = React.forwardRef(
 )
 
 export const ImageInput = React.forwardRef(
-  ({ inputRef, onChange, type, error }: IImageInputProps) => (
+  ({ inputRef, onChange, type, error, multiple }: IImageInputProps) => (
     <div className="flex items-center">
       <input
         className="hidden"
         type={type}
         ref={inputRef}
+        multiple={multiple}
         onChange={onChange}
       />
       {error ? <p className="mt-2.5 text-xs text-red">{error}</p> : null}

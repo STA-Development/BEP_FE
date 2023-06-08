@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import Filters from '@components/Educationalnstitutes/Filters'
 import { FilterIcon } from '@components/Icons/FilterIcon'
 import { Translation } from '@constants/translations'
+import { useAppSelector } from '@redux/hooks'
+import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
+import { useRouter } from 'next/router'
 
 export const EducationalInstitutesHeader = () => {
   const [t] = useTranslation()
 
   const [active, setActive] = useState(true)
+  const { role } = useAppSelector(usersSelector.user)
+  const router = useRouter()
 
   const openFilter = () => {
     setActive(!active)
+  }
+
+  const creatEducationalInstitutes = () => {
+    router.push('/educational-institutes/create-institute')
   }
 
   return (
@@ -46,6 +56,13 @@ export const EducationalInstitutesHeader = () => {
       <div className="mt-4 hidden w-full flex-col items-center justify-center xl:flex">
         <Filters />
       </div>
+      {role === Roles.Admin ? (
+        <div className="mt-5 flex w-full justify-end">
+          <Button onClick={creatEducationalInstitutes}>
+            {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_ADD_INSTITUTE)}
+          </Button>
+        </div>
+      ) : null}
     </div>
   )
 }

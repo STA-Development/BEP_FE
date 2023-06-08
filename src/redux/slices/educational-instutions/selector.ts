@@ -19,10 +19,22 @@ export const filters = createSelector([selector], (state) => state.filters)
 
 export const provinces = createSelector([selector], (state) => state.provinces)
 
+export const iCreateIndividualInstitutesSuccess = createSelector(
+  [selector],
+  (state) => state.iCreateIndividualInstitutesSuccess
+)
+
+const iChangeIndividualInstitutesSuccess = createSelector(
+  [selector],
+  (state) => state.iChangeIndividualInstitutesSuccess
+)
+
 export default {
   educationalInstitutesData,
   individualEduInstitute,
   filters,
   isIndividualEduInstituteLoading,
   provinces,
+  iCreateIndividualInstitutesSuccess,
+  iChangeIndividualInstitutesSuccess,
 }

@@ -15,6 +15,8 @@ interface AutocompleteProps<T> {
   inputClasses?: string
   error?: string | null
   onValueChange?: (value: T) => void
+  label?: string
+  id?: string
 }
 
 export const Autocomplete = <T extends IAutoCompleteItem>({
@@ -24,6 +26,8 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   inputClasses,
   error,
   onValueChange,
+  label,
+  id,
   ...rest
 }: AutocompleteProps<T>) => {
   const [query, setQuery] = useState('')
@@ -56,6 +60,14 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
     <Combobox {...rest}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
+          {label ? (
+            <label
+              htmlFor={id}
+              className="text-sm text-black-light"
+            >
+              {label}
+            </label>
+          ) : null}
           <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
@@ -64,6 +76,7 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
               displayValue={(item: IAutoCompleteItem) => item?.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
+              id={id}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-5">
               <ChevronIcon className="rotate-90 transform" />

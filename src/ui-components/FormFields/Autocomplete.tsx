@@ -9,6 +9,8 @@ export interface IAutocompleteProps<T> {
   inputClasses?: string
   items: T[]
   onChange?: (value: T) => void
+  label?: string
+  id?: string
 }
 
 const AutocompleteField = <T extends IAutoCompleteItem>({
@@ -18,6 +20,8 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
   className,
   inputClasses,
   onChange,
+  label,
+  id,
 }: IAutocompleteProps<T>) => {
   const { field, fieldState } = useController({ name: fieldName })
 
@@ -29,6 +33,8 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
       items={items}
       inputClasses={inputClasses}
       classes={className}
+      label={label}
+      id={id}
       error={fieldState.error ? fieldState.error.message : null}
     />
   )
