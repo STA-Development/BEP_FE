@@ -74,7 +74,7 @@ export const FullName = () => {
             type="submit"
             isLoading={isUpdateLoading}
           >
-            Save
+            {t(Translation.PAGE_PROFILE_MENU_SETTINGS_FORM_SAVE_BUTTON)}
           </Button>
         )}
       </td>

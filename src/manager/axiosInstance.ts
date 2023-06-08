@@ -74,6 +74,15 @@ class RequestManager {
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )
           }
+        } else {
+          dispatch(
+            viewsMiddleware.setToastNotificationPopUpState({
+              open: true,
+              props: {
+                error: error.response.data.status.message,
+              },
+            })
+          )
         }
       }
     )

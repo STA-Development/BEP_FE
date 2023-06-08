@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { LocationIcon, UserIcon } from '@components/Icons'
@@ -9,6 +9,7 @@ import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Loading } from '@uiComponents/Loading'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export const Settings = () => {
   const [t] = useTranslation()
@@ -18,6 +19,14 @@ export const Settings = () => {
   const isUserDetailsLoading = useAppSelector(usersSelector.isUserDetailsLoading)
 
   const { name, address, role } = useAppSelector(usersSelector.user)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.query) {
+      localStorage.setItem('accessToken', router.query.accessToken as string)
+    }
+  }, [router])
 
   const handleAvatarUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target

@@ -42,7 +42,13 @@ module.exports = {
           light: '#666',
           DEFAULT: '#000',
         },
-        red: '#FF6868',
+        red: {
+          DEFAULT: '#FF6868',
+        },
+        error: {
+          light: '#FEE2E2',
+          thin: '#991B1B',
+        },
       },
       borderRadius: {
         DEFAULT: '10px',

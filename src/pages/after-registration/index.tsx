@@ -24,7 +24,7 @@ const AfterRegistration = () => {
     <Container className="py-30">
       <div className="flex flex-col items-center">
         <div className="border-black-thin flex flex-col rounded border-2 p-5 xl:p-10">
-          <h3 className="mb-5 text-lg">Please select your role:</h3>
+          <h3 className="mb-5 text-lg"> {t(Translation.PAGE_AFTER_REGISTRATION_SELECT_ROLE)}</h3>
           <div className="flex w-full flex-col space-y-3 xl:flex-row xl:justify-between xl:space-x-4 xl:space-y-0">
             <Button
               variant="contained"
@@ -60,7 +60,7 @@ const AfterRegistration = () => {
             isLoading={isRoleSelectLoading}
             onClick={selectRole}
           >
-            Next
+            {t(Translation.PAGE_AFTER_REGISTRATION_NEXT_BUTTON)}
           </Button>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import { phoneRegExp } from '@constants/common'
+import { Translation } from '@constants/translations'
+import i18next from 'i18next'
 import { boolean, number, object, string } from 'yup'
 
 export const organizationValidationSchema = object({
@@ -17,7 +19,12 @@ export const organizationValidationSchema = object({
   phone: object({
     value: string().when('active', (active, field) =>
       active[0]
-        ? field.required().matches(phoneRegExp, 'Phone number is not valid')
+        ? field
+            .required()
+            .matches(
+              phoneRegExp,
+              i18next.t(Translation.PROFILE_ORGANIZATION_VALIDATION_PHONE) as string
+            )
         : field.notRequired().nullable()
     ),
     active: boolean(),
