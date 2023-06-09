@@ -1,20 +1,43 @@
 import { phoneRegex } from '@constants/contactUs'
+import { Translation } from '@constants/translations'
+import i18next from 'i18next'
 import { number, object, string } from 'yup'
 
 export const changeEducationalInstitutionValidationSchema = object().shape({
-  address: string().required('Header is required'),
-  description: string().required('description is required'),
-  name: string().required('Name is required'),
-  rector: string().required('Rector is required'),
+  address: string().required(
+    i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_ADDRESS) as string
+  ),
+  description: string().required(
+    i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_DESCRIPTION) as string
+  ),
+  name: string().required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_NAME) as string),
+  rector: string().required(
+    i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_RECTOR) as string
+  ),
   studentQuantity: number()
-    .min(0, 'Quantity must be greater than or equal to 0')
-    .required('Quantity is required'),
+    .min(
+      0,
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_STUDENT_QUANTITY_QUANTITY) as string
+    )
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_STUDENT_QUANTITY) as string),
   lecturerQuantity: number()
-    .min(0, 'Quantity must be greater than or equal to 0')
-    .required('Quantity is required'),
-  subtitle: string().required('subtitle is required'),
-  phone: string().matches(phoneRegex, 'Invalid phone number').required('subtitle is required'),
-  email: string().email().required('Email is required'),
+    .min(
+      0,
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_LECTURER_QUANTITY_QUANTITY) as string
+    )
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_LECTURER_QUANTITY) as string),
+  subtitle: string().required(
+    i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_SUBTITLE) as string
+  ),
+  phone: string()
+    .matches(
+      phoneRegex,
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_PHONE_REGEX) as string
+    )
+    .required('subtitle is required'),
+  email: string()
+    .email()
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_EMAIL) as string),
   province: object({
     name: string().required(),
     id: number().required(),
@@ -24,21 +47,31 @@ export const changeEducationalInstitutionValidationSchema = object().shape({
     id: number().required(),
   }),
   startTime: string()
-    .required('Start time is required')
-    .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid start time format'),
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_START_TIME) as string)
+    .matches(
+      /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_START_TIME_MATCHES) as string
+    ),
   endTime: string()
-    .required('End time is required')
-    .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid end time format')
-    .test('is-greater', 'End time must be greater than start time', function (endTime) {
-      const { startTime } = this.parent
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_END_TIME) as string)
+    .matches(
+      /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_END_TIME_MATCHES) as string
+    )
+    .test(
+      'is-greater',
+      i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_END_TIME_TEST) as string,
+      function (endTime) {
+        const { startTime } = this.parent
 
-      if (!startTime || !endTime) {
-        return true
+        if (!startTime || !endTime) {
+          return true
+        }
+
+        const startTimeObj = new Date(`1970-01-01T${startTime}`)
+        const endTimeObj = new Date(`1970-01-01T${endTime}`)
+
+        return endTimeObj > startTimeObj
       }
-
-      const startTimeObj = new Date(`1970-01-01T${startTime}`)
-      const endTimeObj = new Date(`1970-01-01T${endTime}`)
-
-      return endTimeObj > startTimeObj
-    }),
+    ),
 })
