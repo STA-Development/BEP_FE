@@ -116,8 +116,9 @@ const resetCreateIndividualInstitutesSuccess = () => (dispatch: AppDispatch) => 
 const changeEducationalInstitutes =
   (formData: IChangeEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(setChangeIndividualInstitutes(true))
       await API.educationalInstitutes.changeEducationalInstitute(formData)
+
+      dispatch(setChangeIndividualInstitutes(true))
     } catch (error) {
       /* empty */
     }

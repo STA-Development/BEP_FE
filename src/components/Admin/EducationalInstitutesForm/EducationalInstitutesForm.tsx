@@ -30,7 +30,7 @@ export const EducationalInstitutesForm = ({
     <div className="flex w-full  flex-col  items-center justify-center gap-4">
       <div className="flex w-full justify-center">
         <FileField
-          fieldName="imageURL"
+          fieldName="imageURLs"
           inputRef={inputRef}
           type="file"
           handleFileChange={changeMultipleFiles}
@@ -61,7 +61,6 @@ export const EducationalInstitutesForm = ({
           fieldName="phone"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_PHONE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_PHONE) as string}
-          type="number"
         />
         <TextField
           fieldName="email"
@@ -95,13 +94,11 @@ export const EducationalInstitutesForm = ({
           fieldName="studentQuantity"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_STUDENT_QUANTITY) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_STUDENT_QUANTITY) as string}
-          type="number"
         />
         <TextField
           fieldName="lecturerQuantity"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_LECTURER_QUANTITY) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_LECTURER_QUANTITY) as string}
-          type="number"
         />
         <div className="flex w-full flex-col justify-between xl:flex-row">
           <TextField

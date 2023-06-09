@@ -67,14 +67,14 @@ export interface ICreateEducationalInstituteProps {
   description: string
   email: string
   endTime: string
-  lecturerQuantity: string
+  lecturerQuantity: string | number
   name: string
-  phone: string
-  imageURL: ICreateEducationalInstituteImage[] | string[] | null
+  phone: string | number
+  imageURLs: ICreateEducationalInstituteImage[] | string[] | null
   province: ICreateEducationalInstituteAutocompleteField
   rector: string
   startTime: string
-  studentQuantity: string
+  studentQuantity: string | number
   subtitle: string
   type: ICreateEducationalInstituteAutocompleteField
 }

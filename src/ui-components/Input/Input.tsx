@@ -30,7 +30,6 @@ export interface IImageInputProps {
   inputRef?: LegacyRef<HTMLInputElement>
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   type: string
-
   error?: string | null
   multiple?: boolean
 }

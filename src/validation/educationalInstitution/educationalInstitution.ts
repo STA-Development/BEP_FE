@@ -1,11 +1,17 @@
 import { phoneRegex } from '@constants/contactUs'
-import { array, mixed, number, object, string } from 'yup'
+import { array, number, object, string } from 'yup'
 
-export const educationalInstitutionValidationSchema = object({
+export const educationalInstitutionValidationSchema = object().shape({
   address: string().required('Header is required'),
   description: string().required('description is required'),
   name: string().required('Name is required'),
   rector: string().required('Rector is required'),
+  studentQuantity: number()
+    .min(0, 'Quantity must be greater than or equal to 0')
+    .required('Quantity is required'),
+  lecturerQuantity: number()
+    .min(0, 'Quantity must be greater than or equal to 0')
+    .required('Quantity is required'),
   subtitle: string().required('subtitle is required'),
   phone: string().matches(phoneRegex, 'Invalid phone number').required('subtitle is required'),
   email: string().email().required('Email is required'),
@@ -17,17 +23,6 @@ export const educationalInstitutionValidationSchema = object({
     name: string().required(),
     id: number().required(),
   }),
-  imageURL: array().of(
-    mixed()
-      .test('required', 'Image is required', (file) => {
-        if (file) {
-          return true
-        }
-
-        return false
-      })
-      .required('Image is required')
-  ),
   startTime: string()
     .required('Start time is required')
     .matches(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, 'Invalid start time format'),
@@ -46,4 +41,29 @@ export const educationalInstitutionValidationSchema = object({
 
       return endTimeObj > startTimeObj
     }),
+  imageURLs: array().test(
+    'fileFormat',
+    'Invalid file format. Only JPG, JPEG, PNG, and GIF are allowed.',
+    (value) => {
+      if (!value || value.length === 0) {
+        return false
+      }
+
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < value.length; ++i) {
+        if (!(value[i] instanceof File)) {
+          return false
+        }
+
+        const acceptedFormats = ['jpg', 'jpeg', 'png', 'gif']
+        const fileExtension = value[i].name.split('.').pop().toLowerCase()
+
+        if (!acceptedFormats.includes(fileExtension)) {
+          return false
+        }
+      }
+
+      return true
+    }
+  ),
 })

@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
-import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 import {
   IChangeEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
@@ -18,9 +17,13 @@ import { Loading } from '@uiComponents/Loading'
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
 import { useRouter } from 'next/router'
 
+import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader/MultipleImageLoader'
+
 const ChangeEducationalInstitutes = () => {
-  const [imageLoaded, setImageLoaded] = useState<IImageLoader[]>([])
-  const isLoading = useAppSelector(educationalInstitutesSelector.isIndividualEduInstituteLoading)
+  const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
+  const isIndividualEduInstitutesLoading = useAppSelector(
+    educationalInstitutesSelector.isIndividualEduInstituteLoading
+  )
   const individualEduInstitutes = useAppSelector(
     educationalInstitutesSelector.individualEduInstitute
   )
@@ -46,7 +49,7 @@ const ChangeEducationalInstitutes = () => {
       startTime: individualEduInstitutes?.startTime ?? '',
       endTime: individualEduInstitutes?.endTime ?? '',
       description: individualEduInstitutes?.description ?? '',
-      imageURL: individualEduInstitutes?.imageURLs ?? null,
+      imageURLs: [],
     }),
     [individualEduInstitutes]
   )
@@ -65,7 +68,7 @@ const ChangeEducationalInstitutes = () => {
 
   // @ts-ignore
   const { remove } = useFieldArray({ control, name: 'imageURL' })
-  const iamges = imageLoaded.length ? imageLoaded : individualEduInstitutes?.imageURLs
+  const images = imageLoaded.length ? imageLoaded : individualEduInstitutes?.imageURLs
 
   const onSubmit = (data: ICreateEducationalInstituteProps) => {
     const payload = {
@@ -82,7 +85,7 @@ const ChangeEducationalInstitutes = () => {
       studentQuantity: data.studentQuantity,
       lecturerQuantity: data.lecturerQuantity,
       description: data.description,
-      ...data.imageURL,
+      ...data.imageURLs,
     }
     const instituteForm = {
       payload,
@@ -94,16 +97,6 @@ const ChangeEducationalInstitutes = () => {
         instituteForm as IChangeEducationalInstituteFormDataProps
       )
     )
-  }
-
-  const changeMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const imageArray = Array.from(event.target.files).map((file) =>
-        URL.createObjectURL(file as File)
-      )
-
-      setImageLoaded((prevImages: IImageLoader[]) => prevImages.concat(imageArray))
-    }
   }
 
   const onRemove = (index: number) => {
@@ -119,27 +112,33 @@ const ChangeEducationalInstitutes = () => {
         )
       )
     }
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instituteId])
 
   useEffect(() => {
     if (iChangeIndividualInstitutesSuccess) {
-      dispatch(educationalInstitutesMiddleware.resetChangeIndividualInstitutesSuccess())
       reset(defaultValues)
+      dispatch(educationalInstitutesMiddleware.resetChangeIndividualInstitutesSuccess())
       router.push('/educational-institutes')
     }
     //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [iChangeIndividualInstitutesSuccess])
 
+  useEffect(() => {
+    reset(defaultValues)
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [individualEduInstitutes])
+
   return (
     <div className="grid w-full rounded bg-gray-thin p-5 xl:p-10">
-      {isLoading ? (
+      {isIndividualEduInstitutesLoading ? (
         <Loading />
       ) : (
         <FormProvider {...methods}>
           <div className="w-full">
-            {iamges ? (
+            {images ? (
               <MultipleImageLoader
-                imageLoaded={iamges}
+                imageLoaded={images}
                 onRemove={onRemove}
                 length={imageLoaded.length}
               />

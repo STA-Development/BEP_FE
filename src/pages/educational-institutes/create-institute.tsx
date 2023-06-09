@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
-import { ICreateEducationalInstituteProps } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import {
+  ICreateEducationalInstituteFormDataProps,
+  ICreateEducationalInstituteProps,
+} from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
 import { EducationalInstitutionTypes, province } from '@constants/applications'
@@ -12,6 +15,8 @@ import {
 } from '@redux/slices/educational-instutions'
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
 import { useRouter } from 'next/router'
+
+import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader'
 
 const defaultValues = {
   name: '',
@@ -27,7 +32,7 @@ const defaultValues = {
   startTime: '',
   endTime: '',
   description: '',
-  imageURL: [],
+  imageURLs: [],
 }
 
 export interface IImageLoader {
@@ -41,7 +46,9 @@ const CreateEducationalInstitutes = () => {
     resolver: yupResolver(educationalInstitutionValidationSchema),
     mode: 'onSubmit',
   })
-  const [imageLoaded, setImageLoaded] = useState<IImageLoader[]>([])
+
+  const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
+
   const iCreateIndividualInstitutesSuccess = useAppSelector(
     educationalInstitutesSelector.iCreateIndividualInstitutesSuccess
   )
@@ -50,6 +57,11 @@ const CreateEducationalInstitutes = () => {
 
   // @ts-ignore
   const { remove } = useFieldArray({ control, name: 'imageURL' })
+
+  const onRemove = (index: number) => {
+    remove(index)
+    setImageLoaded(imageLoaded.filter((item, i) => i !== index))
+  }
 
   const onSubmit = (data: ICreateEducationalInstituteProps) => {
     const instituteForm = {
@@ -66,25 +78,14 @@ const CreateEducationalInstitutes = () => {
       studentQuantity: data.studentQuantity,
       lecturerQuantity: data.lecturerQuantity,
       description: data.description,
-      ...data.imageURL,
+      ...data.imageURLs,
     }
 
-    dispatch(educationalInstitutesMiddleware.createEducationalInstitutes(instituteForm))
-  }
-
-  const changeMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const imageArray = Array.from(event.target.files).map((file) =>
-        URL.createObjectURL(file as File)
+    dispatch(
+      educationalInstitutesMiddleware.createEducationalInstitutes(
+        instituteForm as ICreateEducationalInstituteFormDataProps
       )
-
-      setImageLoaded((prevImages: IImageLoader[]) => prevImages.concat(imageArray))
-    }
-  }
-
-  const onRemove = (index: number) => {
-    remove(index)
-    setImageLoaded(imageLoaded.filter((item, i) => i !== index))
+    )
   }
 
   useEffect(() => {

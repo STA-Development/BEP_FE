@@ -57,7 +57,7 @@ const educationalInstitutesManager = {
     >(
       `/core/v1/${baseURL}/${formData.uuid}`,
       {
-        ...formData,
+        ...formData.payload,
       },
       {
         headers: {
