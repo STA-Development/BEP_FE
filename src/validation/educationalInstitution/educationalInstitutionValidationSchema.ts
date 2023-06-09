@@ -1,7 +1,7 @@
 import { phoneRegex } from '@constants/contactUs'
-import { array, number, object, string } from 'yup'
+import { number, object, string } from 'yup'
 
-export const educationalInstitutionValidationSchema = object().shape({
+export const changeEducationalInstitutionValidationSchema = object().shape({
   address: string().required('Header is required'),
   description: string().required('description is required'),
   name: string().required('Name is required'),
@@ -41,26 +41,4 @@ export const educationalInstitutionValidationSchema = object().shape({
 
       return endTimeObj > startTimeObj
     }),
-  imageURLs: array().test('required', 'Invalid file format. Only JPG, JPEG, PNG', (value) => {
-    if (!value || value.length === 0) {
-      return false
-    }
-
-    value.forEach((item) => {
-      if (!(value[item] instanceof File)) {
-        return false
-      }
-
-      const acceptedFormats = ['jpg', 'jpeg', 'png', 'gif']
-      const fileExtension = value[item].name.split('.').pop().toLowerCase()
-
-      if (!acceptedFormats.includes(fileExtension)) {
-        return false
-      }
-
-      return true
-    })
-
-    return true
-  }),
 })

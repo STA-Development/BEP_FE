@@ -18,7 +18,7 @@ import { useRouter } from 'next/router'
 
 import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader'
 
-const defaultValues = {
+const defaultValues: ICreateEducationalInstituteProps = {
   name: '',
   address: '',
   type: EducationalInstitutionTypes[0],
@@ -55,8 +55,7 @@ const CreateEducationalInstitutes = () => {
 
   const { handleSubmit, control, reset } = methods
 
-  // @ts-ignore
-  const { remove } = useFieldArray({ control, name: 'imageURL' })
+  const { remove } = useFieldArray({ control, name: 'imageURLs' })
 
   const onRemove = (index: number) => {
     remove(index)

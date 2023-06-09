@@ -14,7 +14,7 @@ import {
   educationalInstitutesSelector,
 } from '@redux/slices/educational-instutions'
 import { Loading } from '@uiComponents/Loading'
-import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
+import { changeEducationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitutionValidationSchema'
 import { useRouter } from 'next/router'
 
 import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader/MultipleImageLoader'
@@ -31,7 +31,7 @@ const ChangeEducationalInstitutes = () => {
     educationalInstitutesSelector.iChangeIndividualInstitutesSuccess
   )
 
-  const defaultValues = useMemo(
+  const defaultValues: ICreateEducationalInstituteProps = useMemo(
     () => ({
       name: individualEduInstitutes?.name ?? '',
       address: individualEduInstitutes?.address ?? '',
@@ -60,14 +60,13 @@ const ChangeEducationalInstitutes = () => {
 
   const methods = useForm({
     defaultValues,
-    resolver: yupResolver(educationalInstitutionValidationSchema),
+    resolver: yupResolver(changeEducationalInstitutionValidationSchema),
     mode: 'onSubmit',
   })
 
   const { handleSubmit, control, reset } = methods
 
-  // @ts-ignore
-  const { remove } = useFieldArray({ control, name: 'imageURL' })
+  const { remove } = useFieldArray({ control, name: 'imageURLs' })
   const images = imageLoaded.length ? imageLoaded : individualEduInstitutes?.imageURLs
 
   const onSubmit = (data: ICreateEducationalInstituteProps) => {

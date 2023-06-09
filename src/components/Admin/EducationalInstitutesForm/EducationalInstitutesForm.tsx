@@ -28,7 +28,7 @@ export const EducationalInstitutesForm = ({
 
   return (
     <div className="flex w-full  flex-col  items-center justify-center gap-4">
-      <div className="flex w-full justify-center">
+      <div className="flex w-full flex-col-reverse items-center justify-center">
         <FileField
           fieldName="imageURLs"
           inputRef={inputRef}
