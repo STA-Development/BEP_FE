@@ -109,7 +109,6 @@
   "page.contact.us.validation.phone.matches": "Invalid phone number",
   "page.contact.us.validation.message": "Message number is required",
   "profile.organization.validation.phone": "Phone number is not valid",
-  "profile.job.seeker.validation.phone": "Phone number is not valid",
   "modal.delete.events.title": "Are you sure you want to delete this?",
   "modal.delete.events.description": "You will not be able to restore it",
   "modal.delete.events.actions.delete": "Delete",
@@ -119,5 +118,6 @@
   "page.events.actions.read.more": "Read More",
   "page.news.change.news": "Change News",
   "page.news.delete.news": "Delete News",
-  "page.events.delete.event": "Delete Event"
+  "page.events.delete.event": "Delete Event",
+  "profile.job.seeker.validation.phone": "Phone number is not valid"
 }

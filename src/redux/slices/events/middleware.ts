@@ -58,8 +58,9 @@ const getSingleEvent = (id: string) => async (dispatch: AppDispatch) => {
 
 const createEvent = (formData: ICreateEventParams) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(setCreateEventSubmitSuccess(true))
     await API.events.createEvent(formData)
+
+    dispatch(setCreateEventSubmitSuccess(true))
   } catch (error) {
     /* empty */
   }
