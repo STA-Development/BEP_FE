@@ -7,6 +7,10 @@ import {
   DeleteApplicationModal,
   IDeleteApplication,
 } from '@components/Modals/Application/DeleteApplicationModal'
+import {
+  DeleteIndividualEventModal,
+  IDeleteIndividualEvent,
+} from '@components/Modals/Events/DeleteIndividualEventModal'
 import { DeleteIndividualInstitute } from '@components/Modals/Institutes/DeleteIndividualInstitute'
 import {
   DeleteIndividualNewsModal,
@@ -46,6 +50,13 @@ const getDeleteIndividualInstituteModal = (modal: IOpenedModal<IDeleteIndividual
   />
 )
 
+const getDeleteIndividualEventModal = (modal: IOpenedModal<IDeleteIndividualEvent>) => (
+  <DeleteIndividualEventModal
+    key={modal.name}
+    {...modal.props}
+  />
+)
+
 export const ModalsController = () => {
   const modals = useAppSelector(viewsSelector.modals)
 
@@ -62,6 +73,8 @@ export const ModalsController = () => {
             return getDeleteTeamMember(modal)
           case ModalName.DeleteIndividualNewsModal:
             return getDeleteIndividualNewsModal(modal)
+          case ModalName.DeleteIndividualEventModal:
+            return getDeleteIndividualEventModal(modal)
           case ModalName.DeleteIndividualInstitute:
             return getDeleteIndividualInstituteModal(modal)
           default:

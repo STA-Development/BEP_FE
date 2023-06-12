@@ -132,9 +132,9 @@ const NewsList = () => {
                     src={news.imageURL}
                     alt="img"
                     loader={() => news.imageURL}
-                    height={320}
-                    width={320}
-                    className="ml-auto w-full max-w-md rounded object-cover max-xl:mx-auto"
+                    height={400}
+                    width={500}
+                    className="ml-auto h-[400px] w-[500px] w-full  max-w-md rounded object-cover max-xl:mx-auto"
                   />
                 </div>
               </div>

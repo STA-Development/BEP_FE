@@ -5,7 +5,7 @@ import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
 import { Container } from '@components/Container'
-import Header from '@components/EducationalInstitutesHeader'
+import { EducationalInstitutesHeader } from '@components/EducationalInstitutesHeader'
 import { LocationIcon } from '@components/Icons'
 import { MailIcon } from '@components/Icons/MailIcon'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
@@ -99,7 +99,7 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <Header />
+      <EducationalInstitutesHeader />
       {isEducationalInstitutesLoading && !edInstitutesList?.length ? (
         <Loading />
       ) : (
