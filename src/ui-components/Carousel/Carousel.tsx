@@ -49,7 +49,7 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
   return (
     <div>
       <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium font-semibold xl:text-2xl">{title}</h2>
+        <h2 className="mb-10 text-xl font-medium xl:text-2xl">{title}</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
@@ -82,23 +82,24 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
               loader={() => item.imageURL}
               width={340}
               height={222}
-              className="mb-5 h-full max-h-[221px] w-full max-w-[340px] object-cover"
+              className="mb-5 h-full max-h-[222px] w-full max-w-[340px] object-cover"
             />
-            <h3 className="mb-2.5 text-xl	">{item.header}</h3>
-            <div className="mb-5 h-18">
-              <p className="text-black-light line-clamp-2 ">{item.paragraph}</p>
+            <div className="flex h-[300px] flex-col justify-between">
+              <div className="flex h-[150px] w-full flex-col justify-between">
+                <h3 className="mb-2.5 h-[90px] text-xl line-clamp-2">{item.header}</h3>
+                <p className="h-[45px] text-black-light line-clamp-2 ">{item.paragraph}</p>
+              </div>
+              <div>
+                <p className="mb-10 text-black-light line-clamp-2 ">{item.postedAt}</p>
+                <Button
+                  size="fl"
+                  variant="outlined"
+                  onClick={() => redirectToIndividual(item.uuid)}
+                >
+                  {t(Translation.HOME_PAGE_CAROUSEL_READ_ALL_BUTTON)}
+                </Button>
+              </div>
             </div>
-            <div className="h-15">
-              <p className="text-black-light line-clamp-2 ">{item.postedAt}</p>
-            </div>
-
-            <Button
-              size="fl"
-              variant="outlined"
-              onClick={() => redirectToIndividual(item.uuid)}
-            >
-              {t(Translation.HOME_PAGE_CAROUSEL_READ_ALL_BUTTON)}
-            </Button>
           </div>
         ))}
       </div>

@@ -23,7 +23,7 @@ export const Settings = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (router.query) {
+    if (router.query.accessToken) {
       localStorage.setItem('accessToken', router.query.accessToken as string)
     }
   }, [router])
