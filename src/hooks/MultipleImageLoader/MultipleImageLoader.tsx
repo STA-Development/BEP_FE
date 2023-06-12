@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IImageLoader } from '@pages/educational-institutes/create-institute'
+import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 
 export const useMultipleImageUpload = () => {
   const [imageLoaded, setImageLoaded] = useState<IImageLoader[]>([])

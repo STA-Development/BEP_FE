@@ -20,7 +20,7 @@ export const EducationalInstitutesHeader = () => {
     setActive(!active)
   }
 
-  const creatEducationalInstitutes = () => {
+  const routeToCreatEducationalInstitutes = () => {
     router.push('/educational-institutes/create-institute')
   }
 
@@ -58,7 +58,7 @@ export const EducationalInstitutesHeader = () => {
       </div>
       {role === Roles.Admin ? (
         <div className="mt-5 flex w-full justify-end">
-          <Button onClick={creatEducationalInstitutes}>
+          <Button onClick={routeToCreatEducationalInstitutes}>
             {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_ADD_INSTITUTE)}
           </Button>
         </div>

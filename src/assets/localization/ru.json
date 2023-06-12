@@ -118,8 +118,6 @@
   "modal.delete.news.actions.cancel": "Cancel",
   "modal.delete.news.actions.delete": "Delete",
   "modal.delete.news.description": "You will not be able to restore it",
-  "modal.delete.news.title": "Are you sure you want to delete this?",
-  "page.news.delete.news": "Delete News",
   "page.educational.institutes.delete.institute": "Delete Institute",
   "page.educational.institutes.change.institute": "Change Institute",
   "modal.delete.educational.title": "Are you sure you want to delete this?",
@@ -162,5 +160,7 @@
   "page.educational.form.validation.end.time": "End time is required",
   "page.educational.form.validation.end.time.matches": "Invalid end time format",
   "page.educational.form.validation.end.time.test": "End time must be greater than start time",
-  "page.educational.form.validation.image": "Invalid file format. Only JPG, JPEG, PNG"
+  "page.educational.form.validation.image": "Invalid file format. Only JPG, JPEG, PNG",
+  "modal.delete.news.title": "Are you sure you want to delete this?",
+  "page.news.delete.news": "Delete News"
 }

@@ -16,7 +16,7 @@ import {
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
 import { useRouter } from 'next/router'
 
-import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader'
+import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const defaultValues: ICreateEducationalInstituteProps = {
   name: '',
@@ -33,10 +33,6 @@ const defaultValues: ICreateEducationalInstituteProps = {
   endTime: '',
   description: '',
   imageURLs: [],
-}
-
-export interface IImageLoader {
-  [kay: number]: string
 }
 
 const CreateEducationalInstitutes = () => {

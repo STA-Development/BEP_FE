@@ -17,7 +17,7 @@ import { Loading } from '@uiComponents/Loading'
 import { changeEducationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitutionValidationSchema'
 import { useRouter } from 'next/router'
 
-import { useMultipleImageUpload } from '../../hooks/MultipleImageLoader/MultipleImageLoader'
+import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const ChangeEducationalInstitutes = () => {
   const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()

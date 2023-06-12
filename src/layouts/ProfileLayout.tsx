@@ -69,8 +69,8 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <Container>
-      <div className="mb-30 mt-5 grid grid-cols-1 divide-gray-thin xl:mt-10 xl:grid-cols-5 xl:gap-10 xl:divide-x">
-        <aside>
+      <div className="mb-30 mt-5 flex flex-wrap justify-center divide-gray-thin xl:mt-10 xl:grid xl:grid-cols-5 xl:gap-10 xl:divide-x">
+        <aside className="mr-10">
           <h1 className="text-xl font-medium xl:mb-5 xl:font-normal">{label}</h1>
           <div className="mb-5 xl:hidden">
             <Button
@@ -106,7 +106,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
             <div className="hidden xl:block">
               <Button
                 onClick={handleLogOut}
-                size="bs"
+                size="fl"
                 LeftIcon={LogOutIcon}
               >
                 {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}

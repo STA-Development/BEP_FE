@@ -85,7 +85,7 @@ export interface ICreateEducationalInstituteAutocompleteField {
 }
 
 export interface ICreateEducationalInstituteImage {
-  [kay: number]: File
+  [key: number]: File
 }
 
 export interface IChangeEducationalInstituteFormDataProps {

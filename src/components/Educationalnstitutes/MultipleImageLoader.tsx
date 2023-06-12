@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 import { Translation } from '@constants/translations'
-import { IImageLoader } from '@pages/educational-institutes/create-institute'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 

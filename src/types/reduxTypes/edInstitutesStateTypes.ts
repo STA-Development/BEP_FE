@@ -22,5 +22,5 @@ export interface IEdInstitutes {
 }
 
 export interface IImageLoader {
-  [kay: number]: string
+  [key: number]: string
 }
