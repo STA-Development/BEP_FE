@@ -77,7 +77,15 @@ const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: 
 
 const clearInstitutesList = () => async (dispatch: AppDispatch) => {
   try {
+    const filters = {
+      page: 1,
+      filters: [],
+    }
+
     dispatch(setEducationalInstitutesList([]))
+    dispatch(setTotalItems(0))
+    dispatch(setPageSize(0))
+    dispatch(setFilters(filters))
   } catch (error) {
     /* empty */
   }
@@ -86,8 +94,10 @@ const clearInstitutesList = () => async (dispatch: AppDispatch) => {
 const createEducationalInstitutes =
   (formData: ICreateEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(setCreateIndividualInstitutes(true))
       await API.educationalInstitutes.createEducationalInstitute(formData)
+      dispatch(setCreateIndividualInstitutes(true))
+
+      dispatch(educationalInstitutesMiddleware.clearInstitutesList())
     } catch (error) {
       /* empty */
     }
