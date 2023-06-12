@@ -26,7 +26,6 @@ const ChangeEvent = () => {
   const eventId = router.query.path
 
   const singleEvent = useAppSelector(eventsSelector.singleEvent)
-  const { isChangeEventsSubmitSuccess } = useAppSelector(eventsSelector.eventsData)
 
   const defaultValues = useMemo(
     () => ({
@@ -46,6 +45,7 @@ const ChangeEvent = () => {
   const onSubmit = (data: IFormData) => {
     const payload: MyObject = {}
 
+    console.log(data, 'data')
     Object.keys(data).forEach((key: string) => {
       if (
         singleEvent &&
@@ -73,15 +73,6 @@ const ChangeEvent = () => {
   useEffect(() => {
     reset(defaultValues)
   }, [defaultValues, reset])
-
-  useEffect(() => {
-    if (isChangeEventsSubmitSuccess) {
-      reset(defaultValues)
-      dispatch(eventsMiddleware.resetChangeEventSubmitSuccess())
-      router.push('/events')
-    }
-    //   eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isChangeEventsSubmitSuccess, reset, router])
 
   return (
     <Container className="mb-30 mt-15 pb-20">

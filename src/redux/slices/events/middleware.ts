@@ -1,6 +1,7 @@
 import { IChangeEventFormProps, ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
 import API from '@axios/API'
 import { eventsMiddleware } from '@redux/slices/events/index'
+import { viewsMiddleware } from '@redux/slices/views'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -12,8 +13,6 @@ const {
   setTotalItems,
   setSingleEventLoading,
   setSingleEventData,
-  setCreateEventSubmitSuccess,
-  setChangeEventSubmitSuccess,
   setDeleteEventLoading,
 } = slice.actions
 
@@ -60,7 +59,13 @@ const createEvent = (formData: ICreateEventParams) => async (dispatch: AppDispat
   try {
     await API.events.createEvent(formData)
 
-    dispatch(setCreateEventSubmitSuccess(true))
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/events`,
+        params: '',
+        apply: true,
+      })
+    )
   } catch (error) {
     /* empty */
   }
@@ -70,10 +75,6 @@ const clearEventsList = () => async (dispatch: AppDispatch) => {
   dispatch(setEventsList([]))
   dispatch(setPageSize(0))
   dispatch(setTotalItems(0))
-}
-
-const resetCreateEventsSubmitSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setCreateEventSubmitSuccess(false))
 }
 
 const deleteIndividualEvent = (uuid: string) => async (dispatch: AppDispatch) => {
@@ -96,14 +97,16 @@ const changeEvent = (formData: IChangeEventFormProps) => async (dispatch: AppDis
   try {
     await API.events.changeEvent(formData)
 
-    dispatch(setChangeEventSubmitSuccess(true))
+    dispatch(
+      viewsMiddleware.setRedirectionState({
+        path: `/events`,
+        params: '',
+        apply: true,
+      })
+    )
   } catch (error) {
     /* empty */
   }
-}
-
-const resetChangeEventSubmitSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setChangeEventSubmitSuccess(false))
 }
 
 export default {
@@ -111,8 +114,6 @@ export default {
   getSingleEvent,
   createEvent,
   clearEventsList,
-  resetCreateEventsSubmitSuccess,
   deleteIndividualEvent,
   changeEvent,
-  resetChangeEventSubmitSuccess,
 }

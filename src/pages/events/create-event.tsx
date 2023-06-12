@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { ICreateEventParams } from '@allTypes/reduxTypes/eventsStateTypes'
@@ -8,8 +8,8 @@ import { LeftIcon } from '@components/Icons'
 import { PageHeader } from '@components/PageHeader'
 import { Translation } from '@constants/translations'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { dispatch, useAppSelector } from '@redux/hooks'
-import { eventsMiddleware, eventsSelector } from '@redux/slices/events'
+import { dispatch } from '@redux/hooks'
+import { eventsMiddleware } from '@redux/slices/events'
 import { Button } from '@uiComponents/Button'
 import { createEventValidationSchema } from '@validation/events/createEvents'
 import { useRouter } from 'next/router'
@@ -31,20 +31,11 @@ const CreateEvent = () => {
     mode: 'onChange',
   })
 
-  const { isCreateEventsSubmitSuccess } = useAppSelector(eventsSelector.eventsData)
-  const { reset, handleSubmit } = methods
+  const { handleSubmit } = methods
 
   const onSubmit = (data: ICreateEventParams) => {
     dispatch(eventsMiddleware.createEvent(data))
   }
-
-  useEffect(() => {
-    if (isCreateEventsSubmitSuccess) {
-      reset(defaultValues)
-      router.push('/events')
-      dispatch(eventsMiddleware.resetCreateEventsSubmitSuccess())
-    }
-  }, [isCreateEventsSubmitSuccess, reset, router])
 
   return (
     <Container className="mb-30 pb-20">

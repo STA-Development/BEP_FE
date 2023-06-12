@@ -28,14 +28,8 @@ const reducers = createReducer({
   setSingleEventData(state, action: IAction<IEventsListProps>) {
     state.singleEventData = action.payload
   },
-  setCreateEventSubmitSuccess(state, action: IAction<boolean>) {
-    state.events.isCreateEventsSubmitSuccess = action.payload
-  },
   setDeleteEventLoading(state, action: IAction<boolean>) {
     state.events.isDeleteEventLoading = action.payload
-  },
-  setChangeEventSubmitSuccess(state, action: IAction<boolean>) {
-    state.events.isChangeEventsSubmitSuccess = action.payload
   },
 })
 

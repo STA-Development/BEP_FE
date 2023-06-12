@@ -9,9 +9,7 @@ export interface IEventsList {
   eventsList: IEventsListProps[]
   pageSize: number
   totalItems: number
-  isCreateEventsSubmitSuccess: boolean
   isDeleteEventLoading: boolean
-  isChangeEventsSubmitSuccess: boolean
 }
 
 export interface IEventsListProps {
