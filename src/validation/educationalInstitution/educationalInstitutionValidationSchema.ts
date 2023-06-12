@@ -1,4 +1,5 @@
 import { phoneRegex } from '@constants/contactUs'
+import { endTimeRegex, startTimeRegex } from '@constants/instituts'
 import { Translation } from '@constants/translations'
 import i18next from 'i18next'
 import { number, object, string } from 'yup'
@@ -49,13 +50,13 @@ export const changeEducationalInstitutionValidationSchema = object().shape({
   startTime: string()
     .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_START_TIME) as string)
     .matches(
-      /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+      startTimeRegex,
       i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_START_TIME_MATCHES) as string
     ),
   endTime: string()
     .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_END_TIME) as string)
     .matches(
-      /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/,
+      endTimeRegex,
       i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_END_TIME_MATCHES) as string
     )
     .test(

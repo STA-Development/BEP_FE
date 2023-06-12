@@ -2,11 +2,12 @@ import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import {
   IChangeEducationalInstituteFormDataProps,
+  ICreateEducationalInstituteAutocompleteField,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
-import { EducationalInstitutionTypes, province } from '@constants/applications'
+import { EducationalInstitutionTypes } from '@constants/applications'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import {
@@ -27,8 +28,12 @@ const ChangeEducationalInstitutes = () => {
   const individualEduInstitutes = useAppSelector(
     educationalInstitutesSelector.individualEduInstitute
   )
-  const iChangeIndividualInstitutesSuccess = useAppSelector(
-    educationalInstitutesSelector.iChangeIndividualInstitutesSuccess
+
+  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+
+  const provincesTypes: ICreateEducationalInstituteAutocompleteField[] = useMemo(
+    () => provinces.map((item, index) => ({ name: item, id: index.toString() })),
+    [provinces]
   )
 
   const defaultValues: ICreateEducationalInstituteProps = useMemo(
@@ -39,7 +44,8 @@ const ChangeEducationalInstitutes = () => {
         EducationalInstitutionTypes.find((item) => item.name === individualEduInstitutes?.type) ??
         EducationalInstitutionTypes[0],
       province:
-        province.find((item) => item.name === individualEduInstitutes?.province) ?? province[9],
+        provincesTypes.find((item) => item.name === individualEduInstitutes?.province) ??
+        provincesTypes[10],
       phone: individualEduInstitutes?.phone ?? '',
       email: individualEduInstitutes?.email ?? '',
       subtitle: individualEduInstitutes?.subtitle ?? '',
@@ -51,6 +57,7 @@ const ChangeEducationalInstitutes = () => {
       description: individualEduInstitutes?.description ?? '',
       imageURLs: [],
     }),
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
     [individualEduInstitutes]
   )
 
@@ -100,7 +107,7 @@ const ChangeEducationalInstitutes = () => {
 
   const onRemove = (index: number) => {
     remove(index)
-    setImageLoaded(imageLoaded.filter((item, i) => i !== index))
+    setImageLoaded(imageLoaded.filter((item, imageIndex) => imageIndex !== index))
   }
 
   useEffect(() => {
@@ -115,18 +122,13 @@ const ChangeEducationalInstitutes = () => {
   }, [instituteId])
 
   useEffect(() => {
-    if (iChangeIndividualInstitutesSuccess) {
-      reset(defaultValues)
-      dispatch(educationalInstitutesMiddleware.resetChangeIndividualInstitutesSuccess())
-      router.push('/educational-institutes')
-    }
-    //   eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [iChangeIndividualInstitutesSuccess])
-
-  useEffect(() => {
     reset(defaultValues)
     //   eslint-disable-next-line react-hooks/exhaustive-deps
   }, [individualEduInstitutes])
+
+  useEffect(() => {
+    dispatch(educationalInstitutesMiddleware.getProvince())
+  }, [])
 
   return (
     <div className="grid w-full rounded bg-gray-thin p-5 xl:p-10">
@@ -150,6 +152,7 @@ const ChangeEducationalInstitutes = () => {
             <EducationalInstitutesForm
               changeMultipleFiles={changeMultipleFiles}
               imageLoaded={imageLoaded}
+              provincesTypes={provincesTypes}
             />
           </form>
         </FormProvider>

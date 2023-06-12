@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
-import { EducationalInstitutionTypes, province } from '@constants/applications'
+import { ICreateEducationalInstituteAutocompleteField } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { EducationalInstitutionTypes } from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import FileField from '@uiComponents/FileField/FileField'
@@ -11,11 +12,13 @@ import TextField from '@uiComponents/FormFields/TextField'
 interface IEducationalInstitutesFormProps {
   imageLoaded: IImageLoader[]
   changeMultipleFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
+  provincesTypes: ICreateEducationalInstituteAutocompleteField[]
 }
 
 export const EducationalInstitutesForm = ({
   imageLoaded,
   changeMultipleFiles,
+  provincesTypes,
 }: IEducationalInstitutesFormProps) => {
   const [t] = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -75,7 +78,7 @@ export const EducationalInstitutesForm = ({
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
         />
         <AutocompleteField
-          items={province}
+          items={provincesTypes}
           fieldName="province"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}

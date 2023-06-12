@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import {
+  ICreateEducationalInstituteAutocompleteField,
   ICreateEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
-import { EducationalInstitutionTypes, province } from '@constants/applications'
+import { EducationalInstitutionTypes } from '@constants/applications'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import {
@@ -14,40 +15,45 @@ import {
   educationalInstitutesSelector,
 } from '@redux/slices/educational-instutions'
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
-import { useRouter } from 'next/router'
 
 import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
-const defaultValues: ICreateEducationalInstituteProps = {
-  name: '',
-  address: '',
-  type: EducationalInstitutionTypes[0],
-  province: province[9],
-  phone: '',
-  email: '',
-  subtitle: '',
-  rector: '',
-  studentQuantity: '',
-  lecturerQuantity: '',
-  startTime: '',
-  endTime: '',
-  description: '',
-  imageURLs: [],
-}
-
 const CreateEducationalInstitutes = () => {
-  const router = useRouter()
+  const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
+
+  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+
+  const provincesTypes: ICreateEducationalInstituteAutocompleteField[] = useMemo(
+    () => provinces.map((item, index) => ({ name: item, id: index.toString() })),
+    [provinces]
+  )
+
+  const defaultValues: ICreateEducationalInstituteProps = useMemo(
+    () => ({
+      name: '',
+      address: '',
+      type: EducationalInstitutionTypes[0],
+      province: provincesTypes[10],
+      phone: '',
+      email: '',
+      subtitle: '',
+      rector: '',
+      studentQuantity: '',
+      lecturerQuantity: '',
+      startTime: '',
+      endTime: '',
+      description: '',
+      imageURLs: [],
+    }),
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
+    [provincesTypes, provinces]
+  )
+
   const methods = useForm({
     defaultValues,
     resolver: yupResolver(educationalInstitutionValidationSchema),
     mode: 'onSubmit',
   })
-
-  const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
-
-  const iCreateIndividualInstitutesSuccess = useAppSelector(
-    educationalInstitutesSelector.iCreateIndividualInstitutesSuccess
-  )
 
   const { handleSubmit, control, reset } = methods
 
@@ -84,13 +90,15 @@ const CreateEducationalInstitutes = () => {
   }
 
   useEffect(() => {
-    if (iCreateIndividualInstitutesSuccess) {
-      dispatch(educationalInstitutesMiddleware.resetCreateIndividualInstitutesSuccess())
+    dispatch(educationalInstitutesMiddleware.getProvince())
+  }, [])
+
+  useEffect(() => {
+    if (provincesTypes) {
       reset(defaultValues)
-      router.push('/educational-institutes')
     }
     //   eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [iCreateIndividualInstitutesSuccess])
+  }, [provincesTypes])
 
   return (
     <div className="grid w-full rounded bg-gray-thin p-5 xl:p-10">
@@ -107,6 +115,7 @@ const CreateEducationalInstitutes = () => {
           <EducationalInstitutesForm
             changeMultipleFiles={changeMultipleFiles}
             imageLoaded={imageLoaded}
+            provincesTypes={provincesTypes}
           />
         </form>
       </FormProvider>

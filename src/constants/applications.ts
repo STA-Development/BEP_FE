@@ -47,20 +47,6 @@ export const expectedSalary = [
   { id: 3, name: 'From 150,000 to 200,000' },
 ]
 
-export const province = [
-  { id: 1, name: 'Aragatsotn' },
-  { id: 2, name: 'Ararat' },
-  { id: 3, name: 'Armavir' },
-  { id: 4, name: 'Gegharkunik' },
-  { id: 5, name: 'Kotayk' },
-  { id: 6, name: 'Lori' },
-  { id: 7, name: 'Shirak' },
-  { id: 8, name: 'Tavush' },
-  { id: 9, name: 'Vayots Dzor' },
-  { id: 10, name: 'Yerevan' },
-  { id: 11, name: 'Other' },
-]
-
 export const EducationalInstitutionTypes = [
   { id: 1, name: 'University' },
   { id: 2, name: 'College' },

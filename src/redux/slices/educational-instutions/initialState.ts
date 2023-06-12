@@ -10,6 +10,4 @@ export const getInitialState = (): IEdInstitutesProps => ({
   filters: { page: 1, filters: [] },
   isIndividualEduInstitutesLoading: false,
   individualEduInstitute: null,
-  iCreateIndividualInstitutesSuccess: false,
-  iChangeIndividualInstitutesSuccess: false,
 })

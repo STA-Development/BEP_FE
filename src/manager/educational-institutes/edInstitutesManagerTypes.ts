@@ -80,7 +80,7 @@ export interface ICreateEducationalInstituteProps {
 }
 
 export interface ICreateEducationalInstituteAutocompleteField {
-  id: number
+  id: number | string
   name: string
 }
 

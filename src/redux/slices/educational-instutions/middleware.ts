@@ -6,6 +6,7 @@ import {
   IFilters,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { educationalInstitutesMiddleware } from '@redux/slices/educational-instutions/index'
+import { viewsMiddleware } from '@redux/slices/views'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -19,8 +20,6 @@ const {
   setIndividualInstitutesLoadingState,
   setEducationalInstituteListLoading,
   setProvinces,
-  setCreateIndividualInstitutes,
-  setChangeIndividualInstitutes,
 } = slice.actions
 
 const getEducationalInstitutes =
@@ -95,9 +94,16 @@ const createEducationalInstitutes =
   (formData: ICreateEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
     try {
       await API.educationalInstitutes.createEducationalInstitute(formData)
-      dispatch(setCreateIndividualInstitutes(true))
 
       dispatch(educationalInstitutesMiddleware.clearInstitutesList())
+
+      dispatch(
+        viewsMiddleware.setRedirectionState({
+          path: `/educational-institutes`,
+          params: '',
+          apply: true,
+        })
+      )
     } catch (error) {
       /* empty */
     }
@@ -119,24 +125,22 @@ const deleteEducationalInstitute = (uuid: string) => async (dispatch: AppDispatc
   }
 }
 
-const resetCreateIndividualInstitutesSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setCreateIndividualInstitutes(false))
-}
-
 const changeEducationalInstitutes =
   (formData: IChangeEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
     try {
       await API.educationalInstitutes.changeEducationalInstitute(formData)
 
-      dispatch(setChangeIndividualInstitutes(true))
+      dispatch(
+        viewsMiddleware.setRedirectionState({
+          path: `/educational-institutes`,
+          params: '',
+          apply: true,
+        })
+      )
     } catch (error) {
       /* empty */
     }
   }
-
-const resetChangeIndividualInstitutesSuccess = () => (dispatch: AppDispatch) => {
-  dispatch(setChangeIndividualInstitutes(false))
-}
 
 export default {
   getEducationalInstitutes,
@@ -145,8 +149,6 @@ export default {
   setEIFilters,
   getIndividualEducationalInstitutesById,
   createEducationalInstitutes,
-  resetCreateIndividualInstitutesSuccess,
   deleteEducationalInstitute,
   changeEducationalInstitutes,
-  resetChangeIndividualInstitutesSuccess,
 }

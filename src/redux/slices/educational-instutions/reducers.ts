@@ -39,12 +39,6 @@ const reducers = createReducer<SliceCaseReducers<IEdInstitutesProps>>({
   setProvinces(state, action: IAction<string[]>) {
     state.provinces = action.payload
   },
-  setCreateIndividualInstitutes(state, action: IAction<boolean>) {
-    state.iCreateIndividualInstitutesSuccess = action.payload
-  },
-  setChangeIndividualInstitutes(state, action: IAction<boolean>) {
-    state.iChangeIndividualInstitutesSuccess = action.payload
-  },
 })
 
 export default reducers

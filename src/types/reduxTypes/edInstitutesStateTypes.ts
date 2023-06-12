@@ -10,8 +10,6 @@ export interface IEdInstitutesProps {
   filters: { page: number; filters: IFilters[] }
   isIndividualEduInstitutesLoading: boolean
   individualEduInstitute: IIndividualEducationalInstituteResponse | null
-  iCreateIndividualInstitutesSuccess: boolean
-  iChangeIndividualInstitutesSuccess: boolean
 }
 
 export interface IEdInstitutes {
