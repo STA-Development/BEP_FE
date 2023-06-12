@@ -20,12 +20,15 @@ import { Loading } from '@uiComponents/Loading'
 const AboutUs = () => {
   const [showPersonForm, setShowPersonForm] = useState<boolean>(false)
 
-  const { aboutUsList, isTeamMemberSubmitSuccess, isAboutUsLoading } = useAppSelector(
-    aboutUsSelector.aboutUs
-  )
+  const {
+    aboutUsList,
+    isTeamMemberSubmitSuccess,
+    isAboutUsLoading,
+    isChangeTeamMemberSubmitSuccess,
+  } = useAppSelector(aboutUsSelector.aboutUs)
   const { role } = useAppSelector(usersSelector.user)
 
-  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess
+  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess || isChangeTeamMemberSubmitSuccess
 
   const [t] = useTranslation()
   const [changeMember, setChangeMember] = useState<string | null>(null)
@@ -44,6 +47,14 @@ const AboutUs = () => {
   useEffect(() => {
     dispatch(aboutUsMiddleware.getAboutUsList())
   }, [])
+
+  useEffect(() => {
+    if (isChangeTeamMemberSubmitSuccess) {
+      dispatch(aboutUsMiddleware.resetChangeTeamMemberSubmitSuccess())
+      setChangeMember(null)
+    }
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isChangeTeamMemberSubmitSuccess])
 
   return (
     <>

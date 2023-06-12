@@ -7,5 +7,6 @@ export const getInitialState = (): IAboutUsProps => ({
     isTeamMemberSubmitSuccess: false,
     individualMember: null,
     isIndividualMemberLoading: false,
+    isChangeTeamMemberSubmitSuccess: false,
   },
 })
