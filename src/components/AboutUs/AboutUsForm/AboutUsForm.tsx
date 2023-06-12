@@ -6,7 +6,7 @@ import FileField from '@uiComponents/FileField/FileField'
 import TextField from '@uiComponents/FormFields/TextField'
 import Image from 'next/image'
 
-import { useImageUpload } from '../../../hooks/ImageUpload'
+import { useImageUpload } from '@hooks/ImageUpload'
 
 interface IAboutUsFormProps {
   imageURL?: string
