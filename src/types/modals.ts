@@ -3,4 +3,5 @@ export enum ModalName {
   DeleteApplicationModal = 'DeleteApplicationModal',
   DeleteTeamMember = 'DeleteTeamMember',
   DeleteIndividualNewsModal = 'DeleteIndividualNewsModal',
+  DeleteIndividualEventModal = 'DeleteIndividualEventModal',
 }
