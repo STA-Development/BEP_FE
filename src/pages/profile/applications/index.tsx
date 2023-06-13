@@ -90,7 +90,6 @@ export const Applications = () => {
             >
               <div className="mb-5 flex flex-row items-start justify-between xl:items-center">
                 <h2 className="mb-2 text-lg xl:mb-0">
-                  {' '}
                   {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_HEADER)}
                 </h2>
                 <ApplicationMenu uuid={item.uuid} />

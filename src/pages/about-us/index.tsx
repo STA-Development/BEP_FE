@@ -78,7 +78,7 @@ const AboutUs = () => {
       <Container className="pt-30">
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
         {role === Roles.Admin ? (
-          <div className="mb-10 flex w-full justify-end">
+          <div className="mb-10 flex w-full xl:justify-end">
             {showPersonForm ? (
               <Button
                 size="bs"
@@ -100,7 +100,7 @@ const AboutUs = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className="group mb-30 flex w-full flex-col xl:px-30">
+          <div className="group mb-30 flex w-full flex-col gap-4 xl:gap-0 xl:px-30">
             {aboutUsList?.map((member) => (
               <div>
                 {role === Roles.Admin ? (
