@@ -102,7 +102,7 @@ const AboutUs = () => {
         ) : (
           <div className="group mb-30 flex w-full flex-col xl:px-30">
             {aboutUsList?.map((member) => (
-              <div>
+              <div key={member.uuid}>
                 {role === Roles.Admin ? (
                   <div className="mb-5 flex w-full items-end justify-end">
                     {changeMember === member.uuid ? (

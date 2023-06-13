@@ -84,13 +84,13 @@ export const Applications = () => {
         <div>
           {applicationsList?.map((item) => (
             <div
+              key={item.uuid}
               className={`${
                 !item.isActive && 'bg-gray-light'
               } mb-5 rounded border border-gray-light p-5 xl:p-10`}
             >
               <div className="mb-5 flex flex-row items-start justify-between xl:items-center">
                 <h2 className="mb-2 text-lg xl:mb-0">
-                  {' '}
                   {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_HEADER)}
                 </h2>
                 <ApplicationMenu uuid={item.uuid} />
