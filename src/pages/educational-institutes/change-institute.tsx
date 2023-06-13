@@ -2,12 +2,10 @@ import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import {
   IChangeEducationalInstituteFormDataProps,
-  ICreateEducationalInstituteAutocompleteField,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
-import { EducationalInstitutionTypes } from '@constants/applications'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import {
@@ -18,10 +16,12 @@ import { Loading } from '@uiComponents/Loading'
 import { changeEducationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitutionValidationSchema'
 import { useRouter } from 'next/router'
 
+import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
 import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const ChangeEducationalInstitutes = () => {
   const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
+  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
   const isIndividualEduInstitutesLoading = useAppSelector(
     educationalInstitutesSelector.isIndividualEduInstituteLoading
   )
@@ -29,20 +29,13 @@ const ChangeEducationalInstitutes = () => {
     educationalInstitutesSelector.individualEduInstitute
   )
 
-  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
-
-  const provincesTypes: ICreateEducationalInstituteAutocompleteField[] = useMemo(
-    () => provinces.map((item, index) => ({ name: item, id: index.toString() })),
-    [provinces]
-  )
-
   const defaultValues: ICreateEducationalInstituteProps = useMemo(
     () => ({
       name: individualEduInstitutes?.name ?? '',
       address: individualEduInstitutes?.address ?? '',
       type:
-        EducationalInstitutionTypes.find((item) => item.name === individualEduInstitutes?.type) ??
-        EducationalInstitutionTypes[0],
+        EducationalInstitution.find((item) => item.name === individualEduInstitutes?.type) ??
+        EducationalInstitution[0],
       province:
         provincesTypes.find((item) => item.name === individualEduInstitutes?.province) ??
         provincesTypes[10],
@@ -152,7 +145,6 @@ const ChangeEducationalInstitutes = () => {
             <EducationalInstitutesForm
               changeMultipleFiles={changeMultipleFiles}
               imageLoaded={imageLoaded}
-              provincesTypes={provincesTypes}
             />
           </form>
         </FormProvider>

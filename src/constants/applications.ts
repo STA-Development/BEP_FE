@@ -46,9 +46,3 @@ export const expectedSalary = [
   { id: 2, name: 'From 100,000 to 150,000' },
   { id: 3, name: 'From 150,000 to 200,000' },
 ]
-
-export const EducationalInstitutionTypes = [
-  { id: 1, name: 'University' },
-  { id: 2, name: 'College' },
-  { id: 3, name: 'Workshop' },
-]

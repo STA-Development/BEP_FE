@@ -1,27 +1,26 @@
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
-import { ICreateEducationalInstituteAutocompleteField } from '@axios/educational-institutes/edInstitutesManagerTypes'
-import { EducationalInstitutionTypes } from '@constants/applications'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import FileField from '@uiComponents/FileField/FileField'
 import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 import TextField from '@uiComponents/FormFields/TextField'
 
+import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
+
 interface IEducationalInstitutesFormProps {
   imageLoaded: IImageLoader[]
   changeMultipleFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
-  provincesTypes: ICreateEducationalInstituteAutocompleteField[]
 }
 
 export const EducationalInstitutesForm = ({
   imageLoaded,
   changeMultipleFiles,
-  provincesTypes,
 }: IEducationalInstitutesFormProps) => {
   const [t] = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
+  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -72,7 +71,7 @@ export const EducationalInstitutesForm = ({
         />
 
         <AutocompleteField
-          items={EducationalInstitutionTypes}
+          items={EducationalInstitution}
           fieldName="type"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}

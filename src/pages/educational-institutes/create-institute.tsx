@@ -1,13 +1,11 @@
 import React, { useEffect, useMemo } from 'react'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import {
-  ICreateEducationalInstituteAutocompleteField,
   ICreateEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
-import { EducationalInstitutionTypes } from '@constants/applications'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import {
@@ -16,23 +14,20 @@ import {
 } from '@redux/slices/educational-instutions'
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
 
+import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
 import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const CreateEducationalInstitutes = () => {
   const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
+  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
 
   const provinces = useAppSelector(educationalInstitutesSelector.provinces)
-
-  const provincesTypes: ICreateEducationalInstituteAutocompleteField[] = useMemo(
-    () => provinces.map((item, index) => ({ name: item, id: index.toString() })),
-    [provinces]
-  )
 
   const defaultValues: ICreateEducationalInstituteProps = useMemo(
     () => ({
       name: '',
       address: '',
-      type: EducationalInstitutionTypes[0],
+      type: EducationalInstitution[0],
       province: provincesTypes[10],
       phone: '',
       email: '',
@@ -61,7 +56,7 @@ const CreateEducationalInstitutes = () => {
 
   const onRemove = (index: number) => {
     remove(index)
-    setImageLoaded(imageLoaded.filter((item, i) => i !== index))
+    setImageLoaded(imageLoaded.filter((item, imageIndex) => imageIndex !== index))
   }
 
   const onSubmit = (data: ICreateEducationalInstituteProps) => {
@@ -115,7 +110,6 @@ const CreateEducationalInstitutes = () => {
           <EducationalInstitutesForm
             changeMultipleFiles={changeMultipleFiles}
             imageLoaded={imageLoaded}
-            provincesTypes={provincesTypes}
           />
         </form>
       </FormProvider>
