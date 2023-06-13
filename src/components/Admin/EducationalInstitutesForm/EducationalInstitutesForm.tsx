@@ -1,13 +1,16 @@
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
+import { NewsType } from '@axios/news/newsManagerTypes'
 import { Translation } from '@constants/translations'
+import { useAppSelector } from '@redux/hooks'
+import { educationalInstitutesSelector } from '@redux/slices/educational-instutions'
 import { Button } from '@uiComponents/Button'
 import FileField from '@uiComponents/FileField/FileField'
 import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 import TextField from '@uiComponents/FormFields/TextField'
 
-import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
+import { useCreateObjectFromArray, useCreateObjectFromEnum } from '@hooks/EducationalInstitution'
 
 interface IEducationalInstitutesFormProps {
   imageLoaded: IImageLoader[]
@@ -20,7 +23,12 @@ export const EducationalInstitutesForm = ({
 }: IEducationalInstitutesFormProps) => {
   const [t] = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
-  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
+
+  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+
+  const { objectFromArrayFields } = useCreateObjectFromArray(provinces)
+
+  const { objectFromEnumFields } = useCreateObjectFromEnum(NewsType)
 
   const handleClick = () => {
     if (inputRef.current) {
@@ -71,13 +79,13 @@ export const EducationalInstitutesForm = ({
         />
 
         <AutocompleteField
-          items={EducationalInstitution}
+          items={objectFromEnumFields}
           fieldName="type"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
         />
         <AutocompleteField
-          items={provincesTypes}
+          items={objectFromArrayFields}
           fieldName="province"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}

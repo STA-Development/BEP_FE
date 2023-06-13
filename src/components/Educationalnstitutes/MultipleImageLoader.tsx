@@ -15,7 +15,7 @@ const MultipleImageLoader = ({ imageLoaded, onRemove, length }: IMultipleImageLo
   const [t] = useTranslation()
 
   return (
-    <div className="grid w-full gap-4 xl:grid-cols-4">
+    <div className="flex flex-col justify-center xl:flex-row">
       {imageLoaded?.map((image, index) => (
         <div className="p-4">
           <Image

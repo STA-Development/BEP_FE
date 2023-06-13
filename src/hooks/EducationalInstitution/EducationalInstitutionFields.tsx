@@ -1,24 +1,30 @@
 import { useMemo } from 'react'
 import { ICreateEducationalInstituteAutocompleteField } from '@axios/educational-institutes/edInstitutesManagerTypes'
-import { NewsType } from '@axios/news/newsManagerTypes'
-import { useAppSelector } from '@redux/hooks'
-import { educationalInstitutesSelector } from '@redux/slices/educational-instutions'
 
-export const useEducationalInstitutionFields = () => {
-  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+interface INewsType {
+  University: string
+  Workshop: string
+  College: string
+}
 
-  const provincesTypes: ICreateEducationalInstituteAutocompleteField[] = useMemo(
-    () => provinces.map((item, index) => ({ name: item, id: index.toString() })),
+export const useCreateObjectFromArray = (provinces: string[]) => {
+  const objectFromArrayFields = useMemo(
+    () => provinces.map((item: string, index: number) => ({ name: item, id: index.toString() })),
     [provinces]
   )
 
-  const EducationalInstitution: ICreateEducationalInstituteAutocompleteField[] = useMemo(
-    () => Object.values(NewsType).map((item, index) => ({ name: item, id: index.toString() })),
-    []
+  return {
+    objectFromArrayFields,
+  }
+}
+
+export const useCreateObjectFromEnum = (NewsType: INewsType) => {
+  const objectFromEnumFields: ICreateEducationalInstituteAutocompleteField[] = useMemo(
+    () => Object.keys(NewsType).map((item, index) => ({ name: item, id: index.toString() })),
+    [NewsType]
   )
 
   return {
-    provincesTypes,
-    EducationalInstitution,
+    objectFromEnumFields,
   }
 }

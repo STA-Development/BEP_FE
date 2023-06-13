@@ -38,7 +38,7 @@ export interface IFilters {
 }
 
 export interface IProvinces {
-  data: string[]
+  provinces: string[]
 }
 
 export interface EducationalInstitutesPageParam {

@@ -4,6 +4,7 @@ import {
   IChangeEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { NewsType } from '@axios/news/newsManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,12 +17,12 @@ import { Loading } from '@uiComponents/Loading'
 import { changeEducationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitutionValidationSchema'
 import { useRouter } from 'next/router'
 
-import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
+import { useCreateObjectFromArray, useCreateObjectFromEnum } from '@hooks/EducationalInstitution'
 import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const ChangeEducationalInstitutes = () => {
   const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
-  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
+
   const isIndividualEduInstitutesLoading = useAppSelector(
     educationalInstitutesSelector.isIndividualEduInstituteLoading
   )
@@ -29,16 +30,22 @@ const ChangeEducationalInstitutes = () => {
     educationalInstitutesSelector.individualEduInstitute
   )
 
+  const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+
+  const { objectFromArrayFields } = useCreateObjectFromArray(provinces)
+
+  const { objectFromEnumFields } = useCreateObjectFromEnum(NewsType)
+
   const defaultValues: ICreateEducationalInstituteProps = useMemo(
     () => ({
       name: individualEduInstitutes?.name ?? '',
       address: individualEduInstitutes?.address ?? '',
       type:
-        EducationalInstitution.find((item) => item.name === individualEduInstitutes?.type) ??
-        EducationalInstitution[0],
+        objectFromEnumFields.find((item) => item.name === individualEduInstitutes?.type) ??
+        objectFromEnumFields[0],
       province:
-        provincesTypes.find((item) => item.name === individualEduInstitutes?.province) ??
-        provincesTypes[10],
+        objectFromArrayFields.find((item) => item.name === individualEduInstitutes?.province) ??
+        objectFromArrayFields[10],
       phone: individualEduInstitutes?.phone ?? '',
       email: individualEduInstitutes?.email ?? '',
       subtitle: individualEduInstitutes?.subtitle ?? '',

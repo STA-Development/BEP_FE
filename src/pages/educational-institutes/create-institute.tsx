@@ -4,6 +4,7 @@ import {
   ICreateEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { NewsType } from '@axios/news/newsManagerTypes'
 import { EducationalInstitutesForm } from '@components/Admin/EducationalInstitutesForm'
 import MultipleImageLoader from '@components/Educationalnstitutes/MultipleImageLoader'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,21 +15,24 @@ import {
 } from '@redux/slices/educational-instutions'
 import { educationalInstitutionValidationSchema } from '@validation/educationalInstitution/educationalInstitution'
 
-import { useEducationalInstitutionFields } from '@hooks/EducationalInstitution'
+import { useCreateObjectFromArray, useCreateObjectFromEnum } from '@hooks/EducationalInstitution'
 import { useMultipleImageUpload } from '@hooks/MultipleImageLoader'
 
 const CreateEducationalInstitutes = () => {
   const { imageLoaded, setImageLoaded, changeMultipleFiles } = useMultipleImageUpload()
-  const { provincesTypes, EducationalInstitution } = useEducationalInstitutionFields()
 
   const provinces = useAppSelector(educationalInstitutesSelector.provinces)
+
+  const { objectFromArrayFields } = useCreateObjectFromArray(provinces)
+
+  const { objectFromEnumFields } = useCreateObjectFromEnum(NewsType)
 
   const defaultValues: ICreateEducationalInstituteProps = useMemo(
     () => ({
       name: '',
       address: '',
-      type: EducationalInstitution[0],
-      province: provincesTypes[10],
+      type: objectFromEnumFields[0],
+      province: objectFromArrayFields[10],
       phone: '',
       email: '',
       subtitle: '',
@@ -41,7 +45,7 @@ const CreateEducationalInstitutes = () => {
       imageURLs: [],
     }),
     //   eslint-disable-next-line react-hooks/exhaustive-deps
-    [provincesTypes, provinces]
+    [objectFromArrayFields, objectFromEnumFields]
   )
 
   const methods = useForm({
@@ -89,11 +93,11 @@ const CreateEducationalInstitutes = () => {
   }, [])
 
   useEffect(() => {
-    if (provincesTypes) {
+    if (objectFromArrayFields) {
       reset(defaultValues)
     }
     //   eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [provincesTypes])
+  }, [objectFromArrayFields])
 
   return (
     <div className="grid w-full rounded bg-gray-thin p-5 xl:p-10">
