@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { privateRoutes, publicRoutes } from '@constants/router'
+import { adminRoutes, privateRoutes, publicRoutes } from '@constants/router'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
@@ -69,6 +69,14 @@ const Middleware = ({ children }: { children: ReactElement }) => {
       router.push('/')
     }
   }, [router])
+
+  useEffect(() => {
+    console.log(role, 'role')
+
+    if (!isAuthenticated() && role !== Roles.Admin && adminRoutes.includes(router.pathname)) {
+      router.push('/')
+    }
+  }, [role, router])
 
   return children
 }

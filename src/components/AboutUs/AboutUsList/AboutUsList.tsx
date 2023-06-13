@@ -18,10 +18,10 @@ export const AboutUsList = ({ member }: IMemberListProps) => (
       <Image
         src={member.imageURL}
         loader={() => member.imageURL ?? ''}
+        alt="Image"
         width={350}
         height={400}
         className="h-[400px] w-[350px] xl:mb-5"
-        alt="picture"
       />
       <p className="hidden text-base italic text-black-light group-odd:text-right xl:block xl:text-left">
         {member.imageDescription}
