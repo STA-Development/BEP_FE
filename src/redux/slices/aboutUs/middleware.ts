@@ -1,4 +1,4 @@
-import { ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
+import { IChangeMemberFormProps, ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
 import API from '@axios/API'
 import { aboutUsMiddleware } from '@redux/slices/aboutUs/index'
 import { AppDispatch } from '@redux/store'
@@ -9,6 +9,7 @@ const {
   setAboutLoading,
   setAboutList,
   setCreateTeamMemberSubmitSuccess,
+  setChangeTeamMemberSubmitSuccess,
   setIndividualMemberLoading,
   setIndividualMember,
 } = slice.actions
@@ -75,10 +76,28 @@ const deleteTeamMember = (id: string) => async (dispatch: AppDispatch) => {
   }
 }
 
+const changeTeamMember = (formData: IChangeMemberFormProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setChangeTeamMemberSubmitSuccess(true))
+
+    await API.aboutUs.changeTeamMember(formData)
+
+    dispatch(aboutUsMiddleware.getAboutUsList())
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const resetChangeTeamMemberSubmitSuccess = () => (dispatch: AppDispatch) => {
+  dispatch(setChangeTeamMemberSubmitSuccess(false))
+}
+
 export default {
   getAboutUsList,
   createTeamMember,
   resetCreateTeamMemberSubmitSuccess,
   getIndividualMemberById,
   deleteTeamMember,
+  changeTeamMember,
+  resetChangeTeamMemberSubmitSuccess,
 }

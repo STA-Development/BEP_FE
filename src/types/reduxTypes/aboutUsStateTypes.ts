@@ -8,6 +8,7 @@ export interface IAboutUs {
   isTeamMemberSubmitSuccess: boolean
   individualMember: IAboutUsListProps | null
   isIndividualMemberLoading: boolean
+  isChangeTeamMemberSubmitSuccess: boolean
 }
 
 export interface IAboutUsListProps {
@@ -22,5 +23,20 @@ export interface ICreateTeamMember {
   header?: string
   paragraph?: string
   imageDescription?: string
-  imageURL?: File | null | string
+  imageURL?: File | string
+}
+
+export interface IChangeMemberFormProps {
+  payload: ICreateTeamMember
+  uuid: string
+}
+
+export interface IMemberFormData {
+  header: string
+  paragraph: string
+  imageURL: string | File
+  imageDescription: string
+}
+export interface IChangeMemberInfoFormKey {
+  [key: string]: string | File
 }

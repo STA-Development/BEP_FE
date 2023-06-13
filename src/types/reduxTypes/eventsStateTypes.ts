@@ -9,6 +9,7 @@ export interface IEventsList {
   eventsList: IEventsListProps[]
   pageSize: number
   totalItems: number
+  isDeleteEventLoading: boolean
 }
 
 export interface IEventsListProps {
@@ -22,4 +23,29 @@ export interface IEventsListProps {
 
 export interface IEventsListParams {
   page: number
+}
+
+export interface ICreateEventParams {
+  header: string
+  paragraph: string
+  imageURL: FileList | File | null
+}
+
+export interface IEventsResponse {
+  uuid: string
+  header: string
+  paragraph: string
+  imageURL: string
+  postedAt: string
+}
+
+export interface IChangeEventForm {
+  header?: string
+  paragraph?: string
+  imageURL?: string | File
+}
+
+export interface IChangeEventFormProps {
+  payload: IChangeEventForm
+  uuid: string
 }
