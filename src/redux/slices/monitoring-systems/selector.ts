@@ -16,13 +16,28 @@ const isMonitoringEnumsLoading = createSelector(
   [selector],
   (state) => state.isMonitoringEnumsLoading
 )
-
+const firingReasons = createSelector([selector], (state) => state.monitoringEnums?.firingReason)
+const primaryReason = createSelector([selector], (state) => state.monitoringEnums?.primaryReason)
+const employmentMeans = createSelector(
+  [selector],
+  (state) => state.monitoringEnums?.employmentMeans
+)
 const ageRange = createSelector([selector], (state) => state.monitoringEnums?.ageRange)
+const workChallengeAffects = createSelector(
+  [selector],
+  (state) => state.monitoringEnums?.workChallengeAffects
+)
+const trainingPeriod = createSelector([selector], (state) => state.monitoringEnums?.trainingPeriod)
 
 export default {
   monitoringEnums,
   organizationType,
   activityPeriod,
+  firingReasons,
+  primaryReason,
+  workChallengeAffects,
+  employmentMeans,
   isMonitoringEnumsLoading,
   ageRange,
+  trainingPeriod,
 }

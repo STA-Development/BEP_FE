@@ -1,6 +1,6 @@
 import { FormValues } from '@components/Monitoring/Form/helper'
 import { phoneRegExp } from '@constants/common'
-import { array, number, object, string } from 'yup'
+import { array, boolean, number, object, string } from 'yup'
 
 export const monitoringValidationSchema = [
   object({
@@ -57,41 +57,6 @@ export const monitoringValidationSchema = [
       })
     ),
     hasStudentsOrPractitioner: string().required(),
-    // demandingProfessions: array(
-    //   object({
-    //     value: string().when('hasStudentsOrPractitioner', (active, field) => {
-    //       console.log(active)
-    //
-    //       return active[0] === 'true' ? field.required() : field.notRequired().nullable()
-    //     }),
-    //     count: number().when('hasStudentsOrPractitioner', (active, field) =>
-    //       active[0] === 'true' ? field.required() : field.notRequired().nullable()
-    //     ),
-    //   })
-    // ),
-    // demandingProfessions: array().when('hasStudentsOrPractitioner', (active, field) => {
-    //   console.log(active)
-    //   field.when('hasStudentsOrPractitioner', (active1, newField) => {
-    //     console.log(active1, newField, '!!!!!!!')
-    //
-    //     return object({
-    //       value: string().required(),
-    //       count: string().required(),
-    //     })
-    //   })
-    //
-    //   // if (active[0] === 'true') {
-    //   //   return object({
-    //   //     value: string(),
-    //   //     count: string(),
-    //   //   })
-    //   // }
-    //
-    //   return object({
-    //     value: string().required(),
-    //     count: string().required(),
-    //   })
-    // }),
     demandingProfessions: array().when('hasStudentsOrPractitioner', {
       is: 'true',
       then: () =>
@@ -114,5 +79,185 @@ export const monitoringValidationSchema = [
         ),
       otherwise: (schema) => schema.notRequired().nullable(),
     }),
+  }),
+  object({
+    hasFiredWorkers: boolean().required(),
+    firingReason: array().when('hasFiredWorkers', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    hasNewEmployees: boolean().required(),
+    newEmployeePosition: array().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    primaryReason: array().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    hadDifficultiesWithVacancies: boolean().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () => boolean().required(),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    difficultVacancies: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () => array().of(string()),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    employmentMeans: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () =>
+        array()
+          .of(
+            object().shape({
+              fieldName: string().required(),
+              value: boolean().required(),
+            })
+          )
+          .test('has-true-value', 'At least one item should have value true', (value) =>
+            value?.some((obj) => obj.value)
+          ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    workChallengeAffects: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () =>
+        array()
+          .of(
+            object().shape({
+              fieldName: string().required(),
+              value: boolean().required(),
+            })
+          )
+          .test('has-true-value', 'At least one item should have value true', (value) =>
+            value?.some((obj) => obj.value)
+          ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    trainingPeriod: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
+  }),
+  object({
+    hasFiredWorkers: boolean().required(),
+    firingReason: array().when('hasFiredWorkers', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    hasNewEmployees: boolean().required(),
+    newEmployeePosition: array().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    primaryReason: array().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () =>
+        array(
+          object({
+            value: string().required(),
+            count: string().matches(/^\d+$/, 'Count must be number').required(),
+          })
+        ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    hadDifficultiesWithVacancies: boolean().when('hasNewEmployees', {
+      is: (value: boolean) => value,
+      then: () => boolean().required(),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    difficultVacancies: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () => array().of(string()),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    employmentMeans: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () =>
+        array()
+          .of(
+            object().shape({
+              fieldName: string().required(),
+              value: boolean().required(),
+            })
+          )
+          .test('has-true-value', 'At least one item should have value true', (value) =>
+            value?.some((obj) => obj.value)
+          ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    workChallengeAffects: array().when(['hasNewEmployees', 'hadDifficultiesWithVacancies'], {
+      is: (hasNewEmployees: string, hadDifficultiesWithVacancies: string) =>
+        hasNewEmployees === 'true' && hadDifficultiesWithVacancies === 'true',
+      then: () =>
+        array()
+          .of(
+            object().shape({
+              fieldName: string().required(),
+              value: boolean().required(),
+            })
+          )
+          .test('has-true-value', 'At least one item should have value true', (value) =>
+            value?.some((obj) => obj.value)
+          ),
+      otherwise: (schema) => schema.notRequired().nullable(),
+    }),
+    trainingPeriod: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
   }),
 ]

@@ -43,17 +43,6 @@ const MultipleInputWithCount = ({
           />
         </div>
       </div>
-
-      {/* <MaleCount */}
-      {/*  id={item.id} */}
-      {/*  index={index} */}
-      {/*  fieldName={fieldName} */}
-      {/* /> */}
-      {/* <FemaleCount */}
-      {/*  id={item.id} */}
-      {/*  index={index} */}
-      {/*  fieldName={fieldName} */}
-      {/* /> */}
     </div>
   )
 }

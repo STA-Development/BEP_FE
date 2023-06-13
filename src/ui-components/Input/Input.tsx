@@ -23,6 +23,7 @@ export interface InputType {
 export interface InputTypeCheckbox {
   id?: string
   label?: string
+  checked: boolean
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -138,13 +139,14 @@ export const Input = React.forwardRef(
 
 export const InputCheckbox = React.forwardRef(
   (props: InputTypeCheckbox, ref: LegacyRef<HTMLInputElement>) => {
-    const { label, id, onChange } = props
+    const { label, id, checked, onChange } = props
 
     return (
       <div className="flex items-center">
         <input
           id={id}
           type="checkbox"
+          checked={checked}
           onChange={onChange}
           ref={ref}
           className="ml-1 h-5 w-5 rounded-sm border-black"

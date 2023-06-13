@@ -5,9 +5,9 @@ import { PlusIcon } from '@components/Icons/PlusIcon'
 import MultipleInputWithCount from '@components/Monitoring/Form/common/MultipleInputWithCount'
 import { Translation } from '@constants/translations'
 
-const TargetProfession = () => {
+const NewEmployeePosition = () => {
   const [t] = useTranslation()
-  const fieldName = 'targetProfession'
+  const fieldName = 'newEmployeePosition'
   const { control } = useFormContext()
   const { fields, append, remove } = useFieldArray({ name: fieldName, control })
 
@@ -24,7 +24,7 @@ const TargetProfession = () => {
   return (
     <div className="radius relative rounded bg-primary-light p-6">
       <p className="text-white">
-        {t(Translation.PAGE_MONITORING_SYSTEM_FORM_ORGANIZATION_TARGET_PROFESSION)}
+        {t(Translation.PAGE_MONITORING_SYSTEM_FORM_ORGANIZATION_PERSONAL_NEW_EMPLOYEE_POSITION)}
       </p>
       <div className="absolute right-6 top-6 cursor-pointer">
         <PlusIcon
@@ -48,4 +48,4 @@ const TargetProfession = () => {
   )
 }
 
-export default TargetProfession
+export default NewEmployeePosition

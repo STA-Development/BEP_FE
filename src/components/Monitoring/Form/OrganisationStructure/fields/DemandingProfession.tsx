@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { PlusIcon } from '@components/Icons/PlusIcon'
-import MultipleInputWithCount from '@components/Monitoring/Form/OrganisationStructure/fields/common/MultipleInpuWithCount'
+import MultipleInputWithCount from '@components/Monitoring/Form/common/MultipleInputWithCount'
 import { Translation } from '@constants/translations'
 
 const DemandingProfession = () => {
