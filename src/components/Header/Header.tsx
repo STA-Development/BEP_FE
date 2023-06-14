@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Container } from '@components/Container'
 import { LanguageSelector, NotificationList, User } from '@components/Header'
+import HeaderMobile from '@components/Header/HeaderMobile'
 import { BarsIcon, CloseIcon, LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
@@ -82,11 +83,13 @@ export const Header = () => {
                     ))}
                     <LanguageSelector />
                     <div className="ml-5 flex flex-1 items-center justify-around">
-                      <div className="mr-5">
-                        <NotificationList />
-                      </div>
                       {isAuthenticated ? (
-                        <User handleLogOut={handleLogOut} />
+                        <div className="flex items-center">
+                          <div className="mr-5">
+                            <NotificationList />
+                          </div>
+                          <User handleLogOut={handleLogOut} />
+                        </div>
                       ) : (
                         <>
                           <div>
@@ -119,6 +122,7 @@ export const Header = () => {
                 </div>
               </div>
             </Container>
+            <HeaderMobile navigation={navigation} />
             <Disclosure.Panel className="h-[calc(100vh-92px)] px-5 py-10 xl:hidden">
               {({ close }) => (
                 <div>

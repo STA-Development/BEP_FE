@@ -11,7 +11,7 @@ export const NewsImage = ({ image }: IImageProps) => (
         src={image}
         loader={({ src }) => `${src}`}
         width={500}
-        height={680}
+        height={400}
         alt="picture"
         className="h-[400px] w-[500px] object-cover"
       />

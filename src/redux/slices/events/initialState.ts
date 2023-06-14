@@ -6,6 +6,7 @@ export const getInitialState = (): IEventsProps => ({
     eventsList: [],
     pageSize: 0,
     totalItems: 0,
+    isDeleteEventLoading: false,
   },
   isSingleEventLoading: false,
   singleEventData: null,

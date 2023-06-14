@@ -1,4 +1,8 @@
-import { IAboutUsListProps, ICreateTeamMember } from '@allTypes/reduxTypes/aboutUsStateTypes'
+import {
+  IAboutUsListProps,
+  IChangeMemberFormProps,
+  ICreateTeamMember,
+} from '@allTypes/reduxTypes/aboutUsStateTypes'
 import { Axios } from '@axios/axiosInstance'
 import { IAxiosResponse } from '@axios/axiosTypes'
 
@@ -32,6 +36,20 @@ const aboutUsManager = {
   },
   deleteTeamMember(id: string) {
     return axiosInstance.delete<string, IAxiosResponse<string>>(`/core/v1/${baseURL}/${id}`)
+  },
+
+  changeTeamMember(formData: IChangeMemberFormProps) {
+    return axiosInstance.patch<IChangeMemberFormProps, IAxiosResponse<IChangeMemberFormProps>>(
+      `/core/v1/${baseURL}/${formData.uuid}`,
+      {
+        ...formData.payload,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    )
   },
 }
 
