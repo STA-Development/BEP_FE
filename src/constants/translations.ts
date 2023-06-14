@@ -255,7 +255,7 @@ export enum Translation {
   PAGE_MONITORING_SYSTEM_FORM_TITLE_ORGANIZATION_STRUCTURE = 'page.monitoring.system.form.title.organization.structure',
   PAGE_MONITORING_SYSTEM_FORM_TITLE_PERSONAL_FLOW = 'page.monitoring.system.form.title.personal.flow',
   PAGE_MONITORING_SYSTEM_FORM_TITLE_VACANCIES = 'page.monitoring.system.form.title.vacancies',
-  PAGE_MONITORING_SYSTEM_FORM_VACANCIES_HAVEVACANCIES = 'page.monitoring.system.form.vacancies.haveVacancies',
+  PAGE_MONITORING_SYSTEM_FORM_VACANCIES_HAVE_VACANCIES = 'page.monitoring.system.form.vacancies.have.vacancies',
   PAGE_MONITORING_SYSTEM_FORM_VACANCIES_HOW_MANY_VACANCIES_FILED = 'page.monitoring.system.form.vacancies.how.many.vacancies.filed',
   PAGE_MONITORING_SYSTEM_FORM_VACANCIES_NAME_OF_VACANCIES = 'page.monitoring.system.form.vacancies.name.of.vacancies',
   PAGE_MONITORING_SYSTEM_FORM_VACANCIES_PLACEHOLDER_COUNT = 'page.monitoring.system.form.vacancies.placeholder.count',

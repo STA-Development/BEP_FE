@@ -28,6 +28,10 @@ const workChallengeAffects = createSelector(
   (state) => state.monitoringEnums?.workChallengeAffects
 )
 const trainingPeriod = createSelector([selector], (state) => state.monitoringEnums?.trainingPeriod)
+const vacancyCountByField = createSelector(
+  [selector],
+  (state) => state.monitoringEnums?.vacancyFields
+)
 
 export default {
   monitoringEnums,
@@ -37,6 +41,7 @@ export default {
   primaryReason,
   workChallengeAffects,
   employmentMeans,
+  vacancyCountByField,
   isMonitoringEnumsLoading,
   ageRange,
   trainingPeriod,

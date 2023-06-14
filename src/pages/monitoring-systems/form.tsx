@@ -5,6 +5,7 @@ import { Actions } from '@components/Monitoring/Form/actions'
 import Introduction from '@components/Monitoring/Form/Introduction'
 import OrganizationStructure from '@components/Monitoring/Form/OrganisationStructure'
 import PersonalFlow from '@components/Monitoring/Form/PersonalFlow'
+import Vacancies from '@components/Monitoring/Form/Vacancies'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { monitoringMiddleware, monitoringSelector } from '@redux/slices/monitoring-systems'
@@ -14,7 +15,7 @@ import { AnyObjectSchema } from 'yup'
 
 const MonitoringForm = () => {
   const [page, setPage] = useState<number>(1)
-  const lastPage = 4
+  const lastPage = 6
   const isMonitoringEnumsLoading = useAppSelector(monitoringSelector.isMonitoringEnumsLoading)
 
   const [currentSchema, setCurrentSchema] = useState<AnyObjectSchema>(monitoringValidationSchema[0])
@@ -30,6 +31,9 @@ const MonitoringForm = () => {
       hadDifficultiesWithVacancies: 'false',
       newEmployeePosition: [{ value: '', count: null }],
       difficultVacancies: [''],
+      haveVacancies: 'false',
+      vacancy: [{ value: '', count: null }],
+      vacancyData: [{ name: '', education: '', count: null, startDate: null }],
     },
   })
   const { trigger } = methods
@@ -69,6 +73,7 @@ const MonitoringForm = () => {
             {page === 1 ? <Introduction /> : null}
             {page === 2 ? <OrganizationStructure /> : null}
             {page === 3 ? <PersonalFlow /> : null}
+            {page === 4 ? <Vacancies /> : null}
             <Actions
               page={page}
               setPage={setPage}
