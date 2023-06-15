@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { AboutUsList } from '@components/AboutUs/AboutUsList'
+import { AboutUsItem } from '@components/AboutUs/AboutUsList'
 import AboutUsMember from '@components/AboutUs/AddMember/AboutUsMember'
 import { ChangeMemberInfo } from '@components/AboutUs/ChangeMemberInfo'
 import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
@@ -101,7 +101,7 @@ const AboutUs = () => {
           <Loading />
         ) : (
           <div className="group mb-30 flex w-full flex-col xl:px-30">
-            {aboutUsList?.map((member) => (
+            {aboutUsList?.map((member, index) => (
               <div>
                 {role === Roles.Admin ? (
                   <div className="mb-5 flex w-full items-end justify-end">
@@ -131,7 +131,10 @@ const AboutUs = () => {
                 {changeMember === member.uuid ? (
                   <ChangeMemberInfo changeMember={changeMember} />
                 ) : (
-                  <AboutUsList member={member} />
+                  <AboutUsItem
+                    member={member}
+                    index={index}
+                  />
                 )}
               </div>
             ))}
