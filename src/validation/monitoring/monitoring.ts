@@ -198,4 +198,84 @@ export const monitoringValidationSchema = [
       })
     ),
   }),
+  object({
+    businessPerspective: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
+    positionCuts: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    additionalPositions: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    planedPositions: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    positionNecessityReason: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
+  }),
+  object({
+    businessPerspective: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
+    positionCuts: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    additionalPositions: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    planedPositions: array(
+      object({
+        value: string().required(),
+        count: string().matches(/^\d+$/, 'Count must be number').required(),
+      })
+    ),
+    positionNecessityReason: array()
+      .of(
+        object().shape({
+          fieldName: string(),
+          value: boolean().required(),
+        })
+      )
+      .test('has-true-value', 'At least one item should have value true', (value) =>
+        value?.some((obj) => obj.value)
+      ),
+  }),
 ]

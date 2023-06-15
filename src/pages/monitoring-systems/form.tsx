@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Container } from '@components/Container'
 import { Actions } from '@components/Monitoring/Form/actions'
+import { defaultValues } from '@components/Monitoring/Form/helper'
 import Introduction from '@components/Monitoring/Form/Introduction'
 import OrganizationStructure from '@components/Monitoring/Form/OrganisationStructure'
+import OrganizationPlans from '@components/Monitoring/Form/OrganizationPlans'
 import PersonalFlow from '@components/Monitoring/Form/PersonalFlow'
 import Vacancies from '@components/Monitoring/Form/Vacancies'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -17,27 +19,14 @@ const MonitoringForm = () => {
   const [page, setPage] = useState<number>(1)
   const lastPage = 6
   const isMonitoringEnumsLoading = useAppSelector(monitoringSelector.isMonitoringEnumsLoading)
-
+  const monitoringEnums = useAppSelector(monitoringSelector.monitoringEnums)
   const [currentSchema, setCurrentSchema] = useState<AnyObjectSchema>(monitoringValidationSchema[0])
   const methods = useForm({
     mode: 'onChange',
     resolver: yupResolver<AnyObjectSchema>(currentSchema),
-    defaultValues: {
-      demandingProfessions: [{ value: '', count: null }],
-      targetProfession: [{ value: '', count: null }],
-      hasStudentsOrPractitioner: 'false',
-      hasFiredWorkers: 'false',
-      hasNewEmployees: 'false',
-      hadDifficultiesWithVacancies: 'false',
-      newEmployeePosition: [{ value: '', count: null }],
-      difficultVacancies: [''],
-      haveVacancies: 'false',
-      vacancy: [{ value: '', count: null }],
-      vacancyData: [{ name: '', education: '', count: null, startDate: null }],
-    },
+    defaultValues,
   })
-  const { trigger } = methods
-  const { handleSubmit } = methods
+  const { trigger, reset, handleSubmit } = methods
 
   const triggerSchema = useCallback(
     () => async () => {
@@ -49,6 +38,19 @@ const MonitoringForm = () => {
   useEffect(() => {
     triggerSchema()
   }, [currentSchema, trigger, triggerSchema])
+
+  useEffect(() => {
+    const businessPerspective = monitoringEnums?.businessPerspective.map((item) => ({
+      fieldName: item.id,
+      value: false,
+    }))
+    const positionNecessityReason = monitoringEnums?.positionNecessityReason.map((item) => ({
+      fieldName: item.id,
+      value: false,
+    }))
+
+    reset({ ...defaultValues, businessPerspective, positionNecessityReason })
+  }, [monitoringEnums, reset])
 
   const onSubmit = async (values: never) => {
     console.log(values)
@@ -74,6 +76,7 @@ const MonitoringForm = () => {
             {page === 2 ? <OrganizationStructure /> : null}
             {page === 3 ? <PersonalFlow /> : null}
             {page === 4 ? <Vacancies /> : null}
+            {page === 5 ? <OrganizationPlans /> : null}
             <Actions
               page={page}
               setPage={setPage}

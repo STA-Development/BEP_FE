@@ -32,6 +32,14 @@ const vacancyCountByField = createSelector(
   [selector],
   (state) => state.monitoringEnums?.vacancyFields
 )
+const businessPerspective = createSelector(
+  [selector],
+  (state) => state.monitoringEnums?.businessPerspective
+)
+const positionNecessityReason = createSelector(
+  [selector],
+  (state) => state.monitoringEnums?.positionNecessityReason
+)
 
 export default {
   monitoringEnums,
@@ -43,6 +51,8 @@ export default {
   employmentMeans,
   vacancyCountByField,
   isMonitoringEnumsLoading,
+  positionNecessityReason,
+  businessPerspective,
   ageRange,
   trainingPeriod,
 }

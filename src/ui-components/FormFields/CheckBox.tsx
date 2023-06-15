@@ -7,9 +7,10 @@ export interface ICheckBoxProps {
   id?: string
   label?: string
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
+  className?: string
 }
 
-const Checkbox: FC<ICheckBoxProps> = ({ fieldName, label, id, onChange }) => {
+const Checkbox: FC<ICheckBoxProps> = ({ fieldName, className, label, id, onChange }) => {
   const { control, watch } = useFormContext()
   const { field } = useController({ name: fieldName, control })
 
@@ -21,6 +22,7 @@ const Checkbox: FC<ICheckBoxProps> = ({ fieldName, label, id, onChange }) => {
       onChange={onChange ?? field.onChange}
       checked={isChecked}
       label={label}
+      className={className}
       id={id}
     />
   )
