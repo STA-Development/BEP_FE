@@ -1,1 +1,1 @@
-export * from './AboutUsList'
+export * from './AboutUsItem'
