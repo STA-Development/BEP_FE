@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSelector } from '@components/Header/LanguageSelector'
+import { NotificationList } from '@components/Header/NotificationList'
 import { LogOutIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
@@ -43,6 +44,7 @@ const HeaderMobile = ({
               </Link>
             ))}
             <LanguageSelector />
+            <NotificationList close={() => close()} />
           </div>
           {!isAuthenticated ? (
             <div className="space-y-5">

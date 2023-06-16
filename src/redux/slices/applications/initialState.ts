@@ -16,5 +16,7 @@ export const getInitialState = (): IApplicationsProps => ({
     isOrganizationApplicationLoading: false,
     isJobSeekerApplicationLoading: false,
     isCloneApplicationSuccess: false,
+    notifications: null,
+    notificationId: null,
   },
 })

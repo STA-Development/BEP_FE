@@ -4,6 +4,7 @@ import {
   IIndividualApplication,
   IJobSeekerApplicationProps,
   IJobSeekerProps,
+  INotificationsProps,
   IOrganizationApplicationProps,
   IProfileUpdateProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
@@ -131,6 +132,12 @@ const jobSeekerManager = {
   cloneOrganizationApplication(uuid: string) {
     return axiosInstance.post<null, IAxiosResponse<null>>(
       `${baseURL}/v1/organization/application/clone/${uuid}`
+    )
+  },
+
+  getJobSeekerNotifications() {
+    return axiosInstance.get<INotificationsProps[], IAxiosResponse<INotificationsProps[]>>(
+      `${baseURL}/v1/job-seeker/notification`
     )
   },
 }
