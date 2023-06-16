@@ -22,10 +22,16 @@ const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange,
     if (handleFileChange) {
       if (multiple) {
         handleFileChange(event)
-        append(event.target.files && event.target.files[0])
+
+        if (event.target.files) {
+          append(event.target.files)
+        }
       } else {
         handleFileChange(event)
-        field.onChange(event.target.files && event.target.files?.[0])
+
+        if (event.target.files) {
+          field.onChange(event.target.files)
+        }
       }
     }
   }

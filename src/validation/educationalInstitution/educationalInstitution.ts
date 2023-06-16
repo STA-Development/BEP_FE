@@ -1,4 +1,4 @@
-import { phoneRegex } from '@constants/contactUs'
+import { phoneRegex } from '@constants/index'
 import { endTimeRegex, startTimeRegex } from '@constants/instituts'
 import { Translation } from '@constants/translations'
 import i18next from 'i18next'

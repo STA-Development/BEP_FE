@@ -1,4 +1,5 @@
-import { fullNameRegex, phoneRegex } from '@constants/contactUs'
+import { fullNameRegex } from '@constants/contactUs'
+import { phoneRegex } from '@constants/index'
 import { Translation } from '@constants/translations'
 import i18next from 'i18next'
 import { object, string } from 'yup'
