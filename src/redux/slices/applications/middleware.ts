@@ -268,6 +268,16 @@ const getJobSeekerNotifications = () => async (dispatch: AppDispatch) => {
   }
 }
 
+const getOrganizationNotifications = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.jobSeeker.getOrganizationNotifications()
+
+    dispatch(setNotifications(response?.data?.data))
+  } catch (error) {
+    /* empty */
+  }
+}
+
 const getNotificationsId = (id: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch(setNotificationsId(id))
@@ -307,4 +317,5 @@ export default {
   getJobSeekerNotifications,
   getNotificationsId,
   resetNotificationsId,
+  getOrganizationNotifications,
 }

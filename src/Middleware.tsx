@@ -74,6 +74,8 @@ const Middleware = ({ children }: { children: ReactElement }) => {
   useEffect(() => {
     if (role === Roles.JobSeeker) {
       dispatch(applicationsMiddleware.getJobSeekerNotifications())
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.getOrganizationNotifications())
     }
   }, [role])
 

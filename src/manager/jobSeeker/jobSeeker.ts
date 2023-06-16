@@ -140,6 +140,11 @@ const jobSeekerManager = {
       `${baseURL}/v1/job-seeker/notification`
     )
   },
+  getOrganizationNotifications() {
+    return axiosInstance.get<INotificationsProps[], IAxiosResponse<INotificationsProps[]>>(
+      `${baseURL}/v1/organization/notification`
+    )
+  },
 }
 
 export default jobSeekerManager
