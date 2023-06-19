@@ -48,11 +48,12 @@ export const JobSeekerProfile = () => {
         className="divide-y divide-gray-thin"
       >
         <table className="w-full table-auto">
-          <tbody className="divide-y divide-gray-thin" />
-          <FullName />
-          <Email />
-          <Phone />
-          <Address />
+          <tbody className="divide-y divide-gray-thin">
+            <FullName />
+            <Email />
+            <Phone />
+            <Address />
+          </tbody>
         </table>
       </form>
     </FormProvider>
