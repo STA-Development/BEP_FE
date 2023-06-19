@@ -22,11 +22,11 @@ export const NotificationList = ({ close }: ChildComponentProps) => {
   const handleClick = (id: string) => {
     dispatch(applicationsMiddleware.getNotificationsId(id))
 
-    router.push('/profile/applications')
-
     if (typeof close === 'function') {
       close()
     }
+
+    router.push('/profile/applications')
   }
 
   return (

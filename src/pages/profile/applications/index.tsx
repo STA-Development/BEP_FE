@@ -18,6 +18,8 @@ export const Applications = () => {
   const { notificationId } = useAppSelector(applicationsSelector.applications)
   const listRef = useRef<HTMLDivElement>(null)
 
+  const PAGE_BOTTOM = 150
+
   const {
     applicationsList,
     isApplicationLoading,
@@ -55,7 +57,7 @@ export const Applications = () => {
       if (item) {
         const { offsetTop } = item as HTMLElement
 
-        container?.scrollTo({ top: offsetTop - 150, behavior: 'smooth' })
+        container?.scrollTo({ top: offsetTop - PAGE_BOTTOM, behavior: 'smooth' })
       }
     }
 
