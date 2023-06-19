@@ -84,6 +84,7 @@ export const Applications = () => {
         <div>
           {applicationsList?.map((item) => (
             <div
+              key={item.uuid}
               className={`${
                 !item.isActive && 'bg-gray-light'
               } mb-5 rounded border border-gray-light p-5 xl:p-10`}

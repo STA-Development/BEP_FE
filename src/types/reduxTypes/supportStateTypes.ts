@@ -23,7 +23,7 @@ export interface IHelpDataProps {
 }
 
 export interface IContactUsProps {
-  fullName: string
+  name: string
   email: string
   phone: string
   message: string

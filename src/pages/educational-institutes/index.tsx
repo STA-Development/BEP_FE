@@ -79,7 +79,10 @@ const SearchPage = () => {
         <Loading />
       ) : (
         edInstitutesList.map((institute: IEdInstitutesResponse) => (
-          <div className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row">
+          <div
+            key={institute.uuid}
+            className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row"
+          >
             <div className="flex h-80 w-full flex-row items-center justify-center xl:w-1/3 ">
               <div className="flex h-full w-5/6 items-center justify-center rounded-md xl:w-3/4">
                 <Image

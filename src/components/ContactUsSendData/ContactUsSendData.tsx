@@ -11,7 +11,7 @@ import TextField from '@uiComponents/FormFields/TextField'
 import { contactUsValidationSchema } from '@validation/support/contactUs'
 
 const defaultValues = {
-  fullName: '',
+  name: '',
   email: '',
   phone: '',
   message: '',
@@ -34,7 +34,7 @@ export const ContactUsSendData = () => {
   const onSubmit = (data: IContactUsProps) => {
     dispatch(
       supportMiddleware.sendContactUsData({
-        fullName: data.fullName,
+        name: data.name,
         email: data.email,
         phone: data.phone.toString(),
         message: data.message,
@@ -54,7 +54,7 @@ export const ContactUsSendData = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-5 flex flex-col">
             <TextField
-              fieldName="fullName"
+              fieldName="name"
               label={`${t(Translation.PAGE_CONTACT_US_FORM_FULL_NAME)}`}
             />
           </div>
@@ -70,7 +70,6 @@ export const ContactUsSendData = () => {
             <div className="mb-5 flex flex-col">
               <TextField
                 fieldName="phone"
-                type="number"
                 id="telephone"
                 label={`${t(Translation.PAGE_CONTACT_US_FORM_TELEPHONE)}`}
               />
