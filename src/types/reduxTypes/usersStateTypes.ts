@@ -1,3 +1,4 @@
+import { IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { OrganizationType } from '@components/Profile/Organization/helper'
 
 export interface IUserProps {
@@ -16,6 +17,8 @@ export interface IUserProps {
   selectedIndex: number
   isLanguageChangeLoading: boolean
   otp: number | null
+  usersList: IUsersList[]
+  isUsersListLoading: boolean
 }
 
 export interface IUser {

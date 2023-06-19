@@ -106,3 +106,13 @@ export interface IDeactivateApplicationProps {
   uuid: string
   isActive: boolean
 }
+
+export interface IUsersList {
+  address?: string
+  canDeactivate: boolean
+  email: string
+  imageURL: string | null
+  name: string
+  role: string
+  uuid: string
+}

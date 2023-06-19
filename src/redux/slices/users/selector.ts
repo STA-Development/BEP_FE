@@ -4,6 +4,9 @@ import { createSelector } from '@reduxjs/toolkit'
 const selector = (state: RootState) => state.users
 
 export const user = createSelector([selector], (state) => state.user)
+
+export const usersList = createSelector([selector], (state) => state.usersList)
+export const isUsersListLoading = createSelector([selector], (state) => state.isUsersListLoading)
 export const isSignInLoading = createSelector([selector], (state) => state.isSignInLoading)
 export const isSignUpLoading = createSelector([selector], (state) => state.isSignUpLoading)
 export const isUpdateProfileLoading = createSelector(
@@ -49,4 +52,6 @@ export default {
   isUserAvatarLoading,
   isUserDetailsLoading,
   userAvatar,
+  usersList,
+  isUsersListLoading,
 }

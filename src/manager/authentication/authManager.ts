@@ -1,3 +1,4 @@
+import { IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import {
   IForgotPasswordResponse,
@@ -69,6 +70,9 @@ const authManager = {
         'Content-Type': 'multipart/form-data',
       },
     })
+  },
+  getUsersList() {
+    return axiosInstance.get<IUsersList, IAxiosResponse<IUsersList[]>>(`${baseURL}/v1/user`)
   },
 }
 

@@ -30,6 +30,8 @@ const {
   setIsRoleSelectLoading,
   setIsUserAvatarLoading,
   setIsUserDetailsLoading,
+  setUsersList,
+  setUsersListLoading,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -280,6 +282,20 @@ const updateOrganizationProfile =
     }
   }
 
+const getUsersList = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.auth.getUsersList()
+
+    dispatch(setUsersListLoading(true))
+
+    dispatch(setUsersList(response.data.data))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setUsersListLoading(false))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
@@ -300,4 +316,5 @@ export default {
   uploadAvatar,
   updateAvatarLoading,
   getAccessTokenWithRefreshToken,
+  getUsersList,
 }
