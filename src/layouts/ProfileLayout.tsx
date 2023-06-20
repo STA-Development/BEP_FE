@@ -11,9 +11,8 @@ import {
 import { FilterIcon } from '@components/Icons/FilterIcon'
 import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Translation } from '@constants/translations'
-import { dispatch } from '@redux/hooks'
-import { usersMiddleware } from '@redux/slices/users'
-import store from '@redux/store'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersMiddleware, usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -33,7 +32,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const [t] = useTranslation()
   const router = useRouter()
   const { pathname } = router
-  const { role } = store.getState().users.user
+  const { role } = useAppSelector(usersSelector.user)
 
   const menu: Menu = {
     settings: {

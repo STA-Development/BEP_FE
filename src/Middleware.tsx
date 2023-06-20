@@ -74,13 +74,7 @@ const Middleware = ({ children }: { children: ReactElement }) => {
   useEffect(() => {
     if (!isAuthenticated() && role !== Roles.Admin && adminRoutes.includes(router.pathname)) {
       router.push('/')
-    }
-
-    if (
-      isAuthenticated() &&
-      role === Roles.Admin &&
-      notAccessAdminRoutes.includes(router.pathname)
-    ) {
+    } else if (role === Roles.Admin && notAccessAdminRoutes.includes(router.pathname)) {
       router.push('/')
     }
   }, [role, router])

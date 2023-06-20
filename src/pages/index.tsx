@@ -17,10 +17,10 @@ import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
-import { dispatch } from '@redux/hooks'
+import { dispatch, useAppSelector } from '@redux/hooks'
 import { eventsMiddleware } from '@redux/slices/events'
 import { newsMiddleware } from '@redux/slices/news'
-import store from '@redux/store'
+import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -35,7 +35,7 @@ const data1 = [
 
 const Home = () => {
   const [t] = useTranslation()
-  const { role } = store.getState().users.user
+  const { role } = useAppSelector(usersSelector.user)
 
   const helps = [
     { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
@@ -68,11 +68,11 @@ const Home = () => {
   }, [])
 
   const isAdmin = () => {
-    if (role !== Roles.Admin) {
-      return '/profile/applications'
+    if (role === Roles.Admin) {
+      return '/profile/monitoring-systems'
     }
 
-    return 'profile/monitoring-systems'
+    return '/profile/applications'
   }
 
   return (
