@@ -18,7 +18,7 @@ export const Applications = () => {
   const { notificationId } = useAppSelector(applicationsSelector.applications)
   const listRef = useRef<HTMLDivElement>(null)
 
-  const PAGE_BOTTOM = 150
+  const APPLICATION_POSITION = 150
 
   const {
     applicationsList,
@@ -57,7 +57,7 @@ export const Applications = () => {
       if (item) {
         const { offsetTop } = item as HTMLElement
 
-        container?.scrollTo({ top: offsetTop - PAGE_BOTTOM, behavior: 'smooth' })
+        container?.scrollTo({ top: offsetTop - APPLICATION_POSITION, behavior: 'smooth' })
       }
     }
 
@@ -78,7 +78,7 @@ export const Applications = () => {
         >
           {applicationsList?.map((item) => (
             <Application
-              item={item}
+              singleApplication={item}
               notificationId={notificationId}
             />
           ))}

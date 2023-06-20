@@ -17,11 +17,11 @@ import { viewsMiddleware } from '@redux/slices/views'
 import { Button } from '@uiComponents/Button'
 
 interface IApplicationsProps {
-  item: IApplicationsListProps
+  singleApplication: IApplicationsListProps
   notificationId: string | null
 }
 
-export const Application = ({ item, notificationId }: IApplicationsProps) => {
+export const Application = ({ singleApplication, notificationId }: IApplicationsProps) => {
   const [t] = useTranslation()
 
   const { role } = useAppSelector(usersSelector.user)
@@ -54,9 +54,9 @@ export const Application = ({ item, notificationId }: IApplicationsProps) => {
 
   return (
     <div
-      id={item.uuid}
-      className={`${!item.isActive && 'bg-gray-light'} ${
-        notificationId === item.uuid &&
+      id={singleApplication.uuid}
+      className={`${!singleApplication.isActive && 'bg-gray-light'} ${
+        notificationId === singleApplication.uuid &&
         'animate-pulse border border-primary focus:border-transparent focus:outline-none'
       } mb-5 rounded border-2 border-gray-light p-5 xl:p-10`}
     >
@@ -64,20 +64,22 @@ export const Application = ({ item, notificationId }: IApplicationsProps) => {
         <h2 className="mb-2 text-lg xl:mb-0">
           {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_HEADER)}
         </h2>
-        <ApplicationMenu uuid={item.uuid} />
+        <ApplicationMenu uuid={singleApplication.uuid} />
       </div>
       <div className="mb-10 flex flex-col xl:flex-row">
         <p className="mr-10 text-base text-black-light">
           {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_STATUS)}:
-          <span className="ml-5 font-medium text-primary">{item.status}</span>
+          <span className="ml-5 font-medium text-primary">{singleApplication.status}</span>
         </p>
         <p className="mr-10 text-base text-black-light">
           {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DATE)}:
-          <span className="ml-5 font-medium text-primary">{item.postedAt}</span>
+          <span className="ml-5 font-medium text-primary">{singleApplication.postedAt}</span>
         </p>
         <p className="mr-10 text-base text-black-light">
           {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_COMPLETES)}:
-          <span className="ml-5 font-medium text-primary">{item.percentCompleted}%</span>
+          <span className="ml-5 font-medium text-primary">
+            {singleApplication.percentCompleted}%
+          </span>
         </p>
       </div>
       <div className="flex flex-col gap-4 xl:flex-row xl:justify-between">
@@ -85,23 +87,28 @@ export const Application = ({ item, notificationId }: IApplicationsProps) => {
           size="bs"
           variant="contained"
           LeftIcon={EditIcon}
-          onClick={() => redirectToIndividualApplication(item.uuid)}
+          onClick={() => redirectToIndividualApplication(singleApplication.uuid)}
         >
           {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_EDIT)}
         </Button>
         <Button
           variant="outlined"
           LeftIcon={CloneIcon}
-          onClick={() => cloneApplication(item.uuid)}
+          onClick={() => cloneApplication(singleApplication.uuid)}
         >
           Clone Application
         </Button>
         <Button
           variant="outlined"
           LeftIcon={DeactivateIcon}
-          onClick={() => deactivateApplication({ uuid: item.uuid, isActive: !item.isActive })}
+          onClick={() =>
+            deactivateApplication({
+              uuid: singleApplication.uuid,
+              isActive: !singleApplication.isActive,
+            })
+          }
         >
-          {!item.isActive
+          {!singleApplication.isActive
             ? t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_ACTIVATE)
             : t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_DEACTIVATE)}
         </Button>
