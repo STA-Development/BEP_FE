@@ -29,7 +29,7 @@ export const SharedCRU = ({ individualNews }: IChangeEventsNewsForm) => {
   return (
     <div>
       <div className="mb-10 flex w-full flex-col justify-between xl:flex-row-reverse">
-        <div className="space-y-4">
+        <div className="flex flex-col items-center space-y-4">
           <NewsImage image={imageLoaded ?? (individualNews?.imageURL as string)} />
           <div className="flex w-full justify-center">
             <FileField
