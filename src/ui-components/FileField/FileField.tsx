@@ -1,5 +1,5 @@
 import React, { FC, RefObject } from 'react'
-import { useController, useFieldArray } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { ImageInput } from '@uiComponents/Input'
 
 export interface ITextFieldProps {
@@ -15,8 +15,8 @@ export interface ITextFieldProps {
 }
 
 const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange, multiple }) => {
-  const { field, fieldState } = useController({ name: fieldName })
-  const { append } = useFieldArray({ name: fieldName })
+  const { control, setValue, watch } = useFormContext()
+  const { field, fieldState } = useController({ name: fieldName, control })
 
   const handelSetFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (handleFileChange) {
@@ -24,13 +24,16 @@ const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange,
         handleFileChange(event)
 
         if (event.target.files) {
-          append(event.target.files)
+          const imageFile = event.target.files
+          const image = [...watch(fieldName), ...imageFile]
+
+          setValue(fieldName, image)
         }
       } else {
         handleFileChange(event)
 
         if (event.target.files) {
-          field.onChange(event.target.files)
+          setValue(fieldName, event.target.files)
         }
       }
     }
@@ -43,7 +46,7 @@ const FileField: FC<ITextFieldProps> = ({ fieldName, inputRef, handleFileChange,
         inputRef={inputRef}
         type="file"
         multiple={multiple}
-        onChange={(event) => handelSetFile(event)}
+        onChange={handelSetFile}
         error={fieldState.error ? fieldState.error.message : null}
       />
     </div>

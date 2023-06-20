@@ -70,22 +70,18 @@ export interface ICreateEducationalInstituteProps {
   lecturerQuantity: string | number
   name: string
   phone: string | number
-  imageURLs: ICreateEducationalInstituteImage[] | string[] | null
-  province: ICreateEducationalInstituteAutocompleteField
+  imageURLs: File[]
+  province: ICreateEducationalInstituteAutocompleteField | null
   rector: string
   startTime: string
   studentQuantity: string | number
   subtitle: string
-  type: ICreateEducationalInstituteAutocompleteField
+  type: ICreateEducationalInstituteAutocompleteField | null
 }
 
 export interface ICreateEducationalInstituteAutocompleteField {
   id: number | string
   name: string
-}
-
-export interface ICreateEducationalInstituteImage {
-  [key: number]: File
 }
 
 export interface IChangeEducationalInstituteFormDataProps {

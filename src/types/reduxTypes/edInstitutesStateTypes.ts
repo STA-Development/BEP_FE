@@ -19,6 +19,4 @@ export interface IEdInstitutes {
   totalItems: number
 }
 
-export interface IImageLoader {
-  [key: number]: string
-}
+export type ImageLoader = string[]

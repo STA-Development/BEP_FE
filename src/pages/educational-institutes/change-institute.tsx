@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
-import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import {
   IChangeEducationalInstituteFormDataProps,
   ICreateEducationalInstituteProps,
@@ -71,28 +71,20 @@ const ChangeEducationalInstitutes = () => {
     mode: 'onSubmit',
   })
 
-  const { handleSubmit, control, reset } = methods
+  const { handleSubmit, reset, getValues, setValue } = methods
 
-  const { remove } = useFieldArray({ control, name: 'imageURLs' })
   const images = imageLoaded.length ? imageLoaded : individualEduInstitutes?.imageURLs
 
   const onSubmit = (data: ICreateEducationalInstituteProps) => {
+    const { imageURLs, ...params } = data
+
     const payload = {
-      name: data.name,
-      address: data.address,
-      type: data.type.name,
-      phone: data.phone,
-      email: data.email,
-      startTime: data.startTime,
-      endTime: data.endTime,
-      province: data.province.name,
-      subtitle: data.subtitle,
-      rector: data.rector,
-      studentQuantity: data.studentQuantity,
-      lecturerQuantity: data.lecturerQuantity,
-      description: data.description,
-      ...data.imageURLs,
+      ...params,
+      province: data.province?.name,
+      type: data.type?.name,
+      ...imageURLs,
     }
+
     const instituteForm = {
       payload,
       uuid: instituteId,
@@ -106,7 +98,14 @@ const ChangeEducationalInstitutes = () => {
   }
 
   const onRemove = (index: number) => {
-    remove(index)
+    const fieldValues = getValues('imageURLs')
+
+    if (fieldValues && Array.isArray(fieldValues)) {
+      const updatedField = fieldValues.filter((item, i) => i !== index)
+
+      setValue('imageURLs', updatedField)
+    }
+
     setImageLoaded(imageLoaded.filter((item, imageIndex) => imageIndex !== index))
   }
 

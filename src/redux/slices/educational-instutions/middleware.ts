@@ -94,7 +94,6 @@ const createEducationalInstitutes =
   (formData: ICreateEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
     try {
       await API.educationalInstitutes.createEducationalInstitute(formData)
-
       dispatch(educationalInstitutesMiddleware.clearInstitutesList())
 
       dispatch(

@@ -1,12 +1,12 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
+import { ImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 
 export interface IMultipleImageLoaderProps {
-  imageLoaded: IImageLoader[]
+  imageLoaded: ImageLoader
   onRemove: (index: number) => void
   length: number
 }

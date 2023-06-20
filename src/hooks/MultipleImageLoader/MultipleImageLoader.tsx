@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
+import { ImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 
 export const useMultipleImageUpload = () => {
-  const [imageLoaded, setImageLoaded] = useState<IImageLoader[]>([])
+  const [imageLoaded, setImageLoaded] = useState<ImageLoader>([])
 
   const changeMultipleFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -10,7 +10,7 @@ export const useMultipleImageUpload = () => {
         URL.createObjectURL(file as File)
       )
 
-      setImageLoaded((prevImages: IImageLoader[]) => prevImages.concat(imageArray))
+      setImageLoaded((prevImages: ImageLoader) => prevImages.concat(imageArray))
     }
   }
 

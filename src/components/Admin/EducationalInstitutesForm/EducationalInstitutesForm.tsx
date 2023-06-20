@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
+import { ImageLoader } from '@allTypes/reduxTypes/edInstitutesStateTypes'
 import { NewsType } from '@axios/news/newsManagerTypes'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
@@ -13,7 +13,7 @@ import TextField from '@uiComponents/FormFields/TextField'
 import { useCreateObjectFromArray, useCreateObjectFromEnum } from '@hooks/EducationalInstitution'
 
 interface IEducationalInstitutesFormProps {
-  imageLoaded: IImageLoader[]
+  imageLoaded: ImageLoader
   changeMultipleFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 

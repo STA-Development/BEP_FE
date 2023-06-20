@@ -31,11 +31,12 @@ export const educationalInstitutionValidationSchema = object().shape({
     i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_SUBTITLE) as string
   ),
   phone: string()
+    .min(12, 'Password must be at least 12 characters long')
     .matches(
       phoneRegex,
       i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_PHONE_REGEX) as string
     )
-    .required('subtitle is required'),
+    .required('Phone is required'),
   email: string()
     .email()
     .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_EMAIL) as string),
