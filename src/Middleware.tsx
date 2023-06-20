@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { adminRoutes, privateRoutes, publicRoutes } from '@constants/router'
 import { dispatch } from '@redux/hooks'
+import { applicationsMiddleware } from '@redux/slices/applications'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
 import { useRouter } from 'next/router'
@@ -75,6 +76,14 @@ const Middleware = ({ children }: { children: ReactElement }) => {
       router.push('/')
     }
   }, [role, router])
+
+  useEffect(() => {
+    if (role === Roles.JobSeeker) {
+      dispatch(applicationsMiddleware.getJobSeekerNotifications())
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.getOrganizationNotifications())
+    }
+  }, [role])
 
   return children
 }
