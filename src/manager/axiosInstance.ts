@@ -42,8 +42,6 @@ class RequestManager {
     axiosInstance.interceptors.response.use(
       async (res: AxiosResponse) => res,
       (error) => {
-        console.log(9999)
-
         if (
           error.response.status === 403 &&
           error.message === ErrorMessages.AccessTokenExpiryErrorMessage
@@ -68,7 +66,7 @@ class RequestManager {
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )
           }
-        } else if (error.response.status === 401) {
+        } else if (error.response.status === 401 && isAuthenticated()) {
           localStorage.removeItem('accessToken')
           dispatch(viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true }))
         } else {
