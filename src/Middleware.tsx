@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { adminRoutes, privateRoutes, publicRoutes } from '@constants/router'
+import { adminRoutes, notAccessAdminRoutes, privateRoutes, publicRoutes } from '@constants/router'
 import { dispatch } from '@redux/hooks'
 import { applicationsMiddleware } from '@redux/slices/applications'
 import { usersMiddleware } from '@redux/slices/users'
@@ -73,6 +73,14 @@ const Middleware = ({ children }: { children: ReactElement }) => {
 
   useEffect(() => {
     if (!isAuthenticated() && role !== Roles.Admin && adminRoutes.includes(router.pathname)) {
+      router.push('/')
+    }
+
+    if (
+      isAuthenticated() &&
+      role === Roles.Admin &&
+      notAccessAdminRoutes.includes(router.pathname)
+    ) {
       router.push('/')
     }
   }, [role, router])

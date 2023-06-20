@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Container } from '@components/Container'
 import { EventsCarousel } from '@components/EventsCarousel'
 import {
@@ -19,6 +20,7 @@ import { Disclosure } from '@headlessui/react'
 import { dispatch } from '@redux/hooks'
 import { eventsMiddleware } from '@redux/slices/events'
 import { newsMiddleware } from '@redux/slices/news'
+import store from '@redux/store'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,6 +35,7 @@ const data1 = [
 
 const Home = () => {
   const [t] = useTranslation()
+  const { role } = store.getState().users.user
 
   const helps = [
     { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
@@ -64,6 +67,14 @@ const Home = () => {
     dispatch(newsMiddleware.clearNewsList())
   }, [])
 
+  const isAdmin = () => {
+    if (role !== Roles.Admin) {
+      return '/profile/applications'
+    }
+
+    return 'profile/monitoring-systems'
+  }
+
   return (
     <>
       <Introduction
@@ -79,7 +90,7 @@ const Home = () => {
         title={t(Translation.PAGE_HOME_MAIN_TITLE)}
         desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
-          <Link href={`${!isAuthenticated() ? '/login' : '/profile/applications'}`}>
+          <Link href={`${!isAuthenticated() ? '/login' : isAdmin()}`}>
             <Button
               size="lg"
               RightIcon={RightIcon}

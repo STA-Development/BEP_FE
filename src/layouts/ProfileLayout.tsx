@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Container } from '@components/Container'
 import {
   ApplicationsIcon,
@@ -12,6 +13,7 @@ import { HelpIcon } from '@components/Icons/HelpIcon'
 import { Translation } from '@constants/translations'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
+import store from '@redux/store'
 import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -20,6 +22,7 @@ interface MenuItem {
   label: string
   href: string
   icon: ReactNode
+  show: boolean
 }
 
 interface Menu {
@@ -30,27 +33,32 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
   const [t] = useTranslation()
   const router = useRouter()
   const { pathname } = router
+  const { role } = store.getState().users.user
 
   const menu: Menu = {
     settings: {
       label: t(Translation.PAGE_PROFILE_MENU_SETTINGS),
       href: '/profile/settings',
       icon: <SettingsIcon />,
+      show: role !== Roles.Admin,
     },
     applications: {
       label: t(Translation.PAGE_PROFILE_MENU_APPLICATIONS),
       href: '/profile/applications',
       icon: <ApplicationsIcon />,
+      show: role !== Roles.Admin,
     },
     'monitoring-systems': {
       label: t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS),
       href: '/profile/monitoring-systems',
       icon: <MonitoringSystemsIcon />,
+      show: true,
     },
     help: {
       label: t(Translation.PAGE_PROFILE_MENU_HELP),
       href: '/profile/help',
       icon: <HelpIcon />,
+      show: true,
     },
   }
 
@@ -88,20 +96,23 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
           </div>
           <div className={`xl:block ${active ? `flex` : `hidden`}`}>
             <ul className="mb-10">
-              {Object.values(menu).map((item) => (
-                <li
-                  key={item.label}
-                  className="mb-5 text-base font-medium text-primary"
-                >
-                  <Link
-                    href={item.href}
-                    className="flex items-center"
-                  >
-                    <span className="mr-2.5">{item.icon}</span>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {Object.values(menu).map(
+                (item) =>
+                  item.show && (
+                    <li
+                      key={item.label}
+                      className="mb-5 text-base font-medium text-primary"
+                    >
+                      <Link
+                        href={item.href}
+                        className="flex items-center"
+                      >
+                        <span className="mr-2.5">{item.icon}</span>
+                        {item.label}
+                      </Link>
+                    </li>
+                  )
+              )}
             </ul>
             <div className="hidden xl:block">
               <Button
