@@ -18,6 +18,8 @@ export interface IUserProps {
   isLanguageChangeLoading: boolean
   otp: number | null
   usersList: IUsersList[]
+  pageSize: number
+  totalItems: number
   isUsersListLoading: boolean
 }
 

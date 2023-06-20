@@ -1,4 +1,7 @@
-import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import {
+  IDeactivateUserProps,
+  IProfileUpdateProps,
+} from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -32,6 +35,8 @@ const {
   setIsUserDetailsLoading,
   setUsersList,
   setUsersListLoading,
+  setPageSize,
+  setTotalItems,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -282,17 +287,35 @@ const updateOrganizationProfile =
     }
   }
 
-const getUsersList = () => async (dispatch: AppDispatch) => {
+const getUsersList = (currentPage: number) => async (dispatch: AppDispatch) => {
   try {
-    const response = await API.auth.getUsersList()
+    const response = await API.auth.getUsersList(currentPage)
 
     dispatch(setUsersListLoading(true))
 
+    dispatch(setPageSize(response.data.pageSize))
+
     dispatch(setUsersList(response.data.data))
+
+    dispatch(setTotalItems(response.data.totalItems))
   } catch (error) {
     /* empty */
   } finally {
     dispatch(setUsersListLoading(false))
+  }
+}
+
+const deactivateUser = (params: IDeactivateUserProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(false))
+
+    await API.auth.deactivateUser(params.uuid)
+
+    dispatch(usersMiddleware.getUsersList(params.currentPage))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
   }
 }
 
@@ -317,4 +340,5 @@ export default {
   updateAvatarLoading,
   getAccessTokenWithRefreshToken,
   getUsersList,
+  deactivateUser,
 }

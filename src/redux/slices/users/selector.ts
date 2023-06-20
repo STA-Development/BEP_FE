@@ -9,6 +9,10 @@ export const usersList = createSelector([selector], (state) => state.usersList)
 export const isUsersListLoading = createSelector([selector], (state) => state.isUsersListLoading)
 export const isSignInLoading = createSelector([selector], (state) => state.isSignInLoading)
 export const isSignUpLoading = createSelector([selector], (state) => state.isSignUpLoading)
+
+export const pageSize = createSelector([selector], (state) => state.pageSize)
+export const totalItems = createSelector([selector], (state) => state.totalItems)
+
 export const isUpdateProfileLoading = createSelector(
   [selector],
   (state) => state.isUpdateProfileLoading
@@ -54,4 +58,6 @@ export default {
   userAvatar,
   usersList,
   isUsersListLoading,
+  pageSize,
+  totalItems,
 }

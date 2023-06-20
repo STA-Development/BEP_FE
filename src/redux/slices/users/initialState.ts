@@ -16,6 +16,8 @@ export const getInitialState = (): IUserProps => ({
   isUserAvatarLoading: false,
   isUserDetailsLoading: false,
   usersList: [],
+  pageSize: 1,
+  totalItems: 1,
   isUsersListLoading: false,
   user: {
     fullName: '',

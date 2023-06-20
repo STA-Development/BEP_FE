@@ -8,21 +8,25 @@ import { Loading } from '@uiComponents/Loading'
 const UsersList = () => {
   const isUsersListLoading = useAppSelector(usersSelector.isUsersListLoading)
 
-  const usersPerPage = 10
   const usersList = useAppSelector(usersSelector.usersList)
 
-  const [currentPage, setCurrentPage] = useState(0)
+  const pageSize = useAppSelector(usersSelector.pageSize)
+
+  const totalItems = useAppSelector(usersSelector.totalItems)
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const onChangePage = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected)
   }
 
-  const offset = currentPage * usersPerPage
-  const paginatedData = usersList?.slice(offset, offset + usersPerPage)
+  const deactivateUser = (uuid: string) => {
+    console.log(uuid, 'uuid')
+    dispatch(usersMiddleware.deactivateUser({ uuid, currentPage }))
+  }
 
   useEffect(() => {
-    dispatch(usersMiddleware.getUsersList())
-  }, [])
+    dispatch(usersMiddleware.getUsersList(currentPage as number))
+  }, [currentPage])
 
   return (
     <Container>
@@ -30,16 +34,17 @@ const UsersList = () => {
         <Loading />
       ) : (
         <div className="mt-10 w-full">
-          <table className="w-full border-collapse border text-center">
+          <table className="w-full border-collapse overflow-y-auto border text-center">
             <thead>
               <tr className="bg-gray-200">
                 <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Role</th>
+                <th className="px-4 py-2">Status</th>
               </tr>
             </thead>
             <tbody>
-              {paginatedData?.map((user) => (
+              {usersList?.map((user) => (
                 <tr
                   key={user.uuid}
                   className="border-t"
@@ -47,6 +52,20 @@ const UsersList = () => {
                   <td className="px-4 py-2">{user.name}</td>
                   <td className="px-4 py-2">{user.email}</td>
                   <td className="px-4 py-2">{user.role}</td>
+                  <td className="px-4 py-2">
+                    <div className="flex w-full justify-center">
+                      {user.canDeactivate ? (
+                        <Button variant="text">Active</Button>
+                      ) : (
+                        <Button
+                          variant="text"
+                          onClick={() => deactivateUser(user.uuid)}
+                        >
+                          Deactivate
+                        </Button>
+                      )}
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -55,15 +74,15 @@ const UsersList = () => {
             <Button
               variant="text"
               onClick={() => onChangePage({ selected: currentPage - 1 })}
-              disabled={currentPage === 0}
+              disabled={currentPage === 1}
             >
               Previous
             </Button>
-            <span className="px-4 py-2">{currentPage + 1}</span>
+            <span className="px-4 py-2">{currentPage}</span>
             <Button
               variant="text"
               onClick={() => onChangePage({ selected: currentPage + 1 })}
-              disabled={currentPage === Math.ceil(usersList.length / usersPerPage) - 1}
+              disabled={currentPage === Math.ceil(totalItems / pageSize) - 1}
             >
               Next
             </Button>

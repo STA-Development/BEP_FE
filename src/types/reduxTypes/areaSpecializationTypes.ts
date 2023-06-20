@@ -116,3 +116,8 @@ export interface IUsersList {
   role: string
   uuid: string
 }
+
+export interface IDeactivateUserProps {
+  uuid: string
+  currentPage: number
+}

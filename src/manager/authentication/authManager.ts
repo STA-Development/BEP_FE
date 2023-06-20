@@ -10,7 +10,7 @@ import {
   IVerifyOtpResponse,
 } from '@axios/authentication/authManagerTypes'
 import { Axios } from '@axios/axiosInstance'
-import { IAxiosResponse } from '@axios/axiosTypes'
+import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 
 import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
 
@@ -71,8 +71,13 @@ const authManager = {
       },
     })
   },
-  getUsersList() {
-    return axiosInstance.get<IUsersList, IAxiosResponse<IUsersList[]>>(`${baseURL}/v1/user`)
+  getUsersList(currentPage: number) {
+    return axiosInstance.get<IUsersList, IAxiosResponsePaginated<IUsersList[]>>(
+      `${baseURL}/v1/user?page=${currentPage}`
+    )
+  },
+  deactivateUser(uuid: string) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/admin/deactivate/${uuid}`)
   },
 }
 

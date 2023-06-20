@@ -54,6 +54,12 @@ const reducers = createReducer({
   setUsersListLoading(state, action: IAction<boolean>) {
     state.isUsersListLoading = action.payload
   },
+  setPageSize(state, action: IAction<number>) {
+    state.pageSize = action.payload
+  },
+  setTotalItems(state, action: IAction<number>) {
+    state.totalItems = action.payload
+  },
 })
 
 export default reducers
