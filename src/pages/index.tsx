@@ -67,7 +67,7 @@ const Home = () => {
     dispatch(newsMiddleware.clearNewsList())
   }, [])
 
-  const isAdmin = () => {
+  const startNowUrl = () => {
     if (role === Roles.Admin) {
       return '/profile/monitoring-systems'
     }
@@ -90,7 +90,7 @@ const Home = () => {
         title={t(Translation.PAGE_HOME_MAIN_TITLE)}
         desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
-          <Link href={`${!isAuthenticated() ? '/login' : isAdmin()}`}>
+          <Link href={`${!isAuthenticated() ? '/login' : startNowUrl()}`}>
             <Button
               size="lg"
               RightIcon={RightIcon}
