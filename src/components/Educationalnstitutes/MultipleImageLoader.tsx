@@ -14,8 +14,6 @@ export interface IMultipleImageLoaderProps {
 const MultipleImageLoader = ({ imageLoaded, onRemove, length }: IMultipleImageLoaderProps) => {
   const [t] = useTranslation()
 
-  console.log(imageLoaded, 'imageLoaded')
-
   return (
     <div className="flex flex-col items-center justify-center xl:flex-row">
       {imageLoaded?.map((image, index) => (
