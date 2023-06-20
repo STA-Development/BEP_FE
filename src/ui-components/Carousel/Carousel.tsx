@@ -48,8 +48,8 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
 
   return (
     <div>
-      <div className="flex items-start justify-between">
-        <h2 className="mb-10 text-xl font-medium xl:text-2xl">{title}</h2>
+      <div className="mb-5 flex flex-col items-start justify-between xl:mb-10 xl:flex-row">
+        <h2 className="mb-5 text-xl font-medium xl:mb-0 xl:text-2xl">{title}</h2>
         <div className="flex gap-10">
           <Button
             color="secondary"
@@ -74,7 +74,7 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
         {slider.map((item) => (
           <div
             key={item.uuid}
-            className="min-w-[380px] snap-start rounded border border-gray-thin bg-secondary p-5"
+            className="flex w-full min-w-[360px] snap-start flex-col rounded border border-gray-thin bg-secondary p-5 xl:min-w-[380px]"
           >
             <Image
               src={item.imageURL}
@@ -89,7 +89,7 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
                 <h3 className="mb-2.5 h-[90px] text-xl line-clamp-2">{item.header}</h3>
                 <p className="h-[45px] text-black-light line-clamp-2 ">{item.paragraph}</p>
               </div>
-              <div>
+              <div className="flex w-full flex-col items-center justify-center">
                 <p className="mb-10 text-black-light line-clamp-2 ">{item.postedAt}</p>
                 <Button
                   size="fl"

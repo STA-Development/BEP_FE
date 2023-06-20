@@ -104,7 +104,10 @@ const SearchPage = () => {
         <Loading />
       ) : (
         edInstitutesList.map((institute: IEdInstitutesResponse) => (
-          <div className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row">
+          <div
+            key={institute.uuid}
+            className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row"
+          >
             {role === Roles.Admin ? (
               <div className="mb-5 flex w-full justify-end">
                 <DeleteChangeMenu
