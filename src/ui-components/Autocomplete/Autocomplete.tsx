@@ -68,7 +68,7 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
               {label}
             </label>
           ) : null}
-          <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
+          <div className="relative mt-2 w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'

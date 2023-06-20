@@ -41,11 +41,10 @@ const ChangeEducationalInstitutes = () => {
       name: individualEduInstitutes?.name ?? '',
       address: individualEduInstitutes?.address ?? '',
       type:
-        objectFromEnumFields.find((item) => item.name === individualEduInstitutes?.type) ??
-        objectFromEnumFields[0],
+        objectFromEnumFields.find((item) => item.name === individualEduInstitutes?.type) ?? null,
       province:
         objectFromArrayFields.find((item) => item.name === individualEduInstitutes?.province) ??
-        objectFromArrayFields[10],
+        null,
       phone: individualEduInstitutes?.phone ?? '',
       email: individualEduInstitutes?.email ?? '',
       subtitle: individualEduInstitutes?.subtitle ?? '',

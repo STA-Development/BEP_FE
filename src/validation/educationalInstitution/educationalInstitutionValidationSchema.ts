@@ -31,11 +31,12 @@ export const changeEducationalInstitutionValidationSchema = object().shape({
     i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_SUBTITLE) as string
   ),
   phone: string()
+    .min(12, i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_PHONE_LENGTH) as string)
     .matches(
       phoneRegex,
       i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_PHONE_REGEX) as string
     )
-    .required('subtitle is required'),
+    .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_PHONE) as string),
   email: string()
     .email()
     .required(i18next.t(Translation.PAGE_EDUCATIONAL_FORM_VALIDATION_EMAIL) as string),
