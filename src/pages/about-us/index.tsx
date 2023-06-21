@@ -78,7 +78,7 @@ const AboutUs = () => {
       <Container className="pt-30">
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
         {role === Roles.Admin ? (
-          <div className="mb-10 flex w-full justify-end">
+          <div className="mb-10 flex w-full xl:justify-end">
             {showPersonForm ? (
               <Button
                 size="bs"

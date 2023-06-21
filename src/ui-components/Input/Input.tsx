@@ -23,6 +23,8 @@ export interface InputType {
 export interface InputTypeCheckbox {
   id?: string
   label?: string
+  className?: string
+  checked: boolean
   onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -30,8 +32,8 @@ export interface IImageInputProps {
   inputRef?: LegacyRef<HTMLInputElement>
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   type: string
-
   error?: string | null
+  multiple?: boolean
 }
 
 export const Input = React.forwardRef(
@@ -64,12 +66,13 @@ export const Input = React.forwardRef(
         error
           ? 'border-red placeholder:text-red'
           : [
-              color === 'primary' && 'focus:border-primary placeholder:text-black',
+              color === 'primary' && 'focus:border-primary placeholder:text-black-light',
               color === 'secondary' && 'border-gray-thin placeholder:text-black',
             ],
       ],
       [label && 'mt-2.5'],
-      [rows && 'resize-none']
+      [rows && 'resize-none'],
+      className
     )
 
     const [inputType, setInputType] = useState<boolean>(false)
@@ -137,13 +140,14 @@ export const Input = React.forwardRef(
 
 export const InputCheckbox = React.forwardRef(
   (props: InputTypeCheckbox, ref: LegacyRef<HTMLInputElement>) => {
-    const { label, id, onChange } = props
+    const { label, id, checked, onChange, className } = props
 
     return (
-      <div className="flex items-center">
+      <div className={`flex items-center ${className}`}>
         <input
           id={id}
           type="checkbox"
+          checked={checked}
           onChange={onChange}
           ref={ref}
           className="ml-1 h-5 w-5 rounded-sm border-black"
@@ -160,12 +164,13 @@ export const InputCheckbox = React.forwardRef(
 )
 
 export const ImageInput = React.forwardRef(
-  ({ inputRef, onChange, type, error }: IImageInputProps) => (
+  ({ inputRef, onChange, type, error, multiple }: IImageInputProps) => (
     <div className="flex items-center">
       <input
         className="hidden"
         type={type}
         ref={inputRef}
+        multiple={multiple}
         onChange={onChange}
       />
       {error ? <p className="mt-2.5 text-xs text-red">{error}</p> : null}

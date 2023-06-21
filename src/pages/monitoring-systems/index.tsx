@@ -85,8 +85,8 @@ const MonitoringSystems = () => {
           <Tab.Panels>
             <div className="grid grid-cols-1 divide-y divide-gray-thin">
               <div className="my-10 inline-block xl:flex xl:w-full xl:flex-row">
-                <div className="flex flex-row gap-5">
-                  <div className="w-[124px]">
+                <div className="flex flex-col gap-2 xl:flex-row xl:gap-5">
+                  <div className="w-full xl:w-[124px]">
                     <AutocompleteField
                       fieldName="years"
                       items={years}
@@ -95,7 +95,7 @@ const MonitoringSystems = () => {
                       }
                     />
                   </div>
-                  <div className="w-[124px]">
+                  <div className="w-full xl:w-[124px]">
                     <AutocompleteField
                       fieldName="years"
                       items={years}
@@ -104,7 +104,7 @@ const MonitoringSystems = () => {
                       }
                     />
                   </div>
-                  <div className="w-[124px]">
+                  <div className="w-full xl:w-[124px]">
                     <AutocompleteField
                       fieldName="years"
                       items={years}

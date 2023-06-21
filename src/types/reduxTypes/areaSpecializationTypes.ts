@@ -21,6 +21,8 @@ export interface IApplications {
   applicationsPdf: null | File
   isChangeIsActiveSuccess: boolean
   isCloneApplicationSuccess: boolean
+  notifications: null | INotificationsProps[]
+  notificationId: string | null
 }
 
 export interface IJobSeekerApplicationProps {
@@ -105,6 +107,11 @@ export interface IIndividualApplication {
 export interface IDeactivateApplicationProps {
   uuid: string
   isActive: boolean
+}
+
+export interface INotificationsProps {
+  name: string
+  applicationUuid: string
 }
 
 export interface IUsersList {

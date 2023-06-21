@@ -19,6 +19,8 @@ interface AutocompleteProps<T> {
   onChange?: (value: IAutoCompleteItem) => void
   selectedItem?: boolean
   resetSelectedItem?: () => void
+  label?: string
+  id?: string
 }
 
 export const Autocomplete = <T extends IAutoCompleteItem>({
@@ -28,6 +30,8 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   inputClasses,
   error,
   onValueChange,
+  label,
+  id,
   onChange,
   selectedItem = false,
   resetSelectedItem,
@@ -56,7 +60,11 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
     'placeholder:text-black-light',
     'w-full',
     'border-2',
-    [error ? 'border-red placeholder:text-red' : 'focus:border-primary placeholder:text-black']
+    [
+      error
+        ? 'border-red placeholder:text-red'
+        : 'focus:border-primary placeholder:text-black-light',
+    ]
   )
 
   return (
@@ -81,14 +89,23 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
               </Button>
             </div>
           ) : null}
-          <div className="w-full cursor-default overflow-hidden focus:outline-none">
+          {label ? (
+            <label
+              htmlFor={id}
+              className="text-sm text-black-light"
+            >
+              {label}
+            </label>
+          ) : null}
+          <div className="relative mt-2 w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'
               } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${style} ${inputClasses}`}
-              displayValue={(item: IAutoCompleteItem) => (!selectedItem ? '' : item?.name)}
+              displayValue={(item: IAutoCompleteItem) => item?.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
+              id={id}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-5">
               <ChevronIcon className="rotate-90 transform" />
