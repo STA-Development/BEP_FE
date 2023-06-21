@@ -1,4 +1,4 @@
-import { IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { IFilterUserListProps, IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import {
   IForgotPasswordResponse,
@@ -71,13 +71,29 @@ const authManager = {
       },
     })
   },
-  getUsersList(currentPage: number) {
-    return axiosInstance.get<IUsersList, IAxiosResponsePaginated<IUsersList[]>>(
-      `${baseURL}/v1/user?page=${currentPage}`
+  getUsersList(params: IFilterUserListProps) {
+    return axiosInstance.post<IUsersList, IAxiosResponsePaginated<IUsersList[]>>(
+      `${baseURL}/v1/user`,
+      {
+        page: params.page,
+        ...(params.value
+          ? {
+              filters: [
+                {
+                  key: params.key,
+                  value: params.value,
+                },
+              ],
+            }
+          : {}),
+      }
     )
   },
   deactivateUser(uuid: string) {
     return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/admin/deactivate/${uuid}`)
+  },
+  activateUser(uuid: string) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/admin/activate/${uuid}`)
   },
 }
 

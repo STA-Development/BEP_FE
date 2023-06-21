@@ -119,5 +119,11 @@ export interface IUsersList {
 
 export interface IDeactivateUserProps {
   uuid: string
-  currentPage: number
+  params: IFilterUserListProps
+}
+
+export interface IFilterUserListProps {
+  page: number
+  key?: string
+  value?: string
 }

@@ -1,5 +1,6 @@
 import {
   IDeactivateUserProps,
+  IFilterUserListProps,
   IProfileUpdateProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
@@ -287,9 +288,9 @@ const updateOrganizationProfile =
     }
   }
 
-const getUsersList = (currentPage: number) => async (dispatch: AppDispatch) => {
+const getUsersList = (params: IFilterUserListProps) => async (dispatch: AppDispatch) => {
   try {
-    const response = await API.auth.getUsersList(currentPage)
+    const response = await API.auth.getUsersList(params)
 
     dispatch(setUsersListLoading(true))
 
@@ -311,7 +312,21 @@ const deactivateUser = (params: IDeactivateUserProps) => async (dispatch: AppDis
 
     await API.auth.deactivateUser(params.uuid)
 
-    dispatch(usersMiddleware.getUsersList(params.currentPage))
+    dispatch(usersMiddleware.getUsersList(params.params))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
+const activateUser = (params: IDeactivateUserProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(false))
+
+    await API.auth.activateUser(params.uuid)
+
+    dispatch(usersMiddleware.getUsersList(params.params))
   } catch (error) {
     /* empty */
   } finally {
@@ -341,4 +356,5 @@ export default {
   getAccessTokenWithRefreshToken,
   getUsersList,
   deactivateUser,
+  activateUser,
 }

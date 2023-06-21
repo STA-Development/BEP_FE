@@ -1,7 +1,8 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import { ChevronIcon } from '@components/Icons'
+import { ChevronIcon, CloseIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
 import clsxMerge from '@lib/clsxm'
+import { Button } from '@uiComponents/Button'
 
 export interface IAutoCompleteItem {
   id: string | number
@@ -15,6 +16,9 @@ interface AutocompleteProps<T> {
   inputClasses?: string
   error?: string | null
   onValueChange?: (value: T) => void
+  onChange?: (value: IAutoCompleteItem) => void
+  selectedItem?: boolean
+  resetSelectedItem?: () => void
 }
 
 export const Autocomplete = <T extends IAutoCompleteItem>({
@@ -24,6 +28,9 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   inputClasses,
   error,
   onValueChange,
+  onChange,
+  selectedItem = false,
+  resetSelectedItem,
   ...rest
 }: AutocompleteProps<T>) => {
   const [query, setQuery] = useState('')
@@ -53,15 +60,33 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   )
 
   return (
-    <Combobox {...rest}>
+    <Combobox
+      {...rest}
+      onChange={(value) => {
+        if (typeof onChange === 'function') {
+          onChange(value as IAutoCompleteItem)
+        }
+      }}
+    >
       {({ open }) => (
         <div className={`relative ${classes}`}>
-          <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
+          {selectedItem ? (
+            <div className="absolute right-12">
+              <Button
+                variant="text"
+                className="h-[50px] w-[50px] p-0"
+                onClick={resetSelectedItem}
+              >
+                <CloseIcon />
+              </Button>
+            </div>
+          ) : null}
+          <div className="w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'
               } w-full border border-gray-thin px-5 py-2.5 pr-10 text-base text-black outline-none placeholder:text-base placeholder:text-black ${style} ${inputClasses}`}
-              displayValue={(item: IAutoCompleteItem) => item?.name}
+              displayValue={(item: IAutoCompleteItem) => (!selectedItem ? '' : item?.name)}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
             />
