@@ -7,7 +7,7 @@ import { Button } from '@uiComponents/Button'
 import { Introduction } from './Introduction'
 
 const meta: Meta<typeof Introduction> = {
-  title: 'Components/Introduction',
+  title: 'Components/Index',
   component: Introduction,
   tags: ['autodocs'],
   argTypes: {},

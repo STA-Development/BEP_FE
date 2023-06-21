@@ -10,6 +10,16 @@ export interface IVerifyOtpResponse {
   verifyOtpToken: string
 }
 
+export interface IError {
+  response: {
+    data: {
+      status: {
+        message: string
+      }
+    }
+  }
+}
+
 export interface IForgotPasswordResponse {
   otp: number | null
 }
@@ -23,6 +33,7 @@ export interface IResetPasswordParams {
 
 export interface ISignInParams {
   email: string
+  remember: boolean
   password: string
 }
 

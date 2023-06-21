@@ -50,6 +50,8 @@ export const Button: FC<ButtonProps> = ({
     'duration-200',
     'focus:outline-none',
     'disabled:cursor-not-allowed',
+    'disabled:bg-black-light',
+    'disabled:opacity-50',
     'group',
     [
       variant === 'contained' && [

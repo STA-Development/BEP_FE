@@ -2,6 +2,7 @@ import {
   IApplicationsListProps,
   IApplicationsProps,
   IIndividualApplication,
+  INotificationsProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
@@ -52,6 +53,12 @@ const reducers = createReducer({
   },
   setCloneSubmitSuccess(state, action: IAction<boolean>) {
     state.applications.isCloneApplicationSuccess = action.payload
+  },
+  setNotifications(state, action: IAction<INotificationsProps[] | null>) {
+    state.applications.notifications = action.payload
+  },
+  setNotificationsId(state, action: IAction<string | null>) {
+    state.applications.notificationId = action.payload
   },
 })
 
