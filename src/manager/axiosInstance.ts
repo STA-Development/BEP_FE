@@ -67,7 +67,7 @@ class RequestManager {
             )
           }
         } else if (error.response.status === 401 && isAuthenticated()) {
-          localStorage.removeItem('accessToken')
+          dispatch(usersMiddleware.logOut())
           dispatch(viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true }))
         } else {
           dispatch(
