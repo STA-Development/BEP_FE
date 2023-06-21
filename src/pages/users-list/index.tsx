@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { IFilterUserListProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { UsersListTable } from '@components/Admin/UsersListTable'
 import { Container } from '@components/Container/Container'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { usersMiddleware, usersSelector } from '@redux/slices/users'
-import { Autocomplete, IAutoCompleteItem } from '@uiComponents/Autocomplete'
+import { IAutoCompleteItem } from '@uiComponents/Autocomplete'
 import { Button } from '@uiComponents/Button'
+import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 import { Loading } from '@uiComponents/Loading'
 
 const role: IAutoCompleteItem[] = [
@@ -14,10 +17,14 @@ const role: IAutoCompleteItem[] = [
   { id: 2, name: 'Organization' },
 ]
 
+const defaultValues: {
+  userRole: IAutoCompleteItem | null
+} = {
+  userRole: null,
+}
+
 const UsersList = () => {
   const isUsersListLoading = useAppSelector(usersSelector.isUsersListLoading)
-
-  const usersList = useAppSelector(usersSelector.usersList)
 
   const pageSize = useAppSelector(usersSelector.pageSize)
 
@@ -25,16 +32,17 @@ const UsersList = () => {
   const totalItems = useAppSelector(usersSelector.totalItems)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedRole, setSelectedRole] = useState<boolean>(false)
-  const [userRole, setUserRole] = useState<string>('')
 
+  const methods = useForm({
+    defaultValues,
+    mode: 'onSubmit',
+  })
+
+  const { watch, reset } = methods
+
+  const userRole = watch('userRole')
   const onChangePage = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected)
-  }
-
-  const changeRole = (value: IAutoCompleteItem) => {
-    setUserRole(value.name)
-    setSelectedRole(true)
-    setCurrentPage(1)
   }
 
   const deactivateUser = (uuid: string) => {
@@ -42,7 +50,7 @@ const UsersList = () => {
 
     if (userRole) {
       params.key = 'role'
-      params.value = userRole
+      params.value = userRole.name
     }
 
     dispatch(usersMiddleware.deactivateUser({ uuid, params }))
@@ -53,16 +61,16 @@ const UsersList = () => {
 
     if (userRole) {
       params.key = 'role'
-      params.value = userRole
+      params.value = userRole.name
     }
 
     dispatch(usersMiddleware.activateUser({ uuid, params }))
   }
 
   const resetRole = () => {
-    setUserRole('')
     setSelectedRole(false)
     setCurrentPage(1)
+    reset(defaultValues)
   }
 
   useEffect(() => {
@@ -70,11 +78,18 @@ const UsersList = () => {
 
     if (userRole) {
       params.key = 'role'
-      params.value = userRole
+      params.value = userRole.name
     }
 
     dispatch(usersMiddleware.getUsersList(params))
   }, [currentPage, userRole])
+
+  useEffect(() => {
+    if (userRole?.name) {
+      setSelectedRole(true)
+      setCurrentPage(1)
+    }
+  }, [userRole])
 
   return (
     <Container>
@@ -83,59 +98,22 @@ const UsersList = () => {
       ) : (
         <div className="mt-10 w-full">
           <div className="mb-10 flex">
-            <Autocomplete
-              items={role}
-              placeholder={t(Translation.PAGE_USERS_LIST_AUTOCOMPLETE_PLACEHOLDER) as string}
-              onChange={changeRole}
-              selectedItem={selectedRole}
-              resetSelectedItem={resetRole}
-            />
+            <FormProvider {...methods}>
+              <form>
+                <AutocompleteField
+                  fieldName="userRole"
+                  items={role}
+                  placeholder={t(Translation.PAGE_USERS_LIST_AUTOCOMPLETE_PLACEHOLDER) as string}
+                  selectedItem={selectedRole}
+                  resetSelectedItem={resetRole}
+                />
+              </form>
+            </FormProvider>
           </div>
-          <div className="w-full overflow-x-scroll">
-            <table className="w-full border-collapse border text-center">
-              <thead>
-                <tr className="bg-gray-200">
-                  <th className="w-[30%] px-2 py-2">
-                    {t(Translation.PAGE_USERS_LIST_TABLE_EMAIL)}
-                  </th>
-                  <th className="w-[30%] px-2 py-2">{t(Translation.PAGE_USERS_LIST_TABLE_ROLE)}</th>
-                  <th className="w-[30%] px-2 py-2">
-                    {t(Translation.PAGE_USERS_LIST_TABLE_STATUS)}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {usersList?.map((user) => (
-                  <tr
-                    key={user.uuid}
-                    className="border-t"
-                  >
-                    <td className="w-[30%] px-2 py-2">{user.email}</td>
-                    <td className="w-[30%] px-2 py-2">{user.role}</td>
-                    <td className="w-[30%] px-2 py-2">
-                      <div className="flex w-full justify-center">
-                        {user.role === 'Deactivated' ? (
-                          <Button
-                            variant="text"
-                            onClick={() => activateUser(user.uuid)}
-                          >
-                            {t(Translation.PAGE_USERS_LIST_TABLE_USER_ACTIVATE)}
-                          </Button>
-                        ) : (
-                          <Button
-                            variant="text"
-                            onClick={() => deactivateUser(user.uuid)}
-                          >
-                            {t(Translation.PAGE_USERS_LIST_TABLE_USER_DEACTIVATE)}
-                          </Button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <UsersListTable
+            activateUser={activateUser}
+            deactivateUser={deactivateUser}
+          />
           <div className="mt-4 flex justify-between text-primary">
             <Button
               variant="text"

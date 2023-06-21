@@ -16,7 +16,6 @@ interface AutocompleteProps<T> {
   inputClasses?: string
   error?: string | null
   onValueChange?: (value: T) => void
-  onChange?: (value: IAutoCompleteItem) => void
   selectedItem?: boolean
   resetSelectedItem?: () => void
   label?: string
@@ -32,7 +31,6 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   onValueChange,
   label,
   id,
-  onChange,
   selectedItem = false,
   resetSelectedItem,
   ...rest
@@ -68,18 +66,11 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   )
 
   return (
-    <Combobox
-      {...rest}
-      onChange={(value) => {
-        if (typeof onChange === 'function') {
-          onChange(value as IAutoCompleteItem)
-        }
-      }}
-    >
+    <Combobox {...rest}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
           {selectedItem ? (
-            <div className="absolute right-12">
+            <div className="absolute right-12 top-0 z-10">
               <Button
                 variant="text"
                 className="h-[50px] w-[50px] p-0"
