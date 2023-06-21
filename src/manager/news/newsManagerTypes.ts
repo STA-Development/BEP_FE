@@ -11,9 +11,9 @@ export interface INewsParams {
 }
 
 export enum NewsType {
-  university = 'University',
-  workShot = 'Workshop',
-  college = 'College',
+  University = 'University',
+  Workshop = 'Workshop',
+  College = 'College',
 }
 export interface IIndividualNewsResponse {
   uuid?: string

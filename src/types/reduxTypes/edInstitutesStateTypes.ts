@@ -18,3 +18,5 @@ export interface IEdInstitutes {
   pageSize: number
   totalItems: number
 }
+
+export type ImageLoader = string[]
