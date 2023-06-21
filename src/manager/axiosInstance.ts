@@ -64,19 +64,12 @@ class RequestManager {
               }))
             } catch (err) {
               dispatch(usersMiddleware.logOut())
-              dispatch(
-                viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
-              )
             }
           } else {
             dispatch(usersMiddleware.logOut())
-            dispatch(
-              viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
-            )
           }
         } else if (error.response.status === 401 && isAuthenticated()) {
           dispatch(usersMiddleware.logOut())
-          dispatch(viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true }))
         } else {
           dispatch(
             viewsMiddleware.setToastNotificationPopUpState({
