@@ -1,5 +1,5 @@
 import React from 'react'
-import { useController } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 import { Autocomplete, IAutoCompleteItem } from '@uiComponents/Autocomplete'
 
 export interface IAutocompleteProps<T> {
@@ -9,6 +9,7 @@ export interface IAutocompleteProps<T> {
   inputClasses?: string
   items: T[]
   onChange?: (value: T) => void
+  error?: string | null
 }
 
 const AutocompleteField = <T extends IAutoCompleteItem>({
@@ -18,8 +19,11 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
   className,
   inputClasses,
   onChange,
+  error,
 }: IAutocompleteProps<T>) => {
-  const { field, fieldState } = useController({ name: fieldName })
+  const { control } = useFormContext()
+  const { field, fieldState } = useController({ name: fieldName, control })
+  const errorMessage = error ?? fieldState?.error?.message
 
   return (
     <Autocomplete
@@ -29,7 +33,7 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
       items={items}
       inputClasses={inputClasses}
       classes={className}
-      error={fieldState.error ? fieldState.error.message : null}
+      error={errorMessage}
     />
   )
 }

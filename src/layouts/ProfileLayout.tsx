@@ -49,7 +49,7 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
     },
     'monitoring-systems': {
       label: t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS),
-      href: '/profile/monitoring-systems',
+      href: '/monitoring-systems',
       icon: <MonitoringSystemsIcon />,
       show: true,
     },

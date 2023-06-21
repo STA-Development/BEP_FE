@@ -75,7 +75,7 @@ export const Login = () => {
             <div className="mb-5 w-full">
               <Checkbox
                 fieldName="remember"
-                label={t(Translation.PAGE_LOGIN_REMEMBER_ME)}
+                label={t(Translation.PAGE_LOGIN_REMEMBER_ME) as string}
                 id="remember-me"
               />
             </div>

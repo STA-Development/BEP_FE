@@ -49,7 +49,11 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
     'placeholder:text-black-light',
     'w-full',
     'border-2',
-    [error ? 'border-red placeholder:text-red' : 'focus:border-primary placeholder:text-black']
+    [
+      error
+        ? 'border-red placeholder:text-red'
+        : 'focus:border-primary placeholder:text-black-light',
+    ]
   )
 
   return (
