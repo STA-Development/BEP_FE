@@ -1,4 +1,4 @@
-import { phoneRegExp } from '@constants/common'
+import { phoneRegex } from '@constants/index'
 import { Translation } from '@constants/translations'
 import i18next from 'i18next'
 import { boolean, object, string } from 'yup'
@@ -22,7 +22,7 @@ export const jobSeekerValidationSchema = object({
         ? field
             .required()
             .matches(
-              phoneRegExp,
+              phoneRegex,
               i18next.t(Translation.PROFILE_JOB_SEEKER_VALIDATION_PHONE) as string
             )
         : field.notRequired().nullable()

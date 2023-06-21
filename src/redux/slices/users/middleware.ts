@@ -45,7 +45,10 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     const response = await API.auth.signIn(params)
 
     localStorage.setItem('accessToken', response.data.data.accessToken)
-    localStorage.setItem('refreshToken', response.data.data.refreshToken)
+
+    if (params.remember) {
+      localStorage.setItem('refreshToken', response.data.data.refreshToken)
+    }
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
     dispatch(setIsAuthenticated(true))
@@ -62,9 +65,9 @@ const getAccessTokenWithRefreshToken =
     try {
       const response = await API.auth.getAccessToken(refreshToken)
 
-      localStorage.setItem('accessToken', response.data.data.accessToken)
+      localStorage.setItem('accessToken', response?.data?.data?.accessToken)
     } catch (err) {
-      /* empty */
+      throw new Error()
     }
   }
 
@@ -82,6 +85,7 @@ const logOut = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(setLogoutLoading(true))
     localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
     dispatch(setRedirectionState({ path: '/login', params: '', apply: true }))
     dispatch(setIsAuthenticated(false))
     dispatch(

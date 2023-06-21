@@ -23,7 +23,7 @@ export const Header = () => {
     },
     {
       name: t(Translation.NAVBAR_MONITORING_SYSTEMS),
-      href: '/profile/monitoring-systems',
+      href: '/monitoring-systems',
       current: false,
     },
     { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },

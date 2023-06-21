@@ -45,7 +45,6 @@ const ChangeEvent = () => {
   const onSubmit = (data: IFormData) => {
     const payload: MyObject = {}
 
-    console.log(data, 'data')
     Object.keys(data).forEach((key: string) => {
       if (
         singleEvent &&

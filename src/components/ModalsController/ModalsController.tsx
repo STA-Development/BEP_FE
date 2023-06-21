@@ -11,6 +11,7 @@ import {
   DeleteIndividualEventModal,
   IDeleteIndividualEvent,
 } from '@components/Modals/Events/DeleteIndividualEventModal'
+import { DeleteIndividualInstitute } from '@components/Modals/Institutes/DeleteIndividualInstitute'
 import {
   DeleteIndividualNewsModal,
   IDeleteIndividualNews,
@@ -42,6 +43,13 @@ const getDeleteIndividualNewsModal = (modal: IOpenedModal<IDeleteIndividualNews>
   />
 )
 
+const getDeleteIndividualInstituteModal = (modal: IOpenedModal<IDeleteIndividualNews>) => (
+  <DeleteIndividualInstitute
+    key={modal.name}
+    {...modal.props}
+  />
+)
+
 const getDeleteIndividualEventModal = (modal: IOpenedModal<IDeleteIndividualEvent>) => (
   <DeleteIndividualEventModal
     key={modal.name}
@@ -67,6 +75,8 @@ export const ModalsController = () => {
             return getDeleteIndividualNewsModal(modal)
           case ModalName.DeleteIndividualEventModal:
             return getDeleteIndividualEventModal(modal)
+          case ModalName.DeleteIndividualInstitute:
+            return getDeleteIndividualInstituteModal(modal)
           default:
             return null
         }

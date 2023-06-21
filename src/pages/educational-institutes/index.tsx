@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ModalName } from '@allTypes/modals'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { IEdInstitutesResponse } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
 import { Container } from '@components/Container'
-import Header from '@components/EducationalInstitutesHeader'
+import { EducationalInstitutesHeader } from '@components/EducationalInstitutesHeader'
 import { LocationIcon } from '@components/Icons'
 import { MailIcon } from '@components/Icons/MailIcon'
 import { PhoneIcon } from '@components/Icons/PhoneIcon'
 import { Translation } from '@constants/translations'
 import { dispatch, useAppSelector } from '@redux/hooks'
+import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import { Loading } from '@uiComponents/Loading'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import {
   educationalInstitutesMiddleware,
   educationalInstitutesSelector,
@@ -29,8 +34,10 @@ const SearchPage = () => {
   const { edInstitutesList, pageSize, totalItems } = useAppSelector(
     educationalInstitutesSelector.educationalInstitutesData
   )
+  const { role } = useAppSelector(usersSelector.user)
 
   const [t] = useTranslation()
+  const router = useRouter()
 
   const redirectToIndividualEducationalInstitute = (id: string) => {
     dispatch(
@@ -40,6 +47,24 @@ const SearchPage = () => {
         apply: true,
       })
     )
+  }
+
+  const onDeleteIndividualInstituteModal = useCallback((id: string) => {
+    dispatch(
+      viewsMiddleware.openModal({
+        name: ModalName.DeleteIndividualInstitute,
+        props: {
+          id,
+        },
+      })
+    )
+  }, [])
+
+  const changeInstitute = (path: string) => {
+    router.push({
+      pathname: '/educational-institutes/change-institute',
+      query: { path },
+    })
   }
 
   useEffect(() => {
@@ -74,7 +99,7 @@ const SearchPage = () => {
 
   return (
     <Container>
-      <Header />
+      <EducationalInstitutesHeader />
       {isEducationalInstitutesLoading && !edInstitutesList?.length ? (
         <Loading />
       ) : (
@@ -83,16 +108,33 @@ const SearchPage = () => {
             key={institute.uuid}
             className="border-outline my-8 mb-10 flex flex-col flex-wrap items-center justify-center overflow-hidden rounded xl:flex-row"
           >
+            {role === Roles.Admin ? (
+              <div className="mb-5 flex w-full justify-end">
+                <DeleteChangeMenu
+                  onDeleteItem={onDeleteIndividualInstituteModal}
+                  changeAction={changeInstitute}
+                  uuid={institute.uuid}
+                  changeButtonTitle={
+                    t(Translation.PAGE_EDUCATIONAL_INSTITUTES_CHANGE_INSTITUTE) as string
+                  }
+                  deleteButtonTitle={
+                    t(Translation.PAGE_EDUCATIONAL_INSTITUTES_DELETE_INSTITUTE) as string
+                  }
+                />
+              </div>
+            ) : null}
             <div className="flex h-80 w-full flex-row items-center justify-center xl:w-1/3 ">
               <div className="flex h-full w-5/6 items-center justify-center rounded-md xl:w-3/4">
-                <Image
-                  src={institute.imageURL}
-                  alt="img"
-                  loader={() => institute.imageURL}
-                  width={250}
-                  height={250}
-                  className="max-h-[300px] max-w-[300px]"
-                />
+                {institute?.imageURL ? (
+                  <Image
+                    src={institute?.imageURL}
+                    alt="img"
+                    loader={() => institute.imageURL}
+                    width={250}
+                    height={250}
+                    className="max-h-[300px] max-w-[300px]"
+                  />
+                ) : null}
               </div>
             </div>
             <div className="flex w-3/4 flex-col flex-wrap py-8 text-start xl:w-1/3 xl:py-0">

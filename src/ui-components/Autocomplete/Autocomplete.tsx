@@ -15,6 +15,8 @@ interface AutocompleteProps<T> {
   inputClasses?: string
   error?: string | null
   onValueChange?: (value: T) => void
+  label?: string
+  id?: string
 }
 
 export const Autocomplete = <T extends IAutoCompleteItem>({
@@ -24,6 +26,8 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   inputClasses,
   error,
   onValueChange,
+  label,
+  id,
   ...rest
 }: AutocompleteProps<T>) => {
   const [query, setQuery] = useState('')
@@ -49,14 +53,26 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
     'placeholder:text-black-light',
     'w-full',
     'border-2',
-    [error ? 'border-red placeholder:text-red' : 'focus:border-primary placeholder:text-black']
+    [
+      error
+        ? 'border-red placeholder:text-red'
+        : 'focus:border-primary placeholder:text-black-light',
+    ]
   )
 
   return (
     <Combobox {...rest}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
-          <div className="relative w-full cursor-default overflow-hidden focus:outline-none">
+          {label ? (
+            <label
+              htmlFor={id}
+              className="text-sm text-black-light"
+            >
+              {label}
+            </label>
+          ) : null}
+          <div className="relative mt-2 w-full cursor-default overflow-hidden focus:outline-none">
             <Combobox.Input
               className={`${
                 open ? 'rounded-t' : 'rounded'
@@ -64,6 +80,7 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
               displayValue={(item: IAutoCompleteItem) => item?.name}
               placeholder={placeholder}
               onChange={(event) => setQuery(event.target.value)}
+              id={id}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-5">
               <ChevronIcon className="rotate-90 transform" />
