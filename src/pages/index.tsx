@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Container } from '@components/Container'
 import { EventsCarousel } from '@components/EventsCarousel'
 import {
@@ -16,9 +17,10 @@ import { Introduction } from '@components/Introduction'
 import { NewsCarousel } from '@components/NewsCarousel'
 import { Translation } from '@constants/translations'
 import { Disclosure } from '@headlessui/react'
-import { dispatch } from '@redux/hooks'
+import { dispatch, useAppSelector } from '@redux/hooks'
 import { eventsMiddleware } from '@redux/slices/events'
 import { newsMiddleware } from '@redux/slices/news'
+import { usersSelector } from '@redux/slices/users'
 import { Button } from '@uiComponents/Button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -33,6 +35,7 @@ const data1 = [
 
 const Home = () => {
   const [t] = useTranslation()
+  const { role } = useAppSelector(usersSelector.user)
 
   const helps = [
     { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
@@ -64,6 +67,14 @@ const Home = () => {
     dispatch(newsMiddleware.clearNewsList())
   }, [])
 
+  const startNowUrl = () => {
+    if (role === Roles.Admin) {
+      return '/profile/monitoring-systems'
+    }
+
+    return '/profile/applications'
+  }
+
   return (
     <>
       <Introduction
@@ -79,7 +90,7 @@ const Home = () => {
         title={t(Translation.PAGE_HOME_MAIN_TITLE)}
         desc={t(Translation.PAGE_HOME_MAIN_DESCRIPTION)}
         button={
-          <Link href={`${!isAuthenticated() ? '/login' : '/profile/applications'}`}>
+          <Link href={`${!isAuthenticated() ? '/login' : startNowUrl()}`}>
             <Button
               size="lg"
               RightIcon={RightIcon}
