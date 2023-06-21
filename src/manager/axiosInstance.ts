@@ -5,6 +5,8 @@ import { usersMiddleware } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
+import { isAuthenticated } from '@utils/authUtils'
+
 const getServerUrl = () => devToolsDefaultConfig?.server
 
 class RequestManager {
@@ -61,15 +63,13 @@ class RequestManager {
                 },
               }))
             } catch (err) {
-              localStorage.removeItem('refreshToken')
-              localStorage.removeItem('accessToken')
+              dispatch(usersMiddleware.logOut())
               dispatch(
                 viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
               )
             }
           } else {
-            localStorage.removeItem('refreshToken')
-            localStorage.removeItem('accessToken')
+            dispatch(usersMiddleware.logOut())
             dispatch(
               viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
             )
