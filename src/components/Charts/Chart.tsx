@@ -1,7 +1,5 @@
 import React from 'react'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Highcharts from 'highcharts'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Chart from 'highcharts-react-official'
 
 const yAxisLabels = [23063.0, 23228.0, 24854.0, 28399.0, 31159.0]
