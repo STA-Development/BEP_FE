@@ -56,6 +56,8 @@ const Middleware = ({ children }: { children: ReactElement }) => {
       router.pathname !== '/after-registration'
     ) {
       router.push('/after-registration')
+    } else if (role === Roles.Admin) {
+      router.push('/users-list')
     }
   }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 

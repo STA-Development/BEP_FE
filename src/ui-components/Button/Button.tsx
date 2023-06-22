@@ -52,6 +52,7 @@ export const Button: FC<ButtonProps> = ({
     'disabled:cursor-not-allowed',
     'group',
     [
+      variant !== 'text' && ['disabled:bg-black-light', 'disabled:opacity-50'],
       variant === 'contained' && [
         'hover:border-primary-light hover:bg-primary-light',
         color === 'primary' && 'border-primary bg-primary text-secondary',
