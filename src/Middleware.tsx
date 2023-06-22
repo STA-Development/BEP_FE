@@ -58,6 +58,10 @@ const Middleware = ({ children }: { children: ReactElement }) => {
       router.push('/after-registration')
     } else if (role === Roles.Admin) {
       router.push('/users-list')
+    } else if (isAuthenticated() && role === Roles.Deactivated) {
+      dispatch(usersMiddleware.logOut())
+
+      router.push('/login')
     }
   }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 
@@ -68,10 +72,14 @@ const Middleware = ({ children }: { children: ReactElement }) => {
   }, [router])
 
   useEffect(() => {
-    if (isAuthenticated() && privateRoutes.includes(router.pathname)) {
+    if (
+      isAuthenticated() &&
+      role !== Roles.Deactivated &&
+      privateRoutes.includes(router.pathname)
+    ) {
       router.push('/')
     }
-  }, [router])
+  }, [router, role])
 
   useEffect(() => {
     if ((!isAuthenticated() || role !== Roles.Admin) && adminRoutes.includes(router.pathname)) {
