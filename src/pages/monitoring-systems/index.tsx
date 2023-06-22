@@ -1,6 +1,7 @@
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { ChartComponent, ColumnChart, PieChart } from '@components/Charts'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { Button } from '@uiComponents/Button'
@@ -117,6 +118,11 @@ const MonitoringSystems = () => {
                     {t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_ACTIONS_APPLY_FILTERS)}
                   </Button>
                 </div>
+              </div>
+              <div>
+                <ChartComponent />
+                <PieChart />
+                <ColumnChart />
               </div>
               {tabs.map((tab) => (
                 <Tab.Panel
