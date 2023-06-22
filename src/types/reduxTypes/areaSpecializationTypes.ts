@@ -134,8 +134,3 @@ export interface IFilterUserListProps {
   key?: string
   value?: string
 }
-
-export enum UserActivate {
-  Deactivated = 'Deactivated',
-  Activated = 'Activated',
-}

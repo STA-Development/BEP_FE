@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { UserActivate } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Translation } from '@constants/translations'
 import { useAppSelector } from '@redux/hooks'
 import { usersSelector } from '@redux/slices/users'
@@ -36,7 +36,7 @@ export const UsersListTable = ({ activateUser, deactivateUser }: IUsersListTable
               <td className="w-[30%] px-2 py-2">{user.role}</td>
               <td className="w-[30%] px-2 py-2">
                 <div className="flex w-full justify-center">
-                  {user.role === UserActivate.Deactivated ? (
+                  {user.role === Roles.Deactivated ? (
                     <Button
                       variant="text"
                       onClick={() => activateUser(user.uuid)}

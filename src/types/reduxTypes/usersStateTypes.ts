@@ -43,6 +43,8 @@ export enum Roles {
   Partner = 'Partner',
   Institute = 'Institute',
   NOROLE = 'NOROLE',
+  Deactivated = 'Deactivated',
+  Activated = 'Activated',
 }
 
 export enum SexAtBirth {
