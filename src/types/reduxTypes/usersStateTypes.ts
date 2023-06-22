@@ -44,7 +44,6 @@ export enum Roles {
   Institute = 'Institute',
   NOROLE = 'NOROLE',
   Deactivated = 'Deactivated',
-  Activated = 'Activated',
 }
 
 export enum SexAtBirth {
