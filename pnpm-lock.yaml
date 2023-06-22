@@ -81,6 +81,7 @@ dependencies:
   clsx: 1.2.1
   dayjs: 1.11.7
   eslint: 8.39.0
+  highcharts: 11.1.0
   highcharts-react-official: 3.2.0_cserbahkbxrmq7nes6zmp2pez4
   i18next: 22.4.15
   next: 13.3.3_biqbaboplfbrettd7655fr4n2y
@@ -113,7 +114,6 @@ devDependencies:
   eslint-plugin-security: 1.7.1
   eslint-plugin-simple-import-sort: 10.0.0_eslint@8.39.0
   fs: 0.0.1-security
-  highcharts: 11.1.0
   husky: 8.0.3
   lint-staged: 13.2.2
   pnpm: 7.33.1
@@ -7584,6 +7584,7 @@ packages:
 
   /highcharts/11.1.0:
     resolution: {integrity: sha512-vhmqq6/frteWMx0GKYWwEFL25g4OYc7+m+9KQJb/notXbNtIb8KVy+ijOF7XAFqF165cq0pdLIePAmyFY5ph3g==}
+    dev: false
 
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
