@@ -1,7 +1,8 @@
 {
   "pnpm": {
     "overrides": {
-      "yaml": "2.2.2"
+      "yaml": "2.2.2",
+      "semver": "^7.5.2"
     }
   },
   "name": "bep-armenia",

@@ -113,3 +113,24 @@ export interface INotificationsProps {
   name: string
   applicationUuid: string
 }
+
+export interface IUsersList {
+  address?: string
+  canDeactivate: boolean
+  email: string
+  imageURL: string | null
+  name: string
+  role: string
+  uuid: string
+}
+
+export interface IDeactivateUserProps {
+  uuid: string
+  params: IFilterUserListProps
+}
+
+export interface IFilterUserListProps {
+  page: number
+  key?: string
+  value?: string
+}
