@@ -2,7 +2,7 @@ import React from 'react'
 import Highcharts from 'highcharts'
 import Chart from 'highcharts-react-official'
 
-const yAxisLabels = [23063.0, 23228.0, 24854.0, 28399.0, 31159.0] // Array of y-axis label values
+const yAxisLabels = [23063.0, 23228.0, 24854.0, 28399.0, 31159.0]
 const seriesData = [{ y: 100 }, { y: 50 }]
 const years = [2017, 2018, 2019, 2020, 2021]
 
