@@ -1,47 +1,55 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Translation } from '@constants/translations'
 import Highcharts from 'highcharts'
 import Chart from 'highcharts-react-official'
 
-const yAxisLabels = [23063.0, 23228.0, 24854.0, 28399.0, 31159.0]
-const seriesData = [90.4, 100.7, 107, 114.3, 109.7]
-const years = [2017, 2018, 2019, 2020, 2021]
-
-const options = {
-  title: {
-    text: 'Միջին մասնագիտական ուսումնական հաստատությունների ուսանողների թվաքանակը, ընդամենը',
-  },
-  xAxis: {
-    categories: years,
-  },
-  yAxis: {
-    title: {
-      text: null,
-    },
-    labels: {
-      formatter(value: { axis: { tickPositions: string }; pos: string }) {
-        const index = value.axis.tickPositions.indexOf(value.pos)
-
-        return yAxisLabels[index]
-      },
-    },
-  },
-  series: [
-    {
-      data: seriesData,
-      pointInterval: 1,
-      pointStart: 0,
-    },
-  ],
-  credits: {
-    enabled: false,
-  },
+interface IChartComponentProps {
+  years: number[]
+  percentages: number[]
+  counts: number[]
 }
 
-export const ChartComponent = () => (
-  <div>
-    <Chart
-      highcharts={Highcharts}
-      options={options}
-    />
-  </div>
-)
+export const ChartComponent = ({ years, percentages, counts }: IChartComponentProps) => {
+  const [t] = useTranslation()
+
+  const options = {
+    title: {
+      text: t(Translation.PAGE_MONITORING_SYSTEM_CHART_TITLE),
+    },
+    xAxis: {
+      categories: years,
+    },
+    yAxis: {
+      title: {
+        text: null,
+      },
+      labels: {
+        formatter(value: { axis: { tickPositions: string }; pos: string }) {
+          const index = value.axis.tickPositions.indexOf(value.pos)
+
+          return counts[index]
+        },
+      },
+    },
+    series: [
+      {
+        data: percentages,
+        pointInterval: 1,
+        pointStart: 0,
+      },
+    ],
+    credits: {
+      enabled: false,
+    },
+  }
+
+  return (
+    <div>
+      <Chart
+        highcharts={Highcharts}
+        options={options}
+      />
+    </div>
+  )
+}

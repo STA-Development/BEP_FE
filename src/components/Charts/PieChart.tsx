@@ -1,50 +1,40 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Translation } from '@constants/translations'
 import Highcharts from 'highcharts'
 import Chart from 'highcharts-react-official'
 
-const yAxisLabels = [23063.0, 23228.0, 24854.0, 28399.0, 31159.0]
-const seriesData = [{ y: 100 }, { y: 50 }]
-const years = [2017, 2018, 2019, 2020, 2021]
+export const PieChart = ({ male, female }: { male: number | null; female: number | null }) => {
+  const [t] = useTranslation()
 
-const options = {
-  chart: {
-    type: 'pie',
-  },
-  title: {
-    text: 'Միջին մասնագիտական ուսումնական հաստատությունների ուսանողների թվաքանակը, ընդամենը',
-  },
-  xAxis: {
-    categories: years,
-  },
-  yAxis: {
+  const options = {
+    chart: {
+      type: 'pie',
+    },
     title: {
-      text: null,
+      text: t(Translation.PAGE_MONITORING_SYSTEM_PIE_CHART_TITLE),
     },
-    labels: {
-      formatter(value: { axis: { tickPositions: string }; pos: string }) {
-        const index = value.axis.tickPositions.indexOf(value.pos)
-
-        return yAxisLabels[index]
+    series: [
+      {
+        data: [
+          { name: 'Male', y: male },
+          { name: 'Female', y: female },
+        ],
+        pointInterval: 1,
+        pointStart: 0,
       },
+    ],
+    credits: {
+      enabled: false,
     },
-  },
-  series: [
-    {
-      data: seriesData,
-      pointInterval: 1,
-      pointStart: 0,
-    },
-  ],
-  credits: {
-    enabled: false,
-  },
-}
+  }
 
-export const PieChart = () => (
-  <div>
-    <Chart
-      highcharts={Highcharts}
-      options={options}
-    />
-  </div>
-)
+  return (
+    <div>
+      <Chart
+        highcharts={Highcharts}
+        options={options}
+      />
+    </div>
+  )
+}
