@@ -59,6 +59,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     }
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
+
     dispatch(setIsAuthenticated(true))
   } catch (error) {
     /* empty */

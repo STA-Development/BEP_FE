@@ -49,7 +49,7 @@ export const EducationalInstitutesHeader = () => {
             </Button>
           </div>
         </div>
-        <div className="w-full xl:hidden">
+        <div className=" w-full">
           <div
             className={`w-full flex-col items-start xl:flex xl:flex-row ${
               active ? `flex` : `hidden`
@@ -58,10 +58,6 @@ export const EducationalInstitutesHeader = () => {
           >
             <Filters />
           </div>
-        </div>
-
-        <div className="mt-4 hidden w-full flex-col items-center justify-center xl:flex">
-          <Filters />
         </div>
         {role === Roles.Admin ? (
           <div className="mt-5 flex w-full justify-end">

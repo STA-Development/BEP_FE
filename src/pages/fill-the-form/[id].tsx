@@ -8,14 +8,7 @@ import { Container } from '@components/Container'
 import { FilTheFormJobReview } from '@components/FilTheFormJobReview'
 import { LeftIcon } from '@components/Icons/LeftIcon'
 import { type } from '@constants/applications'
-import {
-  area,
-  educationLevel,
-  expectedSalary,
-  experience,
-  schedule,
-  workplace,
-} from '@constants/filTheForm'
+import { area, educationLevel, experience, schedule, workplace } from '@constants/filTheForm'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -30,18 +23,15 @@ import { useRouter } from 'next/router'
 const IndividualApplication = () => {
   const [t] = useTranslation()
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-
   const router = useRouter()
   const applicationId = router.query.id
-
+  const { role } = useAppSelector(usersSelector.user)
   const {
     isJobSeekerSubmitSuccess,
     individualApplication,
     isOrganizationApplicationLoading,
     isJobSeekerApplicationLoading,
   } = useAppSelector(applicationsSelector.applications)
-  const { role } = useAppSelector(usersSelector.user)
-
   const defaultValues = useMemo(
     () => ({
       type: type.find((item) => item.name === individualApplication?.type),
@@ -52,20 +42,19 @@ const IndividualApplication = () => {
       experience: experience.find((item) => item.name === individualApplication?.experience),
       schedule: schedule.find((item) => item.name === individualApplication?.schedule),
       workplace: workplace.find((item) => item.name === individualApplication?.workplace),
-      expectedSalary: expectedSalary.find(
-        (item) => item.name === individualApplication?.expectedSalary
-      ),
+      expectedSalary: individualApplication?.expectedSalary ?? 0,
     }),
     [individualApplication]
   )
 
   const methods = useForm<IOrganizationApplicationForm>({
     defaultValues,
-    mode: 'onChange',
+    mode: 'onSubmit',
     resolver: yupResolver(jobSeekerValidationSchema),
   })
 
-  const { handleSubmit, reset } = methods
+  const { handleSubmit, reset, watch } = methods
+  const salary = watch('expectedSalary')
 
   const onSubmit = (data: IOrganizationApplicationForm) => {
     const areaSpecialization = {
@@ -76,7 +65,7 @@ const IndividualApplication = () => {
       experience: data?.experience?.name,
       schedule: data?.schedule?.name,
       workplace: data?.workplace?.name,
-      expectedSalary: data?.expectedSalary?.name,
+      expectedSalary: data?.expectedSalary,
       uuid: individualApplication?.uuid,
     }
 
@@ -156,7 +145,10 @@ const IndividualApplication = () => {
                     <Loading />
                   ) : (
                     <div>
-                      <AreaOfSpecialization setSelectedIndex={setSelectedIndex} />
+                      <AreaOfSpecialization
+                        setSelectedIndex={setSelectedIndex}
+                        salary={salary}
+                      />
                     </div>
                   )}
                 </Tab.Panel>

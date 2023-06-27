@@ -73,7 +73,7 @@ export const LanguageSelector = () => {
             </div>
           </Menu.Button>
           <Menu.Items
-            className="absolute left-0 mt-3 w-44 divide-y divide-gray-thin rounded-b
+            className="absolute left-0 z-10 mt-3 w-44 divide-y divide-gray-thin rounded-b
               border-2 border-gray-thin bg-secondary"
           >
             <div className="space-y-1 p-1">
