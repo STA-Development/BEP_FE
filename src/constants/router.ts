@@ -11,4 +11,4 @@ export const adminRoutes = [
   '/educational-institutes/create-institute',
 ]
 
-export const notAccessAdminRoutes = ['/profile/applications', '/profile/settings']
+export const notAccessAdminRoutes = ['/profile/applications', '/profile/settings', '/fill-the-form']

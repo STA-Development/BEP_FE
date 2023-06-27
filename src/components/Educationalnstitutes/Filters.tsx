@@ -58,7 +58,7 @@ const Filters = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col items-center xl:flex-row">
           <div className="min-w-[270px] rounded-l-[10px] py-2.5 text-start text-base xl:border">
-            <p className="flex justify-start xl:px-5">
+            <p className="flex items-center justify-start xl:px-6 xl:py-1">
               {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_TITLE)}
             </p>
           </div>
@@ -83,6 +83,7 @@ const Filters = () => {
               RightIcon={SearchIcon}
               radius="r"
               type="submit"
+              className="h-[57px]"
             >
               {t(Translation.PAGE_EDUCATIONAL_INSTITUTES_FILTER_SEARCH)}
             </Button>

@@ -32,7 +32,7 @@ export interface IJobSeekerApplicationProps {
   experience: string
   schedule: string
   workplace: string
-  expectedSalary: string
+  expectedSalary: number
 }
 
 export interface IOrganizationApplicationForm {
@@ -42,7 +42,7 @@ export interface IOrganizationApplicationForm {
   experience: IAutoCompleteItem
   schedule: IAutoCompleteItem
   workplace: IAutoCompleteItem
-  expectedSalary: IAutoCompleteItem
+  expectedSalary: number
 }
 
 export interface IOrganizationApplicationProps {
@@ -53,7 +53,7 @@ export interface IOrganizationApplicationProps {
   experience?: string
   schedule?: string
   workplace?: string
-  expectedSalary?: string
+  expectedSalary?: number
 }
 
 export interface IJobSeekerProps {
@@ -98,7 +98,7 @@ export interface IIndividualApplication {
   experience: string
   schedule: string
   workplace: string
-  expectedSalary: string
+  expectedSalary: number
   isActive?: boolean
   postedAt?: string
   status?: string

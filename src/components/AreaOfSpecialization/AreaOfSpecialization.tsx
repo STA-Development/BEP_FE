@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import {
   area,
   educationLevel,
-  expectedSalary,
   experience,
   schedule,
   type,
@@ -12,12 +11,14 @@ import {
 import { Translation } from '@constants/translations'
 import { Button } from '@uiComponents/Button'
 import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
+import TextField from '@uiComponents/FormFields/TextField'
 
 interface IAreaOfSpecialization {
   setSelectedIndex: (prev: (prev: number) => number) => void
+  salary: number
 }
 
-export const AreaOfSpecialization = ({ setSelectedIndex }: IAreaOfSpecialization) => {
+export const AreaOfSpecialization = ({ setSelectedIndex, salary }: IAreaOfSpecialization) => {
   const [t] = useTranslation()
 
   const handleClick = () => {
@@ -63,15 +64,16 @@ export const AreaOfSpecialization = ({ setSelectedIndex }: IAreaOfSpecialization
         />
       </div>
       <div className="mb-5 w-full">
-        <AutocompleteField
-          items={expectedSalary}
+        <TextField
           fieldName="expectedSalary"
+          type="number"
         />
       </div>
       <div>
         <Button
           size="fl"
           type="button"
+          disabled={!salary}
           onClick={handleClick}
         >
           {t(Translation.PAGE_FILL_THE_FORM_ACTIONS_NEXT)}
