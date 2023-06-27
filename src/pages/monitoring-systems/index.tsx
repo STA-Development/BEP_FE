@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { ChartComponent, ColumnChart, PieChart } from '@components/Charts'
 import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
+import { dispatch, useAppSelector } from '@redux/hooks'
+import { monitoringMiddleware, monitoringSelector } from '@redux/slices/monitoring-systems'
 import { Button } from '@uiComponents/Button'
 import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
@@ -58,8 +61,61 @@ const years: Years[] = [
 
 const MonitoringSystems = () => {
   const [t] = useTranslation()
+  const [yearsChart, setYears] = useState<number[]>([])
+  const [countsChart, setCounts] = useState<number[]>([])
+  const [percentagesChart, setPercentages] = useState<number[]>([])
+  const [maleCount, setMaleCount] = useState<number | null>(null)
+  const [femaleCount, setFemaleCount] = useState<number | null>(null)
+  const [femaleCountOfYears, setFemaleCountOfYears] = useState<number[]>([])
+  const [maleCountOfYears, setMaleCountOfYears] = useState<number[]>([])
+
+  const monitoringStudent = useAppSelector(monitoringSelector.monitoringStudent)
 
   const methods = useForm()
+
+  useEffect(() => {
+    dispatch(monitoringMiddleware.getMonitoringStudent([]))
+  }, [])
+
+  useEffect(() => {
+    if (monitoringStudent) {
+      const yearsArray = monitoringStudent.map((item) => item.year)
+      const percentagesArray = monitoringStudent.map((item) => item.percentage)
+      const countsArray = monitoringStudent.map((item) => item.count)
+
+      const valuesMonitoringStudent = Object.values(monitoringStudent)
+      const sumFemale = valuesMonitoringStudent.reduce((total, item) => {
+        if (item.sexAtBirth === 'Female') {
+          return total + item.count
+        }
+
+        return total
+      }, 0)
+
+      const sumMale = valuesMonitoringStudent.reduce((total, item) => {
+        if (item.sexAtBirth === 'Male') {
+          return total + item.count
+        }
+
+        return total
+      }, 0)
+
+      const maleCountOfYearsArray = monitoringStudent
+        .filter((item) => item.sexAtBirth === 'Male')
+        .map((item) => item.count)
+      const femaleCountOfYearsArray = monitoringStudent
+        .filter((item) => item.sexAtBirth === 'Female')
+        .map((item) => item.count)
+
+      setYears(yearsArray)
+      setPercentages(percentagesArray)
+      setCounts(countsArray)
+      setFemaleCount(sumFemale)
+      setMaleCount(sumMale)
+      setFemaleCountOfYears(femaleCountOfYearsArray)
+      setMaleCountOfYears(maleCountOfYearsArray)
+    }
+  }, [monitoringStudent])
 
   return (
     <FormProvider {...methods}>
@@ -117,6 +173,23 @@ const MonitoringSystems = () => {
                     {t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_ACTIONS_APPLY_FILTERS)}
                   </Button>
                 </div>
+              </div>
+              <div>
+                <ChartComponent
+                  years={yearsChart}
+                  percentages={percentagesChart}
+                  counts={countsChart}
+                />
+                <PieChart
+                  male={maleCount}
+                  female={femaleCount}
+                />
+                <ColumnChart
+                  years={yearsChart}
+                  counts={countsChart}
+                  female={femaleCountOfYears}
+                  male={maleCountOfYears}
+                />
               </div>
               {tabs.map((tab) => (
                 <Tab.Panel

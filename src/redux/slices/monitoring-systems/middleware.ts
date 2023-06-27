@@ -1,10 +1,17 @@
+import { IMonitoringStudentListParams } from '@allTypes/reduxTypes/monitoringStateTypes'
 import API from '@axios/API'
 import { IError } from '@axios/authentication/authManagerTypes'
 import { AppDispatch } from '@redux/store'
 
 import slice from './slice'
 
-const { setMonitoringEnumsLoading, setMonitoringEnums, setError } = slice.actions
+const {
+  setMonitoringEnumsLoading,
+  setMonitoringEnums,
+  setMonitoringStudent,
+  setMonitoringStudentLoading,
+  setError,
+} = slice.actions
 
 const getMonitoringEnums = () => async (dispatch: AppDispatch) => {
   try {
@@ -20,6 +27,22 @@ const getMonitoringEnums = () => async (dispatch: AppDispatch) => {
   }
 }
 
+const getMonitoringStudent =
+  (data: IMonitoringStudentListParams | []) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(setMonitoringStudentLoading(true))
+
+      const response = await API.monitoring.getMonitoringStudent(data)
+
+      dispatch(setMonitoringStudent(response.data.data))
+    } catch (error) {
+      dispatch(setError((error as IError).response?.data?.status.message))
+    } finally {
+      dispatch(setMonitoringStudentLoading(false))
+    }
+  }
+
 export default {
   getMonitoringEnums,
+  getMonitoringStudent,
 }

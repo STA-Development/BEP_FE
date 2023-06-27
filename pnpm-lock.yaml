@@ -37,12 +37,14 @@ specifiers:
   eslint-plugin-security: ^1.7.1
   eslint-plugin-simple-import-sort: ^10.0.0
   fs: 0.0.1-security
+  highcharts: ^11.1.0
+  highcharts-react-official: ^3.2.0
   husky: ^8.0.3
   i18next: ^22.4.15
   lint-staged: ^13.2.1
   next: 13.3.3
   next-i18next: ^13.2.2
-  pnpm: 7.30.0
+  pnpm: ^7.33.1
   postcss: ^8.4.23
   postcss-loader: ^7.2.4
   prettier: ^2.8.8
@@ -80,6 +82,8 @@ dependencies:
   clsx: 1.2.1
   dayjs: 1.11.7
   eslint: 8.39.0
+  highcharts: 11.1.0
+  highcharts-react-official: 3.2.0_cserbahkbxrmq7nes6zmp2pez4
   i18next: 22.4.15
   next: 13.3.3_biqbaboplfbrettd7655fr4n2y
   next-i18next: 13.2.2_bsie5b4a3emwhoidc22f6gfskq
@@ -113,7 +117,7 @@ devDependencies:
   fs: 0.0.1-security
   husky: 8.0.3
   lint-staged: 13.2.2
-  pnpm: 7.30.0
+  pnpm: 7.33.1
   postcss: 8.4.23
   postcss-loader: 7.3.0_postcss@8.4.23
   prettier: 2.8.8
@@ -7569,6 +7573,20 @@ packages:
     hasBin: true
     dev: false
 
+  /highcharts-react-official/3.2.0_cserbahkbxrmq7nes6zmp2pez4:
+    resolution: {integrity: sha512-71IJZsLmEboYFjONpwC3NRsg6JKvtKYtS5Si3e6s6MLRSOFNOY8KILTkzvO36kjpeR/A0X3/kvvewE+GMPpkjw==}
+    peerDependencies:
+      highcharts: '>=6.0.0'
+      react: '>=16.8.0'
+    dependencies:
+      highcharts: 11.1.0
+      react: 18.2.0
+    dev: false
+
+  /highcharts/11.1.0:
+    resolution: {integrity: sha512-vhmqq6/frteWMx0GKYWwEFL25g4OYc7+m+9KQJb/notXbNtIb8KVy+ijOF7XAFqF165cq0pdLIePAmyFY5ph3g==}
+    dev: false
+
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
@@ -9248,8 +9266,8 @@ packages:
       - typescript
     dev: false
 
-  /pnpm/7.30.0:
-    resolution: {integrity: sha512-6SUdrWSZ4qvQ4uBVg7smnabVKOFrT7DgSz2NfViG54nRii4ODB395qmHprBiv5WBdlC/jZYBn99fSfmzIMI3WQ==}
+  /pnpm/7.33.1:
+    resolution: {integrity: sha512-+eL8qbdPEQVBhh7MHurn8Mx7c71zdYNVV47IHecz/5+ONEe7AX3xuSqbbQPgmJnU3EBEnCAZHOGhRJi7CCV0qA==}
     engines: {node: '>=14.6'}
     hasBin: true
     dev: true
