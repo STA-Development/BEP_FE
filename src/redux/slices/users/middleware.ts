@@ -1,4 +1,8 @@
-import { IProfileUpdateProps } from '@allTypes/reduxTypes/areaSpecializationTypes'
+import {
+  IDeactivateUserProps,
+  IFilterUserListProps,
+  IProfileUpdateProps,
+} from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { RedirectionProps } from '@allTypes/reduxTypes/viewsStateTypes'
 import API from '@axios/API'
@@ -30,6 +34,10 @@ const {
   setIsRoleSelectLoading,
   setIsUserAvatarLoading,
   setIsUserDetailsLoading,
+  setUsersList,
+  setUsersListLoading,
+  setPageSize,
+  setTotalItems,
 } = slice.actions
 
 const { setRedirection } = ViewSlice.actions
@@ -51,6 +59,7 @@ const login = (params: ISignInParams) => async (dispatch: AppDispatch) => {
     }
 
     dispatch(setRedirectionState({ path: '/profile/settings', params: '', apply: true }))
+
     dispatch(setIsAuthenticated(true))
   } catch (error) {
     /* empty */
@@ -284,6 +293,52 @@ const updateOrganizationProfile =
     }
   }
 
+const getUsersList = (params: IFilterUserListProps) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.auth.getUsersList(params)
+
+    dispatch(setUsersListLoading(true))
+
+    dispatch(setPageSize(response.data.pageSize))
+
+    dispatch(setUsersList(response.data.data))
+
+    dispatch(setTotalItems(response.data.totalItems))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setUsersListLoading(false))
+  }
+}
+
+const deactivateUser = (params: IDeactivateUserProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(false))
+
+    await API.auth.deactivateUser(params.uuid)
+
+    dispatch(usersMiddleware.getUsersList(params.params))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
+const activateUser = (params: IDeactivateUserProps) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setisUpdateProfileLoading(false))
+
+    await API.auth.activateUser(params.uuid)
+
+    dispatch(usersMiddleware.getUsersList(params.params))
+  } catch (error) {
+    /* empty */
+  } finally {
+    dispatch(setisUpdateProfileLoading(false))
+  }
+}
+
 export default {
   setRedirectionState,
   login,
@@ -304,4 +359,7 @@ export default {
   uploadAvatar,
   updateAvatarLoading,
   getAccessTokenWithRefreshToken,
+  getUsersList,
+  deactivateUser,
+  activateUser,
 }

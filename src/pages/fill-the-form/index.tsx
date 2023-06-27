@@ -10,7 +10,6 @@ import { LeftIcon } from '@components/Icons/LeftIcon'
 import {
   area,
   educationLevel,
-  expectedSalary,
   experience,
   schedule,
   type,
@@ -40,7 +39,7 @@ const FillTheForm = () => {
       experience: experience[0],
       schedule: schedule[0],
       workplace: workplace[0],
-      expectedSalary: expectedSalary[0],
+      expectedSalary: 0,
     }),
     [path]
   )
@@ -58,7 +57,9 @@ const FillTheForm = () => {
     resolver: yupResolver(jobSeekerValidationSchema),
   })
 
-  const { handleSubmit, reset } = methods
+  const { handleSubmit, reset, watch } = methods
+
+  const salary = watch('expectedSalary')
 
   const onSubmit = (data: IOrganizationApplicationForm) => {
     const areaSpecialization = {
@@ -68,7 +69,7 @@ const FillTheForm = () => {
       experience: data?.experience?.name,
       schedule: data?.schedule?.name,
       workplace: data?.workplace?.name,
-      expectedSalary: data?.expectedSalary?.name,
+      expectedSalary: data?.expectedSalary,
     }
 
     if (role === Roles.JobSeeker) {
@@ -125,7 +126,10 @@ const FillTheForm = () => {
                     <p className="text-primary">1/2</p>
                   </div>
                   <div>
-                    <AreaOfSpecialization setSelectedIndex={setSelectedIndex} />
+                    <AreaOfSpecialization
+                      setSelectedIndex={setSelectedIndex}
+                      salary={salary}
+                    />
                   </div>
                 </Tab.Panel>
                 <Tab.Panel>

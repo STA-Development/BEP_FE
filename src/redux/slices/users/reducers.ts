@@ -1,3 +1,4 @@
+import { IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { IUser, IUserProps } from '@allTypes/reduxTypes/usersStateTypes'
 import { IAction } from '@redux/store'
 import { SliceCaseReducers } from '@reduxjs/toolkit/src/createSlice'
@@ -46,6 +47,18 @@ const reducers = createReducer({
   },
   setIsUserDetailsLoading(state, action: IAction<boolean>) {
     state.isUserDetailsLoading = action.payload
+  },
+  setUsersList(state, action: IAction<IUsersList[] | []>) {
+    state.usersList = action.payload
+  },
+  setUsersListLoading(state, action: IAction<boolean>) {
+    state.isUsersListLoading = action.payload
+  },
+  setPageSize(state, action: IAction<number>) {
+    state.pageSize = action.payload
+  },
+  setTotalItems(state, action: IAction<number>) {
+    state.totalItems = action.payload
   },
 })
 

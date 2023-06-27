@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { LanguageSelector } from '@components/Header/LanguageSelector'
 import { NotificationList } from '@components/Header/NotificationList'
 import { LogOutIcon } from '@components/Icons'
@@ -19,6 +20,7 @@ const HeaderMobile = ({
 
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
+  const { role } = useAppSelector(usersSelector.user)
 
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
@@ -44,7 +46,7 @@ const HeaderMobile = ({
               </Link>
             ))}
             <LanguageSelector />
-            <NotificationList close={() => close()} />
+            {role && role !== Roles.Admin ? <NotificationList close={() => close()} /> : null}
           </div>
           {!isAuthenticated ? (
             <div className="space-y-5">

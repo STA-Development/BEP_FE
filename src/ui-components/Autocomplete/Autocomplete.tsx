@@ -1,7 +1,8 @@
 import React, { Fragment, useMemo, useState } from 'react'
-import { ChevronIcon } from '@components/Icons'
+import { ChevronIcon, CloseIcon } from '@components/Icons'
 import { Combobox, Transition } from '@headlessui/react'
 import clsxMerge from '@lib/clsxm'
+import { Button } from '@uiComponents/Button'
 
 export interface IAutoCompleteItem {
   id: string | number
@@ -15,6 +16,8 @@ interface AutocompleteProps<T> {
   inputClasses?: string
   error?: string | null
   onValueChange?: (value: T) => void
+  selectedItem?: boolean
+  resetSelectedItem?: () => void
   label?: string
   id?: string
 }
@@ -28,6 +31,8 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
   onValueChange,
   label,
   id,
+  selectedItem = false,
+  resetSelectedItem,
   ...rest
 }: AutocompleteProps<T>) => {
   const [query, setQuery] = useState('')
@@ -64,6 +69,17 @@ export const Autocomplete = <T extends IAutoCompleteItem>({
     <Combobox {...rest}>
       {({ open }) => (
         <div className={`relative ${classes}`}>
+          {selectedItem ? (
+            <div className="absolute right-12 top-0 z-10">
+              <Button
+                variant="text"
+                className="h-[50px] w-[50px] p-0"
+                onClick={resetSelectedItem}
+              >
+                <CloseIcon />
+              </Button>
+            </div>
+          ) : null}
           {label ? (
             <label
               htmlFor={id}

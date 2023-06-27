@@ -170,5 +170,13 @@
   "page.events.change.event": "Change Event",
   "page.events.actions.read.more": "Read More",
   "page.news.delete.news": "Delete News",
-  "page.events.delete.event": "Delete Event"
+  "page.events.delete.event": "Delete Event",
+  "page.users.list.autocomplete.placeholder": "Select Role",
+  "page.users.list.table.email": "Email",
+  "page.users.list.table.role": "Role",
+  "page.users.list.table.status": "Status",
+  "page.users.list.table.user.activate": "Activate",
+  "page.users.list.table.user.deactivate": "Deactivate",
+  "page.users.list.previous.button": "Previous",
+  "page.users.list.next.button": "Next"
 }

@@ -25,8 +25,5 @@ export const jobSeekerValidationSchema = object({
     name: string().required(),
     id: number().required(),
   }),
-  expectedSalary: object({
-    name: string().required(),
-    id: number().required(),
-  }),
+  expectedSalary: number().required(),
 })

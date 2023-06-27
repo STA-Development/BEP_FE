@@ -1,6 +1,6 @@
 export const publicRoutes = ['/profile/settings', '/profile/applications', '/fill-the-form']
 
-export const privateRoutes = ['/login', '/register', '/reset-password']
+export const authRoutes = ['/login', '/register', '/reset-password']
 
 export const adminRoutes = [
   '/news/create-news',
@@ -11,4 +11,4 @@ export const adminRoutes = [
   '/educational-institutes/create-institute',
 ]
 
-export const notAccessAdminRoutes = ['/profile/applications', '/profile/settings']
+export const notAccessAdminRoutes = ['/profile/applications', '/profile/settings', '/fill-the-form']

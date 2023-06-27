@@ -50,10 +50,9 @@ export const Button: FC<ButtonProps> = ({
     'duration-200',
     'focus:outline-none',
     'disabled:cursor-not-allowed',
-    'disabled:bg-black-light',
-    'disabled:opacity-50',
     'group',
     [
+      variant !== 'text' && ['disabled:bg-black-light', 'disabled:opacity-50'],
       variant === 'contained' && [
         'hover:border-primary-light hover:bg-primary-light',
         color === 'primary' && 'border-primary bg-primary text-secondary',

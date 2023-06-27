@@ -12,6 +12,8 @@ export interface IAutocompleteProps<T> {
   label?: string
   id?: string
   error?: string | null
+  selectedItem?: boolean
+  resetSelectedItem?: () => void
 }
 
 const AutocompleteField = <T extends IAutoCompleteItem>({
@@ -24,6 +26,8 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
   error,
   label,
   id,
+  selectedItem,
+  resetSelectedItem,
 }: IAutocompleteProps<T>) => {
   const { control } = useFormContext()
   const { field, fieldState } = useController({ name: fieldName, control })
@@ -40,6 +44,8 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
       label={label}
       id={id}
       error={errorMessage}
+      selectedItem={selectedItem}
+      resetSelectedItem={resetSelectedItem}
     />
   )
 }
