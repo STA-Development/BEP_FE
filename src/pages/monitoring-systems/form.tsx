@@ -9,8 +9,8 @@ import OrganizationPlans from '@components/Monitoring/Form/OrganizationPlans'
 import PersonalFlow from '@components/Monitoring/Form/PersonalFlow'
 import Vacancies from '@components/Monitoring/Form/Vacancies'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { dispatch, useAppSelector } from '@redux/hooks'
-import { monitoringMiddleware, monitoringSelector } from '@redux/slices/monitoring-systems'
+import { useAppSelector } from '@redux/hooks'
+import { monitoringSelector } from '@redux/slices/monitoring-systems'
 import { Loading } from '@uiComponents/Loading'
 import { monitoringValidationSchema } from '@validation/monitoring/monitoring'
 import { AnyObjectSchema } from 'yup'
@@ -59,10 +59,10 @@ const MonitoringForm = () => {
     //   setCurrentSchema(monitoringValidationSchema[1])
     // }
   }
-
-  useEffect(() => {
-    dispatch(monitoringMiddleware.getMonitoringEnums())
-  }, [])
+  //
+  // useEffect(() => {
+  //   dispatch(monitoringMiddleware.getMonitoringEnums())
+  // }, [])
 
   return (
     <Container className="mt-20">
