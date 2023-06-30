@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { SexAtBirth } from '@allTypes/reduxTypes/usersStateTypes'
 import { Translation } from '@constants/translations'
 import Highcharts from 'highcharts'
 import Chart from 'highcharts-react-official'
@@ -16,9 +17,10 @@ export const PieChart = ({ male, female }: { male: number | null; female: number
     },
     series: [
       {
+        name: 'Students',
         data: [
-          { name: 'Male', y: male },
-          { name: 'Female', y: female },
+          { name: SexAtBirth.Male, y: male },
+          { name: SexAtBirth.Female, y: female },
         ],
         pointInterval: 1,
         pointStart: 0,

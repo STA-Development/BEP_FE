@@ -1,4 +1,6 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Translation } from '@constants/translations'
 import Highcharts from 'highcharts'
 import Chart from 'highcharts-react-official'
 
@@ -8,17 +10,18 @@ export const ColumnChart = ({
   female,
   male,
 }: {
-  years: number[]
+  years: string[]
   counts: number[]
   female: number[]
   male: number[]
 }) => {
+  const [t] = useTranslation()
   const options = {
     chart: {
       type: 'column',
     },
     title: {
-      text: 'Միջին մասնագիտական ուսումնական հաստատությունների ուսանողների թվաքանակը, ընդամենը',
+      text: t(Translation.PAGE_MONITORING_SYSTEM_COLUMN_CHART_TITLE),
     },
     xAxis: {
       categories: years,

@@ -10,6 +10,7 @@ specifiers:
   '@headlessui/react': ^1.7.14
   '@hookform/resolvers': ^3.1.0
   '@neojp/tailwindcss-line-clamp-utilities': ^1.0.1
+  '@next/eslint-plugin-next': ^13.4.7
   '@reduxjs/toolkit': ^1.9.5
   '@storybook/addon-essentials': 7.0.7
   '@storybook/addon-interactions': 7.0.7
@@ -21,6 +22,7 @@ specifiers:
   '@types/node': 18.16.0
   '@types/react': 18.0.38
   '@types/react-dom': 18.0.11
+  '@types/react-highcharts': ^16.0.3
   '@types/react-redux': ^7.1.25
   '@typescript-eslint/eslint-plugin': ^5.59.1
   '@typescript-eslint/parser': ^5.59.1
@@ -42,9 +44,10 @@ specifiers:
   husky: ^8.0.3
   i18next: ^22.4.15
   lint-staged: ^13.2.1
+  lodash.groupby: ^4.6.0
   next: 13.3.3
   next-i18next: ^13.2.2
-  pnpm: ^7.33.1
+  pnpm: ^7.30.0
   postcss: ^8.4.23
   postcss-loader: ^7.2.4
   prettier: ^2.8.8
@@ -70,6 +73,7 @@ dependencies:
   '@headlessui/react': 1.7.14_biqbaboplfbrettd7655fr4n2y
   '@hookform/resolvers': 3.1.0_react-hook-form@7.43.9
   '@neojp/tailwindcss-line-clamp-utilities': 1.0.1
+  '@next/eslint-plugin-next': 13.4.7
   '@reduxjs/toolkit': 1.9.5_k4ae6lp43ej6mezo3ztvx6pykq
   '@storybook/addon-essentials': 7.0.7_biqbaboplfbrettd7655fr4n2y
   '@storybook/addon-interactions': 7.0.7_biqbaboplfbrettd7655fr4n2y
@@ -78,6 +82,7 @@ dependencies:
   '@storybook/nextjs': 7.0.7_v56hezhheqqxk4eqiqxntfscry
   '@storybook/react': 7.0.7_ygqkwb4gg3aean7xjfdauovyqq
   '@storybook/testing-library': 0.1.0
+  '@types/react-highcharts': 16.0.3
   axios: 1.4.0
   clsx: 1.2.1
   dayjs: 1.11.7
@@ -85,6 +90,7 @@ dependencies:
   highcharts: 11.1.0
   highcharts-react-official: 3.2.0_cserbahkbxrmq7nes6zmp2pez4
   i18next: 22.4.15
+  lodash.groupby: 4.6.0
   next: 13.3.3_biqbaboplfbrettd7655fr4n2y
   next-i18next: 13.2.2_bsie5b4a3emwhoidc22f6gfskq
   react: 18.2.0
@@ -2962,6 +2968,12 @@ packages:
       glob: 7.1.7
     dev: true
 
+  /@next/eslint-plugin-next/13.4.7:
+    resolution: {integrity: sha512-ANEPltxzXbyyG7CvqxdY4PmeM5+RyWdAJGufTHnU+LA/i3J6IDV2r8Z4onKwskwKEhwqzz5lMaSYGGXLyHX+mg==}
+    dependencies:
+      glob: 7.1.7
+    dev: false
+
   /@next/swc-darwin-arm64/13.3.3:
     resolution: {integrity: sha512-FcQwSiTMSk4VLwfiqSBvPapTeZarwMV4tX0BZBmKUBuK6/aqn3SLqEtcQFwR88ZrDn6dhmdjfe6plJ52vDU7Kg==}
     engines: {node: '>= 10'}
@@ -4409,6 +4421,10 @@ packages:
     resolution: {integrity: sha512-frsJrz2t/CeGifcu/6uRo4b+SzAwT4NYCVPu1GN8IB9XTzrpPkGuV0tmh9mN+/L0PklAlsC3u5Fxt0ju00LXIw==}
     dev: true
 
+  /@types/geojson/7946.0.10:
+    resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
+    dev: false
+
   /@types/glob/8.1.0:
     resolution: {integrity: sha512-IO+MJPVhoqz+28h1qLAcBEH2+xHMK6MTyHJc7MTnnYb6wsoLR29POVGJ7LycmVXIqyy/4/2ShP5sUwTXuOwb/w==}
     dependencies:
@@ -4419,6 +4435,12 @@ packages:
     resolution: {integrity: sha512-Sig0SNORX9fdW+bQuTEovKj3uHcUL6LQKbCrrqb1X7J6/ReAbhCXRAhc+SMejhLELFj2QcyuxmUooZ4bt5ReSw==}
     dependencies:
       '@types/node': 18.16.0
+    dev: false
+
+  /@types/highcharts/5.0.44:
+    resolution: {integrity: sha512-Rby1gj3GbK7zzsbK/g9T9hoybUfM+x0sBIXrOlTnj25TIvuTkLend3nKRLLz2upvLJNo36GntO6KmTFoVQXWZA==}
+    dependencies:
+      '@types/geojson': 7946.0.10
     dev: false
 
   /@types/hoist-non-react-statics/3.3.1:
@@ -4522,6 +4544,13 @@ packages:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
       '@types/react': 18.0.38
+
+  /@types/react-highcharts/16.0.3:
+    resolution: {integrity: sha512-JrrrANNA2wN4th3Wznqg6E8aUUspAR7L5gV8qXw48Cbj3J+McZW3CTHbOR7uEr6pGoa/Sl2XsZBzgEBR1DMlsw==}
+    dependencies:
+      '@types/highcharts': 5.0.44
+      '@types/react': 18.0.38
+    dev: false
 
   /@types/react-redux/7.1.25:
     resolution: {integrity: sha512-bAGh4e+w5D8dajd6InASVIyCo4pZLJ66oLb80F9OBLO1gKESbZcRCJpTT6uLXX+HAB57zw1WTdwJdAsewuTweg==}
@@ -7419,7 +7448,6 @@ packages:
       minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
-    dev: true
 
   /glob/7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
@@ -8431,6 +8459,10 @@ packages:
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+
+  /lodash.groupby/4.6.0:
+    resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
+    dev: false
 
   /lodash.isfunction/3.0.9:
     resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}

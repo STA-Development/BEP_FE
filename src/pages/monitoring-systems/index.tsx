@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
+import { SexAtBirth } from '@allTypes/reduxTypes/usersStateTypes'
 import { ChartComponent, ColumnChart, PieChart } from '@components/Charts'
-import { Translation } from '@constants/translations'
 import { Tab } from '@headlessui/react'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { monitoringMiddleware, monitoringSelector } from '@redux/slices/monitoring-systems'
-import { Button } from '@uiComponents/Button'
-import AutocompleteField from '@uiComponents/FormFields/Autocomplete'
 
 const tabs = [
   {
@@ -48,22 +45,11 @@ const tabs = [
   },
 ]
 
-interface Years {
-  id: string
-  name: string
-}
-
-const years: Years[] = [
-  { id: '1', name: '2019' },
-  { id: '2', name: '2020' },
-  { id: '3', name: '2021' },
-]
-
 const MonitoringSystems = () => {
-  const [t] = useTranslation()
-  const [yearsChart, setYears] = useState<number[]>([])
+  const [yearsChart, setYears] = useState<string[]>([])
   const [countsChart, setCounts] = useState<number[]>([])
-  const [percentagesChart, setPercentages] = useState<number[]>([])
+  const [percentagesChartMale, setPercentagesMale] = useState<number[]>([])
+  const [percentagesChartFemale, setPercentagesFemale] = useState<number[]>([])
   const [maleCount, setMaleCount] = useState<number | null>(null)
   const [femaleCount, setFemaleCount] = useState<number | null>(null)
   const [femaleCountOfYears, setFemaleCountOfYears] = useState<number[]>([])
@@ -79,8 +65,28 @@ const MonitoringSystems = () => {
 
   useEffect(() => {
     if (monitoringStudent) {
-      const yearsArray = monitoringStudent.map((item) => item.year)
-      const percentagesArray = monitoringStudent.map((item) => item.percentage)
+      const yearsArray = monitoringStudent
+        .filter(
+          (item) =>
+            item.educationLevel === 'Vocational education' && item.sexAtBirth === SexAtBirth.Male
+        )
+        .map((item) => item.year.toString())
+
+      // monitoringStudent.map((item) => item.year)
+      const percentagesArrayMale = monitoringStudent
+        .filter(
+          (item) =>
+            item.educationLevel === 'Vocational education' && item.sexAtBirth === SexAtBirth.Male
+        )
+        .map((item) => item.percentage)
+
+      const percentagesArrayFemale = monitoringStudent
+        .filter(
+          (item) =>
+            item.educationLevel === 'Vocational education' && item.sexAtBirth === SexAtBirth.Female
+        )
+        .map((item) => item.percentage)
+
       const countsArray = monitoringStudent.map((item) => item.count)
 
       const valuesMonitoringStudent = Object.values(monitoringStudent)
@@ -101,14 +107,21 @@ const MonitoringSystems = () => {
       }, 0)
 
       const maleCountOfYearsArray = monitoringStudent
-        .filter((item) => item.sexAtBirth === 'Male')
+        .filter(
+          (item) =>
+            item.educationLevel === 'Higher education' && item.sexAtBirth === SexAtBirth.Male
+        )
         .map((item) => item.count)
       const femaleCountOfYearsArray = monitoringStudent
-        .filter((item) => item.sexAtBirth === 'Female')
+        .filter(
+          (item) =>
+            item.educationLevel === 'Higher education' && item.sexAtBirth === SexAtBirth.Female
+        )
         .map((item) => item.count)
 
       setYears(yearsArray)
-      setPercentages(percentagesArray)
+      setPercentagesMale(percentagesArrayMale)
+      setPercentagesFemale(percentagesArrayFemale)
       setCounts(countsArray)
       setFemaleCount(sumFemale)
       setMaleCount(sumMale)
@@ -121,89 +134,38 @@ const MonitoringSystems = () => {
     <FormProvider {...methods}>
       <form>
         <Tab.Group>
-          <Tab.List>
+          <div className="grid grid-cols-1 divide-y divide-gray-thin">
             {tabs.map((tab) => (
-              <Tab
+              <Tab.Panel
                 key={tab.label}
-                className="mr-10 text-base text-black focus:outline-none"
+                className="pt-10"
               >
-                {({ selected }) => (
-                  <>
-                    <div className="p-2.5 pb-1.5">{tab.label}</div>
-                    <div
-                      className={`h-1 w-full rounded ${selected ? 'bg-primary' : 'bg-transparent'}`}
-                    />
-                  </>
-                )}
-              </Tab>
+                <div className="mb-5 text-lg font-medium">{tab.title}</div>
+                <div className="mb-5 font-normal">{tab.content}</div>
+                <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
+                <div>{tab.content3}</div>
+              </Tab.Panel>
             ))}
-          </Tab.List>
-          <Tab.Panels>
-            <div className="grid grid-cols-1 divide-y divide-gray-thin">
-              <div className="my-10 inline-block xl:flex xl:w-full xl:flex-row">
-                <div className="flex flex-col gap-2 xl:flex-row xl:gap-5">
-                  <div className="w-full xl:w-[124px]">
-                    <AutocompleteField
-                      fieldName="years"
-                      items={years}
-                      placeholder={
-                        t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_YEARS) as string
-                      }
-                    />
-                  </div>
-                  <div className="w-full xl:w-[124px]">
-                    <AutocompleteField
-                      fieldName="years"
-                      items={years}
-                      placeholder={
-                        t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string
-                      }
-                    />
-                  </div>
-                  <div className="w-full xl:w-[124px]">
-                    <AutocompleteField
-                      fieldName="years"
-                      items={years}
-                      placeholder={
-                        t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_FILTERS_REGION) as string
-                      }
-                    />
-                  </div>
-                  <Button size="md">
-                    {t(Translation.PAGE_PROFILE_MENU_MONITORING_SYSTEMS_ACTIONS_APPLY_FILTERS)}
-                  </Button>
-                </div>
-              </div>
-              <div>
-                <ChartComponent
-                  years={yearsChart}
-                  percentages={percentagesChart}
-                  counts={countsChart}
-                />
-                <PieChart
-                  male={maleCount}
-                  female={femaleCount}
-                />
-                <ColumnChart
-                  years={yearsChart}
-                  counts={countsChart}
-                  female={femaleCountOfYears}
-                  male={maleCountOfYears}
-                />
-              </div>
-              {tabs.map((tab) => (
-                <Tab.Panel
-                  key={tab.label}
-                  className="pt-10"
-                >
-                  <div className="mb-5 text-lg font-medium">{tab.title}</div>
-                  <div className="mb-5 font-normal">{tab.content}</div>
-                  <div className="mb-5 font-normal text-black-light">{tab.content2}</div>
-                  <div>{tab.content3}</div>
-                </Tab.Panel>
-              ))}
+            <div className="mt-8">
+              <ChartComponent
+                years={yearsChart}
+                percentages={percentagesChartMale}
+                percentagesChartFemale={percentagesChartFemale}
+                counts={countsChart}
+              />
+              <PieChart
+                male={maleCount}
+                female={femaleCount}
+              />
+              <ColumnChart
+                years={yearsChart}
+                counts={countsChart}
+                female={femaleCountOfYears}
+                male={maleCountOfYears}
+              />
             </div>
-          </Tab.Panels>
+          </div>
+          {/* </Tab.Panels> */}
         </Tab.Group>
       </form>
     </FormProvider>

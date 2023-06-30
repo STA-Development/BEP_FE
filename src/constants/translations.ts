@@ -257,6 +257,7 @@ export enum Translation {
   PAGE_LOGIN_VALIDATION_EMAIL = 'page.login.validation.email',
   PAGE_LOGIN_VALIDATION_PASSWORD = 'page.login.validation.password',
   PAGE_MONITORING_SYSTEM_CHART_TITLE = 'page.monitoring.system.chart.title',
+  PAGE_MONITORING_SYSTEM_COLUMN_CHART_TITLE = 'page.monitoring.system.column.chart.title',
   PAGE_MONITORING_SYSTEM_FORM_RESIDENCE = 'page.monitoring.system.form.Residence',
   PAGE_MONITORING_SYSTEM_FORM_SURVEY = 'page.monitoring.system.form.Survey',
   PAGE_MONITORING_SYSTEM_FORM_ACTIONS_NEXT = 'page.monitoring.system.form.actions.next',
