@@ -2,6 +2,22 @@ export interface IMonitoringProps {
   monitoringEnums: IMonitoringEnums | null
   isMonitoringEnumsLoading: boolean
   error: Error | null | string
+  isMonitoringStudentLoading: boolean
+  monitoringStudent: IMonitoringStudentResponse[]
+}
+
+export interface IMonitoringStudentListParams {
+  key?: string
+  values?: number[]
+}
+
+export interface IMonitoringStudentResponse {
+  uuid: string
+  educationLevel: string
+  sexAtBirth: string
+  year: number
+  count: number
+  percentage: number
 }
 
 export interface IOrganizationType {
