@@ -28,6 +28,7 @@ jobs:
         run: |
           touch .env
           echo NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }} >> .env
+          echo NEXT_PUBLIC_MAP_BASE_KEY=${{ secrets.NEXT_PUBLIC_MAP_BASE_KEY }} >> .env
 
       - name: Build application
         run: pnpm build
