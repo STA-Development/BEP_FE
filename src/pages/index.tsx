@@ -38,27 +38,41 @@ const Home = () => {
   const { role } = useAppSelector(usersSelector.user)
 
   const helps = [
-    { id: 1, name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE), icon: <PeopleCommunityIcon /> },
+    {
+      id: 1,
+      name: t(Translation.PAGE_HOME_SECTIONS_MASTERS_TITLE),
+      icon: <PeopleCommunityIcon />,
+      href: '/fill-the-form',
+    },
     {
       id: 2,
       name: t(Translation.PAGE_HOME_SECTIONS_COMPANIES_TITLE),
       icon: <BuildingBankToolboxIcon />,
+      href: '/fill-the-form',
     },
     {
       id: 3,
       name: t(Translation.PAGE_HOME_SECTIONS_EDUCATIONAL_INSTITUTES_TITLE),
       icon: <BuildingBankIcon />,
+      href: '/fill-the-form',
     },
     {
       id: 4,
       name: t(Translation.PAGE_HOME_SECTIONS_MONITORING_SYSTEMS_TITLE),
       icon: <DesktopPulseIcon />,
+      href: '/fill-the-form',
     },
-    { id: 5, name: t(Translation.PAGE_HOME_SECTIONS_JOBS_TITLE), icon: <ToolboxIcon /> },
+    {
+      id: 5,
+      name: t(Translation.PAGE_HOME_SECTIONS_JOBS_TITLE),
+      icon: <ToolboxIcon />,
+      href: '/fill-the-form',
+    },
     {
       id: 6,
       name: t(Translation.PAGE_HOME_SECTIONS_PRACTICE_TITLE),
       icon: <ClipboardTaskListIcon />,
+      href: '/fill-the-form?path=Practice',
     },
   ]
 
@@ -133,7 +147,6 @@ const Home = () => {
         </div>
       </Container>
       <div className="h-[95px] w-full bg-[url('/wave2.svg')] bg-cover bg-center bg-no-repeat" />
-
       <Container className="my-30 xl:my-60">
         <h2 className="mb-10 text-xl font-medium xl:mt-25 xl:text-2xl">
           <span className="hidden xl:inline-block">{t(Translation.PAGE_HOME_SECTIONS_TITLE)}</span>
@@ -161,7 +174,7 @@ const Home = () => {
                   <div className="mb-10">
                     <p>{t(Translation.PAGE_HOME_SECTIONS_EDUCATIONAL_INSTITUTES_DESCRIPTION)}</p>
                   </div>
-                  <Link href="/fill-the-form">
+                  <Link href={help.href}>
                     <Button
                       size="lg"
                       RightIcon={RightIcon}
