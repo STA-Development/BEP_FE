@@ -71,7 +71,6 @@ class RequestManager {
         } else if (error.response.status === 401 && isAuthenticated()) {
           dispatch(usersMiddleware.logOut())
         } else {
-          console.log('OOOOOOOOO')
           dispatch(
             viewsMiddleware.setToastNotificationPopUpState({
               open: true,
