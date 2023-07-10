@@ -80,13 +80,8 @@ const Home = () => {
     dispatch(newsMiddleware.clearNewsList())
   }, [])
 
-  const startNowUrl = () => {
-    if (role === Roles.Admin) {
-      return '/profile/monitoring-systems'
-    }
-
-    return '/profile/applications'
-  }
+  const startNowUrl = () =>
+    role === Roles.Admin ? '/profile/monitoring-systems' : '/profile/applications'
 
   return (
     <>
