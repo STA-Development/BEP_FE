@@ -4,4 +4,6 @@ export const getInitialState = (): IMonitoringProps => ({
   monitoringEnums: null,
   isMonitoringEnumsLoading: false,
   error: null,
+  monitoringStudent: [],
+  isMonitoringStudentLoading: false,
 })

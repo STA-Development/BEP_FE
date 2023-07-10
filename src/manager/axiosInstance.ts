@@ -80,6 +80,8 @@ class RequestManager {
             })
           )
         }
+
+        return Promise.reject(error)
       }
     )
 

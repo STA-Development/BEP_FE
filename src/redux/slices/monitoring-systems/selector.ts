@@ -40,6 +40,11 @@ const positionNecessityReason = createSelector(
   [selector],
   (state) => state.monitoringEnums?.positionNecessityReason
 )
+const monitoringStudent = createSelector([selector], (state) => state.monitoringStudent)
+const isMonitoringStudentLoading = createSelector(
+  [selector],
+  (state) => state.isMonitoringStudentLoading
+)
 
 export default {
   monitoringEnums,
@@ -55,4 +60,6 @@ export default {
   businessPerspective,
   ageRange,
   trainingPeriod,
+  isMonitoringStudentLoading,
+  monitoringStudent,
 }
