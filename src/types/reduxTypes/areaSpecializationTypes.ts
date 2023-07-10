@@ -7,7 +7,6 @@ export interface IApplicationsProps {
 
 export interface IApplications {
   isJobSeekerLoading: boolean
-
   isApplicationLoading: boolean
   isJobSeekerSubmitSuccess: boolean
   applicationsList: null | IApplicationsListProps[]
@@ -21,7 +20,7 @@ export interface IApplications {
   applicationsPdf: null | File
   isChangeIsActiveSuccess: boolean
   isCloneApplicationSuccess: boolean
-  notifications: null | INotificationsProps[]
+  notification: INotificationProps
   notificationId: string | null
 }
 
@@ -107,6 +106,11 @@ export interface IIndividualApplication {
 export interface IDeactivateApplicationProps {
   uuid: string
   isActive: boolean
+}
+
+export interface INotificationProps {
+  notifications: null | INotificationsProps[]
+  unseenCount: number
 }
 
 export interface INotificationsProps {

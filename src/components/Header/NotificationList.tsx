@@ -17,7 +17,7 @@ export const NotificationList = ({ close }: ChildComponentProps) => {
   const [t] = useTranslation()
   const router = useRouter()
 
-  const { notifications } = useAppSelector(applicationsSelector.applications)
+  const { notification } = useAppSelector(applicationsSelector.applications)
 
   const handleClick = (id: string) => {
     dispatch(applicationsMiddleware.getNotificationsId(id))
@@ -29,20 +29,27 @@ export const NotificationList = ({ close }: ChildComponentProps) => {
     router.push('/profile/applications')
   }
 
+  const handleNotifications = () => {
+    dispatch(applicationsMiddleware.changeJobSeekerNotificationHasSeen())
+  }
+
   return (
     <Menu
       as="div"
       className="relative"
     >
-      <Menu.Button className="inline-flex w-full items-center py-2">
+      <Menu.Button
+        onClick={handleNotifications}
+        className="inline-flex w-full items-center py-2"
+      >
         <p className="mr-2 text-base font-medium text-black xl:hidden">
           {t(Translation.HEADER_NOTIFICATIONS)}
         </p>
         <div className="relative hidden xl:flex">
           <NotificationIcon />
-          {notifications?.length ? (
+          {notification.unseenCount ? (
             <div className="absolute bottom-2.5 left-3 right-0 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red p-1 text-white">
-              <span className="text-[10px]">{notifications?.length}</span>
+              <span className="text-[10px]">{notification.unseenCount}</span>
             </div>
           ) : null}
         </div>
@@ -55,7 +62,7 @@ export const NotificationList = ({ close }: ChildComponentProps) => {
           <h3 className="font-sans text-lg">{t(Translation.HEADER_NOTIFICATIONS)}</h3>
         </div>
         <div className="h-[300px] w-full space-y-4 overflow-scroll p-1">
-          {notifications?.map((item) => (
+          {notification.notifications?.map((item) => (
             <Menu.Item key={item.applicationUuid}>
               <div className="flex">
                 <Button
