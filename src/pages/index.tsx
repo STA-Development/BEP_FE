@@ -32,7 +32,6 @@ const data1 = [
   { id: 2, number: '200+', text: 'Lorem ipsum dolor sit amet consectetur.' },
   { id: 3, number: '95', text: 'Lorem ipsum dolor sit amet consecteturamet.' },
 ]
-
 const Home = () => {
   const [t] = useTranslation()
   const { role } = useAppSelector(usersSelector.user)
@@ -152,7 +151,6 @@ const Home = () => {
           <span className="hidden xl:inline-block">{t(Translation.PAGE_HOME_SECTIONS_TITLE)}</span>
           <span className="xl:hidden">{t(Translation.PAGE_HOME_SECTIONS_MOBILE_TITLE)}</span>
         </h2>
-
         {helps.map((help) => (
           <Disclosure key={help.id}>
             {({ open }) => (
