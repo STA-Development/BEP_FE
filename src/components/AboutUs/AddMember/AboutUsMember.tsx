@@ -15,7 +15,7 @@ const defaultValues: ICreateTeamMember = {
   header: '',
   paragraph: '',
   imageDescription: '',
-  imageURL: undefined,
+  imageURL: '',
 }
 const AboutUsMember = ({ setShowPersonForm }: IAboutUsMemberProps) => {
   const { isTeamMemberSubmitSuccess } = useAppSelector(aboutUsSelector.aboutUs)

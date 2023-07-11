@@ -23,7 +23,7 @@ export interface ICreateTeamMember {
   header?: string
   paragraph?: string
   imageDescription?: string
-  imageURL?: FileList
+  imageURL?: string | FileList
 }
 
 export interface IChangeMemberFormProps {

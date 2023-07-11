@@ -9,10 +9,22 @@ export const createAboutUsValidationSchema = object().shape({
     i18next.t(Translation.PAGE_ABOUT_US_VALIDATION_IMAGE_DESCRIPTION) as string
   ),
   imageURL: mixed().test(
-    'isFile',
-    'Invalid file',
-    (value) =>
-      // Check if value is a File object
-      value instanceof File
+    'imageURL',
+    i18next.t(Translation.PAGE_ABOUT_US_VALIDATION_IMAGE) as string,
+    (value) => {
+      if (typeof value === 'string') {
+        return true
+      }
+
+      if (value instanceof File) {
+        if (value && !['image/jpeg', 'image/png', 'image/jpg']) {
+          return false
+        }
+
+        return value && ['image/jpeg', 'image/png', 'image/jpg'].includes(value.type)
+      }
+
+      return false
+    }
   ),
 })
