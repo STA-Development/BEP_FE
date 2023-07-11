@@ -47,7 +47,7 @@ module.exports = {
     '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreArrowShorthand: true }],
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
-    'max-lines-per-function': ['error', 150],
+    'max-lines-per-function': ['error', 300],
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
     '@typescript-eslint/prefer-nullish-coalescing': 'error',
     'no-underscore-dangle': 'off',
