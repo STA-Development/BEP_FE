@@ -15,7 +15,7 @@ const defaultValues = {
   header: '',
   paragraph: '',
   imageDescription: '',
-  imageURL: '',
+  imageURL: null,
 }
 const AboutUsMember = ({ setShowPersonForm }: IAboutUsMemberProps) => {
   const { isTeamMemberSubmitSuccess } = useAppSelector(aboutUsSelector.aboutUs)
