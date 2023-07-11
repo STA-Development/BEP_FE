@@ -162,7 +162,7 @@ const verifyOtp =
 
       const response = await API.auth.verifyOtp(params)
 
-      localStorage.setItem('accessToken', response.data.data.verifyOtpToken)
+      localStorage.setItem('verifyOtpToken', response.data.data.verifyOtpToken)
       dispatch(setSelectedIndex(selectedIndex + 1))
     } catch (error) {
       /* empty */
