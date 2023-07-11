@@ -4,7 +4,7 @@ import {
   IIndividualApplication,
   IJobSeekerApplicationProps,
   IJobSeekerProps,
-  INotificationsProps,
+  INotificationProps,
   IOrganizationApplicationProps,
   IProfileUpdateProps,
 } from '@allTypes/reduxTypes/areaSpecializationTypes'
@@ -134,14 +134,18 @@ const jobSeekerManager = {
       `${baseURL}/v1/organization/application/clone/${uuid}`
     )
   },
-
   getJobSeekerNotifications() {
-    return axiosInstance.get<INotificationsProps[], IAxiosResponse<INotificationsProps[]>>(
+    return axiosInstance.get<INotificationProps, IAxiosResponse<INotificationProps>>(
       `${baseURL}/v1/job-seeker/notification`
     )
   },
+  changeJobSeekerNotificationHasSeen() {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(
+      `${baseURL}/v1/user/notification/has-seen`
+    )
+  },
   getOrganizationNotifications() {
-    return axiosInstance.get<INotificationsProps[], IAxiosResponse<INotificationsProps[]>>(
+    return axiosInstance.get<INotificationProps, IAxiosResponse<INotificationProps>>(
       `${baseURL}/v1/organization/notification`
     )
   },

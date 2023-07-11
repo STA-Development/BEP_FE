@@ -268,6 +268,18 @@ const getJobSeekerNotifications = () => async (dispatch: AppDispatch) => {
   }
 }
 
+const changeJobSeekerNotificationHasSeen = () => async (dispatch: AppDispatch) => {
+  try {
+    await API.jobSeeker.changeJobSeekerNotificationHasSeen()
+
+    const response = await API.jobSeeker.getJobSeekerNotifications()
+
+    dispatch(setNotifications(response?.data?.data))
+  } catch (error) {
+    /* empty */
+  }
+}
+
 const getOrganizationNotifications = () => async (dispatch: AppDispatch) => {
   try {
     const response = await API.jobSeeker.getOrganizationNotifications()
@@ -315,6 +327,7 @@ export default {
   cloneOrganizationApplication,
   resetCloneSubmitSuccess,
   getJobSeekerNotifications,
+  changeJobSeekerNotificationHasSeen,
   getNotificationsId,
   resetNotificationsId,
   getOrganizationNotifications,
