@@ -11,18 +11,18 @@ export interface IAboutUsMemberProps {
   setShowPersonForm: (value: boolean) => void
 }
 
-const defaultValues = {
+const defaultValues: ICreateTeamMember = {
   header: '',
   paragraph: '',
   imageDescription: '',
-  imageURL: null,
+  imageURL: undefined,
 }
 const AboutUsMember = ({ setShowPersonForm }: IAboutUsMemberProps) => {
   const { isTeamMemberSubmitSuccess } = useAppSelector(aboutUsSelector.aboutUs)
 
   const methods = useForm({
-    defaultValues,
     resolver: yupResolver(createAboutUsValidationSchema),
+    defaultValues,
     mode: 'onChange',
   })
 
