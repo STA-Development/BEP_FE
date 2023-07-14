@@ -23,7 +23,7 @@ class RequestManager {
     axiosInstance.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
       const requestConfig = config
 
-      const idToken = localStorage.getItem('accessToken')
+      const idToken = localStorage.getItem('accessToken') ?? localStorage.getItem('verifyOtpToken')
 
       if (!requestConfig.headers.has('Content-Type')) {
         requestConfig.headers.set({
