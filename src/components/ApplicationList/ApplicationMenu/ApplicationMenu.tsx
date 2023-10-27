@@ -46,10 +46,7 @@ export const ApplicationMenu = ({ uuid }: IApplicationMenuProps) => {
               <MoreIcon />
             </div>
           </Menu.Button>
-          <Menu.Items
-            className="absolute  w-60 divide-y divide-gray-thin rounded-b border-2 border-gray-thin
-              bg-secondary  xl:right-0"
-          >
+          <Menu.Items className="absolute right-0 w-60 divide-y divide-gray-thin rounded-b border-2 border-gray-thin bg-secondary">
             <div className="space-y-1 p-1">
               {role === Roles.JobSeeker ? (
                 <Menu.Item>

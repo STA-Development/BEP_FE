@@ -1,7 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react'
 import { IUserProps, Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { privateRoutes, publicRoutes } from '@constants/router'
+import { adminRoutes, authRoutes, notAccessAdminRoutes, publicRoutes } from '@constants/router'
 import { dispatch } from '@redux/hooks'
+import { applicationsMiddleware } from '@redux/slices/applications'
 import { usersMiddleware } from '@redux/slices/users'
 import store from '@redux/store'
 import { useRouter } from 'next/router'
@@ -55,6 +56,9 @@ const Middleware = ({ children }: { children: ReactElement }) => {
       router.pathname !== '/after-registration'
     ) {
       router.push('/after-registration')
+    } else if (isAuthenticated() && role === Roles.Deactivated) {
+      dispatch(usersMiddleware.logOut())
+      router.push('/login')
     }
   }, [router, isGetProfileComplete, checkIfAuthComplete, role])
 
@@ -65,10 +69,26 @@ const Middleware = ({ children }: { children: ReactElement }) => {
   }, [router])
 
   useEffect(() => {
-    if (isAuthenticated() && privateRoutes.includes(router.pathname)) {
+    if (isAuthenticated() && role !== Roles.Deactivated && authRoutes.includes(router.pathname)) {
       router.push('/')
     }
-  }, [router])
+  }, [router, role])
+
+  useEffect(() => {
+    if ((!isAuthenticated() || role !== Roles.Admin) && adminRoutes.includes(router.pathname)) {
+      router.push('/')
+    } else if (role === Roles.Admin && notAccessAdminRoutes.includes(router.pathname)) {
+      router.push('/')
+    }
+  }, [role, router])
+
+  useEffect(() => {
+    if (role === Roles.JobSeeker) {
+      dispatch(applicationsMiddleware.getJobSeekerNotifications())
+    } else if (role === Roles.Organization) {
+      dispatch(applicationsMiddleware.getOrganizationNotifications())
+    }
+  }, [role])
 
   return children
 }

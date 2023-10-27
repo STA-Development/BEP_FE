@@ -1,3 +1,4 @@
+import { IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { OrganizationType } from '@components/Profile/Organization/helper'
 
 export interface IUserProps {
@@ -16,6 +17,10 @@ export interface IUserProps {
   selectedIndex: number
   isLanguageChangeLoading: boolean
   otp: number | null
+  usersList: IUsersList[]
+  pageSize: number
+  totalItems: number
+  isUsersListLoading: boolean
 }
 
 export interface IUser {
@@ -38,4 +43,10 @@ export enum Roles {
   Partner = 'Partner',
   Institute = 'Institute',
   NOROLE = 'NOROLE',
+  Deactivated = 'Deactivated',
+}
+
+export enum SexAtBirth {
+  Female = 'Female',
+  Male = 'Male',
 }

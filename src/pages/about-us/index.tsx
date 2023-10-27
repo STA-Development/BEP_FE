@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ModalName } from '@allTypes/modals'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
-import { AboutUsList } from '@components/AboutUs/AboutUsList'
+import { AboutUsItem } from '@components/AboutUs/AboutUsList'
 import AboutUsMember from '@components/AboutUs/AddMember/AboutUsMember'
 import { ChangeMemberInfo } from '@components/AboutUs/ChangeMemberInfo'
 import { DeleteChangeMenu } from '@components/Admin/DeleteChangeSettignsMenu'
@@ -20,12 +20,15 @@ import { Loading } from '@uiComponents/Loading'
 const AboutUs = () => {
   const [showPersonForm, setShowPersonForm] = useState<boolean>(false)
 
-  const { aboutUsList, isTeamMemberSubmitSuccess, isAboutUsLoading } = useAppSelector(
-    aboutUsSelector.aboutUs
-  )
+  const {
+    aboutUsList,
+    isTeamMemberSubmitSuccess,
+    isAboutUsLoading,
+    isChangeTeamMemberSubmitSuccess,
+  } = useAppSelector(aboutUsSelector.aboutUs)
   const { role } = useAppSelector(usersSelector.user)
 
-  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess
+  const loading = isAboutUsLoading || isTeamMemberSubmitSuccess || isChangeTeamMemberSubmitSuccess
 
   const [t] = useTranslation()
   const [changeMember, setChangeMember] = useState<string | null>(null)
@@ -44,6 +47,14 @@ const AboutUs = () => {
   useEffect(() => {
     dispatch(aboutUsMiddleware.getAboutUsList())
   }, [])
+
+  useEffect(() => {
+    if (isChangeTeamMemberSubmitSuccess) {
+      dispatch(aboutUsMiddleware.resetChangeTeamMemberSubmitSuccess())
+      setChangeMember(null)
+    }
+    //   eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isChangeTeamMemberSubmitSuccess])
 
   return (
     <>
@@ -67,7 +78,7 @@ const AboutUs = () => {
       <Container className="pt-30">
         <h2 className="mb-10 text-xl font-medium xl:hidden">Our team</h2>
         {role === Roles.Admin ? (
-          <div className="mb-10 flex w-full justify-end">
+          <div className="mb-10 flex w-full xl:justify-end">
             {showPersonForm ? (
               <Button
                 size="bs"
@@ -90,7 +101,7 @@ const AboutUs = () => {
           <Loading />
         ) : (
           <div className="group mb-30 flex w-full flex-col xl:px-30">
-            {aboutUsList?.map((member) => (
+            {aboutUsList?.map((member, index) => (
               <div>
                 {role === Roles.Admin ? (
                   <div className="mb-5 flex w-full items-end justify-end">
@@ -120,7 +131,10 @@ const AboutUs = () => {
                 {changeMember === member.uuid ? (
                   <ChangeMemberInfo changeMember={changeMember} />
                 ) : (
-                  <AboutUsList member={member} />
+                  <AboutUsItem
+                    member={member}
+                    index={index}
+                  />
                 )}
               </div>
             ))}

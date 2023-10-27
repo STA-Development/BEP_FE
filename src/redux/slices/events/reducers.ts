@@ -28,6 +28,9 @@ const reducers = createReducer({
   setSingleEventData(state, action: IAction<IEventsListProps>) {
     state.singleEventData = action.payload
   },
+  setDeleteEventLoading(state, action: IAction<boolean>) {
+    state.events.isDeleteEventLoading = action.payload
+  },
 })
 
 export default reducers

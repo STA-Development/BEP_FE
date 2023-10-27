@@ -23,7 +23,7 @@ export const Settings = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (router.query) {
+    if (Object.keys(router.query).length && router.query.accessToken) {
       localStorage.setItem('accessToken', router.query.accessToken as string)
     }
   }, [router])
@@ -59,7 +59,7 @@ export const Settings = () => {
             </div>
           ) : null}
         </div>
-        {isUserDetailsLoading || !address ? (
+        {isUserDetailsLoading ? (
           <Loading />
         ) : (
           <div className="text-center xl:pl-10 xl:text-left">

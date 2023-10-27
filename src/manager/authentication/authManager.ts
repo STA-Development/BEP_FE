@@ -1,3 +1,4 @@
+import { IFilterUserListProps, IUsersList } from '@allTypes/reduxTypes/areaSpecializationTypes'
 import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import {
   IForgotPasswordResponse,
@@ -9,7 +10,7 @@ import {
   IVerifyOtpResponse,
 } from '@axios/authentication/authManagerTypes'
 import { Axios } from '@axios/axiosInstance'
-import { IAxiosResponse } from '@axios/axiosTypes'
+import { IAxiosResponse, IAxiosResponsePaginated } from '@axios/axiosTypes'
 
 import { getEnvironmentVariables } from '@utils/getEnvironmentVariables'
 
@@ -69,6 +70,30 @@ const authManager = {
         'Content-Type': 'multipart/form-data',
       },
     })
+  },
+  getUsersList(params: IFilterUserListProps) {
+    return axiosInstance.post<IUsersList, IAxiosResponsePaginated<IUsersList[]>>(
+      `${baseURL}/v1/user`,
+      {
+        page: params.page,
+        ...(params.value
+          ? {
+              filters: [
+                {
+                  key: params.key,
+                  value: params.value,
+                },
+              ],
+            }
+          : {}),
+      }
+    )
+  },
+  deactivateUser(uuid: string) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/admin/deactivate/${uuid}`)
+  },
+  activateUser(uuid: string) {
+    return axiosInstance.patch<null, IAxiosResponse<null>>(`${baseURL}/v1/admin/activate/${uuid}`)
   },
 }
 

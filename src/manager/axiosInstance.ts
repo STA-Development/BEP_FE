@@ -44,7 +44,7 @@ class RequestManager {
       (error) => {
         if (
           error.response.status === 403 &&
-          error.message === ErrorMessages.AccessTokenExpiryErrorMessage
+          error?.response?.data?.status?.message === ErrorMessages.AccessTokenExpiryErrorMessage
         ) {
           const refreshToken = localStorage.getItem('refreshToken')
 
@@ -53,19 +53,23 @@ class RequestManager {
 
             const originalRequest = error.config
 
-            axiosInstance.request(originalRequest).then(() => ({
-              headers: {
-                ...originalRequest.headers,
-                Authorization: `Bearer ${usersMiddleware.getAccessTokenWithRefreshToken({
-                  refreshToken,
-                })}`,
-              },
-            }))
-          } else if (!isAuthenticated()) {
-            dispatch(
-              viewsMiddleware.setRedirectionState({ path: '/login', params: '', apply: true })
-            )
+            try {
+              axiosInstance.request(originalRequest).then(() => ({
+                headers: {
+                  ...originalRequest.headers,
+                  Authorization: `Bearer ${usersMiddleware.getAccessTokenWithRefreshToken({
+                    refreshToken,
+                  })}`,
+                },
+              }))
+            } catch (err) {
+              dispatch(usersMiddleware.logOut())
+            }
+          } else {
+            dispatch(usersMiddleware.logOut())
           }
+        } else if (error.response.status === 401 && isAuthenticated()) {
+          dispatch(usersMiddleware.logOut())
         } else {
           dispatch(
             viewsMiddleware.setToastNotificationPopUpState({
@@ -76,6 +80,8 @@ class RequestManager {
             })
           )
         }
+
+        return Promise.reject(error)
       }
     )
 

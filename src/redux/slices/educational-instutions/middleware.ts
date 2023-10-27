@@ -1,8 +1,12 @@
 import API from '@axios/API'
 import {
+  IChangeEducationalInstituteFormDataProps,
+  ICreateEducationalInstituteFormDataProps,
   IEducationalInstitutesParams,
   IFilters,
 } from '@axios/educational-institutes/edInstitutesManagerTypes'
+import { educationalInstitutesMiddleware } from '@redux/slices/educational-instutions/index'
+import { viewsMiddleware } from '@redux/slices/views'
 import store, { AppDispatch } from '@redux/store'
 
 import slice from './slice'
@@ -72,11 +76,70 @@ const getIndividualEducationalInstitutesById = (id: string) => async (dispatch: 
 
 const clearInstitutesList = () => async (dispatch: AppDispatch) => {
   try {
+    const filters = {
+      page: 1,
+      filters: [],
+    }
+
     dispatch(setEducationalInstitutesList([]))
+    dispatch(setTotalItems(0))
+    dispatch(setPageSize(0))
+    dispatch(setFilters(filters))
   } catch (error) {
     /* empty */
   }
 }
+
+const createEducationalInstitutes =
+  (formData: ICreateEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
+    try {
+      await API.educationalInstitutes.createEducationalInstitute(formData)
+      dispatch(educationalInstitutesMiddleware.clearInstitutesList())
+
+      dispatch(
+        viewsMiddleware.setRedirectionState({
+          path: `/educational-institutes`,
+          params: '',
+          apply: true,
+        })
+      )
+    } catch (error) {
+      /* empty */
+    }
+  }
+
+const deleteEducationalInstitute = (uuid: string) => async (dispatch: AppDispatch) => {
+  try {
+    await API.educationalInstitutes.deleteEducationalInstitute(uuid)
+
+    const filters = {
+      page: 1,
+      filters: [],
+    }
+
+    dispatch(educationalInstitutesMiddleware.clearInstitutesList())
+    dispatch(educationalInstitutesMiddleware.getEducationalInstitutes(filters))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const changeEducationalInstitutes =
+  (formData: IChangeEducationalInstituteFormDataProps) => async (dispatch: AppDispatch) => {
+    try {
+      await API.educationalInstitutes.changeEducationalInstitute(formData)
+
+      dispatch(
+        viewsMiddleware.setRedirectionState({
+          path: `/educational-institutes`,
+          params: '',
+          apply: true,
+        })
+      )
+    } catch (error) {
+      /* empty */
+    }
+  }
 
 export default {
   getEducationalInstitutes,
@@ -84,4 +147,7 @@ export default {
   clearInstitutesList,
   setEIFilters,
   getIndividualEducationalInstitutesById,
+  createEducationalInstitutes,
+  deleteEducationalInstitute,
+  changeEducationalInstitutes,
 }

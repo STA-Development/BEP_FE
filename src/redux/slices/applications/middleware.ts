@@ -24,6 +24,8 @@ const {
   setOrganizationApplicationLoading,
   setJobSeekerApplicationLoading,
   setCloneSubmitSuccess,
+  setNotifications,
+  setNotificationsId,
 } = slice.actions
 
 const jobSeeker = (params: IJobSeekerApplicationProps) => async (dispatch: AppDispatch) => {
@@ -256,6 +258,54 @@ const resetCloneSubmitSuccess = () => (dispatch: AppDispatch) => {
   dispatch(setCloneSubmitSuccess(false))
 }
 
+const getJobSeekerNotifications = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.jobSeeker.getJobSeekerNotifications()
+
+    dispatch(setNotifications(response?.data?.data))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const changeJobSeekerNotificationHasSeen = () => async (dispatch: AppDispatch) => {
+  try {
+    await API.jobSeeker.changeJobSeekerNotificationHasSeen()
+
+    const response = await API.jobSeeker.getJobSeekerNotifications()
+
+    dispatch(setNotifications(response?.data?.data))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const getOrganizationNotifications = () => async (dispatch: AppDispatch) => {
+  try {
+    const response = await API.jobSeeker.getOrganizationNotifications()
+
+    dispatch(setNotifications(response?.data?.data))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const getNotificationsId = (id: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setNotificationsId(id))
+  } catch (error) {
+    /* empty */
+  }
+}
+
+const resetNotificationsId = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(setNotificationsId(null))
+  } catch (error) {
+    /* empty */
+  }
+}
+
 export default {
   jobSeeker,
   resetJobSeekerSubmitSuccess,
@@ -276,4 +326,9 @@ export default {
   cloneJobSeekerApplication,
   cloneOrganizationApplication,
   resetCloneSubmitSuccess,
+  getJobSeekerNotifications,
+  changeJobSeekerNotificationHasSeen,
+  getNotificationsId,
+  resetNotificationsId,
+  getOrganizationNotifications,
 }

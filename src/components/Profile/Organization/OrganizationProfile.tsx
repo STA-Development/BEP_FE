@@ -62,13 +62,14 @@ export const OrganizationProfile = () => {
         className="divide-y divide-gray-thin"
       >
         <table className="w-full table-auto">
-          <tbody className="divide-y divide-gray-thin" />
-          <FullName />
-          <Email />
-          <Phone />
-          <Address />
-          <EmployeeQuantity />
-          <OrganizationType />
+          <tbody className="divide-y divide-gray-thin">
+            <FullName />
+            <Email />
+            <Phone />
+            <Address />
+            <EmployeeQuantity />
+            <OrganizationType />
+          </tbody>
         </table>
       </form>
     </FormProvider>

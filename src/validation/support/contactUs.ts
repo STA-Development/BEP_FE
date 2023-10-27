@@ -1,10 +1,11 @@
-import { fullNameRegex, phoneRegex } from '@constants/contactUs'
+import { fullNameRegex } from '@constants/contactUs'
+import { phoneRegex } from '@constants/index'
 import { Translation } from '@constants/translations'
 import i18next from 'i18next'
 import { object, string } from 'yup'
 
 export const contactUsValidationSchema = object({
-  fullName: string()
+  name: string()
     .matches(
       fullNameRegex,
       i18next.t(Translation.PAGE_CONTACT_US_VALIDATION_NAME_MATCHES) as string
