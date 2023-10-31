@@ -129,7 +129,7 @@ const NewsList = () => {
                 </div>
                 <div className="pb-5 xl:shrink-0">
                   <Image
-                    src={news.imageURL}
+                    src={news.imageURL ?? ''}
                     alt="img"
                     loader={() => news.imageURL}
                     height={400}

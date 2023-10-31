@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { UserIcon } from '@components/Icons'
 import { Translation } from '@constants/translations'
 import { Menu, Transition } from '@headlessui/react'
@@ -13,7 +14,7 @@ export interface IHeaderUserProps {
 }
 
 export const User = ({ handleLogOut }: IHeaderUserProps) => {
-  const { name, email } = useAppSelector(usersSelector.user)
+  const { name, email, role } = useAppSelector(usersSelector.user)
 
   const [t] = useTranslation()
 
@@ -21,6 +22,8 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
     { href: '/profile/applications', label: t(Translation.NAVBAR_USER_MENU_ADD_APPLICATION) },
     { href: '/profile/settings', label: t(Translation.NAVBAR_USER_MENU_EDIT_PROFILE) },
   ]
+
+  const isAdmin: boolean = role !== Roles.Admin && role !== Roles.NOROLE
 
   return (
     <Menu
@@ -51,21 +54,23 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
                   </div>
                 </div>
                 <ul>
-                  {links.map((link) => (
-                    <Menu.Item key={link.href}>
-                      <li className="w-100 mb-2.5">
-                        <Link href={link.href}>
-                          <Button
-                            className="w-full"
-                            variant="outlined"
-                            onClick={() => close()}
-                          >
-                            {link.label}
-                          </Button>
-                        </Link>
-                      </li>
-                    </Menu.Item>
-                  ))}
+                  {isAdmin
+                    ? links.map((link) => (
+                        <Menu.Item key={link.href}>
+                          <li className="w-100 mb-2.5">
+                            <Link href={link.href}>
+                              <Button
+                                className="w-full"
+                                variant="outlined"
+                                onClick={() => close()}
+                              >
+                                {link.label}
+                              </Button>
+                            </Link>
+                          </li>
+                        </Menu.Item>
+                      ))
+                    : null}
                   <Menu.Item>
                     <li className="mb-2.5">
                       <Button

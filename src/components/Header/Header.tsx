@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Roles } from '@allTypes/reduxTypes/usersStateTypes'
 import { Container } from '@components/Container'
 import { LanguageSelector, NotificationList, User } from '@components/Header'
 import HeaderMobile from '@components/Header/HeaderMobile'
@@ -13,7 +14,6 @@ import Link from 'next/link'
 
 export const Header = () => {
   const [t] = useTranslation()
-
   const navigation = [
     { name: t(Translation.NAVBAR_ABOUT_US), href: '/about-us', current: false },
     {
@@ -28,10 +28,10 @@ export const Header = () => {
     },
     { name: t(Translation.NAVBAR_PROFILE), href: '/profile/settings', current: false },
   ]
-
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
-
+  const { role } = useAppSelector(usersSelector.user)
+  const isAdmin: boolean = role !== Roles.Admin && role !== Roles.NOROLE
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
   }
@@ -85,9 +85,11 @@ export const Header = () => {
                     <div className="ml-5 flex flex-1 items-center justify-around">
                       {isAuthenticated ? (
                         <div className="flex items-center">
-                          <div className="mr-5">
-                            <NotificationList />
-                          </div>
+                          {isAdmin ? (
+                            <div className="mr-5">
+                              <NotificationList />
+                            </div>
+                          ) : null}
                           <User handleLogOut={handleLogOut} />
                         </div>
                       ) : (
