@@ -23,7 +23,7 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
     { href: '/profile/settings', label: t(Translation.NAVBAR_USER_MENU_EDIT_PROFILE) },
   ]
 
-  const checkIfUserAdmin: boolean = role !== Roles.Admin && role !== Roles.NOROLE
+  const isAdmin: boolean = role !== Roles.Admin && role !== Roles.NOROLE
 
   return (
     <Menu
@@ -54,7 +54,7 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
                   </div>
                 </div>
                 <ul>
-                  {checkIfUserAdmin
+                  {isAdmin
                     ? links.map((link) => (
                         <Menu.Item key={link.href}>
                           <li className="w-100 mb-2.5">
