@@ -23,6 +23,8 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
     setSelectedIndex((prev) => prev - 1)
   }
 
+  console.log(values.educationLevel.name)
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex w-full flex-col justify-between rounded-md border-2 border-gray-thin xl:flex-row xl:py-10">
@@ -45,6 +47,12 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_AREA)}
                 </p>
                 <p className="ml-2.5 text-base">{values.area.name}</p>
+              </div>
+              <div className="flex flex-row flex-wrap">
+                <p className="text-base text-black-light">
+                  {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_EDUCATION)}
+                </p>
+                <p className="ml-2.5 text-base">{values.educationLevel.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
