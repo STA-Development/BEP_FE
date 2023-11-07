@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useState } from 'react'
+import React, { FC, RefObject, useEffect, useRef, useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Translation } from '@constants/translations'
@@ -9,6 +9,7 @@ export interface ITextFieldProps {
   type?: string
   placeholder?: string
   rows?: number
+  scrollToError?: boolean
   label?: string
   id?: string
   inputRef?: RefObject<HTMLInputElement>
@@ -23,11 +24,13 @@ const FileField: FC<ITextFieldProps> = ({
   handleFileChange,
   multiple,
   limit = 0,
+  scrollToError = false,
 }) => {
   const [limitError, setLimitError] = useState<string>('')
 
   const { control, setValue, watch } = useFormContext()
   const { field, fieldState } = useController({ name: fieldName, control })
+  const scrollRef = useRef<HTMLDivElement | null>(null)
   const [t] = useTranslation()
   const handelSetFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (handleFileChange) {
@@ -58,8 +61,14 @@ const FileField: FC<ITextFieldProps> = ({
     }
   }
 
+  useEffect(() => {
+    if (scrollToError && fieldState.error && scrollRef.current) {
+      scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+    }
+  }, [fieldState, fieldState.error, scrollToError])
+
   return (
-    <div>
+    <div ref={scrollRef}>
       <ImageInput
         {...field}
         inputRef={inputRef}
