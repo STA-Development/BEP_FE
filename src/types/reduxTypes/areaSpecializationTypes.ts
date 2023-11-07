@@ -88,6 +88,7 @@ export interface IApplicationsListProps {
   status: string
   uuid: string
   type: string
+  title: string
 }
 
 export interface IIndividualApplication {
