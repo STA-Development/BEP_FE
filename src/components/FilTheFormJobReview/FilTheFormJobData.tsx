@@ -23,8 +23,6 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
     setSelectedIndex((prev) => prev - 1)
   }
 
-  console.log(values.educationLevel.name)
-
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="flex w-full flex-col justify-between rounded-md border-2 border-gray-thin xl:flex-row xl:py-10">

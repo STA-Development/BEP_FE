@@ -87,6 +87,7 @@ export interface IApplicationsListProps {
   postedAt: string
   status: string
   uuid: string
+  type: string
 }
 
 export interface IIndividualApplication {

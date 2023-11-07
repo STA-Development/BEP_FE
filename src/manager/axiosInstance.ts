@@ -3,6 +3,7 @@ import { devToolsDefaultConfig } from '@constants/defaultConfigs'
 import { dispatch } from '@redux/hooks'
 import { usersMiddleware } from '@redux/slices/users'
 import { viewsMiddleware } from '@redux/slices/views'
+import store from '@redux/store'
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
 import { isAuthenticated } from '@utils/authUtils'
@@ -34,6 +35,7 @@ class RequestManager {
       requestConfig.headers.set({
         Accept: 'application/json',
         Authorization: `Bearer ${idToken}`,
+        'accept-language': store.getState().users.language,
       })
 
       return requestConfig

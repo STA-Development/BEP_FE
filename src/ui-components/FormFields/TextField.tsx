@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useRef } from 'react'
+import React, { ChangeEvent, FC } from 'react'
 import { useController } from 'react-hook-form'
 import { Input } from '@uiComponents/Input'
 
@@ -7,7 +7,6 @@ export interface ITextFieldProps {
   type?: string
   placeholder?: string
   rows?: number
-  scrollToError?: boolean
   label?: string
   id?: string
   className?: string
@@ -23,19 +22,11 @@ const TextField: FC<ITextFieldProps> = ({
   id,
   className,
   onChange,
-  scrollToError,
 }) => {
   const { field, fieldState } = useController({ name: fieldName })
-  const scrollRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (scrollToError && fieldState.error && scrollRef.current) {
-      scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
-    }
-  }, [fieldState, fieldState.error, scrollToError])
 
   return (
-    <div ref={scrollRef}>
+    <div>
       <Input
         {...field}
         placeholder={placeholder}

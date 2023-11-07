@@ -64,28 +64,24 @@ export const EducationalInstitutesForm = ({
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_NAME) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_NAME) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_NAME) as string}
-          scrollToError
         />
         <TextField
           fieldName="address"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_ADDRESS) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_ADDRESS) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_ADDRESS) as string}
-          scrollToError
         />
         <TextField
           fieldName="phone"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_PHONE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_PHONE) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_PHONE) as string}
-          scrollToError
         />
         <TextField
           fieldName="email"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_EMAIL) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_EMAIL) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_EMAIL) as string}
-          scrollToError
         />
 
         <AutocompleteField
@@ -109,28 +105,24 @@ export const EducationalInstitutesForm = ({
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_SUBTITLE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_SUBTITLE) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_SUBTITLE) as string}
-          scrollToError
         />
         <TextField
           fieldName="rector"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_RECTOR) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_RECTOR) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_RECTOR) as string}
-          scrollToError
         />
         <TextField
           fieldName="studentQuantity"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_STUDENT_QUANTITY) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_STUDENT_QUANTITY) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_STUDENT_QUANTITY) as string}
-          scrollToError
         />
         <TextField
           fieldName="lecturerQuantity"
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_LECTURER_QUANTITY) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_LECTURER_QUANTITY) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_LECTURER_QUANTITY) as string}
-          scrollToError
         />
         <div className="flex w-full flex-col justify-between xl:flex-row">
           <TextField
@@ -138,14 +130,12 @@ export const EducationalInstitutesForm = ({
             label={t(Translation.PAGE_EDUCATIONAL_CREATE_START_TIME) as string}
             id={t(Translation.PAGE_EDUCATIONAL_CREATE_START_TIME) as string}
             placeholder="00:00"
-            scrollToError
           />
           <TextField
             fieldName="endTime"
             label={t(Translation.PAGE_EDUCATIONAL_CREATE_END_TIME) as string}
             id={t(Translation.PAGE_EDUCATIONAL_CREATE_END_TIME) as string}
             placeholder="00:00"
-            scrollToError
           />
         </div>
 
@@ -154,7 +144,6 @@ export const EducationalInstitutesForm = ({
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_DESCRIPTION) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_DESCRIPTION) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_DESCRIPTION) as string}
-          scrollToError
         />
       </div>
       <Button type="submit">{t(Translation.PAGE_EDUCATIONAL_CREATE_SUBMIT)}</Button>
