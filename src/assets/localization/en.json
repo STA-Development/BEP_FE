@@ -362,7 +362,7 @@
   "page.profile.menu.applications.actions.deactivate": "Deactivate Application",
   "page.profile.menu.applications.actions.delete": "Delete Application",
   "page.profile.menu.applications.actions.edit": "Edit Form",
-  "page.profile.menu.applications.actions.header": "{{title}}:",
+  "page.profile.menu.applications.actions.header": "Application for work:",
   "page.profile.menu.applications.actions.status": "Status",
   "page.profile.menu.applications.download.pdf": "Download PDF",
   "page.profile.menu.applications.image.length.error": "There should be no more then four picture",

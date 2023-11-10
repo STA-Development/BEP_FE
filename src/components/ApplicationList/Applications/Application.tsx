@@ -61,11 +61,7 @@ export const Application = ({ singleApplication, notificationId }: IApplications
       } mb-5 rounded border-2 border-gray-light p-5 xl:p-10`}
     >
       <div className="mb-5 flex flex-row items-start justify-between xl:items-center">
-        <h2 className="mb-2 text-lg xl:mb-0">
-          {t(Translation.PAGE_PROFILE_MENU_APPLICATIONS_ACTIONS_HEADER, {
-            title: singleApplication.title,
-          })}
-        </h2>
+        <h2 className="mb-2 text-lg xl:mb-0">{singleApplication.title}</h2>
         <ApplicationMenu uuid={singleApplication.uuid} />
       </div>
       <div className="mb-10 flex flex-col xl:flex-row">

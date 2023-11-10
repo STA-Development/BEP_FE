@@ -62,7 +62,7 @@ export const User = ({ handleLogOut }: IHeaderUserProps) => {
                               <Button
                                 className="w-full"
                                 variant="outlined"
-                                onClick={() => close()}
+                                onClick={close}
                               >
                                 {link.label}
                               </Button>
