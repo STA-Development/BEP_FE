@@ -31,7 +31,7 @@ export const Header = () => {
   const isAuthenticated = useAppSelector(usersSelector.isAuthenticated)
   const isLogOutLoading = useAppSelector(usersSelector.isLogOutLoading)
   const { role } = useAppSelector(usersSelector.user)
-  const isAdmin: boolean = role === Roles.Admin || role === Roles.NOROLE
+  const showMenuItems = role !== Roles.Admin && role !== Roles.NOROLE
   const handleLogOut = () => {
     dispatch(usersMiddleware.logOut())
   }
@@ -85,7 +85,7 @@ export const Header = () => {
                     <div className="ml-5 flex flex-1 items-center justify-around">
                       {isAuthenticated ? (
                         <div className="flex items-center">
-                          {!isAdmin ? (
+                          {showMenuItems ? (
                             <div className="mr-5">
                               <NotificationList />
                             </div>

@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { Autocomplete, IAutoCompleteItem } from '@uiComponents/Autocomplete'
+
+import { useFormErrorScroll } from '../../hooks/ErrorScroll/FormErrorScroll'
 
 export interface IAutocompleteProps<T> {
   fieldName: string
@@ -36,11 +38,12 @@ const AutocompleteField = <T extends IAutoCompleteItem>({
   const errorMessage = error ?? fieldState?.error?.message
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    if (scrollToError && fieldState.error && scrollRef.current) {
-      scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
-    }
-  }, [fieldState, fieldState.error, scrollToError])
+  useFormErrorScroll({
+    scrollToError,
+    fieldState,
+    fieldError: fieldState.error?.message ?? null,
+    ref: scrollRef,
+  })
 
   return (
     <div ref={scrollRef}>

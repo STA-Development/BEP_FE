@@ -1,8 +1,10 @@
-import React, { FC, RefObject, useEffect, useRef, useState } from 'react'
+import React, { FC, RefObject, useRef, useState } from 'react'
 import { useController, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Translation } from '@constants/translations'
 import { ImageInput } from '@uiComponents/Input'
+
+import { useFormErrorScroll } from '../../hooks/ErrorScroll/FormErrorScroll'
 
 export interface ITextFieldProps {
   fieldName: string
@@ -61,11 +63,12 @@ const FileField: FC<ITextFieldProps> = ({
     }
   }
 
-  useEffect(() => {
-    if (scrollToError && fieldState.error && scrollRef.current) {
-      scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
-    }
-  }, [fieldState, fieldState.error, scrollToError])
+  useFormErrorScroll({
+    scrollToError,
+    fieldState,
+    fieldError: fieldState.error?.message ?? null,
+    ref: scrollRef,
+  })
 
   return (
     <div ref={scrollRef}>
