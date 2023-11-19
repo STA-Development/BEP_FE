@@ -49,7 +49,7 @@ const authManager = {
   googleSignIn() {
     const { NEXT_PUBLIC_BASE_URL } = getEnvironmentVariables()
 
-    return window.open(`${NEXT_PUBLIC_BASE_URL}users/v1/auth/google`)
+    return window.open(`${NEXT_PUBLIC_BASE_URL}/users/v1/auth/google`)
   },
 
   getAccessToken(refreshToken: string) {
