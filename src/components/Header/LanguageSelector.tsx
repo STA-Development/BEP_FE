@@ -35,7 +35,7 @@ const languageList = [
     id: 3,
     icon: ArmIcon,
     language: 'Armenian',
-    value: 'arm',
+    value: 'hy',
   },
 ]
 

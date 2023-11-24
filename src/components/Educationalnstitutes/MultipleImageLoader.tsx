@@ -19,7 +19,7 @@ const MultipleImageLoader = ({ imageLoaded, onRemove, length }: IMultipleImageLo
       {imageLoaded?.map((image, index) => (
         <div className="p-4">
           <Image
-            src={image as string}
+            src={(image as string) ?? ''}
             alt="image"
             loader={() => (image as string) ?? ''}
             width={300}

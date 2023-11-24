@@ -33,7 +33,7 @@ const IndividualNewsPage = () => {
         <div className="justify-between xl:flex">
           <Image
             className="order-last object-cover xl:mb-20 xl:ml-30"
-            src={individualNews?.imageURL as string}
+            src={(individualNews?.imageURL as string) ?? ''}
             loader={() => individualNews?.imageURL ?? ''}
             width={500}
             height={680}

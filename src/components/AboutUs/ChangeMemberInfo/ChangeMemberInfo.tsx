@@ -7,9 +7,11 @@ import {
   IMemberFormData,
 } from '@allTypes/reduxTypes/aboutUsStateTypes'
 import { AboutUsForm } from '@components/AboutUs/AboutUsForm/AboutUsForm'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { dispatch, useAppSelector } from '@redux/hooks'
 import { aboutUsMiddleware, aboutUsSelector } from '@redux/slices/aboutUs'
 import { Loading } from '@uiComponents/Loading'
+import { createAboutUsValidationSchema } from '@validation/aboutUs/aboutUs'
 
 interface IChangeMemberInfoProps {
   changeMember: string | null
@@ -30,6 +32,7 @@ export const ChangeMemberInfo = ({ changeMember }: IChangeMemberInfoProps) => {
 
   const methods = useForm({
     defaultValues,
+    resolver: yupResolver(createAboutUsValidationSchema),
     mode: 'onChange',
   })
 

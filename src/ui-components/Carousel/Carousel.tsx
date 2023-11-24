@@ -77,7 +77,7 @@ export const Carousel = ({ redirectToIndividual, slider, title }: ICarouselProps
             className="flex w-full min-w-[360px] snap-start flex-col rounded border border-gray-thin bg-secondary p-5 xl:min-w-[380px]"
           >
             <Image
-              src={item.imageURL}
+              src={item.imageURL ?? ''}
               alt="news"
               loader={() => item.imageURL}
               width={340}

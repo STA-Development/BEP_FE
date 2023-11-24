@@ -25,7 +25,7 @@ export const AboutUsItem = ({ member, index }: IMemberListProps) => {
               } `}
       >
         <Image
-          src={member.imageURL}
+          src={member.imageURL ?? ''}
           loader={() => member.imageURL ?? ''}
           width={500}
           height={400}

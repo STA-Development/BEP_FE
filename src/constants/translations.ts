@@ -210,6 +210,7 @@ export enum Translation {
   PAGE_FILL_THE_FORM_JOB_TWO_BUTTON = 'page.fill.the.form.job.two.button',
   PAGE_FILL_THE_FORM_JOB_TWO_DETAILS = 'page.fill.the.form.job.two.details',
   PAGE_FILL_THE_FORM_JOB_TWO_DETAILS_BUTTON = 'page.fill.the.form.job.two.details.button',
+  PAGE_FILL_THE_FORM_JOB_TWO_EDUCATION = 'page.fill.the.form.job.two.education',
   PAGE_FILL_THE_FORM_JOB_TWO_EXPERIENCE = 'page.fill.the.form.job.two.experience',
   PAGE_FILL_THE_FORM_JOB_TWO_POSTED_DATE = 'page.fill.the.form.job.two.posted.date',
   PAGE_FILL_THE_FORM_JOB_TWO_SALARY = 'page.fill.the.form.job.two.salary',

@@ -34,7 +34,7 @@ export const AboutUsForm = ({ imageURL }: IAboutUsFormProps) => {
           <div>
             {image ? (
               <Image
-                src={image}
+                src={image ?? ''}
                 loader={({ src }) => `${src}`}
                 width={500}
                 height={345}

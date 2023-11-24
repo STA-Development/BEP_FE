@@ -127,7 +127,7 @@ const SearchPage = () => {
               <div className="flex h-full w-5/6 items-center justify-center rounded-md xl:w-3/4">
                 {institute?.imageURL ? (
                   <Image
-                    src={institute?.imageURL}
+                    src={institute?.imageURL ?? ''}
                     alt="img"
                     loader={() => institute.imageURL}
                     width={250}
