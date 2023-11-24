@@ -9,7 +9,6 @@ import { useRouter } from 'next/router'
 
 import { isAuthenticated } from '@utils/authUtils'
 
-
 const Middleware = ({ children }: { children: ReactElement }) => {
   const router = useRouter()
 
