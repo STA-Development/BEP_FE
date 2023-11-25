@@ -125,13 +125,13 @@ const NewsList = () => {
                   >
                     {t(Translation.PAGE_NEWS_ACTIONS_READ_MORE)}
                   </Button>
-                  <p className="mt-4 text-black-light">{news.postedAt}</p>
+                  <p className="mt-4 text-black-light">{news?.postedAt}</p>
                 </div>
                 <div className="pb-5 xl:shrink-0">
                   <Image
-                    src={news.imageURL}
+                    src={news.imageURL ?? ''}
                     alt="img"
-                    loader={() => news.imageURL}
+                    loader={() => news?.imageURL ?? ''}
                     height={400}
                     width={500}
                     className="ml-auto h-[400px] w-[500px] w-full  max-w-md rounded object-cover max-xl:mx-auto"

@@ -50,7 +50,7 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
                 <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_SALARY)}
                 </p>
-                <p className="ml-2.5 text-base">{values.expectedSalary}</p>
+                <p className="ml-2.5 text-base">{values.expectedSalary.name}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
