@@ -10,6 +10,8 @@ export const useImageUpload = () => {
       const objectUrl = URL.createObjectURL(fileObj)
 
       setImageLoaded(objectUrl)
+    } else {
+      setImageLoaded(null)
     }
   }
 
