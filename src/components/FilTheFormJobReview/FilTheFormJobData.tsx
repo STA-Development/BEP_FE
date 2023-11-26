@@ -48,9 +48,15 @@ export const FilTheFormJobReview = ({ setSelectedIndex }: IFilTheFormJobReviewPr
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">
+                  {t(Translation.PAGE_HOME_SECTIONS_EDUCATIONAL_INSTITUTES_TITLE)}
+                </p>
+                <p className="ml-2.5 text-base">{values.educationLevel.name}</p>
+              </div>
+              <div className="flex flex-row flex-wrap">
+                <p className="text-base text-black-light">
                   {t(Translation.PAGE_FILL_THE_FORM_JOB_TWO_SALARY)}
                 </p>
-                <p className="ml-2.5 text-base">{values.expectedSalary.name}</p>
+                <p className="ml-2.5 text-base">{values.expectedSalary}</p>
               </div>
               <div className="flex flex-row flex-wrap">
                 <p className="text-base text-black-light">

@@ -46,6 +46,7 @@ export const EducationalInstitutesForm = ({
           handleFileChange={changeMultipleFiles}
           multiple
           limit={4}
+          scrollError
         />
         <Button
           disabled={imageLoaded.length >= 4}
@@ -89,6 +90,7 @@ export const EducationalInstitutesForm = ({
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_TYPE) as string}
+          scrollError
         />
         <AutocompleteField
           items={objectFromArrayFields}
@@ -96,6 +98,7 @@ export const EducationalInstitutesForm = ({
           label={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}
           id={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}
           placeholder={t(Translation.PAGE_EDUCATIONAL_CREATE_PROVINCE) as string}
+          scrollError
         />
         <TextField
           fieldName="subtitle"
