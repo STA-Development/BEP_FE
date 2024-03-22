@@ -34,7 +34,6 @@ const authManager = {
       params
     )
   },
-
   forgotPassword(params: IResetPasswordParams) {
     return axiosInstance.post<IForgotPasswordResponse, IAxiosResponse<IForgotPasswordResponse>>(
       `${baseURL}/v1/auth/forgot-password`,
