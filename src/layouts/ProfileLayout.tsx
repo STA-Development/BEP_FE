@@ -17,6 +17,8 @@ import { Button } from '@uiComponents/Button'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { isAuthenticated } from '@utils/authUtils'
+
 interface MenuItem {
   label: string
   href: string
@@ -113,15 +115,17 @@ export const ProfileLayout = ({ children }: PropsWithChildren) => {
                   )
               )}
             </ul>
-            <div className="hidden xl:block">
-              <Button
-                onClick={handleLogOut}
-                size="fl"
-                LeftIcon={LogOutIcon}
-              >
-                {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
-              </Button>
-            </div>
+            {isAuthenticated() ? (
+              <div className="hidden xl:block">
+                <Button
+                  onClick={handleLogOut}
+                  size="fl"
+                  LeftIcon={LogOutIcon}
+                >
+                  {t(Translation.PAGE_PROFILE_ACTIONS_LOGOUT)}
+                </Button>
+              </div>
+            ) : null}
           </div>
         </aside>
         <main className="col-span-4 xl:pl-10">{children}</main>
